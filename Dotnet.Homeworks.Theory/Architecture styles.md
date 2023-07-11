@@ -1,0 +1,28 @@
+# Домашняя работа №3
+
+## Architecture styles (Стили архитектуры)
+
+### Если вдруг пропал, на семинаре было
+1. Чем отличается архитектурный стиль от просто архитектуры
+2. N-уровневая архитектура. Плюсы, минусы
+3. Интерфейс-очередь-рабочая роль. Когда используется, плюсы, минусы
+4. Микрослужбы. Факты, плюсы, минусы
+5. Большие данные. Когда используется, плюсы, минусы
+6. Управляемая событиями архитектура (Pub/Sub). Факты, примеры, когда используется, плюсы, минусы
+
+### Теория
+1. [Обзор архитектурных стилей](https://learn.microsoft.com/ru-ru/azure/architecture/guide/architecture-styles/)
+2. [N-уровневый стиль](https://learn.microsoft.com/ru-ru/azure/architecture/guide/architecture-styles/n-tier)
+3. [Интерфейс-очередь-рабочая роль](https://learn.microsoft.com/ru-ru/azure/architecture/guide/architecture-styles/web-queue-worker)
+4. [Микрослужбы](https://learn.microsoft.com/ru-ru/azure/architecture/guide/architecture-styles/microservices)
+5. [Большие данные](https://learn.microsoft.com/ru-ru/azure/architecture/guide/architecture-styles/big-data)
+6. [Управляемая событиями архитектура (Pub/Sub)](https://learn.microsoft.com/ru-ru/azure/architecture/guide/architecture-styles/event-driven)
+
+### Вопросы к семинару
+1. Скажите, что такое N-уровневая архитектура и назовите её плюсы
+2. Скажите, в чём заключается принцип архитектурного стиля микрослужб, и назовите его минусы
+3. Для чего и когда применяется архитектурный стиль "Большие данные"?
+4. Расскажите первокурснику про Pub/Sub: что это, для чего используется и какие задачи и проблемы решает
+
+### Практика
+TODO
