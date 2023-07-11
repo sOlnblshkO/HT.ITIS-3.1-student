@@ -2,6 +2,6 @@
 
 namespace Dotnet.Homeworks.MainProject.Models;
 
-public class Product
+public class Product : BaseEntity
 {
 }
