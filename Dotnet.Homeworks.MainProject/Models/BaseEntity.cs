@@ -2,6 +2,9 @@
 
 public abstract class BaseEntity
 {
+    /// <summary>
+    /// Id сущности
+    /// </summary>
     public Guid Id { get; init; }
     
     protected BaseEntity()
