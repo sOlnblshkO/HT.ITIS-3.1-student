@@ -12,7 +12,7 @@
 5. После этого в рамках локального репозитория создаётся пулл реквест из ветки с решённым домашним заданием в ветку master. Далее произойдёт автоматический запуск всех workflow:
 - все workflow должны успешно отработать.
 - есди что-то не так, смотрите логи workflow, который не отработал и исправляете проблему.
-- [как настроить codecov в репозиторий (файл для второкурсников)](https://docs.google.com/document/d/1DPAfO-v2acR-CmLviX3qCnTBwUYPyipARdPjUjTZKdo/edit?usp=sharing)
+- [как настроить codecov в репозиторий](https://docs.google.com/document/d/1DPAfO-v2acR-CmLviX3qCnTBwUYPyipARdPjUjTZKdo/edit?usp=sharing)
 ## Как выполнить домашку
 1. В файле Dotnet.Homeworks.Tests.RunLogic/TestConfig.cs проставить номер текущей выполняемой домашки. Т.е. если выполняете домашку 1, то ставите HomeworkProgress(Homeworks.Docker) и т.д.
 2. Открываете папку Theory и находите файл *.md по актуальной теме и знакомитесь с постановкой задачи. Выполняете поставленные требования в основном проекте Dotnet.Homeworks.MainProject.
