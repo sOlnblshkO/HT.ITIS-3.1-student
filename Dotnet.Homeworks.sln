@@ -6,7 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Tests", "D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Theory", "Theory", "{34A78ECB-E940-4BDA-AA77-E7552F322718}"
 	ProjectSection(SolutionItems) = preProject
-		UML.C4.md = UML.C4.md
+		Dotnet.Homeworks.Theory\Docker.md = Dotnet.Homeworks.Theory\Docker.md
+		Dotnet.Homeworks.Theory\UML.C4.md = Dotnet.Homeworks.Theory\UML.C4.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{03F24D07-470D-4F82-826B-5E7058A1E689}"
@@ -20,6 +21,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{E51A9D64-B
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projects", "Projects", "{D08DB727-1044-48BE-844A-3721AD407110}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{06392FE4-9ADB-4D26-9704-950C0FE682B8}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
