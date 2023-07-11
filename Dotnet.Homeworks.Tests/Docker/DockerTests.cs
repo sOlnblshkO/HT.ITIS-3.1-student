@@ -27,7 +27,7 @@ public class DockerTests
     public void ConnectionStringsDefault_IsNotNullInDockerCompose()
     {
         var dotnetWebConnectionString =
-            DockerComposeDeserialized.Services?.DotnetWeb?.Environment?.GetValueOrDefault("ConnectionStrings__DefaultConnection");
+            DockerComposeDeserialized.Services?.DotnetWeb?.Environment?.GetValueOrDefault("ConnectionStrings__Default");
 
         Assert.NotNull(dotnetWebConnectionString);
     }
@@ -72,7 +72,7 @@ public class DockerTests
     public void DotnetWeb_DbConnectionString_ShouldContain_AllDotnetPostgres_EnvVars()
     {
         var dotnetWebConnectionString =
-            DockerComposeDeserialized.Services?.DotnetWeb?.Environment?.GetValueOrDefault("ConnectionStrings__DefaultConnection");
+            DockerComposeDeserialized.Services?.DotnetWeb?.Environment?.GetValueOrDefault("ConnectionStrings__Default");
         var postgresUsernameValue =
             DockerComposeDeserialized.Services?.DotnetPostgres?.Environment?.GetValueOrDefault("POSTGRES_USER");
         var postgresPasswordValue =
