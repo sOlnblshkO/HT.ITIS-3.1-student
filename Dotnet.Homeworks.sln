@@ -5,6 +5,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Tests", "Dotnet.Homeworks.Tests\Dotnet.Homeworks.Tests.csproj", "{3091107F-2431-44E9-BC38-37A46D50ED78}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Theory", "Theory", "{34A78ECB-E940-4BDA-AA77-E7552F322718}"
+	ProjectSection(SolutionItems) = preProject
+		UML.C4.md = UML.C4.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{03F24D07-470D-4F82-826B-5E7058A1E689}"
 EndProject
