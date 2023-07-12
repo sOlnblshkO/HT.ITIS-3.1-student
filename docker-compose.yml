@@ -1,1 +1,7 @@
 version: '3.8'
+services:
+  dotnet_postgres:
+    image: postgres:alpine
+    
+  dotnet_web:
+    image: dotnet-web
