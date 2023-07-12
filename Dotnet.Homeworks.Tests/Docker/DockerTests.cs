@@ -6,11 +6,11 @@ namespace Dotnet.Homeworks.Tests.Docker;
 
 public class DockerTests
 {
-    private const string FileName = "docker-compose.yml";
+    private const string FilePath = "docker-compose.yml";
 
     private static readonly Lazy<DockerCompose> DockerComposeDeserializedFactory = new(() =>
     {
-        var filePath = Path.Combine(TryGetSolutionDirectoryInfo().FullName, FileName);
+        var filePath = Path.Combine(TryGetSolutionDirectoryInfo().FullName, FilePath);
 
         if (!File.Exists(filePath)) throw new InvalidOperationException();
 
