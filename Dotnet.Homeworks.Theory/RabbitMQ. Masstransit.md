@@ -1,0 +1,22 @@
+﻿# Домашнее задание №5
+
+## RabbitMQ
+
+### Если вдруг проспал, на семинаре было
+1. Что такое Message Broker, для чего нужен.
+2. Что такое RabbitMQ.
+3. Что такое Masstransit, зачем его использовать.
+
+### Теория
+1. [RabbitMQ для докера: как скачать, запустить, настроить](https://registry.hub.docker.com/_/rabbitmq/)
+1. [Простая статья о том, как быстро запустить RabbitMQ (без Masstransit)](https://habr.com/ru/articles/649915/)
+2. [Как настроить Masstransit в ASP .NET проекте](https://www.youtube.com/watch?v=CTKWFMZVIWA&ab_channel=MilanJovanovi%C4%87)
+3. [Крутое видео, на примере демонстрирующее всю мощь абстракций Masstransit](https://www.youtube.com/watch?v=4FFYefcx4Bg&ab_channel=NickChapsas)
+
+### Вопросы к семинару
+1. Зачем нужны Message Broker'ы, если они только усложняют структуру проекта? Разве нельзя вызывать весь код просто напрямую?
+2. Чем полезна библиотека Masstransit? Зачем её использовать, если можно работать с RabbitMQ напрямую (см. Теория п.2)?
+3. Какие ещё Message Broker'ы существуют помимо RabbitMQ? Насколько сложнее их использовать с Masstransit?
+
+### Практика
+TODO
