@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Theory", "Theory", "{34A78E
 		Dotnet.Homeworks.Theory\UML.C4.md = Dotnet.Homeworks.Theory\UML.C4.md
 		Dotnet.Homeworks.Theory\RabbitMQ. Masstransit.md = Dotnet.Homeworks.Theory\RabbitMQ. Masstransit.md
 		Dotnet.Homeworks.Theory\Architecture styles.md = Dotnet.Homeworks.Theory\Architecture styles.md
+		Dotnet.Homeworks.Theory\Patterns.md = Dotnet.Homeworks.Theory\Patterns.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{03F24D07-470D-4F82-826B-5E7058A1E689}"
