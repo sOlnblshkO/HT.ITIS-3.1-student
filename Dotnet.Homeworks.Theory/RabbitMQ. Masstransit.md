@@ -11,7 +11,7 @@
 1. [RabbitMQ для докера: как скачать, запустить, настроить](https://registry.hub.docker.com/_/rabbitmq/)
 1. [Простая статья о том, как быстро запустить RabbitMQ (без Masstransit)](https://habr.com/ru/articles/649915/)
 2. [Как настроить Masstransit в ASP .NET проекте](https://www.youtube.com/watch?v=CTKWFMZVIWA&ab_channel=MilanJovanovi%C4%87)
-3. [Крутое видео, на примере демонстрирующее всю мощь абстракций Masstransit](https://www.youtube.com/watch?v=4FFYefcx4Bg&ab_channel=NickChapsas)
+3. [Крутое видео, на примере демонстрирующее всю мощь и пластичность абстракций Masstransit](https://www.youtube.com/watch?v=4FFYefcx4Bg&ab_channel=NickChapsas)
 
 ### Вопросы к семинару
 1. Зачем нужны Message Broker'ы, если они только усложняют структуру проекта? Разве нельзя вызывать весь код просто напрямую?
@@ -19,4 +19,5 @@
 3. Какие ещё Message Broker'ы существуют помимо RabbitMQ? Насколько сложнее их использовать с Masstransit?
 
 ### Практика
-TODO
+1. Запустить RabbitMQ в докере.
+2. Настроить систему pub/sub между проектом Main и Mailing.API с помощью библиотеки Masstransit и RabbitMQ. Main проект должен отправлять сообщения (через RabbitMQ) проекту Mailing.API, а он в свою очередь слушать их и при получении отправлять email с полученными данными.
