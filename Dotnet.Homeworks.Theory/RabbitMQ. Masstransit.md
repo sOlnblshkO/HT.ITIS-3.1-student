@@ -8,7 +8,7 @@
 3. Рассказ про Masstransit и про то, зачем его использовать.
 
 ### Теория
-1. [RabbitMQ для докера: как скачать, запустить, настроить](https://registry.hub.docker.com/_/rabbitmq/)
+1. [RabbitMQ для докера: как скачать, запустить, настроить](https://habr.com/ru/companies/southbridge/articles/704208/)
 1. [Простая статья о том, как быстро запустить RabbitMQ (без Masstransit)](https://habr.com/ru/articles/649915/)
 2. [Как настроить Masstransit в ASP .NET проекте](https://www.youtube.com/watch?v=CTKWFMZVIWA&ab_channel=MilanJovanovi%C4%87)
 3. [Крутое видео, на примере демонстрирующее всю мощь и пластичность абстракций Masstransit](https://www.youtube.com/watch?v=4FFYefcx4Bg&ab_channel=NickChapsas)
