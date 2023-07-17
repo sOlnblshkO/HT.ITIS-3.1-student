@@ -8,7 +8,7 @@
 3. Рассказ про Masstransit и про то, зачем его использовать.
 
 ### Теория
-1. [RabbitMQ для докера: как скачать, запустить, настроить](https://registry.hub.docker.com/_/rabbitmq/)
+1. [RabbitMQ для докера: как скачать, запустить, настроить](https://habr.com/ru/companies/southbridge/articles/704208/)
 1. [Простая статья о том, как быстро запустить RabbitMQ (без Masstransit)](https://habr.com/ru/articles/649915/)
 2. [Как настроить Masstransit в ASP .NET проекте](https://www.youtube.com/watch?v=CTKWFMZVIWA&ab_channel=MilanJovanovi%C4%87)
 3. [Крутое видео, на примере демонстрирующее всю мощь и пластичность абстракций Masstransit](https://www.youtube.com/watch?v=4FFYefcx4Bg&ab_channel=NickChapsas)
@@ -19,6 +19,7 @@
 3. Какие ещё Message Broker'ы существуют помимо RabbitMQ? Насколько сложнее/проще их использовать с Masstransit?
 
 ### Практика
-1. Запустить RabbitMQ в докере.
-2. В appsettings проекта Mailing.API указать свои данные почты, с которой будет отправлять email'ы Mailing.API. 
-3. Настроить систему pub/sub между проектом Main и Mailing.API с помощью библиотеки Masstransit и RabbitMQ. Main проект должен отправлять сообщения (через RabbitMQ) проекту Mailing.API, а он в свою очередь слушать их и при получении отправлять email с полученными данными.
+1. Создать и настроить dockerfile для проекта Mailing.API, обновить (если нужно) docker-compose.yml.
+2. Добавить и правильно настроить RabbitMQ в docker-compose.yml. Авторизация по логину-паролю guest-guest не должна проходить, т.е. нужно поменять дефолтные данные авторизации на какие-нибудь свои.
+3. В environment переменные через докер добавить все необходимые поля для сериализации Mailing.API/EmailConfig.cs. _Можете замокать MailingService из Mailing.API, например, чтобы он просто выводил сообщения в консоль, но использование environment переменных всё равно обязательно._
+4. Настроить систему pub/sub между проектом Main и Mailing.API с помощью библиотеки Masstransit и RabbitMQ. Main проект после _"регистрации"_ пользователя должен отправлять сообщения (через RabbitMQ) проекту Mailing.API, а он в свою очередь слушать их и при получении отправлять email с полученными данными.
