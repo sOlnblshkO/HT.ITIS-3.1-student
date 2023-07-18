@@ -9,10 +9,10 @@ public class DockerTests
     public void ConnectionStringsDefault_IsNotNullInDockerCompose()
     {
         var docker = Parser.Parse();
-        var dotnetWebConnectionString =
-            docker.Services?.DotnetWeb?.Environment?.GetValueOrDefault("ConnectionStrings__Default");
+        var dotnetMainConnectionString =
+            docker.Services?.DotnetMain?.Environment?.GetValueOrDefault(Defaults.MainDefaultConnectionStringEnvVar);
 
-        Assert.NotNull(dotnetWebConnectionString);
+        Assert.NotNull(dotnetMainConnectionString);
     }
 
     [Homework(RunLogic.Homeworks.Docker)]
@@ -20,7 +20,7 @@ public class DockerTests
     {
         var docker = Parser.Parse();
         var postgresUsernameValue =
-            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault("POSTGRES_USER");
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Defaults.PostgresUserEnvVar);
 
         Assert.NotNull(postgresUsernameValue);
     }
@@ -30,7 +30,7 @@ public class DockerTests
     {
         var docker = Parser.Parse();
         var postgresPasswordValue =
-            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault("POSTGRES_PASSWORD");
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Defaults.PostgresPasswordEnvVar);
 
         Assert.NotNull(postgresPasswordValue);
     }
@@ -40,49 +40,49 @@ public class DockerTests
     {
         var docker = Parser.Parse();
         var postgresDbNameValue =
-            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault("POSTGRES_DB");
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Defaults.PostgresDbEnvVar);
 
         Assert.NotNull(postgresDbNameValue);
     }
 
     [Homework(RunLogic.Homeworks.Docker)]
-    public void DotnetWeb_ShouldDependOnDotnetPostgres()
+    public void DotnetMain_ShouldDependOnDotnetPostgres()
     {
         var docker = Parser.Parse();
         var dotnetPostgresDependencyExists =
-            docker.Services?.DotnetWeb?.DependsOn?.Contains("dotnet_postgres");
+            docker.Services?.DotnetMain?.DependsOn?.Contains(Defaults.PostgresService);
 
         Assert.True(dotnetPostgresDependencyExists);
     }
 
     [Homework(RunLogic.Homeworks.Docker)]
-    public void DotnetWeb_DbConnectionString_ShouldContain_AllDotnetPostgres_EnvVars()
+    public void DotnetMain_DbConnectionString_ShouldContain_AllDotnetPostgres_EnvVars()
     {
         var docker = Parser.Parse();
-        var dotnetWebConnectionString =
-            docker.Services?.DotnetWeb?.Environment?.GetValueOrDefault("ConnectionStrings__Default");
+        var dotnetMainConnectionString =
+            docker.Services?.DotnetMain?.Environment?.GetValueOrDefault(Defaults.MainDefaultConnectionStringEnvVar);
         var postgresUsernameValue =
-            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault("POSTGRES_USER");
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Defaults.PostgresUserEnvVar);
         var postgresPasswordValue =
-            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault("POSTGRES_PASSWORD");
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Defaults.PostgresPasswordEnvVar);
         var postgresDbNameValue =
-            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault("POSTGRES_DB");
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Defaults.PostgresDbEnvVar);
 
-        Assert.NotNull(dotnetWebConnectionString);
+        Assert.NotNull(dotnetMainConnectionString);
         Assert.NotNull(postgresUsernameValue);
         Assert.NotNull(postgresPasswordValue);
         Assert.NotNull(postgresDbNameValue);
-        Assert.True(dotnetWebConnectionString.Contains(postgresUsernameValue)
-                    && dotnetWebConnectionString.Contains(postgresPasswordValue)
-                    && dotnetWebConnectionString.Contains(postgresDbNameValue));
+        Assert.True(dotnetMainConnectionString.Contains(postgresUsernameValue)
+                    && dotnetMainConnectionString.Contains(postgresPasswordValue)
+                    && dotnetMainConnectionString.Contains(postgresDbNameValue));
     }
 
     [Homework(RunLogic.Homeworks.Docker)]
-    public void DotnetWeb_ShouldContain_CorrectPathToDockerFile()
+    public void DotnetMain_ShouldContain_CorrectPathToDockerFile()
     {
-        const string expectedPath = "Dotnet.Homeworks.MainProject/Dockerfile";
         var docker = Parser.Parse();
-        var actualPath = docker.Services?.DotnetWeb?.Build?.GetValueOrDefault("dockerfile");
+        var expectedPath = "Dotnet.Homeworks.MainProject/Dockerfile";
+        var actualPath = docker.Services?.DotnetMain?.Build?.GetValueOrDefault("dockerfile");
         
         Assert.Equal(expectedPath, actualPath);
     }
