@@ -4,7 +4,7 @@ namespace Dotnet.Homeworks.MainProject.Services;
 
 public class CommunicationService : ICommunicationService
 {
-    public Task SendEmail(EmailToSend emailDto)
+    public Task SendEmailAsync(SendEmail sendEmailDto)
     {
         throw new NotImplementedException();
     }

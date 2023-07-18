@@ -1,6 +1,5 @@
 ﻿using Dotnet.Homeworks.Mailing.API.Configuration;
 using Dotnet.Homeworks.Mailing.API.Dto;
-using Dotnet.Homeworks.MessagingContracts.Email;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
@@ -17,7 +16,7 @@ public class MailingService : IMailingService
         _emailConfig = emailConfig.Value;
     }
 
-    public async Task<BaseResult> SendEmail(EmailMessage emailDto)
+    public async Task<BaseResult> SendEmailAsync(EmailMessage emailDto)
     {
         using var message = new MimeMessage();
         message.From.Add(new MailboxAddress("Testing mailing api", _emailConfig.Email));
