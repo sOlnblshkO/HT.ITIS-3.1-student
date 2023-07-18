@@ -6,6 +6,7 @@ public class CommunicationService : ICommunicationService
 {
     public Task SendEmailAsync(SendEmail sendEmailDto)
     {
+        // TODO: implement RabbitMq messaging
         throw new NotImplementedException();
     }
 }
