@@ -1,4 +1,4 @@
-﻿namespace Dotnet.Homeworks.Tests.Docker;
+﻿namespace Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
 
 public class DockerCompose
 {
@@ -10,6 +10,8 @@ public class ServicesSection
     public DotnetWeb? DotnetWeb { get; set; }
     
     public DotnetPostgres? DotnetPostgres { get; set; }
+
+    public DotnetRabbitmq? DotnetRabbitmq { get; set; }
 }
 
 public class DotnetWeb
@@ -21,6 +23,11 @@ public class DotnetWeb
     public List<string>? DependsOn { get; set; }
 }
 public class DotnetPostgres
+{
+    public Dictionary<string, string>? Environment { get; set; }
+}
+
+public class DotnetRabbitmq
 {
     public Dictionary<string, string>? Environment { get; set; }
 }
