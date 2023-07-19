@@ -10,9 +10,9 @@ public class DockerMainTests
     {
         var docker = Parser.Parse();
         var dotnetPostgresDependencyExists =
-            docker.Services?.DotnetMain?.DependsOn?.Contains(Defaults.PostgresService);
+            docker.Services?.DotnetMain?.DependsOn?.Contains(Constants.PostgresService);
         var dotnetRabbitMqDependencyExists =
-            docker.Services?.DotnetMain?.DependsOn?.Contains(Defaults.RabbitMqService);
+            docker.Services?.DotnetMain?.DependsOn?.Contains(Constants.RabbitMqService);
 
         Assert.True(dotnetPostgresDependencyExists);
         Assert.True(dotnetRabbitMqDependencyExists);

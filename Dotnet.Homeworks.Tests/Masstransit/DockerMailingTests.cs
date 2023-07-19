@@ -20,7 +20,7 @@ public class DockerMailingTests
     {
         var docker = Parser.Parse();
         var dotnetRabbitmqDependencyExists =
-            docker.Services?.DotnetMailing?.DependsOn?.Contains(Defaults.RabbitMqService);
+            docker.Services?.DotnetMailing?.DependsOn?.Contains(Constants.RabbitMqService);
 
         Assert.True(dotnetRabbitmqDependencyExists);
     }
@@ -30,7 +30,7 @@ public class DockerMailingTests
     {
         var docker = Parser.Parse();
         var dotnetRabbitmqDependencyExists =
-            docker.Services?.DotnetMailing?.DependsOn?.Contains(Defaults.PostgresService);
+            docker.Services?.DotnetMailing?.DependsOn?.Contains(Constants.PostgresService);
 
         Assert.False(dotnetRabbitmqDependencyExists);
     }
@@ -41,8 +41,8 @@ public class DockerMailingTests
         var docker = Parser.Parse();
         var requiredVars = new HashSet<string>
         {
-            Defaults.MailingEmailConfig.Email, Defaults.MailingEmailConfig.Host,
-            Defaults.MailingEmailConfig.Port, Defaults.MailingEmailConfig.Password
+            Constants.MailingEmailConfig.Email, Constants.MailingEmailConfig.Host,
+            Constants.MailingEmailConfig.Port, Constants.MailingEmailConfig.Password
         };
 
         // violates AAA a bit but ok

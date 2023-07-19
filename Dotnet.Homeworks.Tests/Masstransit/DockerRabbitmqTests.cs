@@ -18,9 +18,9 @@ public class DockerRabbitmqTests
     {
         var docker = Parser.Parse();
         var rabbitmqDefaultUser =
-            docker.Services?.DotnetRabbitmq?.Environment?.GetValueOrDefault(Defaults.RabbitmqDefaultUserEnvVar);
+            docker.Services?.DotnetRabbitmq?.Environment?.GetValueOrDefault(Constants.RabbitmqDefaultUserEnvVar);
         var rabbitmqDefaultPassword =
-            docker.Services?.DotnetRabbitmq?.Environment?.GetValueOrDefault(Defaults.RabbitmqDefaultPassEnvVar);
+            docker.Services?.DotnetRabbitmq?.Environment?.GetValueOrDefault(Constants.RabbitmqDefaultPassEnvVar);
 
         Assert.NotNull(rabbitmqDefaultUser);
         Assert.NotNull(rabbitmqDefaultPassword);

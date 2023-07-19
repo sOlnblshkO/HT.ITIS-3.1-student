@@ -1,6 +1,7 @@
-﻿namespace Dotnet.Homeworks.Mailing.API.Consumers;
+﻿using Dotnet.Homeworks.MessagingContracts.Email;
+using MassTransit;
 
-public interface IEmailConsumer
-{
-    // TODO: inherit correct base interface
-}
+namespace Dotnet.Homeworks.Mailing.API.Consumers;
+
+public interface IEmailConsumer : IConsumer<SendEmail>
+{ }

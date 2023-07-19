@@ -1,6 +1,6 @@
 ﻿namespace Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
 
-public static class Defaults
+public static class Constants
 {
     public const string PostgresService = "dotnet_postgres";
     public const string RabbitMqService = "dotnet_rabbitmq";

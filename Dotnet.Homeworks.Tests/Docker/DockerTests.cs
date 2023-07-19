@@ -10,7 +10,7 @@ public class DockerTests
     {
         var docker = Parser.Parse();
         var dotnetMainConnectionString =
-            docker.Services?.DotnetMain?.Environment?.GetValueOrDefault(Defaults.MainDefaultConnectionStringEnvVar);
+            docker.Services?.DotnetMain?.Environment?.GetValueOrDefault(Constants.MainDefaultConnectionStringEnvVar);
 
         Assert.NotNull(dotnetMainConnectionString);
     }
@@ -20,7 +20,7 @@ public class DockerTests
     {
         var docker = Parser.Parse();
         var postgresUsernameValue =
-            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Defaults.PostgresUserEnvVar);
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Constants.PostgresUserEnvVar);
 
         Assert.NotNull(postgresUsernameValue);
     }
@@ -30,7 +30,7 @@ public class DockerTests
     {
         var docker = Parser.Parse();
         var postgresPasswordValue =
-            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Defaults.PostgresPasswordEnvVar);
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Constants.PostgresPasswordEnvVar);
 
         Assert.NotNull(postgresPasswordValue);
     }
@@ -40,7 +40,7 @@ public class DockerTests
     {
         var docker = Parser.Parse();
         var postgresDbNameValue =
-            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Defaults.PostgresDbEnvVar);
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Constants.PostgresDbEnvVar);
 
         Assert.NotNull(postgresDbNameValue);
     }
@@ -50,7 +50,7 @@ public class DockerTests
     {
         var docker = Parser.Parse();
         var dotnetPostgresDependencyExists =
-            docker.Services?.DotnetMain?.DependsOn?.Contains(Defaults.PostgresService);
+            docker.Services?.DotnetMain?.DependsOn?.Contains(Constants.PostgresService);
 
         Assert.True(dotnetPostgresDependencyExists);
     }
@@ -60,13 +60,13 @@ public class DockerTests
     {
         var docker = Parser.Parse();
         var dotnetMainConnectionString =
-            docker.Services?.DotnetMain?.Environment?.GetValueOrDefault(Defaults.MainDefaultConnectionStringEnvVar);
+            docker.Services?.DotnetMain?.Environment?.GetValueOrDefault(Constants.MainDefaultConnectionStringEnvVar);
         var postgresUsernameValue =
-            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Defaults.PostgresUserEnvVar);
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Constants.PostgresUserEnvVar);
         var postgresPasswordValue =
-            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Defaults.PostgresPasswordEnvVar);
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Constants.PostgresPasswordEnvVar);
         var postgresDbNameValue =
-            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Defaults.PostgresDbEnvVar);
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Constants.PostgresDbEnvVar);
 
         Assert.NotNull(dotnetMainConnectionString);
         Assert.NotNull(postgresUsernameValue);
