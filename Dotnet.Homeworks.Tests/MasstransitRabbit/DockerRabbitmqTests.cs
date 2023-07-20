@@ -1,11 +1,11 @@
 ﻿using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
 
-namespace Dotnet.Homeworks.Tests.Masstransit;
+namespace Dotnet.Homeworks.Tests.MasstransitRabbit;
 
 public class DockerRabbitmqTests
 {
-    [Homework(RunLogic.Homeworks.Rabbit)]
+    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
     public void Services_ShouldContain_DotnetRabbitmq()
     {
         var docker = Parser.Parse();
@@ -13,7 +13,7 @@ public class DockerRabbitmqTests
         Assert.NotNull(docker.Services?.DotnetRabbitmq);
     }
 
-    [Homework(RunLogic.Homeworks.Rabbit)]
+    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
     public void DotnetRabbitmq_ShouldContain_CredentialEnvVars()
     {
         var docker = Parser.Parse();

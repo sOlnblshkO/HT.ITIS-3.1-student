@@ -2,7 +2,7 @@
 using Dotnet.Homeworks.MessagingContracts.Email;
 using MassTransit.Testing;
 
-namespace Dotnet.Homeworks.Tests.Masstransit.Helpers;
+namespace Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers;
 
 internal static class ReflectionHelpers
 {

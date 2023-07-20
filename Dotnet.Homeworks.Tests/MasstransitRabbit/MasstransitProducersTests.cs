@@ -9,7 +9,7 @@ using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
-namespace Dotnet.Homeworks.Tests.Masstransit;
+namespace Dotnet.Homeworks.Tests.MasstransitRabbit;
 
 public class MasstransitProducersTests
 {
@@ -30,7 +30,7 @@ public class MasstransitProducersTests
         return serviceCollection.BuildServiceProvider();
     }
     
-    [Homework(RunLogic.Homeworks.Rabbit)]
+    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
     public async Task RegisterService_ShouldPublishOrSend_SendEmail_WithoutErrors()
     {
         await using var provider = GetServiceProvider(null);
