@@ -65,15 +65,15 @@ public class MasstransitConsumerTests
         await using var testEnv = new TestEnvironmentBuilder();
         testEnv.SetupServices(c => c.AddSingleton<IRegistrationService, RegistrationService>());
         var env = testEnv.Build();
-        var consumer = env.EmailConsumer;
     
         try
         {
             await env.Harness.Start();
             await env.RegistrationService.RegisterAsync(new RegisterUserDto("", ""));
-            var anyConsumed = await AnyConsumedMessagesWithFilterAsync<SendEmail>(consumer);
+            var anyConsumed = await AnyConsumedMessagesWithFilterAsync<SendEmail>(env.EmailConsumer);
             var anyConsumedWithErrors =
-                await AnyConsumedMessagesWithFilterAsync<SendEmail>(consumer, message => message.Exception is not null);
+                await AnyConsumedMessagesWithFilterAsync<SendEmail>(env.EmailConsumer,
+                    message => message.Exception is not null);
 
             Assert.True(anyConsumed);
             Assert.False(anyConsumedWithErrors);
@@ -132,6 +132,7 @@ public class MasstransitConsumerTests
         testEnv.AddRegistrationProducer(producerMock.Object);
         testEnv.AddCommunicationService(communicationServiceMock.Object);
         var env = testEnv.Build();
+        
         try
         {
             await env.Harness.Start();

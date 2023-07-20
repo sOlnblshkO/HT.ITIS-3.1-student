@@ -17,7 +17,12 @@ internal class TestEnvironmentBuilder : IAsyncDisposable
     private object? _emailConsumer;
     
     /// <summary>
-    /// Should be used with caution only for configuring services by providing Bus property
+    /// Should be used with caution and only for configuring services by providing Bus property.
+    /// 
+    /// <remarks>
+    /// Is not null only after SetupServices call.
+    /// </remarks>
+    /// 
     /// </summary>
     public ITestHarness? Harness { get; private set; }
 
