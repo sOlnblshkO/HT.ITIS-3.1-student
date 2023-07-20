@@ -17,12 +17,14 @@ public class MasstransitProducersTests
 
     private ServiceProvider GetServiceProvider(Action<IServiceCollection>? configureServices)
     {
+        var assembly = typeof(EmailConsumer).Assembly;
+        
         var serviceCollection = new ServiceCollection()
             .AddSingleton(_mailingMock.Object)
             .AddSingleton<ICommunicationService, CommunicationService>()
             .AddMassTransitTestHarness(b =>
             {
-                b.AddConsumer<EmailConsumer>();
+                b.AddConsumers(assembly);
             });
         configureServices?.Invoke(serviceCollection);
         return serviceCollection.BuildServiceProvider();
@@ -42,8 +44,8 @@ public class MasstransitProducersTests
             await producer.RegisterAsync(new RegisterUserDto("", ""));
             
             Assert.True(await harness.Published.Any<SendEmail>() || await harness.Sent.Any<SendEmail>());
-            Assert.False(await harness.Published.Any<SendEmail>(p => p.Exception != null) ||
-                         await harness.Sent.Any<SendEmail>(p => p.Exception != null));
+            Assert.False(await harness.Published.Any<SendEmail>(p => p.Exception is not null) ||
+                         await harness.Sent.Any<SendEmail>(p => p.Exception is not null));
         }
         finally
         {
