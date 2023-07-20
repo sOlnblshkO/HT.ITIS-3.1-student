@@ -13,6 +13,7 @@ using static Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers.ReflectionHelpers;
 
 namespace Dotnet.Homeworks.Tests.MasstransitRabbit;
 
+[Collection(nameof(AnyConsumersInAssemblyFixture))]
 public class MasstransitConsumerTests
 {
     [Homework(RunLogic.Homeworks.MasstransitRabbit)]

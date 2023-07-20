@@ -16,6 +16,9 @@ internal class TestEnvironmentBuilder : IAsyncDisposable
     private IRegistrationService? _registrationService;
     private object? _emailConsumer;
     
+    /// <summary>
+    /// Should be used with caution only for configuring services by providing Bus property
+    /// </summary>
     public ITestHarness? Harness { get; private set; }
 
     public void SetupServices(Action<IServiceCollection>? configureServices = default) =>

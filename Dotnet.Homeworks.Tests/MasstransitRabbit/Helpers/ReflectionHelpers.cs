@@ -66,5 +66,4 @@ internal static class ReflectionHelpers
         var resObj = countGenericMethod.Invoke(null, new[] { consumedPropertyValue, default(CancellationToken) });
         return resObj is int res ? res : throw new Exception("A signature of Count method has changed. It does not return int now");
     }
-
 }
