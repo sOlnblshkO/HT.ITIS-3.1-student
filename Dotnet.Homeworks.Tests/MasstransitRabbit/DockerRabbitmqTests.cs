@@ -25,4 +25,19 @@ public class DockerRabbitmqTests
         Assert.NotNull(rabbitmqDefaultUser);
         Assert.NotNull(rabbitmqDefaultPassword);
     }
+
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
+    public void DotnetRabbitmq_ShouldContain_CredentialEnvVars_OtherThanGuest()
+    {
+        var docker = Parser.Parse();
+        var rabbitmqDefaultUser =
+            docker.Services?.DotnetRabbitmq?.Environment?.GetValueOrDefault(Constants.RabbitmqDefaultUserEnvVar);
+        var rabbitmqDefaultPassword =
+            docker.Services?.DotnetRabbitmq?.Environment?.GetValueOrDefault(Constants.RabbitmqDefaultPassEnvVar);
+
+        Assert.NotNull(rabbitmqDefaultUser);
+        Assert.NotNull(rabbitmqDefaultPassword);
+        Assert.NotEqual("guest", rabbitmqDefaultUser);
+        Assert.NotEqual("guest", rabbitmqDefaultPassword);
+    }
 }
