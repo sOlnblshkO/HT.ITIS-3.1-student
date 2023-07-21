@@ -15,7 +15,7 @@ internal class TestEnvironmentBuilder : IAsyncDisposable
     private ICommunicationService? _communicationService;
     private IRegistrationService? _registrationService;
     private object? _emailConsumer;
-    
+
     /// <summary>
     /// Should be used with caution and only for configuring services by providing Bus property.
     /// 
@@ -24,7 +24,7 @@ internal class TestEnvironmentBuilder : IAsyncDisposable
     /// </remarks>
     /// 
     /// </summary>
-    public ITestHarness? Harness { get; private set; }
+    public ITestHarness? Harness => _serviceProvider.GetTestHarness();
 
     public void SetupServices(Action<IServiceCollection>? configureServices = default) =>
         _serviceProvider = GetServiceProvider(configureServices);
@@ -38,11 +38,10 @@ internal class TestEnvironmentBuilder : IAsyncDisposable
     public TestEnvironment Build()
     {
         _serviceProvider ??= GetServiceProvider(null);
-        Harness ??= _serviceProvider.GetTestHarness();
         _communicationService ??= _serviceProvider.GetRequiredService<ICommunicationService>();
         _registrationService ??= _serviceProvider.GetRequiredService<IRegistrationService>();
-        _emailConsumer ??= Harness.GetConsumerHarness<EmailConsumer>();
-        return new TestEnvironment(Harness, _communicationService, _registrationService, _emailConsumer, _mailingMock);
+        _emailConsumer ??= Harness!.GetConsumerHarness<EmailConsumer>();
+        return new TestEnvironment(Harness!, _communicationService, _registrationService, _emailConsumer, _mailingMock);
     }
 
     private ServiceProvider GetServiceProvider(Action<IServiceCollection>? configureServices)

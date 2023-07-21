@@ -7,7 +7,7 @@ public enum Homeworks
     RabbitMasstransit,
     Cqrs,
     CqrsValidatorsDecorators,
-    ZenkoStorage, 
+    MinioStorage, 
     MongoDb,
     AutoMapper,
     Observability
