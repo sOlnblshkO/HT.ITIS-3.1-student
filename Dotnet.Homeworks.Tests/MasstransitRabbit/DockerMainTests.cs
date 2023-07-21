@@ -5,7 +5,7 @@ namespace Dotnet.Homeworks.Tests.MasstransitRabbit;
 
 public class DockerMainTests
 {
-    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public void DotnetMain_ShouldDependOn_DotnetPostgres_And_RabbitMq()
     {
         var docker = Parser.Parse();

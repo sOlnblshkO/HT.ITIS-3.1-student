@@ -5,7 +5,7 @@ namespace Dotnet.Homeworks.Tests.MasstransitRabbit;
 
 public class DockerMailingTests
 {
-    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public void DotnetMailing_ShouldContain_CorrectPathToDockerFile()
     {
         var docker = Parser.Parse();
@@ -15,7 +15,7 @@ public class DockerMailingTests
         Assert.Equal(expectedPath, actualPath);
     }
     
-    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public void DotnetMailing_ShouldDependOn_DotnetRabbitMq()
     {
         var docker = Parser.Parse();
@@ -25,7 +25,7 @@ public class DockerMailingTests
         Assert.True(dotnetRabbitmqDependencyExists);
     }
     
-    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public void DotnetMailing_ShouldNotDependOn_DotnetPostgres()
     {
         var docker = Parser.Parse();
@@ -35,7 +35,7 @@ public class DockerMailingTests
         Assert.False(dotnetRabbitmqDependencyExists);
     }
     
-    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public void DotnetMailing_ShouldContain_EmailConfigEnvVars()
     {
         var docker = Parser.Parse();

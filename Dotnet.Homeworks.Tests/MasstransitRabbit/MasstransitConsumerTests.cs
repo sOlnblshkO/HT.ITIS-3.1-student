@@ -16,7 +16,7 @@ namespace Dotnet.Homeworks.Tests.MasstransitRabbit;
 [Collection(nameof(AnyConsumersInAssemblyFixture))]
 public class MasstransitConsumerTests
 {
-    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task MailingConsumer_ShouldConsume_CorrectMessages_WithoutErrors()
     {
         await using var testEnv = new TestEnvironmentBuilder();
@@ -59,7 +59,7 @@ public class MasstransitConsumerTests
         }
     }
 
-    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task MailingConsumer_ShouldConsume_Messages_SentFromRegisterService_WithoutErrors()
     {
         await using var testEnv = new TestEnvironmentBuilder();
@@ -84,7 +84,7 @@ public class MasstransitConsumerTests
         }
     }
 
-    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task MailingConsumer_ShouldConsume_OneMessage_WhenOneMessageSentFromRegisterService_WithoutErrors()
     {
         await using var testEnv = new TestEnvironmentBuilder();
@@ -110,7 +110,7 @@ public class MasstransitConsumerTests
         }
     }
     
-    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task MailingConsumer_ShouldCall_IMailingService_Once()
     {
         await using var testEnv = new TestEnvironmentBuilder();

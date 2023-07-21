@@ -7,7 +7,7 @@ namespace Dotnet.Homeworks.Tests.MasstransitRabbit;
 
 public class ArchitectureTests
 {
-    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public void ConsumersNamespace_ShouldHave_DependencyOnMasstransit()
     {
         var consumerType = typeof(IEmailConsumer);
@@ -21,7 +21,7 @@ public class ArchitectureTests
         Assert.True(testResult.IsSuccessful);
     }
 
-    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public void MainProjectAssembly_ShouldNotHave_DependencyOnMailingAPI()
     {
         var mainAssembly = typeof(RegistrationService).Assembly;
@@ -35,7 +35,7 @@ public class ArchitectureTests
         Assert.True(testResult.IsSuccessful);
     }
 
-    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public void MailingAPIAssembly_ShouldNotHave_DependencyOnMainProject()
     {
         var mailingAssembly = typeof(EmailConsumer).Assembly;

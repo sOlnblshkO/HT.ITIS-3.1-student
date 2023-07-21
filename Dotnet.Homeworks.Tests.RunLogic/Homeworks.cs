@@ -4,7 +4,7 @@ public enum Homeworks
 {
     Init,
     Docker,
-    MasstransitRabbit,
+    RabbitMasstransit,
     Cqrs,
     CqrsValidatorsDecorators,
     ZenkoStorage, 

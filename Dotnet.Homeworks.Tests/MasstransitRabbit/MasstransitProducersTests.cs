@@ -30,7 +30,7 @@ public class MasstransitProducersTests
         return serviceCollection.BuildServiceProvider();
     }
     
-    [Homework(RunLogic.Homeworks.MasstransitRabbit)]
+    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task RegisterService_ShouldPublishOrSend_SendEmail_WithoutErrors()
     {
         await using var provider = GetServiceProvider(null);
