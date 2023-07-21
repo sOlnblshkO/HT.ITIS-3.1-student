@@ -4,6 +4,7 @@ using MassTransit;
 
 namespace Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers;
 
+[CollectionDefinition(nameof(AnyConsumersInAssemblyFixture))]
 public class AnyConsumersInAssemblyFixture : IDisposable, ICollectionFixture<AnyConsumersInAssemblyFixture>
 {
     private static readonly Assembly Assembly = typeof(IEmailConsumer).Assembly;
@@ -21,10 +22,4 @@ public class AnyConsumersInAssemblyFixture : IDisposable, ICollectionFixture<Any
     {
         GC.SuppressFinalize(this);
     }
-}
-
-[CollectionDefinition(nameof(AnyConsumersInAssemblyFixture))]
-public class AnyConsumersInAssemblyCollection : ICollectionFixture<AnyConsumersInAssemblyFixture>
-{
-    // This class has no code in it; its purpose is to define the collection
 }

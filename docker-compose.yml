@@ -4,7 +4,7 @@ services:
     image: postgres:alpine
     
   dotnet_rabbitmq:
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:3-alpine
     
   dotnet_main:
     image: dotnet-web

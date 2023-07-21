@@ -1,6 +1,8 @@
 ﻿using Dotnet.Homeworks.Mailing.API.Consumers;
 using Dotnet.Homeworks.Mailing.API.Services;
+using Dotnet.Homeworks.MainProject.Dto;
 using Dotnet.Homeworks.MainProject.Services;
+using Dotnet.Homeworks.MessagingContracts.Email;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,22 +20,31 @@ internal class TestEnvironmentBuilder : IAsyncDisposable
 
     /// <summary>
     /// Should be used with caution and only for configuring services by providing Bus property.
-    /// 
     /// <remarks>
     /// Is not null only after SetupServices call.
     /// </remarks>
-    /// 
     /// </summary>
-    public ITestHarness? Harness => _serviceProvider.GetTestHarness();
+    private ITestHarness? Harness => _serviceProvider.GetTestHarness();
 
     public void SetupServices(Action<IServiceCollection>? configureServices = default) =>
         _serviceProvider = GetServiceProvider(configureServices);
 
-    public void AddCommunicationService(ICommunicationService communicationService) =>
-        _communicationService = communicationService;
+    public void SetupProducingProcessMock(SendEmail testingEmailMessage)
+    {
+        if (Harness is null) SetupServices();
+        var communicationServiceMock = new Mock<ICommunicationService>();
+        var producerMock = new Mock<IRegistrationService>();
 
-    public void AddRegistrationProducer(IRegistrationService registrationService) =>
-        _registrationService = registrationService;
+        // ReSharper disable 2 AsyncVoidLambda
+        // Callback only accepts Action, which prohibits passing `async Task` to it (it fails in runtime)
+        // This is ok as it is only used once here in callback
+        communicationServiceMock.Setup(c => c.SendEmailAsync(It.Is<SendEmail>(data => data == testingEmailMessage)))
+            .Callback(async () => await Harness!.Bus.Publish(testingEmailMessage));
+        producerMock.Setup(p => p.RegisterAsync(It.IsAny<RegisterUserDto>()))
+            .Callback(async () => await communicationServiceMock.Object.SendEmailAsync(testingEmailMessage));
+        _communicationService = communicationServiceMock.Object;
+        _registrationService = producerMock.Object;
+    }
 
     public TestEnvironment Build()
     {
@@ -41,7 +52,7 @@ internal class TestEnvironmentBuilder : IAsyncDisposable
         _communicationService ??= _serviceProvider.GetRequiredService<ICommunicationService>();
         _registrationService ??= _serviceProvider.GetRequiredService<IRegistrationService>();
         _emailConsumer ??= Harness!.GetConsumerHarness<EmailConsumer>();
-        return new TestEnvironment(Harness!, _communicationService, _registrationService, _emailConsumer, _mailingMock);
+        return new TestEnvironment(Harness!, _registrationService, _emailConsumer, _mailingMock);
     }
 
     private ServiceProvider GetServiceProvider(Action<IServiceCollection>? configureServices)
@@ -64,12 +75,10 @@ internal class TestEnvironmentBuilder : IAsyncDisposable
 
 public class TestEnvironment
 {
-    public TestEnvironment(ITestHarness harness, ICommunicationService communicationService,
-        IRegistrationService registrationService, object emailConsumer,
+    public TestEnvironment(ITestHarness harness, IRegistrationService registrationService, object emailConsumer,
         Mock<IMailingService> mailingMock)
     {
         Harness = harness;
-        CommunicationService = communicationService;
         RegistrationService = registrationService;
         EmailConsumer = emailConsumer;
         MailingServiceMock = mailingMock;
@@ -78,8 +87,6 @@ public class TestEnvironment
     public readonly Mock<IMailingService> MailingServiceMock;
 
     public readonly ITestHarness Harness;
-
-    public readonly ICommunicationService CommunicationService;
 
     public readonly IRegistrationService RegistrationService;
 

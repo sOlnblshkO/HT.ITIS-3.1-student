@@ -16,30 +16,18 @@ public class ServicesSection
     public DotnetMailing? DotnetMailing { get; set; }
 }
 
-public class DotnetPostgres
+public class DotnetPostgres : HasEnvironment
 {
-    public Dictionary<string, string>? Environment { get; set; }
 }
 
-public class DotnetRabbitmq
+public class DotnetRabbitmq : HasEnvironment
 {
-    public Dictionary<string, string>? Environment { get; set; }
 }
 
-public class DotnetMain
+public class DotnetMain : DotnetProject
 {
-    public Dictionary<string, string>? Environment { get; set; }
-    
-    public Dictionary<string, string>? Build { get; set; }
-    
-    public List<string>? DependsOn { get; set; }
 }
 
-public class DotnetMailing
+public class DotnetMailing : DotnetProject
 {
-    public Dictionary<string, string>? Environment { get; set; }
-    
-    public Dictionary<string, string>? Build { get; set; }
-    
-    public List<string>? DependsOn { get; set; }
 }

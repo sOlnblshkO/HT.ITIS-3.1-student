@@ -8,7 +8,6 @@ using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using static Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers.ReflectionHelpers;
-// ReSharper disable AsyncVoidLambda
 // ReSharper disable AccessToDisposedClosure
 
 namespace Dotnet.Homeworks.Tests.MasstransitRabbit;
@@ -19,25 +18,11 @@ public class MasstransitConsumerTests
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task MailingConsumer_ShouldConsume_CorrectMessages_WithoutErrors()
     {
-        await using var testEnv = new TestEnvironmentBuilder();
-        testEnv.SetupServices();
-
-        #region Mocking ICommunicationService and IRegistrationService
-        
-        var communicationServiceMock = new Mock<ICommunicationService>();
-        var producerMock = new Mock<IRegistrationService>();
+        await using var testEnvBuilder = new TestEnvironmentBuilder();
         var testSendEmail = new SendEmail("test", "test", "test", "test");
-        
-        communicationServiceMock.Setup(c => c.SendEmailAsync(It.Is<SendEmail>(data => data == testSendEmail)))
-            .Callback(async () => await testEnv.Harness!.Bus.Publish(testSendEmail));
-        producerMock.Setup(p => p.RegisterAsync(It.IsAny<RegisterUserDto>()))
-            .Callback(async () => await communicationServiceMock.Object.SendEmailAsync(testSendEmail));
-
-        #endregion 
-        
-        testEnv.AddCommunicationService(communicationServiceMock.Object);
-        testEnv.AddRegistrationProducer(producerMock.Object);
-        var env = testEnv.Build();
+        testEnvBuilder.SetupServices();
+        testEnvBuilder.SetupProducingProcessMock(testSendEmail);
+        var env = testEnvBuilder.Build();
 
         try
         {
@@ -62,9 +47,9 @@ public class MasstransitConsumerTests
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task MailingConsumer_ShouldConsume_Messages_SentFromRegisterService_WithoutErrors()
     {
-        await using var testEnv = new TestEnvironmentBuilder();
-        testEnv.SetupServices(c => c.AddSingleton<IRegistrationService, RegistrationService>());
-        var env = testEnv.Build();
+        await using var testEnvBuilder = new TestEnvironmentBuilder();
+        testEnvBuilder.SetupServices(c => c.AddSingleton<IRegistrationService, RegistrationService>());
+        var env = testEnvBuilder.Build();
     
         try
         {
@@ -87,9 +72,9 @@ public class MasstransitConsumerTests
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task MailingConsumer_ShouldConsume_OneMessage_WhenOneMessageSentFromRegisterService_WithoutErrors()
     {
-        await using var testEnv = new TestEnvironmentBuilder();
-        testEnv.SetupServices(c => c.AddSingleton<IRegistrationService, RegistrationService>());
-        var env = testEnv.Build();
+        await using var testEnvBuilder = new TestEnvironmentBuilder();
+        testEnvBuilder.SetupServices(c => c.AddSingleton<IRegistrationService, RegistrationService>());
+        var env = testEnvBuilder.Build();
     
         try
         {
@@ -113,26 +98,12 @@ public class MasstransitConsumerTests
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task MailingConsumer_ShouldCall_IMailingService_Once()
     {
-        await using var testEnv = new TestEnvironmentBuilder();
-        testEnv.SetupServices();
-
-        #region Mocking ICommunicationService and IRegistrationService
-        
-        var communicationServiceMock = new Mock<ICommunicationService>();
+        await using var testEnvBuilder = new TestEnvironmentBuilder();
         var testSendEmail = new SendEmail("test", "test", "test", "test");
-        var producerMock = new Mock<IRegistrationService>();
-        
-        communicationServiceMock.Setup(c => c.SendEmailAsync(It.Is<SendEmail>(data => data == testSendEmail)))
-            .Callback(async () => await testEnv.Harness!.Bus.Publish(testSendEmail));
-        producerMock.Setup(p => p.RegisterAsync(It.IsAny<RegisterUserDto>()))
-            .Callback(async () => await communicationServiceMock.Object.SendEmailAsync(testSendEmail));
+        testEnvBuilder.SetupServices();
+        testEnvBuilder.SetupProducingProcessMock(testSendEmail);
+        var env = testEnvBuilder.Build();
 
-        #endregion
-        
-        testEnv.AddRegistrationProducer(producerMock.Object);
-        testEnv.AddCommunicationService(communicationServiceMock.Object);
-        var env = testEnv.Build();
-        
         try
         {
             await env.Harness.Start();
