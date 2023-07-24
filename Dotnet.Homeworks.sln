@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Theory", "Theory", "{34A78E
 		Dotnet.Homeworks.Theory\RabbitMQ. Masstransit.md = Dotnet.Homeworks.Theory\RabbitMQ. Masstransit.md
 		Dotnet.Homeworks.Theory\Architecture styles.md = Dotnet.Homeworks.Theory\Architecture styles.md
 		Dotnet.Homeworks.Theory\Patterns.md = Dotnet.Homeworks.Theory\Patterns.md
+		Dotnet.Homeworks.Theory\Minio.S3.md = Dotnet.Homeworks.Theory\Minio.S3.md
 		Dotnet.Homeworks.Theory\CQRS.md = Dotnet.Homeworks.Theory\CQRS.md
 	EndProjectSection
 EndProject
