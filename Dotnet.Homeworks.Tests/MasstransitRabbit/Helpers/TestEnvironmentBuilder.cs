@@ -72,23 +72,3 @@ internal class TestEnvironmentBuilder : IAsyncDisposable
         return _serviceProvider?.DisposeAsync() ?? ValueTask.CompletedTask;
     }
 }
-
-public class TestEnvironment
-{
-    public TestEnvironment(ITestHarness harness, IRegistrationService registrationService, object emailConsumer,
-        Mock<IMailingService> mailingMock)
-    {
-        Harness = harness;
-        RegistrationService = registrationService;
-        EmailConsumer = emailConsumer;
-        MailingServiceMock = mailingMock;
-    }
-
-    public readonly Mock<IMailingService> MailingServiceMock;
-
-    public readonly ITestHarness Harness;
-
-    public readonly IRegistrationService RegistrationService;
-
-    public readonly object EmailConsumer;
-}
