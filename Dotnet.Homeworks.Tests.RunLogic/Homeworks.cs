@@ -4,10 +4,10 @@ public enum Homeworks
 {
     Init,
     Docker,
-    Rabbit,
+    RabbitMasstransit,
     Cqrs,
     CqrsValidatorsDecorators,
-    ZenkoStorage, 
+    MinioStorage, 
     MongoDb,
     AutoMapper,
     Observability

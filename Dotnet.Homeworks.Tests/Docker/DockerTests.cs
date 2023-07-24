@@ -1,42 +1,26 @@
 ﻿using Dotnet.Homeworks.Tests.RunLogic.Attributes;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
+using Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
 
 namespace Dotnet.Homeworks.Tests.Docker;
 
 public class DockerTests
 {
-    private const string FilePath = "docker-compose.yml";
-
-    private static readonly Lazy<DockerCompose> DockerComposeDeserializedFactory = new(() =>
-    {
-        var filePath = Path.Combine(TryGetSolutionDirectoryInfo().FullName, FilePath);
-
-        if (!File.Exists(filePath)) throw new InvalidOperationException();
-
-        var b = new DeserializerBuilder()
-            .IgnoreUnmatchedProperties()
-            .WithNamingConvention(UnderscoredNamingConvention.Instance);
-
-        return b.Build().Deserialize<DockerCompose>(File.ReadAllText(filePath));
-    });
-
-    private static readonly DockerCompose DockerComposeDeserialized = DockerComposeDeserializedFactory.Value;
-
     [Homework(RunLogic.Homeworks.Docker)]
     public void ConnectionStringsDefault_IsNotNullInDockerCompose()
     {
-        var dotnetWebConnectionString =
-            DockerComposeDeserialized.Services?.DotnetWeb?.Environment?.GetValueOrDefault("ConnectionStrings__Default");
+        var docker = Parser.Parse();
+        var dotnetMainConnectionString =
+            docker.Services?.DotnetMain?.Environment?.GetValueOrDefault(Constants.MainDefaultConnectionStringEnvVar);
 
-        Assert.NotNull(dotnetWebConnectionString);
+        Assert.NotNull(dotnetMainConnectionString);
     }
 
     [Homework(RunLogic.Homeworks.Docker)]
     public void DotnetPostgres_ShouldContainUsernameEnvVar()
     {
+        var docker = Parser.Parse();
         var postgresUsernameValue =
-            DockerComposeDeserialized.Services?.DotnetPostgres?.Environment?.GetValueOrDefault("POSTGRES_USER");
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Constants.PostgresUserEnvVar);
 
         Assert.NotNull(postgresUsernameValue);
     }
@@ -44,8 +28,9 @@ public class DockerTests
     [Homework(RunLogic.Homeworks.Docker)]
     public void DotnetPostgres_ShouldContainPasswordEnvVar()
     {
+        var docker = Parser.Parse();
         var postgresPasswordValue =
-            DockerComposeDeserialized.Services?.DotnetPostgres?.Environment?.GetValueOrDefault("POSTGRES_PASSWORD");
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Constants.PostgresPasswordEnvVar);
 
         Assert.NotNull(postgresPasswordValue);
     }
@@ -53,54 +38,52 @@ public class DockerTests
     [Homework(RunLogic.Homeworks.Docker)]
     public void DotnetPostgres_ShouldContainDbNameEnvVar()
     {
+        var docker = Parser.Parse();
         var postgresDbNameValue =
-            DockerComposeDeserialized.Services?.DotnetPostgres?.Environment?.GetValueOrDefault("POSTGRES_DB");
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Constants.PostgresDbEnvVar);
 
         Assert.NotNull(postgresDbNameValue);
     }
 
     [Homework(RunLogic.Homeworks.Docker)]
-    public void DotnetWeb_ShouldDependOnDotnetPostgres()
+    public void DotnetMain_ShouldDependOnDotnetPostgres()
     {
+        var docker = Parser.Parse();
         var dotnetPostgresDependencyExists =
-            DockerComposeDeserialized.Services?.DotnetWeb?.DependsOn?.Contains("dotnet_postgres");
+            docker.Services?.DotnetMain?.DependsOn?.Contains(Constants.PostgresService);
 
         Assert.True(dotnetPostgresDependencyExists);
     }
 
     [Homework(RunLogic.Homeworks.Docker)]
-    public void DotnetWeb_DbConnectionString_ShouldContain_AllDotnetPostgres_EnvVars()
+    public void DotnetMain_DbConnectionString_ShouldContain_AllDotnetPostgres_EnvVars()
     {
-        var dotnetWebConnectionString =
-            DockerComposeDeserialized.Services?.DotnetWeb?.Environment?.GetValueOrDefault("ConnectionStrings__Default");
+        var docker = Parser.Parse();
+        var dotnetMainConnectionString =
+            docker.Services?.DotnetMain?.Environment?.GetValueOrDefault(Constants.MainDefaultConnectionStringEnvVar);
         var postgresUsernameValue =
-            DockerComposeDeserialized.Services?.DotnetPostgres?.Environment?.GetValueOrDefault("POSTGRES_USER");
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Constants.PostgresUserEnvVar);
         var postgresPasswordValue =
-            DockerComposeDeserialized.Services?.DotnetPostgres?.Environment?.GetValueOrDefault("POSTGRES_PASSWORD");
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Constants.PostgresPasswordEnvVar);
         var postgresDbNameValue =
-            DockerComposeDeserialized.Services?.DotnetPostgres?.Environment?.GetValueOrDefault("POSTGRES_DB");
-       
-        Assert.True(dotnetWebConnectionString.Contains(postgresUsernameValue)
-                    && dotnetWebConnectionString.Contains(postgresPasswordValue)
-                    && dotnetWebConnectionString.Contains(postgresDbNameValue));
+            docker.Services?.DotnetPostgres?.Environment?.GetValueOrDefault(Constants.PostgresDbEnvVar);
+
+        Assert.NotNull(dotnetMainConnectionString);
+        Assert.NotNull(postgresUsernameValue);
+        Assert.NotNull(postgresPasswordValue);
+        Assert.NotNull(postgresDbNameValue);
+        Assert.True(dotnetMainConnectionString.Contains(postgresUsernameValue)
+                    && dotnetMainConnectionString.Contains(postgresPasswordValue)
+                    && dotnetMainConnectionString.Contains(postgresDbNameValue));
     }
 
     [Homework(RunLogic.Homeworks.Docker)]
-    public void DotnetWeb_ShouldContain_CorrectPathToDockerFile()
+    public void DotnetMain_ShouldContain_CorrectPathToDockerFile()
     {
+        var docker = Parser.Parse();
         var expectedPath = "Dotnet.Homeworks.MainProject/Dockerfile";
-        var actualPath = DockerComposeDeserialized.Services?.DotnetWeb?.Build?.GetValueOrDefault("dockerfile");
+        var actualPath = docker.Services?.DotnetMain?.Build?.GetValueOrDefault("dockerfile");
         
         Assert.Equal(expectedPath, actualPath);
-    }
-
-    private static DirectoryInfo TryGetSolutionDirectoryInfo()
-    {
-        var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
-        
-        while (directory != null && !directory.GetFiles("*.sln").Any()) 
-            directory = directory.Parent;
-        
-        return directory;
     }
 }

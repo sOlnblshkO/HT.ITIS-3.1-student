@@ -3,5 +3,11 @@ services:
   dotnet_postgres:
     image: postgres:alpine
     
-  dotnet_web:
+  dotnet_rabbitmq:
+    image: rabbitmq:3-alpine
+    
+  dotnet_main:
+    image: dotnet-web
+    
+  dotnet_mailing:
     image: dotnet-web
