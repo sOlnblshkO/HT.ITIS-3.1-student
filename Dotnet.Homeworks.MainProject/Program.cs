@@ -1,7 +1,6 @@
-using Dotnet.Homeworks.MainProject.Data;
+using Dotnet.Homeworks.Infastructure.DatabaseContext;
 using Dotnet.Homeworks.MainProject.Dto;
 using Dotnet.Homeworks.MainProject.Services;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
