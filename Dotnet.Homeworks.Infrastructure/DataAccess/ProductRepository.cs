@@ -1,6 +1,6 @@
+using Dotnet.Homeworks.Data.DatabaseContext;
 using Dotnet.Homeworks.Domain.Abstractions;
 using Dotnet.Homeworks.Domain.Entities;
-using Dotnet.Homeworks.Infrastructure.DatabaseContext;
 
 namespace Dotnet.Homeworks.Infrastructure.DataAccess;
 

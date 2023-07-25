@@ -1,4 +1,4 @@
-using Dotnet.Homeworks.Infastructure.Utils;
+using Dotnet.Homeworks.Infrastructure.Cqrs.Utils;
 using MediatR;
 
 namespace Dotnet.Homeworks.Infrastructure.Cqrs.Commands;

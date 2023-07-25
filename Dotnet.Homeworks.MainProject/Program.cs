@@ -1,4 +1,4 @@
-using Dotnet.Homeworks.Infrastructure.DatabaseContext;
+using Dotnet.Homeworks.Data.DatabaseContext;
 using Dotnet.Homeworks.MainProject.Dto;
 using Dotnet.Homeworks.MainProject.Services;
 using Microsoft.EntityFrameworkCore;

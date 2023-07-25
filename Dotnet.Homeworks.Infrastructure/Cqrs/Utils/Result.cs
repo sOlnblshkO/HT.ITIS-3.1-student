@@ -1,4 +1,4 @@
-namespace Dotnet.Homeworks.Infastructure.Utils;
+namespace Dotnet.Homeworks.Infrastructure.Cqrs.Utils;
 
 public class Result
 {
