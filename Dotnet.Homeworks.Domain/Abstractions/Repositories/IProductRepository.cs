@@ -1,6 +1,6 @@
 using Dotnet.Homeworks.Domain.Entities;
 
-namespace Dotnet.Homeworks.Domain.Abstractions;
+namespace Dotnet.Homeworks.Domain.Repositories.Abstractions;
 
 public interface IProductRepository
 {
