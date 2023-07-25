@@ -13,22 +13,22 @@ public class ProductRepository : IProductRepository
         _context = context;
     }
     
-    public async Task<IEnumerable<Product>> GetAllProducts()
+    public async Task<IEnumerable<Product>> GetAllProductsAsync()
     {
         throw new NotImplementedException();
     }
 
-    public async Task DeleteProductById(int id)
+    public async Task DeleteProductByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
 
-    public async Task UpdateProduct(Product product)
+    public async Task UpdateProductAsync(Product product)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<int> InsertProduct(Product product)
+    public async Task<int> InsertProductAsync(Product product)
     {
         throw new NotImplementedException();
     }
