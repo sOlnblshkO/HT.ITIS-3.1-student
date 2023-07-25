@@ -4,7 +4,7 @@
 public class Product : BaseEntity
 {
     /// <summary>
-    /// Имя
+    /// Название продукта
     /// </summary>
     public string Name { get; set; }
 }

@@ -4,12 +4,12 @@
 public class User : BaseEntity
 {
     /// <summary>
-    /// Почта
+    /// Почта пользователя
     /// </summary>
     public string Email { get; set; }
 
     /// <summary>
-    /// Имя
+    /// Имя пользователя
     /// </summary>
     public string Name { get; set; }
 }
