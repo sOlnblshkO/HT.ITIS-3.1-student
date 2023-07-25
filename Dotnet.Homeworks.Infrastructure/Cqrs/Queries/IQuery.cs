@@ -1,7 +1,7 @@
 using Dotnet.Homeworks.Infastructure.Utils;
 using MediatR;
 
-namespace Dotnet.Homeworks.Infastructure.Cqrs.Queries;
+namespace Dotnet.Homeworks.Infrastructure.Cqrs.Queries;
 
 public interface IQuery<TResponse> : IRequest<Result<TResponse>>
 {

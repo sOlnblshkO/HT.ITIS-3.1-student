@@ -1,8 +1,8 @@
 using Dotnet.Homeworks.Domain.Abstractions;
 using Dotnet.Homeworks.Domain.Entities;
-using Dotnet.Homeworks.Infastructure.DatabaseContext;
+using Dotnet.Homeworks.Infrastructure.DatabaseContext;
 
-namespace Dotnet.Homeworks.Infastructure.RepositoryImplementations;
+namespace Dotnet.Homeworks.Infrastructure.DataAccess;
 
 public class ProductRepository : IProductRepository
 {

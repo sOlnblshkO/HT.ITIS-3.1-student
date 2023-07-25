@@ -10,10 +10,5 @@ public interface IProductRepository
     
     Task UpdateProductAsync(Product product);
     
-    /// <summary>
-    /// Returns id of inserted
-    /// </summary>
-    /// <param name="product"></param>
-    /// <returns></returns>
     Task<int> InsertProductAsync(Product product);
 }

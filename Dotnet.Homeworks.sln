@@ -40,7 +40,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Features",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Domain", "Dotnet.Homeworks.Domain\Dotnet.Homeworks.Domain.csproj", "{AF76D63E-12E1-4553-B880-548D6BF6CAE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Infastructure", "Dotnet.Homeworks.Infastructure\Dotnet.Homeworks.Infastructure.csproj", "{7860419F-16B1-42D5-A065-6C168E50D65F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Infrastructure", "Dotnet.Homeworks.Infrastructure\Dotnet.Homeworks.Infrastructure.csproj", "{7860419F-16B1-42D5-A065-6C168E50D65F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

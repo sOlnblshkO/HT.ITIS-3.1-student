@@ -1,7 +1,7 @@
 using Dotnet.Homeworks.Infastructure.Utils;
 using MediatR;
 
-namespace Dotnet.Homeworks.Infastructure.Cqrs.Commands;
+namespace Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 
 public interface ICommand : IRequest<Result>
 {
