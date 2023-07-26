@@ -23,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Dotnet.Homeworks.Infrastructure\Dotnet.Homeworks.Infrastructure.csproj" />
       <ProjectReference Include="..\Dotnet.Homeworks.MessagingContracts\Dotnet.Homeworks.MessagingContracts.csproj" />
     </ItemGroup>
 
