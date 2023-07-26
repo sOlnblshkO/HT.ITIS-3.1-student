@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<MinioConfig>(builder.Configuration.GetSection("MinioConfig"));
+builder.Services.AddSingleton<IImageStorageFactory, ImageStorageFactory>();
 
 var app = builder.Build();
 
