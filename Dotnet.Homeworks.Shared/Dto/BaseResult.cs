@@ -1,3 +1,3 @@
-﻿namespace Dotnet.Homeworks.Storage.API.Dto;
+﻿namespace Dotnet.Homeworks.Shared.Dto;
 
 public record BaseResult(bool IsSucceeded, string ResultMessage);

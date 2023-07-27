@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Dotnet.Homeworks.MessagingContracts.Email;
+using Dotnet.Homeworks.Shared.MessagingContracts.Email;
 using MassTransit.Testing;
 
 namespace Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers;
