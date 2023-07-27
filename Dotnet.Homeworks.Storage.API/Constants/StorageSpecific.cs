@@ -1,6 +1,6 @@
-﻿namespace Dotnet.Homeworks.Storage.API.Configuration;
+﻿namespace Dotnet.Homeworks.Storage.API.Constants;
 
-public static class Constants
+public static class StorageSpecific
 {
     public const string ProductsBucket = "dotnet-homeworks-storage-products";
     public const string PendingBucket = "dotnet-homeworks-storage-pending";
