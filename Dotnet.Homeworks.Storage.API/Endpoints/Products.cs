@@ -11,7 +11,7 @@ public static class Products
     {
         app.MapPost("/products/picture", async ([FromForm] IFormFile formFile, IStorageFactory storageFactory, CancellationToken cancellationToken) =>
         {
-            var imageStorage = await storageFactory.CreateImageStorageWithinBucketAsync(Constants.StorageSpecific.ProductsBucket);
+            var imageStorage = await storageFactory.CreateImageStorageWithinBucketAsync(Constants.Buckets.Products);
             var image = new Image(formFile.OpenReadStream(), formFile.FileName,
                 !string.IsNullOrWhiteSpace(formFile.ContentType) ? formFile.ContentType : default);
             var res = await imageStorage.PutItemAsync(image, cancellationToken);
@@ -21,7 +21,7 @@ public static class Products
         app.MapGet("/products/picture",
             async (string fileName, IStorageFactory storageFactory, CancellationToken cancellationToken) =>
             {
-                var imageStorage = await storageFactory.CreateImageStorageWithinBucketAsync(Constants.StorageSpecific.ProductsBucket);
+                var imageStorage = await storageFactory.CreateImageStorageWithinBucketAsync(Constants.Buckets.Products);
                 var image = await imageStorage.GetItemAsync(fileName, cancellationToken);
                 return image.Content is null
                     ? Results.NotFound()
@@ -31,14 +31,14 @@ public static class Products
         app.MapDelete("/products/picture",
             async (string fileName, IStorageFactory storageFactory, CancellationToken cancellationToken) =>
             {
-                var imageStorage = await storageFactory.CreateImageStorageWithinBucketAsync(Constants.StorageSpecific.ProductsBucket);
+                var imageStorage = await storageFactory.CreateImageStorageWithinBucketAsync(Constants.Buckets.Products);
                 var res = await imageStorage.RemoveItemAsync(fileName, cancellationToken);
                 return res.IsSucceeded ? Results.Ok() : Results.BadRequest(res.ResultMessage);
             });
 
         app.MapGet("/products/pictures", async (IStorageFactory storageFactory, CancellationToken cancellationToken) =>
         {
-            var imageStorage = await storageFactory.CreateImageStorageWithinBucketAsync(Constants.StorageSpecific.ProductsBucket);
+            var imageStorage = await storageFactory.CreateImageStorageWithinBucketAsync(Constants.Buckets.Products);
             var res = await imageStorage.EnumerateItemNamesAsync(cancellationToken);
             return Results.Ok(res);
         });
