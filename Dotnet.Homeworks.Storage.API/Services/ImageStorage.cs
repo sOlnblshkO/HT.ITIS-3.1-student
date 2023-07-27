@@ -20,7 +20,7 @@ public class ImageStorage : IStorage<Image>
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<string>> ListItemNamesAsync(CancellationToken cancellationToken = default)
+    public Task<IEnumerable<string>> EnumerateItemNamesAsync(CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
