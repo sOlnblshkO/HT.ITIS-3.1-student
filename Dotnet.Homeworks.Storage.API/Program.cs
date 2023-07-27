@@ -42,7 +42,7 @@ app.MapDelete("/products/picture",
 app.MapGet("/products/pictures", async (IStorageFactory storageFactory, CancellationToken cancellationToken) =>
 {
     var imageStorage = await storageFactory.CreateImageStorageWithinBucketAsync(Constants.ProductsBucket);
-    var res = await imageStorage.ListItemsAsync(cancellationToken);
+    var res = await imageStorage.ListItemNamesAsync(cancellationToken);
     return Results.Ok(res);
 });
 
