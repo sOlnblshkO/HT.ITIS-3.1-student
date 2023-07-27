@@ -3,24 +3,30 @@ using Dotnet.Homeworks.Storage.API.Dto.Internal;
 
 namespace Dotnet.Homeworks.Storage.API.Services;
 
-public class ImageStorage : IImageStorage
+public class ImageStorage : IStorage<Image>
 {
-    public Task<BaseResult> PutObjectAsync(Image image, CancellationToken cancellationToken = default)
+    public Task<BaseResult> PutItemAsync(Image item, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Image> GetObjectAsync(string imageName, CancellationToken cancellationToken = default)
+    public Task<Image> GetItemAsync(string itemName, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
 
-    public Task<BaseResult> RemoveObjectAsync(string imageName, CancellationToken cancellationToken = default)
+    public Task<BaseResult> RemoveItemAsync(string itemName, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<string>> ListObjectsAsync(CancellationToken cancellationToken = default)
+    public Task<IEnumerable<string>> ListItemsAsync(CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<BaseResult> CopyItemToBucketAsync(string itemName, string destinationBucketName,
+        CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
