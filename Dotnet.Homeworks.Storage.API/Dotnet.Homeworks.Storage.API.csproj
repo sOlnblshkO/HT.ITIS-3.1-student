@@ -14,10 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Endpoints\Products\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Dotnet.Homeworks.Shared\Dotnet.Homeworks.Shared.csproj" />
     </ItemGroup>
 
