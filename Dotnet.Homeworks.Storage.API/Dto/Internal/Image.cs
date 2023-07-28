@@ -2,14 +2,15 @@
 
 namespace Dotnet.Homeworks.Storage.API.Dto.Internal;
 
-public class Image
+public record Image
 {
     public Stream? Content { get; }
     public string FileName { get; }
     public string ContentType { get; }
     public Dictionary<string, string> Metadata { get; }
     
-    public Image(Stream? content, string fileName, string? contentType = default, Dictionary<string, string>? metadata = default)
+    public Image(Stream? content, string fileName, string? contentType = default,
+        Dictionary<string, string>? metadata = default)
     {
         Content = content;
         FileName = fileName;
