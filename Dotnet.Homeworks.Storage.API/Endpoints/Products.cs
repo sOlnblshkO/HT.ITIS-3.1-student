@@ -1,5 +1,4 @@
-﻿using Dotnet.Homeworks.Storage.API.Configuration;
-using Dotnet.Homeworks.Storage.API.Dto.Internal;
+﻿using Dotnet.Homeworks.Storage.API.Dto.Internal;
 using Dotnet.Homeworks.Storage.API.Services;
 using Microsoft.AspNetCore.Mvc;
 

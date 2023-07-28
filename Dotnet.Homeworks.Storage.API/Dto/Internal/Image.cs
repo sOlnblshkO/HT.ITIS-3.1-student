@@ -4,10 +4,10 @@ namespace Dotnet.Homeworks.Storage.API.Dto.Internal;
 
 public class Image
 {
-    public Stream? Content { get; set; }
-    public string FileName { get; set; }
-    public string ContentType { get; set; }
-    public Dictionary<string, string> Metadata { get; set; }
+    public Stream? Content { get; }
+    public string FileName { get; }
+    public string ContentType { get; }
+    public Dictionary<string, string> Metadata { get; init; }
     
     public Image(Stream? content, string fileName, string? contentType = default, Dictionary<string, string>? metadata = default)
     {
