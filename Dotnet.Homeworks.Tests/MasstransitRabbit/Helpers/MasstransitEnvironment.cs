@@ -5,9 +5,9 @@ using Moq;
 
 namespace Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers;
 
-public class TestEnvironment
+public class MasstransitEnvironment
 {
-    public TestEnvironment(ITestHarness harness, IRegistrationService registrationService, object emailConsumer,
+    public MasstransitEnvironment(ITestHarness harness, IRegistrationService registrationService, object emailConsumer,
         Mock<IMailingService> mailingMock)
     {
         Harness = harness;
