@@ -10,7 +10,7 @@ public class ImageStorage : IStorage<Image>
         throw new NotImplementedException();
     }
 
-    public Task<Image> GetItemAsync(string itemName, CancellationToken cancellationToken = default)
+    public Task<Image?> GetItemAsync(string itemName, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }

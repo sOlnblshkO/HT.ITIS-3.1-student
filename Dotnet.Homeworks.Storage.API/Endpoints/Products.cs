@@ -22,7 +22,7 @@ public static class Products
             {
                 var imageStorage = await storageFactory.CreateImageStorageWithinBucketAsync(Constants.Buckets.Products);
                 var image = await imageStorage.GetItemAsync(fileName, cancellationToken);
-                return image.Content is null
+                return image is null
                     ? Results.NotFound()
                     : Results.File(image.Content, image.ContentType, image.FileName);
             });
