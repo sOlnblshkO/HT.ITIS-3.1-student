@@ -31,4 +31,8 @@
         <ProjectReference Include="..\Dotnet.Homeworks.Tests.RunLogic\Dotnet.Homeworks.Tests.RunLogic.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="MInioStorage\Helpers\" />
+    </ItemGroup>
+
 </Project>
