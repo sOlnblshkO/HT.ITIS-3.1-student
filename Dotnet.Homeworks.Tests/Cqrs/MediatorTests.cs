@@ -27,7 +27,10 @@ public class MediatorTests
     [Homework(RunLogic.Homeworks.Cqrs)]
     public async void Controller_Should_CallMediator()
     {
-        var mediatorMock = new Mock<IMediator>();
+        // just uncomment strokes below and delete exception                     
+        throw new NotImplementedException();
+        
+        /*ar mediatorMock = new Mock<IMediator>();
         var list = new List<GetProductDto>() { new GetProductDto(Guid.NewGuid(), "name") };
         var returns = new Result<List<GetProductDto>>(list, true, null);
         mediatorMock.Setup(x => x.Send(It.IsAny<IQuery<List<GetProductDto>>>(), It.IsAny<CancellationToken>()))
@@ -38,6 +41,6 @@ public class MediatorTests
         var result = await productManagementController.GetProducts();
         
         mediatorMock.Verify(x=> 
-            x.Send(It.IsAny<IQuery<List<GetProductDto>>>(), It.IsAny<CancellationToken>()), Times.Once);
+            x.Send(It.IsAny<IQuery<List<GetProductDto>>>(), It.IsAny<CancellationToken>()), Times.Once);*/
     }    
 }

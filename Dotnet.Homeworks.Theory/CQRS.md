@@ -21,6 +21,6 @@
 
 ### Практика
 1) Реализовать commands, queries и handlers в проекте Features от соответствующих интерфейсов.
-2) После 1 шага раскомментировать тесты в папке Cqrs и удалить exception'ы. 
+2) После 1 шага раскомментировать тесты CqrsTests в папке Cqrs и удалить exception'ы. 
 3) Создать crud операции в контроллере ProductManagementController, который вызывает commands и queries.
-4) Зарегистрировать MediatR в сервисах.  
+4) Раскомментировать тесты в MeditorTests.
