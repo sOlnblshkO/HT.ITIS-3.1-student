@@ -2,7 +2,7 @@
 using Dotnet.Homeworks.Mailing.API.Services;
 using Dotnet.Homeworks.MainProject.Dto;
 using Dotnet.Homeworks.MainProject.Services;
-using Dotnet.Homeworks.MessagingContracts.Email;
+using Dotnet.Homeworks.Shared.MessagingContracts.Email;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;

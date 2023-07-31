@@ -19,8 +19,8 @@
 3. Какие ещё Message Broker'ы существуют помимо RabbitMQ? Насколько сложнее/проще их использовать с Masstransit?
 
 ### Практика
-1. Создать и настроить dockerfile для проекта Mailing.API, обновить (если нужно) docker-compose.yml.
+1. Создать и настроить dockerfile для проекта Mailing.API, обновить docker-compose.yml.
 2. Добавить и правильно настроить RabbitMQ в docker-compose.yml. Авторизация по логину-паролю guest-guest не должна проходить, т.е. нужно поменять дефолтные данные авторизации на какие-нибудь свои.
-3. В environment переменные через докер добавить все необходимые поля для сериализации Mailing.API/EmailConfig.cs. _Можете замокать MailingService из Mailing.API, например, чтобы он просто выводил сообщения в консоль, но использование environment переменных всё равно обязательно._
+3. В environment переменные через докер добавить все необходимые поля для десериализации Mailing.API/EmailConfig.cs. _Можете замокать MailingService из Mailing.API, например, чтобы он просто выводил сообщения в консоль, но использование environment переменных всё равно обязательно._
 4. Настроить систему pub/sub между проектом MainProject и Mailing.API с помощью библиотеки Masstransit и RabbitMQ. MainProject проект после _"регистрации"_ пользователя должен отправлять сообщения (через RabbitMQ) проекту Mailing.API, а он в свою очередь слушать их и при получении отправлять email с полученными данными.
 5. Вам необходимо подключить библиотеку Masstransit в проект, правильно реализовать CommunicationService в MainProject (Producer) и EmailConsumer в Mailing.API (Consumer). Не забудьте отнаследовать IEmailConsumer от IConsumer<TMessage>.

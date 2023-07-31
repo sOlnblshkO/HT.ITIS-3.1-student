@@ -1,14 +1,10 @@
-﻿using Dotnet.Homeworks.Mailing.API.Consumers;
-using Dotnet.Homeworks.Mailing.API.Services;
-using Dotnet.Homeworks.MainProject.Dto;
+﻿using Dotnet.Homeworks.MainProject.Dto;
 using Dotnet.Homeworks.MainProject.Services;
-using Dotnet.Homeworks.MessagingContracts.Email;
+using Dotnet.Homeworks.Shared.MessagingContracts.Email;
 using Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
-using MassTransit;
 using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
 
 namespace Dotnet.Homeworks.Tests.MasstransitRabbit;
 

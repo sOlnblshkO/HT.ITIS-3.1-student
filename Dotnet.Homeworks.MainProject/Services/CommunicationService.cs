@@ -1,4 +1,4 @@
-﻿using Dotnet.Homeworks.MessagingContracts.Email;
+﻿using Dotnet.Homeworks.Shared.MessagingContracts.Email;
 
 namespace Dotnet.Homeworks.MainProject.Services;
 
