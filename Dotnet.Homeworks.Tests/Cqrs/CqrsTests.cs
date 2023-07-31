@@ -1,5 +1,4 @@
 using Dotnet.Homeworks.Application.Abstractions.Repositories;
-using Dotnet.Homeworks.Contracts.FeaturesContracts;
 using Dotnet.Homeworks.Domain.Entities;
 using Dotnet.Homeworks.Features.Products.Commands.DeleteProduct;
 using Dotnet.Homeworks.Features.Products.Commands.InsertProduct;
@@ -7,6 +6,7 @@ using Dotnet.Homeworks.Features.Products.Commands.UpdateProduct;
 using Dotnet.Homeworks.Features.Products.Queries.GetProducts;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Queries;
+using Dotnet.Homeworks.Shared.Dto;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Moq;
 
@@ -47,7 +47,7 @@ public class CqrsTests
     [Homework(RunLogic.Homeworks.Cqrs)]
     public void CommandAndQueryHandlers_Should_ImplementCertainInterfaces()
     {
-        // just uncomment strokes below and delete exception    
+        // just uncomment lines below and delete exception    
         throw new NotImplementedException();
         
         // var productQueryType = typeof(GetProductsHandler);
@@ -71,7 +71,7 @@ public class CqrsTests
     [Homework(RunLogic.Homeworks.Cqrs)]
     public async Task InsertOperation_IsCorrect()
     {
-        // just uncomment strokes below and delete exception    
+        // just uncomment lines below and delete exception    
         throw new NotImplementedException();
         
         // // Arrange     
@@ -113,7 +113,7 @@ public class CqrsTests
     [Homework(RunLogic.Homeworks.Cqrs)]
     public async void InsertOperation_Should_ReturnCorrectResponse()    
     {
-        // just uncomment strokes below and delete exception                     
+        // just uncomment lines below and delete exception                     
         throw new NotImplementedException();                                      
     
         // // Arrange                                

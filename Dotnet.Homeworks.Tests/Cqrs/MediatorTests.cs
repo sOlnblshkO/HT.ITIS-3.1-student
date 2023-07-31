@@ -1,7 +1,7 @@
 ﻿using Dotnet.Homeworks.Infrastructure.Cqrs.Queries;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Utils;
 using Dotnet.Homeworks.MainProject.Controllers;
-using Dotnet.Homeworks.Contracts.FeaturesContracts;
+using Dotnet.Homeworks.Shared.Dto;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using MediatR;
 using Moq;
@@ -30,17 +30,17 @@ public class MediatorTests
         // just uncomment strokes below and delete exception                     
         throw new NotImplementedException();
         
-        /*ar mediatorMock = new Mock<IMediator>();
-        var list = new List<GetProductDto>() { new GetProductDto(Guid.NewGuid(), "name") };
-        var returns = new Result<List<GetProductDto>>(list, true, null);
-        mediatorMock.Setup(x => x.Send(It.IsAny<IQuery<List<GetProductDto>>>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(returns);
+          /*var mediatorMock = new Mock<IMediator>();
+          var list = new List<GetProductDto>() { new GetProductDto(Guid.NewGuid(), "name") };
+          var returns = new Result<List<GetProductDto>>(list, true, null);
+          mediatorMock.Setup(x => x.Send(It.IsAny<IQuery<List<GetProductDto>>>(), It.IsAny<CancellationToken>()))
+              .ReturnsAsync(returns);
 
-        var productManagementController = new ProductManagementController(mediatorMock.Object);
-        
-        var result = await productManagementController.GetProducts();
-        
-        mediatorMock.Verify(x=> 
-            x.Send(It.IsAny<IQuery<List<GetProductDto>>>(), It.IsAny<CancellationToken>()), Times.Once);*/
+          var productManagementController = new ProductManagementController(mediatorMock.Object);
+          
+          var result = await productManagementController.GetProducts();
+          
+          mediatorMock.Verify(x=> 
+              x.Send(It.IsAny<IQuery<List<GetProductDto>>>(), It.IsAny<CancellationToken>()), Times.Once);*/
     }    
 }

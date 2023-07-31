@@ -27,7 +27,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Dotnet.Homeworks.Application\Dotnet.Homeworks.Application.csproj" />
-        <ProjectReference Include="..\Dotnet.Homeworks.Contracts\Dotnet.Homeworks.Contracts.csproj" />
         <ProjectReference Include="..\Dotnet.Homeworks.Features\Dotnet.Homeworks.Features.csproj" />
         <ProjectReference Include="..\Dotnet.Homeworks.Infrastructure\Dotnet.Homeworks.Infrastructure.csproj" />
         <ProjectReference Include="..\Dotnet.Homeworks.Mailing.API\Dotnet.Homeworks.Mailing.API.csproj" />

@@ -18,7 +18,7 @@ public class ProductManagementController : ControllerBase
     }
 
     [HttpDelete("deleteProduct")]
-    public async Task<IActionResult> DeleteProduct(int id)
+    public async Task<IActionResult> DeleteProduct(Guid id)
     {
         throw new NotImplementedException();
     }

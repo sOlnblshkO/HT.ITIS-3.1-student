@@ -48,8 +48,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Data", "Do
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Application", "Dotnet.Homeworks.Application\Dotnet.Homeworks.Application.csproj", "{7666B14F-EEE6-4076-B372-1858BB86522C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Contracts", "Dotnet.Homeworks.Contracts\Dotnet.Homeworks.Contracts.csproj", "{1185F380-04CC-4070-A708-8E6B7B0BC937}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,10 +98,6 @@ Global
 		{7666B14F-EEE6-4076-B372-1858BB86522C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7666B14F-EEE6-4076-B372-1858BB86522C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7666B14F-EEE6-4076-B372-1858BB86522C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1185F380-04CC-4070-A708-8E6B7B0BC937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1185F380-04CC-4070-A708-8E6B7B0BC937}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1185F380-04CC-4070-A708-8E6B7B0BC937}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1185F380-04CC-4070-A708-8E6B7B0BC937}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3091107F-2431-44E9-BC38-37A46D50ED78} = {03F24D07-470D-4F82-826B-5E7058A1E689}
@@ -117,6 +111,5 @@ Global
 		{7860419F-16B1-42D5-A065-6C168E50D65F} = {D08DB727-1044-48BE-844A-3721AD407110}
 		{3037EDE1-DCFC-4A0D-B034-6F095B1C7E53} = {D08DB727-1044-48BE-844A-3721AD407110}
 		{7666B14F-EEE6-4076-B372-1858BB86522C} = {D08DB727-1044-48BE-844A-3721AD407110}
-		{1185F380-04CC-4070-A708-8E6B7B0BC937} = {D08DB727-1044-48BE-844A-3721AD407110}
 	EndGlobalSection
 EndGlobal
