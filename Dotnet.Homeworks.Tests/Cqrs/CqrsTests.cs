@@ -38,10 +38,10 @@ public class CqrsTests
         var updateProductCommandType = typeof(UpdateProductCommand);
         var updateProductInterface = typeof(ICommand);
         
-        Assert.True(getProductQueryType?.GetInterfaces().Contains(getProductInterface));
-        Assert.True(insertProductCommandType?.GetInterfaces().Contains(insertProductInterface));
-        Assert.True(deleteProductCommandType?.GetInterfaces().Contains(deleteProductInterface));
-        Assert.True(updateProductCommandType?.GetInterfaces().Contains(updateProductInterface));
+        Assert.Contains(getProductInterface, getProductQueryType.GetInterfaces());
+        Assert.Contains(insertProductInterface, insertProductCommandType.GetInterfaces());
+        Assert.Contains(deleteProductInterface, deleteProductCommandType.GetInterfaces());
+        Assert.Contains(updateProductInterface, updateProductCommandType.GetInterfaces());
     }
 
     [Homework(RunLogic.Homeworks.Cqrs)]
