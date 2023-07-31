@@ -111,7 +111,7 @@ public class CqrsTests
     }
 
     [Homework(RunLogic.Homeworks.Cqrs)]
-    public async void InsertOperation_Should_ReturnCorrectResponse()    
+    public async Task InsertOperation_Should_ReturnCorrectResponse()    
     {
         // just uncomment lines below and delete exception                     
         throw new NotImplementedException();                                      

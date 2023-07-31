@@ -15,8 +15,9 @@ public class MediatorTests
     public void MediatR_Should_ResideInMainProject()
     {
         var mediatR = "MediatR";
-        
-        var result = Types.InNamespace("Dotnet.Homeworks.MainProject")
+        var nspaceMainProject = "Dotnet.Homeworks.MainProject";
+
+        var result = Types.InNamespace(nspaceMainProject)
             .Should()
             .HaveDependencyOn(mediatR)
             .GetResult();
@@ -25,7 +26,7 @@ public class MediatorTests
     }
     
     [Homework(RunLogic.Homeworks.Cqrs)]
-    public async void Controller_Should_CallMediator()
+    public async Task Controller_Should_CallMediator()
     {
         // just uncomment strokes below and delete exception                     
         throw new NotImplementedException();
