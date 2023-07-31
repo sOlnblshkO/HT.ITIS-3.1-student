@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Net.Sockets;
 using Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
 using MinioInstance = Dotnet.Homeworks.Tests.MinioStorage.Helpers.TestEnvironmentMinioInstance;
 
@@ -12,8 +13,24 @@ public class RunMinioServerInDockerFixture : IDisposable, ICollectionFixture<Run
     public RunMinioServerInDockerFixture()
     {
         _minioContainerName = Guid.NewGuid().ToString();
+        if (!IsPortAvailable(MinioInstance.Config.Port))
+            throw new PortAlreadyAllocatedException(MinioInstance.Config.Port);
         RunMinioContainer(_minioContainerName);
         Thread.Sleep(TimeSpan.FromSeconds(1)); // waiting for minio container to fully set up
+    }
+
+    private static bool IsPortAvailable(int port)
+    {
+        try
+        {
+            using var client = new TcpClient();
+            client.Connect(MinioInstance.Config.Endpoint, port);
+            return false;
+        }
+        catch (SocketException)
+        {
+            return true;
+        }
     }
 
     private static void RunMinioContainer(string containerName) =>
