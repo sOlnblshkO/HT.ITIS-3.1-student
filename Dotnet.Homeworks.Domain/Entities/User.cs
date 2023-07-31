@@ -1,9 +1,10 @@
-﻿namespace Dotnet.Homeworks.MainProject.Models;
+﻿namespace Dotnet.Homeworks.Domain.Entities;
+
 
 public class User : BaseEntity
 {
     /// <summary>
-    /// Email пользователя
+    /// Почта пользователя
     /// </summary>
     public string Email { get; set; }
 

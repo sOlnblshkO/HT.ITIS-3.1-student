@@ -1,4 +1,4 @@
-﻿namespace Dotnet.Homeworks.MainProject.Models;
+﻿namespace Dotnet.Homeworks.Domain.Entities;
 
 public abstract class BaseEntity
 {
