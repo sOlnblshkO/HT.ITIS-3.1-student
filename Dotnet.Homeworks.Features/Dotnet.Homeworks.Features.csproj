@@ -10,7 +10,6 @@
       <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
           <_Parameter1>Dotnet.Homeworks.Tests</_Parameter1>
       </AssemblyAttribute>
-      <ProjectReference Include="..\Dotnet.Homeworks.MessagingContracts\Dotnet.Homeworks.MessagingContracts.csproj" />
     </ItemGroup>
 
 </Project>
