@@ -1,7 +1,7 @@
 ﻿using Dotnet.Homeworks.Infrastructure.Cqrs.Queries;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Utils;
 using Dotnet.Homeworks.MainProject.Controllers;
-using Dotnet.Homeworks.MessagingContracts.FeaturesContracts;
+using Dotnet.Homeworks.Contracts.FeaturesContracts;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using MediatR;
 using Moq;

@@ -1,4 +1,5 @@
 using Dotnet.Homeworks.Application.Abstractions.Repositories;
+using Dotnet.Homeworks.Contracts.FeaturesContracts;
 using Dotnet.Homeworks.Domain.Entities;
 using Dotnet.Homeworks.Features.Products.Commands.DeleteProduct;
 using Dotnet.Homeworks.Features.Products.Commands.InsertProduct;
@@ -6,7 +7,6 @@ using Dotnet.Homeworks.Features.Products.Commands.UpdateProduct;
 using Dotnet.Homeworks.Features.Products.Queries.GetProducts;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Queries;
-using Dotnet.Homeworks.MessagingContracts.FeaturesContracts;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Moq;
 
