@@ -23,8 +23,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Dotnet.Homeworks.Infrastructure\Dotnet.Homeworks.Infrastructure.csproj" />
-      <ProjectReference Include="..\Dotnet.Homeworks.MessagingContracts\Dotnet.Homeworks.MessagingContracts.csproj" />
+      <ProjectReference Include="..\Dotnet.Homeworks.Data\Dotnet.Homeworks.Data.csproj" />
+      <ProjectReference Include="..\Dotnet.Homeworks.Domain\Dotnet.Homeworks.Domain.csproj" />
+      <ProjectReference Include="..\Dotnet.Homeworks.Shared\Dotnet.Homeworks.Shared.csproj" />
     </ItemGroup>
 
 </Project>

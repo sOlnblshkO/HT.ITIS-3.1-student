@@ -6,8 +6,14 @@ services:
   dotnet_rabbitmq:
     image: rabbitmq:3-alpine
     
+  dotnet_minio:
+    image: minio/minio:latest
+    
   dotnet_main:
     image: dotnet-web
     
   dotnet_mailing:
+    image: dotnet-web
+    
+  dotnet_storage:
     image: dotnet-web

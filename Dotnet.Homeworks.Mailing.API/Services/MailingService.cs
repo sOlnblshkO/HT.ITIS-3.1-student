@@ -4,6 +4,7 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using Dotnet.Homeworks.Shared.Dto;
 
 namespace Dotnet.Homeworks.Mailing.API.Services;
 
