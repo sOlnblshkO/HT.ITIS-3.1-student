@@ -28,7 +28,7 @@ public class MediatorTests
     }
     
     [Homework(RunLogic.Homeworks.Cqrs)]
-    public async Task Controller_Should_CallMediator_WhenCallGetPoducts()
+    public async Task Controller_Should_CallMediator_WhenCallGetProducts()
     {
         // just uncomment strokes below and delete exception                     
         throw new NotImplementedException();
@@ -36,19 +36,19 @@ public class MediatorTests
         // var mediatorMock = new Mock<IMediator>();
         // var list = new List<GetProductsDto>() { new GetProductsDto(Guid.NewGuid(), "name") };
         // var returns = new Result<List<GetProductsDto>>(list, true, null);
-        // mediatorMock.Setup(x => x.Send(It.IsAny<IQuery<List<GetProductsDtosDto>>>(), It.IsAny<CancellationToken>()))
+        // mediatorMock.Setup(x => x.Send(It.IsAny<IQuery<List<GetProductsDto>>>(), It.IsAny<CancellationToken>()))
         //     .ReturnsAsync(returns);
         //
         // var productManagementController = new ProductManagementController(mediatorMock.Object);
-        // 
+        //
         // var result = await productManagementController.GetProducts();
-        // 
+        //
         // mediatorMock.Verify(x=> 
         //     x.Send(It.IsAny<IQuery<List<GetProductsDto>>>(), It.IsAny<CancellationToken>()), Times.Once);
     }
     
     [Homework(RunLogic.Homeworks.Cqrs)]
-    public async Task Controller_Should_CallMediator_WhenCallInsertPoduct()
+    public async Task Controller_Should_CallMediator_WhenCallInsertProduct()
     {
         // just uncomment strokes below and delete exception                     
         throw new NotImplementedException();
@@ -68,7 +68,7 @@ public class MediatorTests
     }
     
     [Homework(RunLogic.Homeworks.Cqrs)]
-    public async Task Controller_Should_CallMediator_WhenCallDeletePoduct()
+    public async Task Controller_Should_CallMediator_WhenCallDeleteProduct()
     {
         // just uncomment strokes below and delete exception                     
         throw new NotImplementedException();
@@ -88,7 +88,7 @@ public class MediatorTests
     }
     
     [Homework(RunLogic.Homeworks.Cqrs)]
-    public async Task Controller_Should_CallMediator_WhenCallUpdatePoduct()
+    public async Task Controller_Should_CallMediator_WhenCallUpdateProduct()
     {
         // just uncomment strokes below and delete exception                     
         throw new NotImplementedException();

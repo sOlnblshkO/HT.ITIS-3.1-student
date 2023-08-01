@@ -32,7 +32,7 @@ public class CqrsTests
         var insertProductCommandType = typeof(InsertProductCommand);
         var insertProductInterface = typeof(ICommand<InsertProductDto>);
 
-        var deleteProductCommandType = typeof(DeleteProductByIdCommand);
+        var deleteProductCommandType = typeof(DeleteProductByGuidCommand);
         var deleteProductInterface = typeof(ICommand);
 
         var updateProductCommandType = typeof(UpdateProductCommand);
@@ -50,16 +50,16 @@ public class CqrsTests
         // just uncomment lines below and delete exception    
         throw new NotImplementedException();
         
-        // var productQueryType = typeof(GetProductsHandler);
+        // var productQueryType = typeof(GetProductsQueryHandler);
         // var getProductInterface = typeof(IQueryHandler<GetProductsQuery, List<GetProductsDto>>);
         //
-        // var insertProductType = typeof(InsertProductHandler);
+        // var insertProductType = typeof(InsertProductCommandHandler);
         // var insertProductInterface = typeof(ICommandHandler<InsertProductCommand, InsertProductDto>);
         //
-        // var deleteProductType = typeof(DeleteProductByIdHandler);
-        // var deleteProductInterface = typeof(ICommandHandler<DeleteProductByIdCommand>);
+        // var deleteProductType = typeof(DeleteProductByGuidCommandHandler);
+        // var deleteProductInterface = typeof(ICommandHandler<DeleteProductByGuidCommand>);
         //
-        // var updateProductType = typeof(UpdateProductHandler);
+        // var updateProductType = typeof(UpdateProductCommandHandler);
         // var updateProductInterface = typeof(ICommandHandler<UpdateProductCommand>);
         //
         // Assert.True(productQueryType?.GetInterfaces().Contains(getProductInterface));
@@ -91,11 +91,11 @@ public class CqrsTests
         // ).ReturnsAsync(productList);
         //
         // var command = new InsertProductCommand(product.Name);
-        // var commandHandler = new InsertProductHandler(_productRepositoryMock.Object,
+        // var commandHandler = new InsertProductCommandHandler(_productRepositoryMock.Object,
         //     _unitOfWorkMock.Object);
         //
         // var query = new GetProductsQuery(); 
-        // var queryHandler = new GetProductsHandler(_productRepositoryMock.Object,
+        // var queryHandler = new GetProductsQueryHandler(_productRepositoryMock.Object,
         //     _unitOfWorkMock.Object);
         //
         // // Act
@@ -122,7 +122,7 @@ public class CqrsTests
         //     x.InsertProductAsync(It.IsAny<Product>())).ReturnsAsync(product.Id);
         //
         // var command = new InsertProductCommand(product.Name);
-        // var commandHandler = new InsertProductHandler(_productRepositoryMock.Object,
+        // var commandHandler = new InsertProductCommandHandler(_productRepositoryMock.Object,
         //     _unitOfWorkMock.Object);
         //
         // // Act                                                                       
