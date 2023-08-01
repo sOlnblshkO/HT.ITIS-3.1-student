@@ -10,7 +10,7 @@ namespace Dotnet.Homeworks.Tests.MinioStorage.Helpers;
 public class MinioEnvironmentBuilder : TestEnvironmentBuilder<MinioEnvironment>
 {
     private bool _runBackgroundServicesOnBuild;
-    private TimeSpan _pendingObjectsProcessorPeriod = TimeSpan.FromSeconds(3.5);
+    private readonly TimeSpan _pendingObjectsProcessorPeriod = TimeSpan.FromSeconds(3.5);
 
     public MinioEnvironmentBuilder WithBackgroundServicesRunOnBuild(bool runBackgroundServicesOnBuild = true)
     {
@@ -21,7 +21,6 @@ public class MinioEnvironmentBuilder : TestEnvironmentBuilder<MinioEnvironment>
     public override void SetupServices(Action<IServiceCollection>? configureServices = default)
     {
         var optionsConfig = Options.Create(MinioInstance.Config);
-        configureServices ??= _ => { };
         configureServices += s => s
             .AddSingleton(optionsConfig)
             .AddSingleton<IStorageFactory, StorageFactory>()
