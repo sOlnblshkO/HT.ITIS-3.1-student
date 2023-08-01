@@ -1,4 +1,4 @@
-using Dotnet.Homeworks.Application.Abstractions.Repositories;
+using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Domain.Entities;
 using Dotnet.Homeworks.Features.Products.Commands.DeleteProduct;
 using Dotnet.Homeworks.Features.Products.Commands.InsertProduct;

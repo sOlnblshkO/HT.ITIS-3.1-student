@@ -13,7 +13,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Dotnet.Homeworks.Application\Dotnet.Homeworks.Application.csproj" />
       <ProjectReference Include="..\Dotnet.Homeworks.Data\Dotnet.Homeworks.Data.csproj" />
     </ItemGroup>
 
