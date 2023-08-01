@@ -14,8 +14,9 @@
 ### Теория
 1. [Расшифровка выступления Максима Аршинова на dotnext про богатые и анемичные модели](https://habr.com/ru/company/jugru/blog/503868/)
 2. [Статья Максима Аршинова про реализацию паттерна спецификация на C#](https://habr.com/ru/articles/325280/)
-3. [Сравнение популярных мапперов в C#](https://www.youtube.com/watch?v=U8gSdQN2jWI&ab_channel=NickChapsas)
-4. [Mapster](https://github.com/MapsterMapper/Mapster)
+3. [DDD на практике](https://habr.com/ru/articles/334126/)
+4. [Сравнение популярных мапперов в C#](https://www.youtube.com/watch?v=U8gSdQN2jWI&ab_channel=NickChapsas)
+5. [Mapster](https://github.com/MapsterMapper/Mapster)
 
 ### Вопросы к семинару
 1. Богатая модель - прямое нарушение принципов SOLID. Но почему некоторые разработчики тем не менее выбирают именно этот вариант реализации DDD?
