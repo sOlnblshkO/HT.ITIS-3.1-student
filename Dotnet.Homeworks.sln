@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Theory", "Theory", "{34A78E
 		Dotnet.Homeworks.Theory\Patterns.md = Dotnet.Homeworks.Theory\Patterns.md
 		Dotnet.Homeworks.Theory\Minio.S3.md = Dotnet.Homeworks.Theory\Minio.S3.md
 		Dotnet.Homeworks.Theory\CQRS.md = Dotnet.Homeworks.Theory\CQRS.md
+		Dotnet.Homeworks.Theory\CQRSValidatorsDecorators.md = Dotnet.Homeworks.Theory\CQRSValidatorsDecorators.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{03F24D07-470D-4F82-826B-5E7058A1E689}"
@@ -39,6 +40,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Storage.API", "Dotnet.Homeworks.Storage.API\Dotnet.Homeworks.Storage.API.csproj", "{EF6C5008-6FA2-4500-9D9F-4BE1F8A68DAD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Shared", "Dotnet.Homeworks.Shared\Dotnet.Homeworks.Shared.csproj", "{C1278C47-BA43-49CF-B5AC-604672B9FD99}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Domain", "Dotnet.Homeworks.Domain\Dotnet.Homeworks.Domain.csproj", "{AF76D63E-12E1-4553-B880-548D6BF6CAE7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Infrastructure", "Dotnet.Homeworks.Infrastructure\Dotnet.Homeworks.Infrastructure.csproj", "{7860419F-16B1-42D5-A065-6C168E50D65F}"
