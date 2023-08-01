@@ -1,5 +1,5 @@
 namespace Dotnet.Homeworks.Features.Products.Commands.InsertProduct;
 
-internal sealed class InsertProductHandler 
+internal sealed class InsertProductCommandHandler 
 {
 }

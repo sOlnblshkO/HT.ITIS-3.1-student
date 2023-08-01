@@ -2,7 +2,7 @@ using Dotnet.Homeworks.Application.Abstractions.Repositories;
 using Dotnet.Homeworks.Data.DatabaseContext;
 using Dotnet.Homeworks.Domain.Entities;
 
-namespace Dotnet.Homeworks.Infrastructure.DataAccess;
+namespace Dotnet.Homeworks.Infrastructure.Repositories;
 
 public class ProductRepository : IProductRepository
 {
@@ -18,7 +18,7 @@ public class ProductRepository : IProductRepository
         throw new NotImplementedException();
     }
 
-    public async Task DeleteProductByIdAsync(Guid id)
+    public async Task DeleteProductByGuidAsync(Guid id)
     {
         throw new NotImplementedException();
     }
