@@ -1,5 +1,3 @@
 namespace Dotnet.Homeworks.Features.Products.Queries.GetProducts;
 
-public record GetProductsQuery 
-{
-}
+public record GetProductsQuery;

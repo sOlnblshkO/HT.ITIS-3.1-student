@@ -1,4 +1,4 @@
-﻿namespace Dotnet.Homeworks.Domain.Abstractions.Repositories;
+﻿namespace Dotnet.Homeworks.Domain.Abstractions.UnitOfWork;
 
 public interface IUnitOfWork
 {

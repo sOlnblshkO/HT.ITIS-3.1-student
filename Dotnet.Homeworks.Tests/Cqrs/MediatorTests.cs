@@ -34,9 +34,9 @@ public class MediatorTests
         throw new NotImplementedException();
         
         // var mediatorMock = new Mock<IMediator>();
-        // var list = new List<GetProductDto>() { new GetProductDto(Guid.NewGuid(), "name") };
-        // var returns = new Result<List<GetProductDto>>(list, true, null);
-        // mediatorMock.Setup(x => x.Send(It.IsAny<IQuery<List<GetProductDto>>>(), It.IsAny<CancellationToken>()))
+        // var list = new List<GetProductsDto>() { new GetProductsDto(Guid.NewGuid(), "name") };
+        // var returns = new Result<List<GetProductsDto>>(list, true, null);
+        // mediatorMock.Setup(x => x.Send(It.IsAny<IQuery<List<GetProductsDtosDto>>>(), It.IsAny<CancellationToken>()))
         //     .ReturnsAsync(returns);
         //
         // var productManagementController = new ProductManagementController(mediatorMock.Object);
@@ -44,7 +44,7 @@ public class MediatorTests
         // var result = await productManagementController.GetProducts();
         // 
         // mediatorMock.Verify(x=> 
-        //     x.Send(It.IsAny<IQuery<List<GetProductDto>>>(), It.IsAny<CancellationToken>()), Times.Once);
+        //     x.Send(It.IsAny<IQuery<List<GetProductsDto>>>(), It.IsAny<CancellationToken>()), Times.Once);
     }
     
     [Homework(RunLogic.Homeworks.Cqrs)]

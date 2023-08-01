@@ -18,13 +18,13 @@ public class ProductManagementController : ControllerBase
     }
 
     [HttpDelete("deleteProduct")]
-    public async Task<IActionResult> DeleteProduct(Guid id)
+    public async Task<IActionResult> DeleteProduct(Guid guid)
     {
         throw new NotImplementedException();
     }
 
     [HttpPut("updateProduct")]
-    public async Task<IActionResult> UpdateProduct(Guid id, string name)
+    public async Task<IActionResult> UpdateProduct(Guid guid, string name)
     {
         throw new NotImplementedException();
     }

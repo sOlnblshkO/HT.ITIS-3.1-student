@@ -1,4 +1,5 @@
 using Dotnet.Homeworks.Domain.Abstractions.Repositories;
+using Dotnet.Homeworks.Domain.Abstractions.UnitOfWork;
 using Dotnet.Homeworks.Domain.Entities;
 using Dotnet.Homeworks.Features.Products.Commands.DeleteProduct;
 using Dotnet.Homeworks.Features.Products.Commands.InsertProduct;
@@ -26,7 +27,7 @@ public class CqrsTests
     public void CommandsAndQueries_Should_ImplementCertainInterface()
     {
         var getProductQueryType = typeof(GetProductsQuery);
-        var getProductInterface = typeof(IQuery<List<GetProductDto>>);
+        var getProductInterface = typeof(IQuery<List<GetProductsDto>>);
 
         var insertProductCommandType = typeof(InsertProductCommand);
         var insertProductInterface = typeof(ICommand<InsertProductDto>);
@@ -50,7 +51,7 @@ public class CqrsTests
         throw new NotImplementedException();
         
         // var productQueryType = typeof(GetProductsHandler);
-        // var getProductInterface = typeof(IQueryHandler<GetProductsQuery, List<GetProductDto>>);
+        // var getProductInterface = typeof(IQueryHandler<GetProductsQuery, List<GetProductsDto>>);
         //
         // var insertProductType = typeof(InsertProductHandler);
         // var insertProductInterface = typeof(ICommandHandler<InsertProductCommand, InsertProductDto>);
