@@ -13,22 +13,25 @@ public class RunMinioServerInDockerFixture : IDisposable, ICollectionFixture<Run
     public RunMinioServerInDockerFixture()
     {
         _minioContainerName = Guid.NewGuid().ToString();
-        if (!IsPortAvailable(MinioInstance.Config.Port))
+        if (!IsMinioPortAvailable())
             throw new PortAlreadyAllocatedException(MinioInstance.Config.Port);
         RunMinioContainer(_minioContainerName);
         Thread.Sleep(TimeSpan.FromSeconds(1)); // waiting for minio container to fully set up
     }
 
-    private static bool IsPortAvailable(int port)
+    private static bool IsMinioPortAvailable()
     {
         try
         {
             using var client = new TcpClient();
-            client.Connect(MinioInstance.Config.Endpoint, port);
+            client.Connect(MinioInstance.Config.Endpoint, MinioInstance.Config.Port);
+            // if we managed to successfully connect to this endpoint with the given port
+            // then some process is already running on this port, so it's taken
             return false;
         }
         catch (SocketException)
         {
+            // if we couldn't connect, then the port is available
             return true;
         }
     }
