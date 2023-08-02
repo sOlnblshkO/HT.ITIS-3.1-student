@@ -1,11 +1,16 @@
-﻿namespace Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
+﻿using Dotnet.Homeworks.Mailing.API.Configuration;
+using Dotnet.Homeworks.Storage.API.Configuration;
+
+namespace Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
 
 public static class Constants
 {
     public const string PostgresService = "dotnet_postgres";
     public const string RabbitMqService = "dotnet_rabbitmq";
+    public const string MinioService = "dotnet_minio";
     public const string MainService = "dotnet_main";
     public const string MailingService = "dotnet_mailing";
+    public const string StorageService = "dotnet_storage";
 
     public const string PostgresUserEnvVar = "POSTGRES_USER";
     public const string PostgresPasswordEnvVar = "POSTGRES_PASSWORD";
@@ -14,13 +19,25 @@ public static class Constants
     public const string RabbitmqDefaultUserEnvVar = "RABBITMQ_DEFAULT_USER";
     public const string RabbitmqDefaultPassEnvVar = "RABBITMQ_DEFAULT_PASS";
 
+    public const string MinioRootUserEnvVar = "MINIO_ROOT_USER";
+    public const string MinioRootPassEnvVar = "MINIO_ROOT_PASSWORD";
+
     public const string MainDefaultConnectionStringEnvVar = "ConnectionStrings__Default";
 
     public static class MailingEmailConfig
     {
-        public const string Email = "Email";
-        public const string Host = "Host";
-        public const string Port = "Port";
-        public const string Password = "Password";
+        public const string Email = nameof(EmailConfig.Email);
+        public const string Host = nameof(EmailConfig.Host);
+        public const string Port = nameof(EmailConfig.Port);
+        public const string Password = nameof(EmailConfig.Password);
+    }
+
+    public static class StorageMinioConfig
+    {
+        public const string Username = nameof(MinioConfig.Username);
+        public const string Password = nameof(MinioConfig.Password);
+        public const string Endpoint = nameof(MinioConfig.Endpoint);
+        public const string Port = nameof(MinioConfig.Port);
+        public const string WithSsl = nameof(MinioConfig.WithSsl);
     }
 }
