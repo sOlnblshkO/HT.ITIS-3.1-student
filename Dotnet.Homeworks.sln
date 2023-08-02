@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Theory", "Theory", "{34A78E
 		Dotnet.Homeworks.Theory\Patterns.md = Dotnet.Homeworks.Theory\Patterns.md
 		Dotnet.Homeworks.Theory\Minio.S3.md = Dotnet.Homeworks.Theory\Minio.S3.md
 		Dotnet.Homeworks.Theory\CQRS.md = Dotnet.Homeworks.Theory\CQRS.md
+		Dotnet.Homeworks.Theory\CQRSValidatorsDecorators.md = Dotnet.Homeworks.Theory\CQRSValidatorsDecorators.md
 		Dotnet.Homeworks.Theory\DDD.Mapster.md = Dotnet.Homeworks.Theory\DDD.Mapster.md
 	EndProjectSection
 EndProject
