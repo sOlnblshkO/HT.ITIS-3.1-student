@@ -13,7 +13,7 @@ public class MasstransitProducersTests
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task RegisterService_ShouldPublishOrSend_SendEmail_WithoutErrors()
     {
-        await using var testEnvBuilder = new TestEnvironmentBuilder();
+        await using var testEnvBuilder = new MasstransitEnvironmentBuilder();
         testEnvBuilder.SetupServices(c => c.AddSingleton<IRegistrationService, RegistrationService>());
         var env = testEnvBuilder.Build();
 

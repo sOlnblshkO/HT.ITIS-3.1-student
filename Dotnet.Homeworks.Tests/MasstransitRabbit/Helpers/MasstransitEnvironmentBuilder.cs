@@ -1,8 +1,10 @@
 ﻿using Dotnet.Homeworks.Mailing.API.Consumers;
+using Dotnet.Homeworks.Mailing.API.Helpers;
 using Dotnet.Homeworks.Mailing.API.Services;
 using Dotnet.Homeworks.MainProject.Dto;
 using Dotnet.Homeworks.MainProject.Services;
 using Dotnet.Homeworks.Shared.MessagingContracts.Email;
+using Dotnet.Homeworks.Tests.RunLogic.Utils.TestEnvironmentBuilder;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,9 +12,8 @@ using Moq;
 
 namespace Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers;
 
-internal class TestEnvironmentBuilder : IAsyncDisposable
+public class MasstransitEnvironmentBuilder : TestEnvironmentBuilder<MasstransitEnvironment>
 {
-    private ServiceProvider? _serviceProvider;
     private readonly Mock<IMailingService> _mailingMock = new();
     private ICommunicationService? _communicationService;
     private IRegistrationService? _registrationService;
@@ -24,10 +25,18 @@ internal class TestEnvironmentBuilder : IAsyncDisposable
     /// Is not null only after SetupServices call.
     /// </remarks>
     /// </summary>
-    private ITestHarness? Harness => _serviceProvider.GetTestHarness();
+    private ITestHarness? Harness => ServiceProvider?.GetTestHarness();
 
-    public void SetupServices(Action<IServiceCollection>? configureServices = default) =>
-        _serviceProvider = GetServiceProvider(configureServices);
+    public override void SetupServices(Action<IServiceCollection>? configureServices = default)
+    {
+        var assembly = AssemblyReference.Assembly;
+        configureServices ??= _ => { };
+        configureServices += s => s
+            .AddSingleton(_mailingMock.Object)
+            .AddSingleton<ICommunicationService, CommunicationService>()
+            .AddMassTransitTestHarness(b => b.AddConsumers(assembly));
+        ServiceProvider = GetServiceProvider(configureServices);
+    }
 
     public void SetupProducingProcessMock(SendEmail testingEmailMessage)
     {
@@ -42,33 +51,17 @@ internal class TestEnvironmentBuilder : IAsyncDisposable
             .Callback(async () => await Harness!.Bus.Publish(testingEmailMessage));
         producerMock.Setup(p => p.RegisterAsync(It.IsAny<RegisterUserDto>()))
             .Callback(async () => await communicationServiceMock.Object.SendEmailAsync(testingEmailMessage));
+        
         _communicationService = communicationServiceMock.Object;
         _registrationService = producerMock.Object;
     }
 
-    public TestEnvironment Build()
+    public override MasstransitEnvironment Build()
     {
-        _serviceProvider ??= GetServiceProvider(null);
-        _communicationService ??= _serviceProvider.GetRequiredService<ICommunicationService>();
-        _registrationService ??= _serviceProvider.GetRequiredService<IRegistrationService>();
+        if (ServiceProvider is null) SetupServices();
+        _communicationService ??= ServiceProvider!.GetRequiredService<ICommunicationService>();
+        _registrationService ??= ServiceProvider!.GetRequiredService<IRegistrationService>();
         _emailConsumer ??= Harness!.GetConsumerHarness<EmailConsumer>();
-        return new TestEnvironment(Harness!, _registrationService, _emailConsumer, _mailingMock);
-    }
-
-    private ServiceProvider GetServiceProvider(Action<IServiceCollection>? configureServices)
-    {
-        var assembly = typeof(EmailConsumer).Assembly;
-
-        var serviceCollection = new ServiceCollection()
-            .AddSingleton(_mailingMock.Object)
-            .AddSingleton<ICommunicationService, CommunicationService>()
-            .AddMassTransitTestHarness(b => b.AddConsumers(assembly));
-        configureServices?.Invoke(serviceCollection);
-        return serviceCollection.BuildServiceProvider();
-    }
-
-    public ValueTask DisposeAsync()
-    {
-        return _serviceProvider?.DisposeAsync() ?? ValueTask.CompletedTask;
+        return new MasstransitEnvironment(Harness!, _registrationService, _emailConsumer, _mailingMock);
     }
 }
