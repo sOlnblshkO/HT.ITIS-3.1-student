@@ -6,7 +6,7 @@
 1. Что такое observability? Чем это отличается от мониторинга?
 2. Три столпа наблюдаемости.
 3. Что такое trace?
-4. Dapper, Zipkin, Jaeger?
+4. Dapper, Zipkin, Jaeger.
 5. Структура Jaeger.
 6. OpenTracing, OpenCensus - что это, как и с чем их едят?
 7. Что такое OpenTelemetry?
