@@ -18,7 +18,7 @@ public class MasstransitConsumerTests
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task MailingConsumer_ShouldConsume_CorrectMessages_WithoutErrors()
     {
-        await using var testEnvBuilder = new TestEnvironmentBuilder();
+        await using var testEnvBuilder = new MasstransitEnvironmentBuilder();
         var testSendEmail = new SendEmail("test", "test", "test", "test");
         testEnvBuilder.SetupServices();
         testEnvBuilder.SetupProducingProcessMock(testSendEmail);
@@ -47,7 +47,7 @@ public class MasstransitConsumerTests
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task MailingConsumer_ShouldConsume_Messages_SentFromRegisterService_WithoutErrors()
     {
-        await using var testEnvBuilder = new TestEnvironmentBuilder();
+        await using var testEnvBuilder = new MasstransitEnvironmentBuilder();
         testEnvBuilder.SetupServices(c => c.AddSingleton<IRegistrationService, RegistrationService>());
         var env = testEnvBuilder.Build();
     
@@ -72,7 +72,7 @@ public class MasstransitConsumerTests
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task MailingConsumer_ShouldConsume_OneMessage_WhenOneMessageSentFromRegisterService_WithoutErrors()
     {
-        await using var testEnvBuilder = new TestEnvironmentBuilder();
+        await using var testEnvBuilder = new MasstransitEnvironmentBuilder();
         testEnvBuilder.SetupServices(c => c.AddSingleton<IRegistrationService, RegistrationService>());
         var env = testEnvBuilder.Build();
     
@@ -98,7 +98,7 @@ public class MasstransitConsumerTests
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task MailingConsumer_ShouldCall_IMailingService_Once()
     {
-        await using var testEnvBuilder = new TestEnvironmentBuilder();
+        await using var testEnvBuilder = new MasstransitEnvironmentBuilder();
         var testSendEmail = new SendEmail("test", "test", "test", "test");
         testEnvBuilder.SetupServices();
         testEnvBuilder.SetupProducingProcessMock(testSendEmail);

@@ -1,5 +1,5 @@
 ﻿using Dotnet.Homeworks.Mailing.API.Consumers;
-using Dotnet.Homeworks.MainProject.Services;
+using Dotnet.Homeworks.Mailing.API.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using NetArchTest.Rules;
 
@@ -24,12 +24,15 @@ public class ArchitectureTests
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public void MainProjectAssembly_ShouldNotHave_DependencyOnMailingAPI()
     {
-        var mainAssembly = typeof(RegistrationService).Assembly;
-        var mailingFullName = typeof(EmailConsumer).FullName;
-
-        var testResult = Types.InAssembly(mainAssembly)
+        var mailingApiAssembly = AssemblyReference.Assembly;
+        var mainProjectAssembly = MainProject.Helpers.AssemblyReference.Assembly;
+        var mailingApiNamespaces = mailingApiAssembly.ExportedTypes.Select(t => t.Namespace).Distinct()
+            .Where(n => n is not null);
+        
+        var testResult = Types
+            .InAssembly(mainProjectAssembly)
             .ShouldNot()
-            .HaveDependencyOn(mailingFullName)
+            .HaveDependencyOnAny(mailingApiNamespaces.ToArray())
             .GetResult();
         
         Assert.True(testResult.IsSuccessful);
@@ -38,12 +41,15 @@ public class ArchitectureTests
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public void MailingAPIAssembly_ShouldNotHave_DependencyOnMainProject()
     {
-        var mailingAssembly = typeof(EmailConsumer).Assembly;
-        var mainFullName = typeof(RegistrationService).FullName;
+        var mailingApiAssembly = AssemblyReference.Assembly;
+        var mainProjectAssembly = MainProject.Helpers.AssemblyReference.Assembly;
+        var mainProjectNamespaces =
+            mainProjectAssembly.ExportedTypes.Select(t => t.Namespace).Distinct().Where(n => n is not null);
 
-        var testResult = Types.InAssembly(mailingAssembly)
+        var testResult = Types
+            .InAssembly(mailingApiAssembly)
             .ShouldNot()
-            .HaveDependencyOn(mainFullName)
+            .HaveDependencyOnAny(mainProjectNamespaces.ToArray())
             .GetResult();
         
         Assert.True(testResult.IsSuccessful);
