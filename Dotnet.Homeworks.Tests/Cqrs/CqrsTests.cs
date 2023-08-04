@@ -1,12 +1,10 @@
-using Dotnet.Homeworks.Domain.Abstractions.Repositories;
-using Dotnet.Homeworks.Domain.Entities;
 using Dotnet.Homeworks.Features.Products.Commands.DeleteProduct;
 using Dotnet.Homeworks.Features.Products.Commands.InsertProduct;
 using Dotnet.Homeworks.Features.Products.Commands.UpdateProduct;
 using Dotnet.Homeworks.Features.Products.Queries.GetProducts;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Queries;
-using Dotnet.Homeworks.Infrastructure.UnitOfWork;
+using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Moq;
 
@@ -14,15 +12,6 @@ namespace Dotnet.Homeworks.Tests.Cqrs;
 
 public class CqrsTests
 {
-    private readonly Mock<IProductRepository> _productRepositoryMock;
-    private readonly Mock<IUnitOfWork> _unitOfWorkMock;
-
-    public CqrsTests()
-    {
-        _unitOfWorkMock = new();
-        _productRepositoryMock = new();
-    }
-    
     [Homework(RunLogic.Homeworks.Cqrs)]
     public void CommandsAndQueries_Should_ImplementCertainInterface()
     {
@@ -47,89 +36,64 @@ public class CqrsTests
     [Homework(RunLogic.Homeworks.Cqrs)]
     public void CommandAndQueryHandlers_Should_ImplementCertainInterfaces()
     {
-        // just uncomment lines below and delete exception    
-        throw new NotImplementedException();
+        var productQueryType = typeof(GetProductsQueryHandler);
+        var getProductInterface =
+            typeof(IQueryHandler<,>).MakeGenericType(typeof(GetProductsQuery), typeof(List<GetProductsDto>));
         
-        // var productQueryType = typeof(GetProductsQueryHandler);
-        // var getProductInterface = typeof(IQueryHandler<GetProductsQuery, List<GetProductsDto>>);
-        //
-        // var insertProductType = typeof(InsertProductCommandHandler);
-        // var insertProductInterface = typeof(ICommandHandler<InsertProductCommand, InsertProductDto>);
-        //
-        // var deleteProductType = typeof(DeleteProductByGuidCommandHandler);
-        // var deleteProductInterface = typeof(ICommandHandler<DeleteProductByGuidCommand>);
-        //
-        // var updateProductType = typeof(UpdateProductCommandHandler);
-        // var updateProductInterface = typeof(ICommandHandler<UpdateProductCommand>);
-        //
-        // Assert.True(productQueryType?.GetInterfaces().Contains(getProductInterface));
-        // Assert.True(insertProductType?.GetInterfaces().Contains(insertProductInterface));
-        // Assert.True(deleteProductType?.GetInterfaces().Contains(deleteProductInterface));
-        // Assert.True(updateProductType?.GetInterfaces().Contains(updateProductInterface));
+        var insertProductType = typeof(InsertProductCommandHandler);
+        var insertProductInterface =
+            typeof(ICommandHandler<,>).MakeGenericType(typeof(InsertProductCommand), typeof(InsertProductDto));
+        
+        var deleteProductType = typeof(DeleteProductByGuidCommandHandler);
+        var deleteProductInterface = typeof(ICommandHandler<>).MakeGenericType(typeof(DeleteProductByGuidCommand));
+        
+        var updateProductType = typeof(UpdateProductCommandHandler);
+        var updateProductInterface = typeof(ICommandHandler<>).MakeGenericType(typeof(UpdateProductCommand));
+        
+        Assert.Contains(getProductInterface, productQueryType.GetInterfaces());
+        Assert.Contains(insertProductInterface, insertProductType.GetInterfaces());
+        Assert.Contains(deleteProductInterface, deleteProductType.GetInterfaces());
+        Assert.Contains(updateProductInterface, updateProductType.GetInterfaces());
     }
 
     [Homework(RunLogic.Homeworks.Cqrs)]
     public async Task InsertOperation_IsCorrect()
     {
-        // just uncomment lines below and delete exception    
-        throw new NotImplementedException();
+        // Arrange
+        var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi();
+        var env = testEnvBuilder.Build();
+        var insertCommand = TestProduct.GetInsertCommand();
+        var getQuery = TestProduct.GetGetQuery();
         
-        // // Arrange     
-        // var productList = new List<Product>();
-        // var product = new Product(){  Id = Guid.NewGuid(), Name = "Name" };
-        // _productRepositoryMock.Setup(
-        //     x => x.InsertProductAsync(
-        //         It.IsAny<Product>()
-        //     )
-        // ).ReturnsAsync(() =>
-        // {
-        //     productList.Add(product);
-        //     return product.Id;
-        // });
-        // _productRepositoryMock.Setup(
-        //     x => x.GetAllProductsAsync()
-        // ).ReturnsAsync(productList);
-        //
-        // var command = new InsertProductCommand(product.Name);
-        // var commandHandler = new InsertProductCommandHandler(_productRepositoryMock.Object,
-        //     _unitOfWorkMock.Object);
-        //
-        // var query = new GetProductsQuery(); 
-        // var queryHandler = new GetProductsQueryHandler(_productRepositoryMock.Object,
-        //     _unitOfWorkMock.Object);
-        //
-        // // Act
-        // var resultInsert = await commandHandler.Handle(command);
-        // var resultGet = await queryHandler.Handle(query, new CancellationToken());
-        //
-        // // Assert
-        // Assert.True(resultInsert.IsSuccess);
-        // Assert.True(resultGet.IsSuccess);
-        // _unitOfWorkMock.Verify(x=>x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
-        // Assert.NotNull(resultGet?.Value?
-        //     .Single(x=>x.Id == resultInsert?.Value?.Id));
+        // Act
+        var resultInsert =
+            await CqrsEnvironment.HandleCommand<InsertProductCommand, InsertProductDto>(env.InsertCommandHandler,
+                insertCommand);
+        var resultGet = await CqrsEnvironment.HandleQuery<GetProductsQuery, List<GetProductsDto>>(env.GetQueryHandler, getQuery);
+
+        // Assert
+        Assert.True(resultInsert.IsSuccess);
+        Assert.True(resultGet.IsSuccess);
+        env.UnitOfWorkMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+        Assert.NotNull(resultGet.Value?
+            .Single(x => x.Guid == resultInsert.Value?.Guid));
     }
 
     [Homework(RunLogic.Homeworks.Cqrs)]
-    public async Task InsertOperation_Should_ReturnCorrectResponse()    
+    public async Task InsertOperation_Should_ReturnCorrectResponse()
     {
-        // just uncomment lines below and delete exception                     
-        throw new NotImplementedException();                                      
-    
-        // // Arrange                                
-        // var product = new Product() { Id = Guid.NewGuid(), Name = "Name" };
-        // _productRepositoryMock.Setup(x => 
-        //     x.InsertProductAsync(It.IsAny<Product>())).ReturnsAsync(product.Id);
-        //
-        // var command = new InsertProductCommand(product.Name);
-        // var commandHandler = new InsertProductCommandHandler(_productRepositoryMock.Object,
-        //     _unitOfWorkMock.Object);
-        //
-        // // Act                                                                       
-        // var resultInsert = await commandHandler.Handle(command);
-        //
-        // // Assert
-        // Assert.True(resultInsert.IsSuccess);
-        // Assert.Equal(product.Id, resultInsert?.Value?.Id);
+        // Arrange
+        var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi();
+        var env = testEnvBuilder.Build();
+        var insertCommand = TestProduct.GetInsertCommand();
+        var getQuery = TestProduct.GetGetQuery();
+
+        // Act
+        await CqrsEnvironment.HandleCommand<InsertProductCommand, InsertProductDto>(env.InsertCommandHandler, insertCommand);
+        var resultGet = await CqrsEnvironment.HandleQuery<GetProductsQuery, List<GetProductsDto>>(env.GetQueryHandler, getQuery);
+        
+        // Assert
+        Assert.NotNull(resultGet.Value);
+        Assert.Contains(resultGet.Value, p => p.Name == insertCommand.Name);
     }
 }
