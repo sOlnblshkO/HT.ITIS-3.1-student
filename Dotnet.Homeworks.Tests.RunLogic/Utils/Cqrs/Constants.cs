@@ -3,5 +3,5 @@
 public static class Constants
 {
     public const string MediatR = "MediatR";
-    public const string NamespaceMainProject = "Dotnet.Homeworks.MainProject";
+    public static string? NamespaceMainProject = typeof(MainProject.Helpers.AssemblyReference).Assembly.GetName().Name;
 }

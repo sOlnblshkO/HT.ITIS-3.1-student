@@ -4,7 +4,6 @@ namespace Dotnet.Homeworks.MainProject.Controllers;
 
 public class ProductManagementController : ControllerBase
 {
-    
     [HttpGet("getProducts")]
     public async Task<IActionResult> GetProducts()
     {

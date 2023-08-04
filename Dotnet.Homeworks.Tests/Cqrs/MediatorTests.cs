@@ -18,7 +18,6 @@ public class MediatorTests
     [Homework(RunLogic.Homeworks.Cqrs)]
     public void MediatR_Should_ResideInMainProject()
     {
-
         var result = Types.InNamespace(Constants.NamespaceMainProject)
             .Should()
             .HaveDependencyOn(Constants.MediatR)

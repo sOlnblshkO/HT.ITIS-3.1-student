@@ -15,5 +15,9 @@
       <ProjectReference Include="..\Dotnet.Homeworks.Mailing.API\Dotnet.Homeworks.Mailing.API.csproj" />
       <ProjectReference Include="..\Dotnet.Homeworks.Storage.API\Dotnet.Homeworks.Storage.API.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Dotnet.Homeworks.MainProject\Dotnet.Homeworks.MainProject.csproj" />
+    </ItemGroup>
     
 </Project>
