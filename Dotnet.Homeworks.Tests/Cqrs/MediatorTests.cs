@@ -15,7 +15,6 @@ public class MediatorTests
     [Homework(RunLogic.Homeworks.Cqrs)]
     public void MediatR_Should_ResideInMainProject()
     {
-
         var result = Types.InNamespace(Constants.NamespaceMainProject)
             .Should()
             .HaveDependencyOn(Constants.MediatR)
@@ -27,7 +26,7 @@ public class MediatorTests
     [Homework(RunLogic.Homeworks.Cqrs)]
     public async Task Controller_Should_CallMediator_WhenCallGetProducts()
     {
-        var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediatR();
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediatR();
         var env = testEnvBuilder.Build();
 
         await env.ProductManagementController.GetProducts();
@@ -39,7 +38,7 @@ public class MediatorTests
     [Homework(RunLogic.Homeworks.Cqrs)]
     public async Task Controller_Should_CallMediator_WhenCallInsertProduct()
     {   
-        var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediatR();
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediatR();
         var env = testEnvBuilder.Build();
         
         await env.ProductManagementController.InsertProduct("Name");
@@ -51,7 +50,7 @@ public class MediatorTests
     [Homework(RunLogic.Homeworks.Cqrs)]
     public async Task Controller_Should_CallMediator_WhenCallDeleteProduct()
     {   
-        var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediatR();
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediatR();
         var env = testEnvBuilder.Build();
         
         await env.ProductManagementController.DeleteProduct(Guid.NewGuid());
@@ -63,7 +62,7 @@ public class MediatorTests
     [Homework(RunLogic.Homeworks.Cqrs)]
     public async Task Controller_Should_CallMediator_WhenCallUpdateProduct()
     {   
-        var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediatR();
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediatR();
         var env = testEnvBuilder.Build();
         
         await env.ProductManagementController.UpdateProduct(Guid.NewGuid(), "Name");

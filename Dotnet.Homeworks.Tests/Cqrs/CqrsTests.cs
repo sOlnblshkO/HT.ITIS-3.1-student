@@ -60,7 +60,7 @@ public class CqrsTests
     public async Task InsertOperation_IsCorrect()
     {
         // Arrange
-        var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi();
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi();
         var env = testEnvBuilder.Build();
         var insertCommand = TestProduct.GetInsertCommand();
         var getQuery = TestProduct.GetGetQuery();
@@ -83,7 +83,7 @@ public class CqrsTests
     public async Task InsertOperation_Should_ReturnCorrectResponse()
     {
         // Arrange
-        var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi();
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi();
         var env = testEnvBuilder.Build();
         var insertCommand = TestProduct.GetInsertCommand();
         var getQuery = TestProduct.GetGetQuery();
