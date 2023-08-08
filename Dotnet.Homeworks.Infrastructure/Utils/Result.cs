@@ -1,8 +1,8 @@
-namespace Dotnet.Homeworks.Infrastructure.Cqrs.Utils;
+namespace Dotnet.Homeworks.Infrastructure.Utils;
 
 public class Result
 {
-    public bool IsSuccess { get; } = true;
+    public bool IsSuccess { get; }
     public bool IsFailure => !IsSuccess;
     public string? Error { get; }
 

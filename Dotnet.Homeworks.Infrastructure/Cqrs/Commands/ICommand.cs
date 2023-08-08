@@ -1,5 +1,5 @@
-using Dotnet.Homeworks.Infrastructure.Cqrs.Utils;
-using MediatR;
+using Dotnet.Homeworks.Infrastructure.Utils;
+using Dotnet.Homeworks.Mediator;
 
 namespace Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 
@@ -10,5 +10,5 @@ public interface ICommand : IRequest<Result>
 
 public interface ICommand<TResponse> : IRequest<Result<TResponse>>
 {
-    public Result<TResponse> Result { get; set; }
+    public Result<TResponse> Result { get; init; }
 }

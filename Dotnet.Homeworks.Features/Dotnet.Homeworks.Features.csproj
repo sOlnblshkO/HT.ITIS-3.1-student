@@ -12,4 +12,18 @@
       </AssemblyAttribute>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Users\Common\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Dotnet.Homeworks.Infrastructure\Dotnet.Homeworks.Infrastructure.csproj" />
+      <ProjectReference Include="..\Dotnet.Homeworks.Mediator\Dotnet.Homeworks.Mediator.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="11.6.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    </ItemGroup>
+
 </Project>

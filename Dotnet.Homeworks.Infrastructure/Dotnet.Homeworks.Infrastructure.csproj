@@ -8,12 +8,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="11.6.0" />
       <PackageReference Include="MediatR" Version="12.1.1" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Dotnet.Homeworks.Data\Dotnet.Homeworks.Data.csproj" />
+      <ProjectReference Include="..\Dotnet.Homeworks.Mediator\Dotnet.Homeworks.Mediator.csproj" />
     </ItemGroup>
 
 </Project>
