@@ -15,6 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using ProductRepository = Dotnet.Homeworks.Domain.Repositories.ProductRepository;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
@@ -55,5 +57,7 @@ app.MapGet("/", () => "Hello World!");
 app.MapPost("/user",
     async (RegisterUserDto userDto, IRegistrationService registrationService) =>
         await registrationService.RegisterAsync(userDto));
+
+app.MapControllers();
 
 app.Run();
