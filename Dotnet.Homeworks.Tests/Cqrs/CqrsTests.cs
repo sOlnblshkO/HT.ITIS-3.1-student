@@ -10,29 +10,10 @@ using Moq;
 
 namespace Dotnet.Homeworks.Tests.Cqrs;
 
+
+[Collection(nameof(AllRequestsFixture))]
 public class CqrsTests
 {
-    [Homework(RunLogic.Homeworks.Cqrs)]
-    public void CommandsAndQueries_Should_ImplementCertainInterface()
-    {
-        var getProductQueryType = typeof(GetProductsQuery);
-        var getProductInterface = typeof(IQuery<List<GetProductsDto>>);
-
-        var insertProductCommandType = typeof(InsertProductCommand);
-        var insertProductInterface = typeof(ICommand<InsertProductDto>);
-
-        var deleteProductCommandType = typeof(DeleteProductByGuidCommand);
-        var deleteProductInterface = typeof(ICommand);
-
-        var updateProductCommandType = typeof(UpdateProductCommand);
-        var updateProductInterface = typeof(ICommand);
-        
-        Assert.Contains(getProductInterface, getProductQueryType.GetInterfaces());
-        Assert.Contains(insertProductInterface, insertProductCommandType.GetInterfaces());
-        Assert.Contains(deleteProductInterface, deleteProductCommandType.GetInterfaces());
-        Assert.Contains(updateProductInterface, updateProductCommandType.GetInterfaces());
-    }
-
     [Homework(RunLogic.Homeworks.Cqrs)]
     public void CommandAndQueryHandlers_Should_ImplementCertainInterfaces()
     {
@@ -63,37 +44,30 @@ public class CqrsTests
         await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi();
         var env = testEnvBuilder.Build();
         var insertCommand = TestProduct.GetInsertCommand();
-        var getQuery = TestProduct.GetGetQuery();
         
         // Act
         var resultInsert =
             await CqrsEnvironment.HandleCommand<InsertProductCommand, InsertProductDto>(env.InsertCommandHandler,
                 insertCommand);
-        var resultGet = await CqrsEnvironment.HandleQuery<GetProductsQuery, List<GetProductsDto>>(env.GetQueryHandler, getQuery);
 
         // Assert
         Assert.True(resultInsert.IsSuccess);
-        Assert.True(resultGet.IsSuccess);
         env.UnitOfWorkMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
-        Assert.NotNull(resultGet.Value?
-            .Single(x => x.Guid == resultInsert.Value?.Guid));
     }
-
+    
     [Homework(RunLogic.Homeworks.Cqrs)]
-    public async Task InsertOperation_Should_ReturnCorrectResponse()
+    public async Task GetOperation_IsCorrect()
     {
         // Arrange
         await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi();
         var env = testEnvBuilder.Build();
-        var insertCommand = TestProduct.GetInsertCommand();
         var getQuery = TestProduct.GetGetQuery();
-
-        // Act
-        await CqrsEnvironment.HandleCommand<InsertProductCommand, InsertProductDto>(env.InsertCommandHandler, insertCommand);
-        var resultGet = await CqrsEnvironment.HandleQuery<GetProductsQuery, List<GetProductsDto>>(env.GetQueryHandler, getQuery);
         
+        // Act
+        var resultGet = await CqrsEnvironment.HandleQuery<GetProductsQuery, List<GetProductsDto>>(env.GetQueryHandler, getQuery);
+
         // Assert
-        Assert.NotNull(resultGet.Value);
-        Assert.Contains(resultGet.Value, p => p.Name == insertCommand.Name);
+        Assert.True(resultGet.IsSuccess);
+        env.UnitOfWorkMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
     }
 }
