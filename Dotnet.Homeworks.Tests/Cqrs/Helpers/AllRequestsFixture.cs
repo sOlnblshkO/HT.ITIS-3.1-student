@@ -11,7 +11,7 @@ public class AllRequestsFixture : IDisposable, ICollectionFixture<AllRequestsFix
     private static Assembly AssemblyFeatures = Features.Helpers.AssemblyReference.Assembly;
 
     public AllRequestsFixture() {
-        if (!AllRequestsInAssemblyFixture())
+        if (!AllRequestsInAssemblyFixture() || !AllHandlersInAssemblyFixture())
             throw new ImplementInterfacesException(AssemblyFeatures.FullName);
     }
 
@@ -26,6 +26,22 @@ public class AllRequestsFixture : IDisposable, ICollectionFixture<AllRequestsFix
         
         var types = AssemblyFeatures.GetTypes()
             .Where(x => x.Name.EndsWith("Command") || x.Name.EndsWith("Query"))
+            .Select(x => interfaces.IntersectBy(x.GetInterfaces().Select(x=>x.Name), type=>type.Name));
+
+        return types.All(x => x.Any());
+    }
+
+    public bool AllHandlersInAssemblyFixture()
+    {
+        var interfaces = new List<Type>()
+        {
+            typeof(ICommandHandler<,>),
+            typeof(ICommandHandler<>),
+            typeof(IQueryHandler<,>),
+        };
+        
+        var types = AssemblyFeatures.GetTypes()
+            .Where(x => x.Name.EndsWith("Handler"))
             .Select(x => interfaces.IntersectBy(x.GetInterfaces().Select(x=>x.Name), type=>type.Name));
 
         return types.All(x => x.Any());

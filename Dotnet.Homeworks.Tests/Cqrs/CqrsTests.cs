@@ -15,29 +15,6 @@ namespace Dotnet.Homeworks.Tests.Cqrs;
 public class CqrsTests
 {
     [Homework(RunLogic.Homeworks.Cqrs)]
-    public void CommandAndQueryHandlers_Should_ImplementCertainInterfaces()
-    {
-        var productQueryType = typeof(GetProductsQueryHandler);
-        var getProductInterface =
-            typeof(IQueryHandler<,>).MakeGenericType(typeof(GetProductsQuery), typeof(List<GetProductsDto>));
-        
-        var insertProductType = typeof(InsertProductCommandHandler);
-        var insertProductInterface =
-            typeof(ICommandHandler<,>).MakeGenericType(typeof(InsertProductCommand), typeof(InsertProductDto));
-        
-        var deleteProductType = typeof(DeleteProductByGuidCommandHandler);
-        var deleteProductInterface = typeof(ICommandHandler<>).MakeGenericType(typeof(DeleteProductByGuidCommand));
-        
-        var updateProductType = typeof(UpdateProductCommandHandler);
-        var updateProductInterface = typeof(ICommandHandler<>).MakeGenericType(typeof(UpdateProductCommand));
-        
-        Assert.Contains(getProductInterface, productQueryType.GetInterfaces());
-        Assert.Contains(insertProductInterface, insertProductType.GetInterfaces());
-        Assert.Contains(deleteProductInterface, deleteProductType.GetInterfaces());
-        Assert.Contains(updateProductInterface, updateProductType.GetInterfaces());
-    }
-
-    [Homework(RunLogic.Homeworks.Cqrs)]
     public async Task InsertOperation_IsCorrect()
     {
         // Arrange
