@@ -13,6 +13,8 @@ public class ServicesSection
 
     public DotnetMinio? DotnetMinio { get; set; }
 
+    public DotnetJaeger? DotnetJaeger { get; set; }
+
     public DotnetMain? DotnetMain { get; set; }
 
     public DotnetMailing? DotnetMailing { get; set; }
@@ -29,6 +31,10 @@ public class DotnetRabbitmq : HasEnvironment
 }
 
 public class DotnetMinio : HasEnvironment
+{
+}
+
+public class DotnetJaeger : HasEnvironment
 {
 }
 
