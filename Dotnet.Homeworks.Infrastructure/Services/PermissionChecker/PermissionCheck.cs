@@ -82,16 +82,5 @@ public class PermissionCheck : IPermissionCheck
         return constructor.Invoke(parameterValues);
     }
     
-    
-    private class ScanResult
-    {
-        public Type? CommandType { get; }
-        public Type CheckerType { get; }
-
-        public ScanResult(Type? commandType, Type checkerType)
-        {
-            CommandType = commandType;
-            CheckerType = checkerType;
-        }
-    }
+    private record ScanResult(Type? CommandType, Type CheckerType);
 }

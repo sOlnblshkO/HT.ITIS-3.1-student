@@ -24,9 +24,6 @@ public class AdminPermissionChecker : IPermissionChecker<IAdminRequest>
         var claimRole = _httpContext.User.Claims
             .FirstOrDefault(claim=>claim.Type == ClaimTypes.Role)?.Value;
 
-        if (claimRole != "Admin")
-            return new PermissionResult(false, "Access denied");
-            
-        return new PermissionResult(true, null);
+        return claimRole != "Admin" ? new PermissionResult(false, "Access denied") : new PermissionResult(true);
     }
 }

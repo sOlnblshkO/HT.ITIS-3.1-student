@@ -6,7 +6,7 @@ public class Result
     public bool IsFailure => !IsSuccess;
     public string? Error { get; }
 
-    public Result(bool isSuccessful, string? error)
+    public Result(bool isSuccessful, string? error = default)
     {
         IsSuccess = isSuccessful;
         if (error is not null) 

@@ -24,7 +24,7 @@ public class GetUserQueryHandler : CqrsDecorator<GetUserQuery, Result<GetUserDto
 
     public async Task<Result<GetUserDto>> Handle(GetUserQuery request, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetUserByGuid(request.Guid);
+        var user = await _userRepository.GetUserByGuidAsync(request.Guid);
         var result = new GetUserDto(user.Id, user.Name, user.Email);
         return new Result<GetUserDto>(result, true, null);
     }

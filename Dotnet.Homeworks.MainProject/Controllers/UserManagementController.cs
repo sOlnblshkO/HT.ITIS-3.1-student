@@ -23,7 +23,7 @@ public class UserManagementController : ControllerBase
     }
 
     //TODO: в зависимости от кода ошибки отправлять соответствующий статус
-    [HttpPost("createUser")]
+    [HttpPost("user")]
     public async Task<IActionResult> CreateUser(string name, string email)
     {
         var result = await _mediator.Send(new CreateUserCommand(name, email));
@@ -36,21 +36,21 @@ public class UserManagementController : ControllerBase
         return Ok(await _mediator.Send(new GetUserQuery(guid)));   
     }
 
-    [HttpPost("getAllUsers")]
+    [HttpGet("getAllUsers")]
     public async Task<IActionResult> GetAllUsers()
     {
         var result = await _mediator.Send(new GetAllUsersQuery());
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
     }
 
-    [HttpDelete("deleteProfile/{guid:guid}")]
+    [HttpDelete("profile/{guid:guid}")]
     public async Task<IActionResult> DeleteProfile(Guid guid)
     {
         var result = await _mediator.Send(new DeleteUserCommand(guid));
         return result.IsSuccess ? Ok() : BadRequest(result.Error);
     }
 
-    [HttpPut("updateProfile")]
+    [HttpPut("profile")]
     public async Task<IActionResult> UpdateProfile(User user)
     {
         var result = await _mediator.Send(new UpdateUserCommand(user));
@@ -79,8 +79,7 @@ public class UserManagementController : ControllerBase
         
         return Ok();
     }
-
-    [Authorize("HasEmail")]
+    
     [HttpGet("check")]
     public async Task<IActionResult> CheckLogin()
     {

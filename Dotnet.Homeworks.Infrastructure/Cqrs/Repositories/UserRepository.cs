@@ -15,22 +15,22 @@ public class UserRepository : IUserRepository
         _dbContext = dbContext;
     }
 
-    public async Task<IQueryable<User>> GetUsers()
+    public async Task<IQueryable<User>> GetUsersAsync()
     {
         return _dbContext.Users;
     }
 
-    public async Task<User?> GetUserByGuid(Guid guid)
+    public async Task<User?> GetUserByGuidAsync(Guid guid)
     {
         return _dbContext.Users.FirstOrDefault(user => user.Id == guid);
     }
 
-    public async Task DeleteUserByGuid(Guid guid)
+    public async Task DeleteUserByGuidAsync(Guid guid)
     {
         await _dbContext.Users.Where(user=>user.Id==guid).ExecuteDeleteAsync();
     }
 
-    public async Task UpdateUserByGuid(User user)
+    public async Task UpdateUserAsync(User user)
     {
         await _dbContext.Users
             .Where(x => x.Id == user.Id)
@@ -40,7 +40,7 @@ public class UserRepository : IUserRepository
             );
     }
 
-    public async Task<Guid> InsertUser(User user)
+    public async Task<Guid> InsertUserAsync(User user)
     {
         var trackedEntity = await _dbContext.Users.AddAsync(user);
         return trackedEntity.Entity.Id;

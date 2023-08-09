@@ -31,11 +31,11 @@ public class ClientPermissionChecker : IPermissionChecker<IClientRequest>
         if (!Guid.TryParse(claimGuid, out id)) 
             return new PermissionResult(false, "No id provided");
 
-        var user = await _userRepository.GetUserByGuid(id);
+        var user = await _userRepository.GetUserByGuidAsync(id);
         
         if (user.Id != request.Guid)
             return new PermissionResult(false, "Access denied");
             
-        return new PermissionResult(true, null);
+        return new PermissionResult(true);
     }
 }

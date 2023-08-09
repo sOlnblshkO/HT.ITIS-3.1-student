@@ -34,7 +34,7 @@ public class UpdateUserCommandHandler : CqrsDecorator<UpdateUserCommand, Result>
         //TODO: маппинг
         try
         {
-            await _userRepository.UpdateUserByGuid(request.User);
+            await _userRepository.UpdateUserAsync(request.User);
             await _unitOfWork.SaveChangesAsync();
         }
         catch (Exception e)

@@ -24,13 +24,13 @@ public class DeleteUserByAdminCommandHandler : ICommandHandler<DeleteUserByAdmin
         //TODO: маппинг
         try
         {
-            await _userRepository.DeleteUserByGuid(request.Guid);
+            await _userRepository.DeleteUserByGuidAsync(request.Guid);
             await _unitOfWork.SaveChangesAsync();
         }
         catch (Exception e)
         {
-            return new Result(true, e.Message);
+            return new Result(false, e.Message);
         }
-        return new Result(true, null);
+        return new Result(true);
     }
 }

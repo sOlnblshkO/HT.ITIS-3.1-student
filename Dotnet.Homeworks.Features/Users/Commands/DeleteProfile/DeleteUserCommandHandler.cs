@@ -33,7 +33,7 @@ public class DeleteUserCommandHandler : CqrsDecorator<DeleteUserCommand, Result>
         //TODO: маппинг
         try
         {
-            await _userRepository.DeleteUserByGuid(request.Guid);
+            await _userRepository.DeleteUserByGuidAsync(request.Guid);
             await _unitOfWork.SaveChangesAsync();
         }
         catch (Exception e)

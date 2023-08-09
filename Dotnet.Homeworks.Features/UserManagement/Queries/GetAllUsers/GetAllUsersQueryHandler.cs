@@ -19,7 +19,7 @@ public class GetAllUsersQueryHandler : IQueryHandler<GetAllUsersQuery, IList<Get
     
     public async Task<Result<IList<GetAllUsersDto>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
-        var users = await (await _userRepository.GetUsers()).Select( x=>
+        var users = await (await _userRepository.GetUsersAsync()).Select( x=>
             new GetAllUsersDto(x.Id, x.Name, x.Email)
         ).ToListAsync();
 

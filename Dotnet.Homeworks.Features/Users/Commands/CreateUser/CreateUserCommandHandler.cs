@@ -33,7 +33,7 @@ public class CreateUserCommandHandler : CqrsDecorator<CreateUserCommand, Result<
             return resultDecorators;
 
         //TODO: маппинг
-        var result = await _userRepository.InsertUser(new User()
+        var result = await _userRepository.InsertUserAsync(new User()
         {
             Name = request.Name,
             Email = request.Email
