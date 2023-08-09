@@ -57,7 +57,7 @@ public class UserManagementController : ControllerBase
         return result.IsSuccess ? Ok() : BadRequest(result.Error); 
     }
 
-    [HttpPost("deleteUser/{guid:guid}")]
+    [HttpDelete("deleteUser/{guid:guid}")]
     public async Task<IActionResult> DeleteUser(Guid guid)
     {
         var result = await _mediator.Send(new DeleteUserCommand(guid));
