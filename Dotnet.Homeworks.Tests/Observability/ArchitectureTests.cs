@@ -14,7 +14,7 @@ public class ArchitectureTests
     [InlineData(Constants.OpenTelemetry)]
     [InlineData(Constants.OpenTelemetryTrace)]
     [InlineData(Constants.OpenTelemetryMetrics)]
-    public void MainProject_ShouldHave_Dependencies(string dependency)
+    public void MainProject_ShouldHave_Dependency(string dependency)
     {
         var types = GetTypesInAssemblyThatHaveDependency(_mainAssembly, dependency);
 
