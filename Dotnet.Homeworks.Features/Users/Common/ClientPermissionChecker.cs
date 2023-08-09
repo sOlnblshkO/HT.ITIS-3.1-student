@@ -25,7 +25,9 @@ public class ClientPermissionChecker : IPermissionChecker<IClientRequest>
     {
         var claimGuid = _httpContext.User.Claims
             .FirstOrDefault(claim=>claim.Type == ClaimTypes.NameIdentifier)?.Value;
-        Guid id = new Guid();
+        
+        if (!Guid.TryParse(claimGuid, out var id)) 
+            return new PermissionResult(false, "No id provided");
         if (!Guid.TryParse(claimGuid, out id)) 
             return new PermissionResult(false, "No id provided");
 
