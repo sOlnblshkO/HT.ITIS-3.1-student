@@ -1,14 +1,14 @@
 using Dotnet.Homeworks.Domain.Entities;
 
-namespace Dotnet.Homeworks.Domain.Repositories.Abstractions;
+namespace Dotnet.Homeworks.Domain.Abstractions.Repositories;
 
 public interface IProductRepository
 {
     Task<IEnumerable<Product>> GetAllProductsAsync();
     
-    Task DeleteProductByIdAsync(int id);
+    Task DeleteProductByGuidAsync(Guid guid);
     
     Task UpdateProductAsync(Product product);
     
-    Task<int> InsertProductAsync(Product product);
+    Task<Guid> InsertProductAsync(Product product);
 }

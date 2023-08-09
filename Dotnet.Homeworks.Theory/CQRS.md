@@ -20,4 +20,5 @@
 4) Что такое Vertical Slices? В чем плюсы и минусы Vertical Slices?
 
 ### Практика
-TODO
+1) Реализовать commands, queries и handlers в проекте Features от соответствующих интерфейсов.
+2) Создать crud операции в контроллере ProductManagementController, который вызывает commands и queries.

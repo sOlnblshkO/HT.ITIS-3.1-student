@@ -14,7 +14,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Dotnet.Homeworks.Data\Dotnet.Homeworks.Data.csproj" />
-      <ProjectReference Include="..\Dotnet.Homeworks.Domain\Dotnet.Homeworks.Domain.csproj" />
     </ItemGroup>
 
 </Project>
