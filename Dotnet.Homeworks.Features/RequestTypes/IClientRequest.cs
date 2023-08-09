@@ -2,5 +2,5 @@
 
 public interface IClientRequest 
 {
-    
+    public Guid Guid { get; }
 }

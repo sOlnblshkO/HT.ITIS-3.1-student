@@ -2,7 +2,7 @@
 using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 using Dotnet.Homeworks.Infrastructure.Utils;
 
-namespace Dotnet.Homeworks.Features.Users.Commands.DeleteUser;
+namespace Dotnet.Homeworks.Features.Users.Commands.DeleteProfile;
 
 public class DeleteUserCommand : ICommand, IClientRequest
 {

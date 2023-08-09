@@ -4,7 +4,7 @@ using Dotnet.Homeworks.Infrastructure.Utils;
 
 namespace Dotnet.Homeworks.Features.Users.Queries.GetUser;
 
-public class GetUserQuery: IQuery<GetUserDto>, IClientRequest
+public class GetUserQuery: IQuery<GetUserDto>
 {
     public GetUserQuery(Guid guid)
     {

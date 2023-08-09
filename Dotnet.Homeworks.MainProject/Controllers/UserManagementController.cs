@@ -1,6 +1,9 @@
 ﻿using System.Security.Claims;
+using Dotnet.Homeworks.Domain.Entities;
 using Dotnet.Homeworks.Features.UserManagement.Queries.GetAllUsers;
 using Dotnet.Homeworks.Features.Users.Commands.CreateUser;
+using Dotnet.Homeworks.Features.Users.Commands.DeleteProfile;
+using Dotnet.Homeworks.Features.Users.Commands.UpdateUser;
 using Dotnet.Homeworks.Mediator;
 using Dotnet.Homeworks.Features.Users.Queries.GetUser;
 using Microsoft.AspNetCore.Authentication;
@@ -10,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Dotnet.Homeworks.MainProject.Controllers;
 
-[Controller]
 public class UserManagementController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -41,11 +43,35 @@ public class UserManagementController : ControllerBase
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
     }
 
+    [HttpDelete("deleteProfile/{guid:guid}")]
+    public async Task<IActionResult> DeleteProfile(Guid guid)
+    {
+        var result = await _mediator.Send(new DeleteUserCommand(guid));
+        return result.IsSuccess ? Ok() : BadRequest(result.Error);
+    }
+
+    [HttpPut("updateProfile")]
+    public async Task<IActionResult> UpdateProfile(User user)
+    {
+        var result = await _mediator.Send(new UpdateUserCommand(user));
+        return result.IsSuccess ? Ok() : BadRequest(result.Error); 
+    }
+
+    [HttpPost("deleteUser/{guid:guid}")]
+    public async Task<IActionResult> DeleteUser(Guid guid)
+    {
+        var result = await _mediator.Send(new DeleteUserCommand(guid));
+        return result.IsSuccess ? Ok() : BadRequest(result.Error); 
+    }
 
     [HttpGet("login")]
     public async Task<IActionResult> Login()
     {
-        var claims = new List<Claim>() { new Claim(ClaimTypes.Email, "Email@lol.ru") };
+        var claims = new List<Claim>()
+        {
+            new Claim(ClaimTypes.Email, "Email@lol.ru"),
+            new Claim(ClaimTypes.Role, "Admin")
+        };
         var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var claimPrincipal = new ClaimsPrincipal(claimIdentity);
 

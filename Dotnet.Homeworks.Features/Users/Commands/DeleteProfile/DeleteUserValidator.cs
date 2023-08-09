@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Dotnet.Homeworks.Features.Users.Commands.DeleteUser;
+namespace Dotnet.Homeworks.Features.Users.Commands.DeleteProfile;
 
 public class DeleteUserValidator : AbstractValidator<DeleteUserCommand>
 {
