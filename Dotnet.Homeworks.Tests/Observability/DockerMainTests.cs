@@ -5,7 +5,7 @@ namespace Dotnet.Homeworks.Tests.Observability;
 
 public class DockerMainTests
 {
-    [Homework(RunLogic.Homeworks.RabbitMasstransit)]
+    [Homework(RunLogic.Homeworks.Observability)]
     public void DotnetMain_ShouldDependOn_DotnetJaeger()
     {
         var docker = Parser.Parse();

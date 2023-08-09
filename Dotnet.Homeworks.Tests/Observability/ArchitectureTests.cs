@@ -10,7 +10,7 @@ public class ArchitectureTests
 {
     private readonly Assembly _mainAssembly = AssemblyReference.Assembly;
 
-    [HomeworkTheory(RunLogic.Homeworks.RabbitMasstransit)]
+    [HomeworkTheory(RunLogic.Homeworks.Observability)]
     [InlineData(Constants.OpenTelemetry)]
     [InlineData(Constants.OpenTelemetryTrace)]
     [InlineData(Constants.OpenTelemetryMetrics)]
