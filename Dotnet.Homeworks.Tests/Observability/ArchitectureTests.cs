@@ -16,17 +16,12 @@ public class ArchitectureTests
     [InlineData(Constants.OpenTelemetryMetrics)]
     public void MainProject_ShouldHave_Dependency(string dependency)
     {
-        var types = GetTypesInAssemblyThatHaveDependency(_mainAssembly, dependency);
-
-        Assert.NotEmpty(types);
-    }
-
-    private static IEnumerable<Type> GetTypesInAssemblyThatHaveDependency(Assembly assembly, string dependency)
-    {
-        return Types
-            .InAssembly(assembly)
+        var types = Types
+            .InAssembly(_mainAssembly)
             .That()
             .HaveDependencyOn(dependency)
             .GetTypes();
+
+        Assert.NotEmpty(types);
     }
 }
