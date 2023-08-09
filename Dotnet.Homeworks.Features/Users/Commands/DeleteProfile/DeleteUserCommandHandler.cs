@@ -40,6 +40,6 @@ public class DeleteUserCommandHandler : CqrsDecorator<DeleteUserCommand, Result>
         {
             return new Result(true, e.Message);
         }
-        return new Result(true, null);
+        return new Result(true);
     }
 }

@@ -23,6 +23,6 @@ public class GetAllUsersQueryHandler : IQueryHandler<GetAllUsersQuery, IList<Get
             new GetAllUsersDto(x.Id, x.Name, x.Email)
         ).ToListAsync();
 
-        return new Result<IList<GetAllUsersDto>>(users, true, null);
+        return new Result<IList<GetAllUsersDto>>(users, true);
     }
 }

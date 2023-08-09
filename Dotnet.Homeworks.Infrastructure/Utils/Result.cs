@@ -18,7 +18,7 @@ public class Result<TValue> : Result
 {
     private readonly TValue? _value;
 
-    public Result(TValue? val, bool isSuccessful, string? error)
+    public Result(TValue? val, bool isSuccessful, string? error = default)
         : base(isSuccessful, error)
     {
         _value = val;

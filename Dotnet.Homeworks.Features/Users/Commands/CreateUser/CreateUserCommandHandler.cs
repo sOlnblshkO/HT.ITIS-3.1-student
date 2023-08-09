@@ -40,6 +40,6 @@ public class CreateUserCommandHandler : CqrsDecorator<CreateUserCommand, Result<
         });
         await _unitOfWork.SaveChangesAsync();
         
-        return new Result<CreateUserDto>(new CreateUserDto(result), true, null);
+        return new Result<CreateUserDto>(new CreateUserDto(result), true);
     }
 }
