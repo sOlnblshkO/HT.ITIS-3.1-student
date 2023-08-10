@@ -2,7 +2,7 @@
 using Dotnet.Homeworks.Domain.Entities;
 using Dotnet.Homeworks.Features.UserManagement.Queries.GetAllUsers;
 using Dotnet.Homeworks.Features.Users.Commands.CreateUser;
-using Dotnet.Homeworks.Features.Users.Commands.DeleteProfile;
+using Dotnet.Homeworks.Features.Users.Commands.DeleteUser;
 using Dotnet.Homeworks.Features.Users.Commands.UpdateUser;
 using Dotnet.Homeworks.Mediator;
 using Dotnet.Homeworks.Features.Users.Queries.GetUser;

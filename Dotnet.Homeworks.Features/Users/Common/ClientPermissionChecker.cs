@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using Dotnet.Homeworks.Domain.Repositories;
+using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Features.RequestTypes;
 using Dotnet.Homeworks.Infrastructure.Services.PermissionChecker;
 using Dotnet.Homeworks.Infrastructure.Utils;

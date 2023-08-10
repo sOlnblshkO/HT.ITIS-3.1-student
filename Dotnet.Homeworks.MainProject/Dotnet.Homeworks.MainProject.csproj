@@ -25,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Dotnet.Homeworks.DataAccess\Dotnet.Homeworks.DataAccess.csproj" />
       <ProjectReference Include="..\Dotnet.Homeworks.Data\Dotnet.Homeworks.Data.csproj" />
       <ProjectReference Include="..\Dotnet.Homeworks.Domain\Dotnet.Homeworks.Domain.csproj" />
       <ProjectReference Include="..\Dotnet.Homeworks.Features\Dotnet.Homeworks.Features.csproj" />

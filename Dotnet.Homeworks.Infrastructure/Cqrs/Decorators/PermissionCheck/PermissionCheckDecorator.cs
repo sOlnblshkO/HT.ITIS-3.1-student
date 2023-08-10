@@ -20,7 +20,7 @@ public class PermissionCheckDecorator<TRequest, TResponse> : CqrsDecoratorBase<T
     
     public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
     {
-        var error = _checker.CheckPermission(request);
+        var error = _checker.CheckPermissionAsync(request);
             
         if (error.All(x=>x.IsSuccess))
             return await GenerateSucceedResult<TResponse>();

@@ -1,4 +1,4 @@
-﻿using Dotnet.Homeworks.Domain.Repositories;
+﻿using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Features.Users.Commands.CreateUser;
 using FluentValidation;
 
@@ -12,8 +12,8 @@ public class UpdateUserValidator : AbstractValidator<UpdateUserCommand>
     {
         _userRepository = userRepository;
         
-        RuleFor(x => x.Email).EmailAddress().WithMessage("Invalid email");
-        RuleFor(x => x.Email).NotEmpty().MustAsync(BeUnique).WithMessage("Such email already exists");
+        RuleFor(x => x.User.Email).EmailAddress().WithMessage("Invalid email");
+        RuleFor(x => x.User.Email).NotEmpty().MustAsync(BeUnique).WithMessage("Such email already exists");
     }
 
     private async Task<bool> BeUnique(string email, CancellationToken token = default)

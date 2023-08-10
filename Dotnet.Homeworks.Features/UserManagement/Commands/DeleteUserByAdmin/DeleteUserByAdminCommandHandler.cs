@@ -1,4 +1,4 @@
-﻿using Dotnet.Homeworks.Domain.Repositories;
+﻿using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 using Dotnet.Homeworks.Infrastructure.UnitOfWork;
 using Dotnet.Homeworks.Infrastructure.Utils;

@@ -1,4 +1,4 @@
-﻿using Dotnet.Homeworks.Domain.Repositories;
+﻿using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Decorators;
 using Dotnet.Homeworks.Infrastructure.Services.PermissionChecker;
@@ -6,7 +6,7 @@ using Dotnet.Homeworks.Infrastructure.UnitOfWork;
 using Dotnet.Homeworks.Infrastructure.Utils;
 using FluentValidation;
 
-namespace Dotnet.Homeworks.Features.Users.Commands.DeleteProfile;
+namespace Dotnet.Homeworks.Features.Users.Commands.DeleteUser;
 
 public class DeleteUserCommandHandler : CqrsDecorator<DeleteUserCommand, Result>, ICommandHandler<DeleteUserCommand>
 {
@@ -38,7 +38,7 @@ public class DeleteUserCommandHandler : CqrsDecorator<DeleteUserCommand, Result>
         }
         catch (Exception e)
         {
-            return new Result(true, e.Message);
+            return new Result(false, e.Message);
         }
         return new Result(true);
     }

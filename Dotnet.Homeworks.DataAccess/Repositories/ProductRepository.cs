@@ -2,7 +2,7 @@ using Dotnet.Homeworks.Data.DatabaseContext;
 using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Domain.Entities;
 
-namespace Dotnet.Homeworks.Infrastructure.Cqrs.Repositories;
+namespace Dotnet.Homeworks.DataAccess.Repositories;
 
 public class ProductRepository : IProductRepository
 {

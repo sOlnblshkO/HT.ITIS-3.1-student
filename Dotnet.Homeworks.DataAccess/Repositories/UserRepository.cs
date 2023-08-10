@@ -1,10 +1,9 @@
 ﻿using Dotnet.Homeworks.Data.DatabaseContext;
 using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Domain.Entities;
-using Dotnet.Homeworks.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dotnet.Homeworks.Infrastructure.Cqrs.Repositories;
+namespace Dotnet.Homeworks.DataAccess.Repositories;
 
 public class UserRepository : IUserRepository
 {

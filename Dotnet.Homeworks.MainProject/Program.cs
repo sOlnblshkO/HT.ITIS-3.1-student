@@ -1,9 +1,8 @@
 using Dotnet.Homeworks.Data.DatabaseContext;
+using Dotnet.Homeworks.DataAccess.Repositories;
 using Dotnet.Homeworks.Domain.Abstractions.Repositories;
-using Dotnet.Homeworks.Domain.Repositories;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Behaviors.PermissionCheck;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Behaviors.Validation;
-using Dotnet.Homeworks.Infrastructure.Cqrs.Repositories;
 using Dotnet.Homeworks.Infrastructure.Services.PermissionChecker;
 using Dotnet.Homeworks.Infrastructure.UnitOfWork;
 using Dotnet.Homeworks.MainProject.Dto;
@@ -12,7 +11,6 @@ using Dotnet.Homeworks.Mediator;
 using Dotnet.Homeworks.Mediator.Helpers;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using ProductRepository = Dotnet.Homeworks.Domain.Repositories.ProductRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();

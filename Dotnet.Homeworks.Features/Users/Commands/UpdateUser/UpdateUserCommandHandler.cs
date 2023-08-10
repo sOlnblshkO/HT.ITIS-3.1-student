@@ -1,4 +1,4 @@
-﻿using Dotnet.Homeworks.Domain.Repositories;
+﻿using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Decorators;
 using Dotnet.Homeworks.Infrastructure.Services.PermissionChecker;
@@ -39,7 +39,7 @@ public class UpdateUserCommandHandler : CqrsDecorator<UpdateUserCommand, Result>
         }
         catch (Exception e)
         {
-            return new Result(true, e.Message);
+            return new Result(false, e.Message);
         }
         return new Result(true);
     }

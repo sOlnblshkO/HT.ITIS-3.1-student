@@ -1,6 +1,5 @@
 ﻿using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Domain.Entities;
-using Dotnet.Homeworks.Domain.Repositories;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Decorators;
 using Dotnet.Homeworks.Infrastructure.Services.PermissionChecker;
@@ -22,7 +21,7 @@ public class CreateUserCommandHandler : CqrsDecorator<CreateUserCommand, Result<
         IUnitOfWork unitOfWork) : base(validators, checker)
     {
         _userRepository = userRepository;
-        _unitOfWork = unitOfWork;
+        _unitOfWork = unitOfWork; 
     }
     
     public async Task<Result<CreateUserDto>> Handle(CreateUserCommand request, CancellationToken cancellationToken)

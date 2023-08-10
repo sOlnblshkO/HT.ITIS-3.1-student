@@ -1,5 +1,4 @@
 using Dotnet.Homeworks.Domain.Abstractions.Repositories;
-using Dotnet.Homeworks.Domain.Repositories;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Queries;
 using Dotnet.Homeworks.Infrastructure.Utils;
 using Microsoft.EntityFrameworkCore;

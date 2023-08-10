@@ -1,6 +1,6 @@
 ﻿using Dotnet.Homeworks.Domain.Entities;
 
-namespace Dotnet.Homeworks.Domain.Repositories;
+namespace Dotnet.Homeworks.Domain.Abstractions.Repositories;
 
 public interface IUserRepository
 {

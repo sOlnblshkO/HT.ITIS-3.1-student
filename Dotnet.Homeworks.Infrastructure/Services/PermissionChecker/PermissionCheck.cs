@@ -22,7 +22,7 @@ public class PermissionCheck : IPermissionCheck
         RegisterCheckers(scanResults);
     }
 
-    public IEnumerable<PermissionResult> CheckPermission<TRequest>(TRequest request)
+    public IEnumerable<PermissionResult> CheckPermissionAsync<TRequest>(TRequest request)
     {
         List<Type> checkerTypes = new List<Type>();
         var inheritedTypes = typeof(TRequest).GetInterfaces().ToList();
