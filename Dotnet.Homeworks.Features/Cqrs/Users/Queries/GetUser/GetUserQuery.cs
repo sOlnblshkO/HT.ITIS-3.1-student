@@ -1,10 +1,13 @@
-﻿namespace Dotnet.Homeworks.Features.Users.Queries.GetUser;
+﻿using Dotnet.Homeworks.Features.RequestTypes;
 
-public class GetUserQuery
+namespace Dotnet.Homeworks.Features.Cqrs.Users.Queries.GetUser;
+
+public class GetUserQuery : IClientRequest // , ???
 {
+    public Guid Guid { get; init; }
+
     public GetUserQuery(Guid guid)
     {
         Guid = guid;
     }
-    public Guid Guid { get; init; }
 };

@@ -1,4 +1,4 @@
-﻿namespace Dotnet.Homeworks.Features.Users.Commands.DeleteUser;
+﻿namespace Dotnet.Homeworks.Features.Cqrs.Users.Commands.DeleteUser;
 
 public class DeleteUserCommandHandler
 {

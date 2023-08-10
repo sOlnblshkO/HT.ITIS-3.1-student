@@ -1,13 +1,7 @@
-﻿using Dotnet.Homeworks.Infrastructure.Utils;
-using Dotnet.Homeworks.Mediator;
+﻿namespace Dotnet.Homeworks.Features.Decorators;
 
-namespace Dotnet.Homeworks.Infrastructure.Cqrs.Decorators;
-
-public class CqrsDecorator<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>    
-    where TRequest : IRequest<TResponse>
-    where TResponse : Result
+public class CqrsDecorator<TRequest, TResponse> // : ???
 {
-
     protected CqrsDecorator() : base()
     {
     }

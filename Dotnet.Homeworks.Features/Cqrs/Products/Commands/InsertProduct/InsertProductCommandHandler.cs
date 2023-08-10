@@ -1,4 +1,4 @@
-namespace Dotnet.Homeworks.Features.Products.Commands.InsertProduct;
+namespace Dotnet.Homeworks.Features.Cqrs.Products.Commands.InsertProduct;
 
 internal sealed class InsertProductCommandHandler 
 {

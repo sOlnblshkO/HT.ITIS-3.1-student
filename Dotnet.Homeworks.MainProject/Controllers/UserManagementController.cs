@@ -1,29 +1,15 @@
 ﻿using System.Security.Claims;
 using Dotnet.Homeworks.Domain.Entities;
-using Dotnet.Homeworks.Features.UserManagement.Queries.GetAllUsers;
-using Dotnet.Homeworks.Features.Users.Commands.CreateUser;
-using Dotnet.Homeworks.Features.Users.Commands.DeleteUser;
-using Dotnet.Homeworks.Features.Users.Commands.UpdateUser;
-using Dotnet.Homeworks.Mediator;
-using Dotnet.Homeworks.Features.Users.Queries.GetUser;
 using Dotnet.Homeworks.MainProject.Dto;
 using Dotnet.Homeworks.MainProject.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dotnet.Homeworks.MainProject.Controllers;
 
 public class UserManagementController : ControllerBase
 {
-    private readonly IMediator _mediator;
-
-    public UserManagementController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     [HttpPost("user")]
     public async Task<IActionResult> CreateUser(string name, string email)
     {
@@ -42,7 +28,7 @@ public class UserManagementController : ControllerBase
         throw new NotImplementedException();
     }
 
-    [HttpGet("getAllUsers")]
+    [HttpGet("users")]
     public async Task<IActionResult> GetAllUsers()
     {
         throw new NotImplementedException();
@@ -60,7 +46,7 @@ public class UserManagementController : ControllerBase
         throw new NotImplementedException();
     }
 
-    [HttpDelete("deleteUser/{guid:guid}")]
+    [HttpDelete("user/{guid:guid}")]
     public async Task<IActionResult> DeleteUser(Guid guid)
     {
         throw new NotImplementedException();

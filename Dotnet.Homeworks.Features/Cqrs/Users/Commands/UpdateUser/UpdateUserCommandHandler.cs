@@ -1,4 +1,4 @@
-﻿namespace Dotnet.Homeworks.Features.Users.Commands.UpdateUser;
+﻿namespace Dotnet.Homeworks.Features.Cqrs.Users.Commands.UpdateUser;
 
 public class UpdateUserCommandHandler
 {

@@ -1,5 +1,7 @@
-namespace Dotnet.Homeworks.Features.UserManagement.Queries.GetAllUsers;
+using Dotnet.Homeworks.Features.RequestTypes;
 
-public class GetAllUsersQuery
+namespace Dotnet.Homeworks.Features.Cqrs.UserManagement.Queries.GetAllUsers;
+
+public class GetAllUsersQuery : IAdminRequest // , ???
 {
 }

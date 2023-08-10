@@ -1,3 +1,3 @@
-namespace Dotnet.Homeworks.Features.Products.Commands.InsertProduct;
+namespace Dotnet.Homeworks.Features.Cqrs.Products.Commands.InsertProduct;
 
 public record InsertProductDto(Guid Guid);

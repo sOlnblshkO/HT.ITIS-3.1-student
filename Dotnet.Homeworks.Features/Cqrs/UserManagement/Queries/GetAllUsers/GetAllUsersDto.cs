@@ -1,4 +1,4 @@
-namespace Dotnet.Homeworks.Features.UserManagement.Queries.GetAllUsers;
+namespace Dotnet.Homeworks.Features.Cqrs.UserManagement.Queries.GetAllUsers;
 
 public record GetAllUsersDto (
     Guid Guid,

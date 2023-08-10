@@ -1,4 +1,4 @@
-namespace Dotnet.Homeworks.Features.Products.Commands.UpdateProduct;
+namespace Dotnet.Homeworks.Features.Cqrs.Products.Commands.UpdateProduct;
 
 internal sealed class UpdateProductCommandHandler
 {

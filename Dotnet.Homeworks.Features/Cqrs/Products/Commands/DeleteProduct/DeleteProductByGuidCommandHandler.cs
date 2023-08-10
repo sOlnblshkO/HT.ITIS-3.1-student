@@ -1,4 +1,4 @@
-namespace Dotnet.Homeworks.Features.Products.Commands.DeleteProduct;
+namespace Dotnet.Homeworks.Features.Cqrs.Products.Commands.DeleteProduct;
 
 internal sealed class DeleteProductByGuidCommandHandler 
 {
