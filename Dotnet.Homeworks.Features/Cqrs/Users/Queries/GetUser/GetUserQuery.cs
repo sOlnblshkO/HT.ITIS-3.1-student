@@ -2,7 +2,7 @@
 
 namespace Dotnet.Homeworks.Features.Cqrs.Users.Queries.GetUser;
 
-public class GetUserQuery : IClientRequest // , ???
+public class GetUserQuery : IClientRequest 
 {
     public Guid Guid { get; init; }
 

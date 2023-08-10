@@ -2,7 +2,7 @@
 
 namespace Dotnet.Homeworks.Features.Cqrs.Users.Commands.DeleteUser;
 
-public class DeleteUserCommand : IClientRequest // , ???
+public class DeleteUserCommand : IClientRequest 
 {
     public Guid Guid { get; }
 
