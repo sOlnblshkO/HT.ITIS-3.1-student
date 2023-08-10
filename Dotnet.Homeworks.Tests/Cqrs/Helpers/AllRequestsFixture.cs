@@ -12,7 +12,7 @@ public class AllRequestsFixture : IDisposable, ICollectionFixture<AllRequestsFix
 
     public AllRequestsFixture() {
         if (!AllRequestsInAssemblyFixture() || !AllHandlersInAssemblyFixture())
-            throw new ImplementInterfacesException(AssemblyFeatures.FullName);
+            throw new ImplementInterfacesException(AssemblyFeatures.FullName ?? "");
     }
 
     public bool AllRequestsInAssemblyFixture()
