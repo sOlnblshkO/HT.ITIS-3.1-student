@@ -1,14 +1,9 @@
-using Dotnet.Homeworks.Infrastructure.Cqrs.Utils;
-using MediatR;
-
 namespace Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 
-public interface ICommand : IRequest<Result>
+public interface ICommand  //TODO: Inherit certain interface 
 {
-    public Result Result { get; set; }
 }
 
-public interface ICommand<TResponse> : IRequest<Result<TResponse>>
+public interface ICommand<TResponse> //TODO: Inherit certain interface 
 {
-    public Result<TResponse> Result { get; set; }
 }

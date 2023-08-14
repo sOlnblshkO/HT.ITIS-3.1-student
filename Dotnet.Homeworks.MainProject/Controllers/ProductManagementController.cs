@@ -4,25 +4,25 @@ namespace Dotnet.Homeworks.MainProject.Controllers;
 
 public class ProductManagementController : ControllerBase
 {
-    [HttpGet("getProducts")]
+    [HttpGet("products")]
     public async Task<IActionResult> GetProducts()
     {
         throw new NotImplementedException();
     }
 
-    [HttpPost("insertProduct")]
+    [HttpPost("product")]
     public async Task<IActionResult> InsertProduct(string name)
     {
         throw new NotImplementedException();
     }
 
-    [HttpDelete("deleteProduct")]
+    [HttpDelete("product")]
     public async Task<IActionResult> DeleteProduct(Guid guid)
     {
         throw new NotImplementedException();
     }
 
-    [HttpPut("updateProduct")]
+    [HttpPut("product")]
     public async Task<IActionResult> UpdateProduct(Guid guid, string name)
     {
         throw new NotImplementedException();

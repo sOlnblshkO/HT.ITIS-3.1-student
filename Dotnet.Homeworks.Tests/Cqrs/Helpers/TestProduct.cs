@@ -1,8 +1,8 @@
 ﻿using Dotnet.Homeworks.Domain.Entities;
-using Dotnet.Homeworks.Features.Products.Commands.DeleteProduct;
-using Dotnet.Homeworks.Features.Products.Commands.InsertProduct;
-using Dotnet.Homeworks.Features.Products.Commands.UpdateProduct;
-using Dotnet.Homeworks.Features.Products.Queries.GetProducts;
+using Dotnet.Homeworks.Features.Cqrs.Products.Commands.DeleteProduct;
+using Dotnet.Homeworks.Features.Cqrs.Products.Commands.InsertProduct;
+using Dotnet.Homeworks.Features.Cqrs.Products.Commands.UpdateProduct;
+using Dotnet.Homeworks.Features.Cqrs.Products.Queries.GetProducts;
 
 namespace Dotnet.Homeworks.Tests.Cqrs.Helpers;
 
