@@ -7,13 +7,6 @@ namespace Dotnet.Homeworks.DataAccess.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    private readonly AppDbContext _dbContext;
-
-    public UserRepository(AppDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-
     public async Task<IQueryable<User>> GetUsersAsync()
     {
         throw new NotImplementedException();

@@ -1,6 +1,6 @@
 namespace Dotnet.Homeworks.Features.Cqrs.Products.Commands.DeleteProduct;
 
-public class DeleteProductByGuidCommand
+public class DeleteProductByGuidCommand //TODO: Inherit certain interface 
 {
     public Guid Guid { get; init; }
 

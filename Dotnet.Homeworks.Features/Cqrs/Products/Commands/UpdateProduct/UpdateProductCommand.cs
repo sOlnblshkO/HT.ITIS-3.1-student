@@ -1,6 +1,6 @@
 namespace Dotnet.Homeworks.Features.Cqrs.Products.Commands.UpdateProduct;
 
-public class UpdateProductCommand
+public class UpdateProductCommand //TODO: Inherit certain interface 
 {
     public Guid Guid { get; init; }
     public string Name { get; init; }

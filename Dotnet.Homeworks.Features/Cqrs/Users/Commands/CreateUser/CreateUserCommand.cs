@@ -1,6 +1,6 @@
 ﻿namespace Dotnet.Homeworks.Features.Cqrs.Users.Commands.CreateUser;
 
-public class CreateUserCommand 
+public class CreateUserCommand //TODO: Inherit certain interface 
 {
     public string Name { get; }
     public string Email { get; }

@@ -2,7 +2,7 @@
 
 namespace Dotnet.Homeworks.Features.Cqrs.UserManagement.Commands.DeleteUserByAdmin;
 
-public class DeleteUserByAdminCommand : IAdminRequest
+public class DeleteUserByAdminCommand : IAdminRequest //TODO: Inherit certain interface 
 {
     public Guid Guid { get; }
 

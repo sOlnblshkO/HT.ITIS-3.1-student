@@ -3,7 +3,7 @@ using Dotnet.Homeworks.Features.RequestTypes;
 
 namespace Dotnet.Homeworks.Features.Cqrs.Users.Commands.UpdateUser;
 
-public class UpdateUserCommand : IClientRequest 
+public class UpdateUserCommand : IClientRequest //TODO: Inherit certain interface 
 {
     public User User { get; }
     

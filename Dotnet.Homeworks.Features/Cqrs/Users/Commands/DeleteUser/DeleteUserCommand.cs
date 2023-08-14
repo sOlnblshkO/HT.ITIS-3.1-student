@@ -2,7 +2,7 @@
 
 namespace Dotnet.Homeworks.Features.Cqrs.Users.Commands.DeleteUser;
 
-public class DeleteUserCommand : IClientRequest 
+public class DeleteUserCommand : IClientRequest //TODO: Inherit certain interface 
 {
     public Guid Guid { get; }
 
