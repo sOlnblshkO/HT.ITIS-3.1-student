@@ -19,6 +19,6 @@
 
 ### Практика:
 1. Правильно настроить mongodb в docker-compose.yml.
-2. Имплементировать OrderRepository в Dotnet.Homeworks.Infrastructure/Cqrs/Repositories.
+2. Имплементировать OrderRepository в Dotnet.Homeworks.DataAccess/Repositories.
 3. Реализовать фичу Orders в Dotnet.Homeworks.Features: имплементировать все commands, queries, handlers.
 4. Реализовать методы контроллера OrderManagementController, проверить, что приложение правильно работает с mongodb.
