@@ -9,6 +9,9 @@ services:
   dotnet_minio:
     image: minio/minio:latest
     
+  dotnet_mongodb:
+    image: mongo:latest
+    
   dotnet_jaeger:
     image: jaegertracing/all-in-one:latest
     
