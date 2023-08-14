@@ -1,11 +1,11 @@
 ﻿namespace Dotnet.Homeworks.Features.Decorators;
 
-public class CqrsDecorator<TRequest, TResponse> // : ???
+public class CqrsDecorator<TRequest, TResponse> //TODO: Inherit certain interface 
 {
     protected CqrsDecorator() : base()
     {
     }
 
     public virtual async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
-        => throw new NotImplementedException();  // Декоратор вызывает отнаследованный метод родителя: await base.Handle(request, cancellationToken);
+        => throw new NotImplementedException();  //TODO: Decorator invoke parent's method: await base.Handle(request, cancellationToken);
 }

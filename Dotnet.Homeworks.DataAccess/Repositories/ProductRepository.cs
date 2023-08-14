@@ -15,22 +15,21 @@ public class ProductRepository : IProductRepository
     
     public async Task<IEnumerable<Product>> GetAllProductsAsync()
     {
-        return _context.Products.ToList();
+        throw new NotImplementedException();
     }
 
     public async Task DeleteProductByGuidAsync(Guid id)
     {
-         _context.Products.Remove(new Product() {Id = id});
+        throw new NotImplementedException();
     }
 
     public async Task UpdateProductAsync(Product product)
     {
-        _context.Products.Update(product);
+        throw new NotImplementedException();
     }
 
     public async Task<Guid> InsertProductAsync(Product product)
     {
-        var entity = await _context.Products.AddAsync(product);
-        return entity.Entity.Id;
+        throw new NotImplementedException();
     }
 }

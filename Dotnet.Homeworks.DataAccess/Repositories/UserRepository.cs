@@ -16,32 +16,26 @@ public class UserRepository : IUserRepository
 
     public async Task<IQueryable<User>> GetUsersAsync()
     {
-        return _dbContext.Users;
+        throw new NotImplementedException();
     }
 
     public async Task<User?> GetUserByGuidAsync(Guid guid)
     {
-        return _dbContext.Users.FirstOrDefault(user => user.Id == guid);
+        throw new NotImplementedException();
     }
 
     public async Task DeleteUserByGuidAsync(Guid guid)
     {
-        await _dbContext.Users.Where(user=>user.Id==guid).ExecuteDeleteAsync();
+        throw new NotImplementedException();
     }
 
     public async Task UpdateUserAsync(User user)
     {
-        await _dbContext.Users
-            .Where(x => x.Id == user.Id)
-            .ExecuteUpdateAsync(setter => setter
-                .SetProperty(x => x.Name, user.Name)  
-                .SetProperty(x => x.Email, user.Email)
-            );
+        throw new NotImplementedException();
     }
 
     public async Task<Guid> InsertUserAsync(User user)
     {
-        var trackedEntity = await _dbContext.Users.AddAsync(user);
-        return trackedEntity.Entity.Id;
+        throw new NotImplementedException();
     }
 }

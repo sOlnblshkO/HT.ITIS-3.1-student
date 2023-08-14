@@ -1,5 +1,6 @@
 namespace Dotnet.Homeworks.Features.Cqrs.Products.Queries.GetProducts;
 
-public class GetProductsQuery //TODO: Query returns GetProductsDto
-{
-}
+public record GetProductDto(
+    Guid Guid,
+    string Name
+);
