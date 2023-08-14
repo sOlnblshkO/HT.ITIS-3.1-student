@@ -44,20 +44,4 @@ public class UserManagementController : ControllerBase
     {
         throw new NotImplementedException();
     }
-    
-    [HttpPost("login")]
-    public async Task<IActionResult> Login(Guid guid)
-    {
-        var claims = new List<Claim>()
-        {
-            new Claim(ClaimTypes.NameIdentifier, guid.ToString()),
-            new Claim(ClaimTypes.Role, "Admin")
-        };
-        var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-        var claimPrincipal = new ClaimsPrincipal(claimIdentity);
-
-        await HttpContext.SignInAsync(claimPrincipal);
-
-        return Ok();
-    }
 }
