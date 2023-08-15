@@ -2,17 +2,16 @@ using System.Reflection;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Queries;
 
-namespace Dotnet.Homeworks.Tests.Cqrs.Helpers;
+namespace Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 
-
-[CollectionDefinition(nameof(AllRequestsFixture))]
-public class AllRequestsFixture : IDisposable, ICollectionFixture<AllRequestsFixture>
+[CollectionDefinition(nameof(AllUsersRequestsFixture))]
+public class AllUserManagementFixture : IDisposable, ICollectionFixture<AllUserManagementFixture>
 {
     private static Assembly AssemblyFeatures = Features.Helpers.AssemblyReference.Assembly;
 
-    public AllRequestsFixture() {
+    public AllUserManagementFixture() {
         if (!AllRequestsInAssemblyFixture() || !AllHandlersInAssemblyFixture())
-            throw new ImplementInterfacesException(AssemblyFeatures.GetName().FullName);
+            throw new UserImplementInterfacesException(AssemblyFeatures.GetName().FullName);
     }
 
     public bool AllRequestsInAssemblyFixture()
@@ -25,12 +24,13 @@ public class AllRequestsFixture : IDisposable, ICollectionFixture<AllRequestsFix
         };
         
         var types = AssemblyFeatures.GetTypes()
+            .Where(x=>x.Namespace.Contains("UserManagement"))
             .Where(x => x.Name.EndsWith("Command") || x.Name.EndsWith("Query"))
             .Select(x => interfaces.IntersectBy(x.GetInterfaces().Select(x=>x.Name), type=>type.Name));
 
         return types.All(x => x.Any());
     }
-
+    
     public bool AllHandlersInAssemblyFixture()
     {
         var interfaces = new List<Type>()
@@ -41,6 +41,7 @@ public class AllRequestsFixture : IDisposable, ICollectionFixture<AllRequestsFix
         };
         
         var types = AssemblyFeatures.GetTypes()
+            .Where(x=>x.Namespace.Contains("UserManagement"))
             .Where(x => x.Name.EndsWith("Handler"))
             .Select(x => interfaces.IntersectBy(x.GetInterfaces().Select(x=>x.Name), type=>type.Name));
 
