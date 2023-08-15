@@ -8,6 +8,7 @@ public static class Constants
     public const string PostgresService = "dotnet_postgres";
     public const string RabbitMqService = "dotnet_rabbitmq";
     public const string MinioService = "dotnet_minio";
+    public const string MongodbService = "dotnet_mongodb";
     public const string JaegerService = "dotnet_jaeger";
     public const string MainService = "dotnet_main";
     public const string MailingService = "dotnet_mailing";
@@ -22,6 +23,9 @@ public static class Constants
 
     public const string MinioRootUserEnvVar = "MINIO_ROOT_USER";
     public const string MinioRootPassEnvVar = "MINIO_ROOT_PASSWORD";
+
+    public const string MongodbRootUsernameEnvVar = "MONGO_INITDB_ROOT_USERNAME";
+    public const string MongodbRootPasswordEnvVar = "MONGO_INITDB_ROOT_PASSWORD";
 
     public const string JaegerOtlpCollectorEnvVar = "COLLECTOR_OTLP_ENABLED";
 
