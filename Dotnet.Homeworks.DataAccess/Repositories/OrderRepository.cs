@@ -5,12 +5,12 @@ namespace Dotnet.Homeworks.DataAccess.Repositories;
 
 public class OrderRepository : IOrderRepository
 {
-    public async Task<IEnumerable<Order>> GetAllOrdersAsync(User user, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Order>> GetAllOrdersFromUserAsync(Guid userId, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Order> GetOrderByGuid(Guid orderGuid, CancellationToken cancellationToken)
+    public async Task<Order> GetOrderByGuidAsync(Guid orderGuid, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
