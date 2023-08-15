@@ -10,7 +10,7 @@ public class OrderRepository : IOrderRepository
         throw new NotImplementedException();
     }
 
-    public async Task<Order> GetOrderByGuidAsync(Guid orderGuid, CancellationToken cancellationToken)
+    public async Task<Order?> GetOrderByGuidAsync(Guid orderGuid, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
