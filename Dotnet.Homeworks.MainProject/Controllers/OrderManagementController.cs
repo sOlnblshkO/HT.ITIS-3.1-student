@@ -11,7 +11,7 @@ public class OrderManagementController : ControllerBase
         throw new NotImplementedException();
     }
 
-    [HttpGet("orders/{id:guid}")]
+    [HttpGet("order/{id:guid}")]
     public async Task<IActionResult> GetUserOrdersAsync(Guid id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
