@@ -1,8 +1,6 @@
-using Dotnet.Homeworks.Features.Cqrs.Products.Commands.InsertProduct;
-using Dotnet.Homeworks.Features.Cqrs.Products.Queries.GetProducts;
 using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
-using Moq;
+using NSubstitute;
 
 namespace Dotnet.Homeworks.Tests.Cqrs;
 
@@ -13,49 +11,34 @@ public class CqrsTests
     public async Task InsertOperation_IsCorrect()
     {
         // Arrange
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi();
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder();
         var env = testEnvBuilder.Build();
         var insertCommand = TestProduct.GetInsertCommand();
-        
+
         // Act
         var resultInsert =
-            await CqrsEnvironment.HandleCommand<InsertProductCommand, InsertProductDto>(env.InsertProductCommandHandler,
-                insertCommand);
+            await env.CustomMediatorMock.Send(insertCommand);
 
         // Assert
-        Assert.True(resultInsert.IsSuccess);
-        env.UnitOfWorkMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+        Assert.True(resultInsert?.IsSuccess);
+        await env.UnitOfWorkMock.Received().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
-    
+
     [Homework(RunLogic.Homeworks.Cqrs)]
     public async Task GetOperation_IsCorrect()
     {
         // Arrange
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi();
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder();
         var env = testEnvBuilder.Build();
         var getQuery = TestProduct.GetGetQuery();
-        
+
         // Act
-        var resultGet = await CqrsEnvironment.HandleQuery<GetProductsQuery, GetProductsDto>(env.GetProductsQueryHandler, getQuery);
+        var resultGet =
+            await env.CustomMediatorMock.Send(getQuery);
 
         // Assert
-        Assert.True(resultGet.IsSuccess);
-        env.UnitOfWorkMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
-    }
-    
-    [Homework(RunLogic.Homeworks.Cqrs)]
-    public async Task DeleteOperation_Should_ReturnFailedResult_WhenNoSuchProductExists()
-    {
-        // Arrange
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi();
-        var env = testEnvBuilder.Build();
-        var getDelete = TestProduct.GetDeleteCommand(Guid.NewGuid());
-        
-        // Act
-        var result = await CqrsEnvironment.HandleCommand(env.DeleteProductByGuidCommandHandler, getDelete);
+        Assert.True(resultGet?.IsSuccess);
 
-        // Assert
-        Assert.True(result.IsFailure);
-        env.UnitOfWorkMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
+        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 }

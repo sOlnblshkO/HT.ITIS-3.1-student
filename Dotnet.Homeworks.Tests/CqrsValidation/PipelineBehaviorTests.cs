@@ -9,6 +9,7 @@ using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Dotnet.Homeworks.Tests.RunLogic.Utils.Cqrs;
 using Moq;
 using NetArchTest.Rules;
+using NSubstitute;
 
 namespace Dotnet.Homeworks.Tests.CqrsValidation;
 
@@ -23,12 +24,12 @@ public class PipelineBehaviorTests
             .HaveNameEndingWith("Handler")
             .And()
             .ResideInNamespaceStartingWith(Constants.UserManagementFeatureNamespace);
-        
+
         var result = typesWithCondition
             .ShouldNot()
             .Inherit(typeof(CqrsDecorator<,>))
             .GetResult();
-        
+
         Assert.True(result.IsSuccessful);
     }
 
@@ -36,102 +37,95 @@ public class PipelineBehaviorTests
     public async Task Mediator_Should_InvokeBehaviors_And_ReturnSucceedResult_WhenCallGetAllUsers()
     {
         // Assert
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi().WithPipelineBehaviors();
-        
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithPipelineBehaviors();
+
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>()
             { new Claim(ClaimTypes.Role, Roles.Admin.ToString()) });
-        
+
         var env = testEnvBuilder.Build();
-        
+
         // Act
         var result =
-            await CqrsEnvironment.HandleQuery<GetAllUsersQuery, GetAllUsersDto>(env.GetAllUsersQueryHandler,
-                TestUsers.GetAllUsersQuery());
-        
+            await env.CustomMediatorMock.Send(TestUsers.GetAllUsersQuery());
+
         // Assert
-        Assert.True(result.IsSuccess);
+        Assert.True(result?.IsSuccess);
     }
-    
+
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public async Task Mediator_Should_InvokeBehaviors_And_ReturnFailedResult_WhenCallGetAllUsersWithNoPermission()
     {
         // Assert
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi().WithPipelineBehaviors();
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithPipelineBehaviors();
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>());
-        
+
         var env = testEnvBuilder.Build();
-        
+
         // Act
         var result =
-            await CqrsEnvironment.HandleQuery<GetAllUsersQuery, GetAllUsersDto>(env.GetAllUsersQueryHandler,
-                TestUsers.GetAllUsersQuery());
-        
+            await env.CustomMediatorMock.Send(TestUsers.GetAllUsersQuery());
+
         // Assert
-        Assert.True(result.IsFailure);
+        Assert.True(result?.IsFailure);
     }
-    
+
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public async Task Mediator_Should_InvokeBehaviors_And_ReturnFailedResult_WhenCallDeleteUserWithNoPermission()
     {
         // Assert
         var email = "correct@email.ru";
         var name = "name";
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi().WithPipelineBehaviors();
-        var guid = await testEnvBuilder.UserRepositoryMock.Object?.InsertUserAsync(new User() {Name = name, Email = email})!;
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithPipelineBehaviors();
+        var guid = await testEnvBuilder.UserRepositoryMock.InsertUserAsync(new User() { Name = name, Email = email })!;
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>());
 
         var env = testEnvBuilder.Build();
-        
+
         // Act
-        var result =
-            await CqrsEnvironment.HandleCommand(env.DeleteUserByAdminCommandHandler,
-                TestUsers.DeleteUserByAdminCommand(guid));
-        
+        var result = await env.CustomMediatorMock.Send(TestUsers.DeleteUserByAdminCommand(guid));
+
         // Assert
-        Assert.True(result.IsFailure);
-        env.UnitOfWorkMock.Verify(x=>x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
+        Assert.True(result?.IsFailure);
+        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(It.IsAny<CancellationToken>());
     }
-    
+
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public async Task Mediator_Should_InvokeBehaviors_And_ReturnSucceedResult_WhenCallDeleteUser()
     {
         // Assert
         var email = "correct@email.ru";
         var name = "name";
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi().WithPipelineBehaviors();
-        var guid = await testEnvBuilder.UserRepositoryMock.Object?.InsertUserAsync(new User() {Name = name, Email = email})!;
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithPipelineBehaviors();
+        var guid = await testEnvBuilder.UserRepositoryMock.InsertUserAsync(new User() { Name = name, Email = email })!;
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>()
             { new Claim(ClaimTypes.Role, Roles.Admin.ToString()) });
-        
+
         var env = testEnvBuilder.Build();
-        
+
         // Act
-        var result =
-            await CqrsEnvironment.HandleCommand(env.DeleteUserByAdminCommandHandler,
-                TestUsers.DeleteUserByAdminCommand(guid));
-        
+        var result = await env.CustomMediatorMock.Send(TestUsers.DeleteUserByAdminCommand(guid));
+
         // Assert
-        Assert.True(result.IsSuccess);
-        env.UnitOfWorkMock.Verify(x=>x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.AtLeastOnce);
+        Assert.True(result?.IsSuccess);
+        await env.UnitOfWorkMock.Received().SaveChangesAsync(It.IsAny<CancellationToken>());
     }
-    
+
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public async Task DeleteOperation_Should_ReturnFailedResult_WhenNoSuchUserExists()
     {
         // Assert
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi().WithPipelineBehaviors();
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithPipelineBehaviors();
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>()
             { new Claim(ClaimTypes.Role, Roles.Admin.ToString()) });
-        
+
         var env = testEnvBuilder.Build();
-        
+
         // Act
-       var result =
-            await CqrsEnvironment.HandleCommand(env.DeleteUserByAdminCommandHandler,
-                TestUsers.DeleteUserByAdminCommand(Guid.NewGuid()));
-        
+        var result =
+            await env.CustomMediatorMock.Send(TestUsers.DeleteUserByAdminCommand(Guid.NewGuid()));
+
         // Assert
-        Assert.True(result.IsFailure);
-        env.UnitOfWorkMock.Verify(x=>x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
+        Assert.True(result?.IsFailure);
+        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(It.IsAny<CancellationToken>());
     }
 }
