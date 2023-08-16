@@ -13,7 +13,9 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Dotnet.Homeworks.DataAccess\Dotnet.Homeworks.DataAccess.csproj" />
+      <ProjectReference Include="..\Dotnet.Homeworks.Features\Dotnet.Homeworks.Features.csproj" />
       <ProjectReference Include="..\Dotnet.Homeworks.Mailing.API\Dotnet.Homeworks.Mailing.API.csproj" />
+      <ProjectReference Include="..\Dotnet.Homeworks.Mediator\Dotnet.Homeworks.Mediator.csproj" />
       <ProjectReference Include="..\Dotnet.Homeworks.Storage.API\Dotnet.Homeworks.Storage.API.csproj" />
     </ItemGroup>
 

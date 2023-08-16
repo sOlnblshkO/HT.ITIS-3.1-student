@@ -1,11 +1,12 @@
-﻿using Dotnet.Homeworks.Domain.Abstractions.Repositories;
+﻿using System.Collections.Concurrent;
+using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Domain.Entities;
 
 namespace Dotnet.Homeworks.Tests.Cqrs.Helpers;
 
 public class ProductRepositoryMock : IProductRepository
 {
-    private readonly Dictionary<Guid, Product> _products = new();
+    private readonly ConcurrentDictionary<Guid, Product> _products = new();
 
     public Task<IEnumerable<Product>> GetAllProductsAsync()
     {
@@ -15,19 +16,21 @@ public class ProductRepositoryMock : IProductRepository
 
     public Task DeleteProductByGuidAsync(Guid id)
     {
-        _products.Remove(id);
+        _products.Remove(id, out var product);
         return Task.CompletedTask;
     }
 
     public Task UpdateProductAsync(Product product)
     {
-        _products[product.Id] = product;
+        if (_products.ContainsKey(product.Id))  
+            _products[product.Id] = product;
+        
         return Task.CompletedTask;
     }
 
     public Task<Guid> InsertProductAsync(Product product)
     {
-        _products.Add(product.Id, product);
+        _products.TryAdd(product.Id, product);
         return Task.FromResult(product.Id);
     }
 }

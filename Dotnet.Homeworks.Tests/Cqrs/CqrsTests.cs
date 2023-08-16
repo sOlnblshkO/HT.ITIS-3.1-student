@@ -1,48 +1,44 @@
-using Dotnet.Homeworks.Features.Cqrs.Products.Commands.InsertProduct;
-using Dotnet.Homeworks.Features.Cqrs.Products.Queries.GetProducts;
-using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
-using Dotnet.Homeworks.Infrastructure.Cqrs.Queries;
 using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
-using Moq;
+using NSubstitute;
 
 namespace Dotnet.Homeworks.Tests.Cqrs;
 
-
-[Collection(nameof(AllRequestsFixture))]
+[Collection(nameof(AllProductsRequestsFixture))]
 public class CqrsTests
 {
     [Homework(RunLogic.Homeworks.Cqrs)]
     public async Task InsertOperation_IsCorrect()
     {
         // Arrange
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi();
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder();
         var env = testEnvBuilder.Build();
         var insertCommand = TestProduct.GetInsertCommand();
-        
+
         // Act
         var resultInsert =
-            await CqrsEnvironment.HandleCommand<InsertProductCommand, InsertProductDto>(env.InsertCommandHandler,
-                insertCommand);
+            await env.CustomMediatorMock.Send(insertCommand);
 
         // Assert
-        Assert.True(resultInsert.IsSuccess);
-        env.UnitOfWorkMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+        Assert.True(resultInsert?.IsSuccess);
+        await env.UnitOfWorkMock.Received().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
-    
+
     [Homework(RunLogic.Homeworks.Cqrs)]
     public async Task GetOperation_IsCorrect()
     {
         // Arrange
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithHandlersInDi();
+        await using var testEnvBuilder = new CqrsEnvironmentBuilder();
         var env = testEnvBuilder.Build();
         var getQuery = TestProduct.GetGetQuery();
-        
+
         // Act
-        var resultGet = await CqrsEnvironment.HandleQuery<GetProductsQuery, List<GetProductsDto>>(env.GetQueryHandler, getQuery);
+        var resultGet =
+            await env.CustomMediatorMock.Send(getQuery);
 
         // Assert
-        Assert.True(resultGet.IsSuccess);
-        env.UnitOfWorkMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
+        Assert.True(resultGet?.IsSuccess);
+
+        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 }
