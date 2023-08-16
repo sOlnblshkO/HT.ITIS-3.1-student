@@ -1,6 +1,3 @@
 namespace Dotnet.Homeworks.Features.Orders.Queries.GetOrder;
 
-public class GetOrderQuery
-{
-    // TODO: implement
-}
+public record GetOrderQuery(Guid Id); // TODO: implement interface
