@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using Dotnet.Homeworks.Domain.Entities;
 using Dotnet.Homeworks.Features.Decorators;
-using Dotnet.Homeworks.Infrastructure.Services.PermissionChecker.Enums;
+using Dotnet.Homeworks.Infrastructure.Validation.PermissionChecker.Enums;
 using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;

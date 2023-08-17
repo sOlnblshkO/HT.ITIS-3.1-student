@@ -27,9 +27,9 @@ public class AllProductsRequestsFixture : IDisposable, ICollectionFixture<AllPro
         };
 
         var types = AssemblyFeatures.GetTypes()
-            .Where(x => x.Namespace.Contains("Products"))
-            .Where(x => x.Name.EndsWith("Command") || x.Name.EndsWith("Query"))
-            .Select(x => interfaces.IntersectBy(x.GetInterfaces().Select(x => x.Name), type => type.Name));
+            .Where(type => type.Namespace != null && type.Namespace.Contains("Products"))
+            .Where(type => type.Name.EndsWith("Command") || type.Name.EndsWith("Query"))
+            .Select(type => interfaces.IntersectBy(type.GetInterfaces().Select(interfaceType => interfaceType.Name), x => x.Name));
 
         return types.All(x => x.Any());
     }
@@ -44,9 +44,9 @@ public class AllProductsRequestsFixture : IDisposable, ICollectionFixture<AllPro
         };
 
         var types = AssemblyFeatures.GetTypes()
-            .Where(x => x.Namespace.Contains("Products"))
-            .Where(x => x.Name.EndsWith("Handler"))
-            .Select(x => interfaces.IntersectBy(x.GetInterfaces().Select(x => x.Name), type => type.Name));
+            .Where(type => type.Namespace != null && type.Namespace.Contains("Products"))
+            .Where(type => type.Name.EndsWith("Handler"))
+            .Select(type => interfaces.IntersectBy(type.GetInterfaces().Select(interfaceType => interfaceType.Name), x => x.Name));
 
         return types.All(x => x.Any());
     }

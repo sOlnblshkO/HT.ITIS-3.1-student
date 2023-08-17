@@ -1,4 +1,4 @@
-namespace Dotnet.Homeworks.Infrastructure.Services.PermissionChecker.Enums;
+namespace Dotnet.Homeworks.Infrastructure.Validation.PermissionChecker.Enums;
 
 public enum Roles
 {

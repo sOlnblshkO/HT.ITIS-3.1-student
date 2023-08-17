@@ -5,7 +5,6 @@ using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Dotnet.Homeworks.Tests.RunLogic.Utils.Cqrs;
-using Moq;
 using NetArchTest.Rules;
 using NSubstitute;
 
@@ -122,7 +121,7 @@ public class DecoratorTests
             { new Claim(ClaimTypes.NameIdentifier, guid.ToString()) });
 
         var env = testEnvBuilder.Build();
-        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = name, Email = email })!;
+        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = name, Email = email });
 
         // Act
         var result =
@@ -166,7 +165,7 @@ public class DecoratorTests
             { new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()) });
 
         var env = testEnvBuilder.Build();
-        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = Name, Email = Email })!;
+        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = Name, Email = Email });
 
         // Act
         var result =
@@ -212,7 +211,7 @@ public class DecoratorTests
             { new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()) });
 
         var env = testEnvBuilder.Build();
-        await testEnvBuilder.UserRepositoryMock.InsertUserAsync(new User() { Id = guid, Name = Name, Email = Email });
+        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = Name, Email = Email });
         var user = new User() { Email = Email, Id = guid, Name = Name };
 
         // Act

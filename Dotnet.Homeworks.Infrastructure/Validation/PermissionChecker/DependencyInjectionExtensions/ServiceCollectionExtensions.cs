@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dotnet.Homeworks.Infrastructure.Services.PermissionChecker.DependencyInjectionExtensions;
+namespace Dotnet.Homeworks.Infrastructure.Validation.PermissionChecker.DependencyInjectionExtensions;
 
 public static class ServiceCollectionExtensions
 {
