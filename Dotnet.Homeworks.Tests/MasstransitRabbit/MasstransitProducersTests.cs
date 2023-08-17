@@ -21,7 +21,7 @@ public class MasstransitProducersTests
         {
             await env.Harness.Start();
             await env.RegistrationService.RegisterAsync(new RegisterUserDto("", ""));
-            
+
             Assert.True(await env.Harness.Published.Any<SendEmail>() || await env.Harness.Sent.Any<SendEmail>());
             Assert.False(await env.Harness.Published.Any<SendEmail>(p => p.Exception is not null) ||
                          await env.Harness.Sent.Any<SendEmail>(p => p.Exception is not null));

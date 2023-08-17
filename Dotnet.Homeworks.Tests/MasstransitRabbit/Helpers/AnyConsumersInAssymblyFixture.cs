@@ -8,7 +8,7 @@ namespace Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers;
 public class AnyConsumersInAssemblyFixture : IDisposable, ICollectionFixture<AnyConsumersInAssemblyFixture>
 {
     private static readonly Assembly Assembly = typeof(IEmailConsumer).Assembly;
-    
+
     public AnyConsumersInAssemblyFixture()
     {
         if (!IsAnyConsumerInAssembly)

@@ -11,13 +11,13 @@ public class ArchitectureTests
     public void ConsumersNamespace_ShouldHave_DependencyOnMasstransit()
     {
         var consumerType = typeof(IEmailConsumer);
-        
+
         var testResult = Types
             .InNamespace(consumerType.Namespace)
             .Should()
             .HaveDependencyOn("MassTransit")
             .GetResult();
-        
+
         Assert.True(testResult.IsSuccessful);
     }
 
@@ -28,13 +28,13 @@ public class ArchitectureTests
         var mainProjectAssembly = MainProject.Helpers.AssemblyReference.Assembly;
         var mailingApiNamespaces = mailingApiAssembly.ExportedTypes.Select(t => t.Namespace).Distinct()
             .Where(n => n is not null);
-        
+
         var testResult = Types
             .InAssembly(mainProjectAssembly)
             .ShouldNot()
             .HaveDependencyOnAny(mailingApiNamespaces.ToArray())
             .GetResult();
-        
+
         Assert.True(testResult.IsSuccessful);
     }
 
@@ -51,7 +51,7 @@ public class ArchitectureTests
             .ShouldNot()
             .HaveDependencyOnAny(mainProjectNamespaces.ToArray())
             .GetResult();
-        
+
         Assert.True(testResult.IsSuccessful);
     }
 }

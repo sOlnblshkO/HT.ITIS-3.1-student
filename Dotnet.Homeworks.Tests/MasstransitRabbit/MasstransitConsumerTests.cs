@@ -8,6 +8,7 @@ using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using static Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers.ReflectionHelpers;
+
 // ReSharper disable AccessToDisposedClosure
 
 namespace Dotnet.Homeworks.Tests.MasstransitRabbit;
@@ -34,7 +35,7 @@ public class MasstransitConsumerTests
             var anyCorrectMessagesConsumedWithErrors =
                 await AnyConsumedMessagesWithFilterAsync<SendEmail>(env.EmailConsumer,
                     message => message.Exception is not null);
-            
+
             Assert.True(anyCorrectMessagesConsumed);
             Assert.False(anyCorrectMessagesConsumedWithErrors);
         }
@@ -50,7 +51,7 @@ public class MasstransitConsumerTests
         await using var testEnvBuilder = new MasstransitEnvironmentBuilder();
         testEnvBuilder.SetupServices(c => c.AddSingleton<IRegistrationService, RegistrationService>());
         var env = testEnvBuilder.Build();
-    
+
         try
         {
             await env.Harness.Start();
@@ -75,16 +76,17 @@ public class MasstransitConsumerTests
         await using var testEnvBuilder = new MasstransitEnvironmentBuilder();
         testEnvBuilder.SetupServices(c => c.AddSingleton<IRegistrationService, RegistrationService>());
         var env = testEnvBuilder.Build();
-    
+
         try
         {
             await env.Harness.Start();
             await env.RegistrationService.RegisterAsync(new RegisterUserDto("", ""));
             var anyConsumed = await AnyConsumedMessagesWithFilterAsync<SendEmail>(env.EmailConsumer);
             var anyConsumedWithErrors =
-                await AnyConsumedMessagesWithFilterAsync<SendEmail>(env.EmailConsumer, message => message.Exception is not null);
+                await AnyConsumedMessagesWithFilterAsync<SendEmail>(env.EmailConsumer,
+                    message => message.Exception is not null);
             var countConsumedMessages = CountConsumedMessages<SendEmail>(env.EmailConsumer);
-    
+
             Assert.True(anyConsumed);
             Assert.Equal(1, countConsumedMessages);
             Assert.False(anyConsumedWithErrors);
@@ -94,7 +96,7 @@ public class MasstransitConsumerTests
             await env.Harness.Stop();
         }
     }
-    
+
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public async Task MailingConsumer_ShouldCall_IMailingService_Once()
     {
@@ -109,7 +111,7 @@ public class MasstransitConsumerTests
             await env.Harness.Start();
             await env.RegistrationService.RegisterAsync(new RegisterUserDto("", ""));
             await Task.Delay(100);
-    
+
             env.MailingServiceMock.Verify(m => m.SendEmailAsync(It.IsAny<EmailMessage>()), Times.Once);
         }
         finally

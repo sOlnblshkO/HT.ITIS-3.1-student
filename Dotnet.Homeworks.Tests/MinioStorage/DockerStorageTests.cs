@@ -11,10 +11,10 @@ public class DockerStorageTests
         var docker = Parser.Parse();
         var expectedPath = "Dotnet.Homeworks.Storage.API/Dockerfile";
         var actualPath = docker.Services?.DotnetStorage?.Build?.GetValueOrDefault("dockerfile");
-        
+
         Assert.Equal(expectedPath, actualPath);
     }
-    
+
     [Homework(RunLogic.Homeworks.MinioStorage)]
     public void DotnetStorage_ShouldDependOn_DotnetMinio()
     {
@@ -24,7 +24,7 @@ public class DockerStorageTests
 
         Assert.True(dotnetMinioDependencyExists);
     }
-    
+
     [Homework(RunLogic.Homeworks.MinioStorage)]
     public void DotnetStorage_ShouldDependOn_OnlyDotnetMinio()
     {
@@ -34,7 +34,7 @@ public class DockerStorageTests
         Assert.Equal(1, dotnetStorageDependencies?.Count);
         Assert.Equal(Constants.MinioService, dotnetStorageDependencies?[0]);
     }
-    
+
     [Homework(RunLogic.Homeworks.MinioStorage)]
     public void DotnetStorage_ShouldContain_MinioConfigEnvVars()
     {
@@ -47,7 +47,7 @@ public class DockerStorageTests
         };
 
         Assert.NotNull(docker.Services?.DotnetStorage?.Environment);
-        
+
         foreach (var key in docker.Services?.DotnetStorage?.Environment?.Keys!)
         {
             var item = key.Split("__")[^1];

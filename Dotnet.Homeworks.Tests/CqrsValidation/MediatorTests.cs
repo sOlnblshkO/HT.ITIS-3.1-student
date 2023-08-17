@@ -1,6 +1,12 @@
+using Dotnet.Homeworks.Features.Cqrs.Products.Commands.InsertProduct;
+using Dotnet.Homeworks.Features.Cqrs.Products.Queries.GetProducts;
+using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
+using Dotnet.Homeworks.Infrastructure.Cqrs.Queries;
+using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Dotnet.Homeworks.Tests.RunLogic.Utils.Cqrs;
+using NSubstitute;
 
 namespace Dotnet.Homeworks.Tests.CqrsValidation;
 

@@ -6,15 +6,15 @@ namespace Dotnet.Homeworks.Tests.RunLogic.Attributes;
 public class HomeworkAttribute : FactAttribute
 {
     private readonly Homeworks _number;
-    private readonly bool _skipIfPassed;
+    private readonly bool _skipIfNotCurrentHomework;
 
-    public HomeworkAttribute(Homeworks number, bool skipIfPassed = default)
+    public HomeworkAttribute(Homeworks number, bool skipIfNotCurrentHomework = default)
     {
         _number = number;
-        _skipIfPassed = skipIfPassed;
+        _skipIfNotCurrentHomework = skipIfNotCurrentHomework;
     }
 
-    public override string? Skip => GetSkip(_number, _skipIfPassed);
+    public override string? Skip => GetSkip(_number, _skipIfNotCurrentHomework);
 
     internal static string? GetSkip(Homeworks number, bool skipIfPassed)
     {
@@ -28,7 +28,7 @@ public class HomeworkAttribute : FactAttribute
         }
 
         var assemblyNumber = (byte)hw.Value;
-        return (byte)number <= assemblyNumber && ( !skipIfPassed || (byte)number == assemblyNumber )
+        return (byte)number <= assemblyNumber && (!skipIfPassed || (byte)number == assemblyNumber)
             ? null
             : "Next Homeworks";
     }

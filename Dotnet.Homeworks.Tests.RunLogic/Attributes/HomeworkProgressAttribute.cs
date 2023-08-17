@@ -5,7 +5,9 @@ public class HomeworkProgressAttribute : Attribute
 {
     public int Number { get; }
 
-    public HomeworkProgressAttribute(Homeworks homeworks) : this((int)homeworks) { }
+    public HomeworkProgressAttribute(Homeworks homeworks) : this((int)homeworks)
+    {
+    }
 
     private HomeworkProgressAttribute(int number)
     {
@@ -14,7 +16,7 @@ public class HomeworkProgressAttribute : Attribute
             var enumElementsCount = Enum.GetNames(typeof(Homeworks)).Length - 1;
             throw new ArgumentOutOfRangeException(nameof(number), $"Number must be 0 <= number < {enumElementsCount}");
         }
-        
+
         Number = number;
     }
 }

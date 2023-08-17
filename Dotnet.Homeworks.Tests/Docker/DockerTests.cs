@@ -83,7 +83,7 @@ public class DockerTests
         var docker = Parser.Parse();
         var expectedPath = "Dotnet.Homeworks.MainProject/Dockerfile";
         var actualPath = docker.Services?.DotnetMain?.Build?.GetValueOrDefault("dockerfile");
-        
+
         Assert.Equal(expectedPath, actualPath);
     }
 }

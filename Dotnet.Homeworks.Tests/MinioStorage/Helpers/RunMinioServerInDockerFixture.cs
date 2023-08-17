@@ -9,7 +9,7 @@ namespace Dotnet.Homeworks.Tests.MinioStorage.Helpers;
 public class RunMinioServerInDockerFixture : IDisposable, ICollectionFixture<RunMinioServerInDockerFixture>
 {
     private readonly string _minioContainerName;
-    
+
     public RunMinioServerInDockerFixture()
     {
         _minioContainerName = Guid.NewGuid().ToString();
@@ -41,7 +41,7 @@ public class RunMinioServerInDockerFixture : IDisposable, ICollectionFixture<Run
                              $"-e {Constants.MinioRootUserEnvVar}={MinioInstance.Config.Username} " +
                              $"-e {Constants.MinioRootPassEnvVar}={MinioInstance.Config.Password} " +
                              $"minio/minio server /data");
-    
+
     private static void StopMinioContainer(string containerName) =>
         RunProcess("docker", $"stop {containerName}");
 
@@ -59,7 +59,7 @@ public class RunMinioServerInDockerFixture : IDisposable, ICollectionFixture<Run
         process.WaitForExit();
         process.Close();
     }
-    
+
     public void Dispose()
     {
         StopMinioContainer(_minioContainerName);

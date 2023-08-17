@@ -1,7 +1,7 @@
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dotnet.Homeworks.Mediator.Helpers;
+namespace Dotnet.Homeworks.Mediator.DependencyInjectionExtensions;
 
 
 public static class ServiceCollectionExtensions

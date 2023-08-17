@@ -11,10 +11,10 @@ public class DockerMailingTests
         var docker = Parser.Parse();
         var expectedPath = "Dotnet.Homeworks.Mailing.API/Dockerfile";
         var actualPath = docker.Services?.DotnetMailing?.Build?.GetValueOrDefault("dockerfile");
-        
+
         Assert.Equal(expectedPath, actualPath);
     }
-    
+
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public void DotnetMailing_ShouldDependOn_DotnetRabbitMq()
     {
@@ -24,7 +24,7 @@ public class DockerMailingTests
 
         Assert.True(dotnetRabbitmqDependencyExists);
     }
-    
+
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public void DotnetMailing_ShouldNotDependOn_DotnetPostgres()
     {
@@ -34,7 +34,7 @@ public class DockerMailingTests
 
         Assert.False(dotnetRabbitmqDependencyExists);
     }
-    
+
     [Homework(RunLogic.Homeworks.RabbitMasstransit)]
     public void DotnetMailing_ShouldContain_EmailConfigEnvVars()
     {
@@ -47,7 +47,7 @@ public class DockerMailingTests
 
         // violates AAA a bit but ok
         Assert.NotNull(docker.Services?.DotnetMailing?.Environment);
-        
+
         foreach (var key in docker.Services?.DotnetMailing?.Environment?.Keys!)
         {
             var item = key.Split("__")[^1];
