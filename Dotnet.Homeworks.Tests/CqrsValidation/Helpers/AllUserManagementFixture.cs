@@ -32,7 +32,7 @@ public class AllUserManagementFixture : IDisposable, ICollectionFixture<AllUserM
         return types.All(x => x.Any());
     }
 
-    public bool AllHandlersInAssemblyFixture()
+    private bool AllHandlersInAssemblyFixture()
     {
         var interfaces = new List<Type>()
         {
