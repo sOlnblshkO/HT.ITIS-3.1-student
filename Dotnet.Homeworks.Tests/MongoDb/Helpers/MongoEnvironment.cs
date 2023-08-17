@@ -20,7 +20,7 @@ public class MongoEnvironment
     private IHttpContextAccessor HttpContextAccessor { get; }
 
     /// <summary>
-    ///     Null if builder wasn't called WithFakeUserInContext
+    ///     Null if builder wasn't called WithFakeUserInContext. Then updates after LogInNewUserAsync call.
     /// </summary>
     public Guid? ContextUserId { get; private set; }
 
