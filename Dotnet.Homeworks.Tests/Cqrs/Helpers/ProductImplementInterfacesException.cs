@@ -6,5 +6,5 @@ public class ProductImplementInterfacesException : Exception
     public ProductImplementInterfacesException(string assembly)
         : base(FormatMessage(assembly)) { }
 
-    private static string FormatMessage(string assembly) => $"Not User's feature classes implement certain interface in {assembly} assembly";
+    private static string FormatMessage(string assembly) => $"Not all Products feature types implement required interfaces in {assembly} assembly";
 }
