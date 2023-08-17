@@ -17,10 +17,7 @@ public class MongoEnvironment
 
     private IHttpContextAccessor HttpContextAccessor { get; }
 
-    public void LogOutCurrentUser()
-    {
-        HttpContextAccessor.HttpContext!.User = new ClaimsPrincipal();
-    }
+    public void LogOutCurrentUser() => HttpContextAccessor.HttpContext!.User = new ClaimsPrincipal();
 
     /// <summary>
     ///     Creates a user and authorizes under its Guid in the current Context

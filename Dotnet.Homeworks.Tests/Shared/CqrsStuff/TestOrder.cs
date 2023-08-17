@@ -10,44 +10,33 @@ namespace Dotnet.Homeworks.Tests.Shared.CqrsStuff;
 
 public static class TestOrder
 {
-    private static CreateOrderCommand GetCreateCommand(IEnumerable<Guid> productIds) => new(productIds);
-
-    private static UpdateOrderCommand GetUpdateCommand(Guid orderId, IEnumerable<Guid> productsIds) =>
-        new(orderId, productsIds);
-
-    private static DeleteOrderByGuidCommand GetDeleteCommand(Guid id) => new(id);
-
-    private static GetOrdersQuery GetGetAllQuery() => new();
-
-    private static GetOrderQuery GetGetOneQuery(Guid id) => new(id);
-    
     public static async Task<Result<CreateOrderDto>> CreateOrderAsync(IMediator mediator, params Guid[] productsIds)
     {
-        var createOrder = GetCreateCommand(productsIds);
+        var createOrder = new CreateOrderCommand(productsIds);
         return await mediator.Send(createOrder);
     }
 
     public static async Task<Result<GetOrderDto>> GetOrderAsync(IMediator mediator, Guid orderId)
     {
-        var getOrder = GetGetOneQuery(orderId);
+        var getOrder = new GetOrderQuery(orderId);
         return await mediator.Send(getOrder);
     }
 
     public static async Task<Result<GetOrdersDto>> GetOrdersAsync(IMediator mediator)
     {
-        var getOrders = GetGetAllQuery();
+        var getOrders = new GetOrdersQuery();
         return await mediator.Send(getOrders);
     }
 
     public static async Task<Result> DeleteOrderAsync(IMediator mediator, Guid orderId)
     {
-        var deleteOrder = GetDeleteCommand(orderId);
+        var deleteOrder = new DeleteOrderByGuidCommand(orderId);
         return await mediator.Send(deleteOrder);
     }
 
     public static async Task<Result> UpdateOrderAsync(IMediator mediator, Guid orderId, IEnumerable<Guid> productsIds)
     {
-        var updateOrder = GetUpdateCommand(orderId, productsIds);
+        var updateOrder = new UpdateOrderCommand(orderId, productsIds);
         return await mediator.Send(updateOrder);
     }
 }

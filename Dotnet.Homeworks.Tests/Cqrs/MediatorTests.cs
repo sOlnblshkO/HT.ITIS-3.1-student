@@ -32,7 +32,7 @@ public class MediatorTests
 
         await env.ProductManagementController.GetProducts();
 
-        await env.MediatRMock.Received().Send(Arg.Any<IQuery<GetProductsDto>>(), Arg.Any<CancellationToken>());
+        await env.MediatR.Received().Send(Arg.Any<IQuery<GetProductsDto>>(), Arg.Any<CancellationToken>());
     }
 
     [Homework(RunLogic.Homeworks.Cqrs, true)]
@@ -43,7 +43,7 @@ public class MediatorTests
 
         await env.ProductManagementController.InsertProduct("Name");
 
-        await env.MediatRMock.Received().Send(Arg.Any<ICommand<InsertProductDto>>(), Arg.Any<CancellationToken>());
+        await env.MediatR.Received().Send(Arg.Any<ICommand<InsertProductDto>>(), Arg.Any<CancellationToken>());
     }
 
     [Homework(RunLogic.Homeworks.Cqrs, true)]
@@ -54,7 +54,7 @@ public class MediatorTests
 
         await env.ProductManagementController.DeleteProduct(Guid.NewGuid());
 
-        await env.MediatRMock.Received().Send(Arg.Any<DeleteProductByGuidCommand>(), Arg.Any<CancellationToken>());
+        await env.MediatR.Received().Send(Arg.Any<DeleteProductByGuidCommand>(), Arg.Any<CancellationToken>());
     }
 
     [Homework(RunLogic.Homeworks.Cqrs, true)]
@@ -65,6 +65,6 @@ public class MediatorTests
 
         await env.ProductManagementController.UpdateProduct(Guid.NewGuid(), "Name");
 
-        await env.MediatRMock.Received().Send(Arg.Any<UpdateProductCommand>(), Arg.Any<CancellationToken>());
+        await env.MediatR.Received().Send(Arg.Any<UpdateProductCommand>(), Arg.Any<CancellationToken>());
     }
 }
