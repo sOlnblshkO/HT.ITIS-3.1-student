@@ -152,7 +152,7 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
             .Returns(new Result<GetProductsDto>(new GetProductsDto(new List<GetProductDto>(){new GetProductDto(Guid.NewGuid(), "name")}), true, null));
     }
 
-    internal static bool IsCqrsComplete()
+    private static bool IsCqrsComplete()
     {
         var attrHomeworkProgress = typeof(HomeworkAttribute).Assembly.GetCustomAttributes<HomeworkProgressAttribute>().Single();
         var isCqrsComplete = attrHomeworkProgress.Number >= (int)RunLogic.Homeworks.CqrsValidatorsDecorators;
