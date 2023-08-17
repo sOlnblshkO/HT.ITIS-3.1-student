@@ -8,5 +8,5 @@ public class UserImplementInterfacesException : Exception
     }
 
     private static string FormatMessage(string assembly) =>
-        $"Not all Product's feature classes implement certain interface in {assembly} assembly";
+        $"Not all Users feature types implement required interfaces in {assembly} assembly";
 }
