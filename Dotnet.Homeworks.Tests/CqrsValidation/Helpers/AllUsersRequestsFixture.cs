@@ -27,7 +27,6 @@ public class AllUsersRequestsFixture : IDisposable, ICollectionFixture<AllUsersR
             typeof(IQuery<>)
         };
 
-        // В списке еще есть GetAllUsers, хотя тот находится в другой директории 
         var types2 = AssemblyFeatures.GetTypes()
             .Where(x => x.Namespace.Contains("Users"))
             .Where(x => x.Name.EndsWith("Command") || x.Name.EndsWith("Query"));
