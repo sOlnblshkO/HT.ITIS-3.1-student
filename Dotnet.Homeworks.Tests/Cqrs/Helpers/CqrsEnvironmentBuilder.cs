@@ -65,7 +65,6 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
         SetupMediator(ref configureServices);
 
         SetupPipelineBehavior(ref configureServices);
-        SetupPipelineBehavior(ref configureServices);
 
         ServiceProvider = GetServiceProvider(configureServices);
     }
@@ -74,13 +73,7 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
     {
         if (ServiceProvider is null) SetupServices();
         _productManagementController ??= ServiceProvider!.GetRequiredService<ProductManagementController>();
-        if (!_withMockedMediator)
-        {
-            if (IsCqrsComplete())
-                _customMediatorMock = ServiceProvider!.GetRequiredService<Mediator.IMediator>();
-            else
-                _mediatRMock = ServiceProvider!.GetRequiredService<MediatR.IMediator>();
-        }
+        GetMockedMediatorFromServiceProvider();
 
         return new CqrsEnvironment(_productManagementController,
             _unitOfWork, _mediatRMock, _customMediatorMock, ProductRepositoryMock, UserRepositoryMock);
@@ -171,6 +164,17 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
                 configureServices += s => s
                     .AddSingleton(typeof(Mediator.IPipelineBehavior<,>), type);
             }
+        }
+    }
+
+    private void GetMockedMediatorFromServiceProvider()
+    {
+        if (!_withMockedMediator)
+        {
+            if (IsCqrsComplete())
+                _customMediatorMock = ServiceProvider!.GetRequiredService<Mediator.IMediator>();
+            else
+                _mediatRMock = ServiceProvider!.GetRequiredService<MediatR.IMediator>();
         }
     }
 }

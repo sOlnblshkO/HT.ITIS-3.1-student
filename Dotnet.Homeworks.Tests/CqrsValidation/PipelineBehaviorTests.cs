@@ -15,6 +15,9 @@ namespace Dotnet.Homeworks.Tests.CqrsValidation;
 [Collection(nameof(AllUserManagementFixture))]
 public class PipelineBehaviorTests
 {
+    private const string Email = "correct@email.ru";
+    private const string Name = "Name";
+
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public void RequestHandlers_ShouldNot_InheritDecorators()
     {
@@ -71,14 +74,12 @@ public class PipelineBehaviorTests
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public async Task Mediator_Should_InvokeBehaviors_And_ReturnFailedResult_WhenCallDeleteUserWithNoPermission()
     {
-        // Assert
-        var email = "correct@email.ru";
-        var name = "name";
+        // Assert;
         await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithPipelineBehaviors();
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>());
 
         var env = testEnvBuilder.Build();
-        var guid = await env.UserRepository.InsertUserAsync(new User() { Name = name, Email = email });
+        var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email });
 
         // Act
         var result = await env.CustomMediatorMock.Send(TestUsers.DeleteUserByAdminCommand(guid));
@@ -92,14 +93,12 @@ public class PipelineBehaviorTests
     public async Task Mediator_Should_InvokeBehaviors_And_ReturnSucceedResult_WhenCallDeleteUser()
     {
         // Assert
-        var email = "correct@email.ru";
-        var name = "name";
         await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithPipelineBehaviors();
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>()
             { new Claim(ClaimTypes.Role, Roles.Admin.ToString()) });
 
         var env = testEnvBuilder.Build();
-        var guid = await env.UserRepository.InsertUserAsync(new User() { Name = name, Email = email });
+        var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email });
 
         // Act
         var result = await env.CustomMediatorMock.Send(TestUsers.DeleteUserByAdminCommand(guid));
