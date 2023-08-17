@@ -10,7 +10,7 @@ namespace Dotnet.Homeworks.Tests.Shared.CqrsStuff;
 
 public static class TestProduct
 {
-    public static InsertProductCommand GetInsertCommand() => new("test");
+    private static InsertProductCommand GetInsertCommand() => new("test");
     
     public static UpdateProductCommand GetUpdateCommand(Product product) => new(product.Id, product.Name);
     

@@ -10,16 +10,16 @@ namespace Dotnet.Homeworks.Tests.Shared.CqrsStuff;
 
 public static class TestOrder
 {
-    public static CreateOrderCommand GetCreateCommand(IEnumerable<Guid> productIds) => new(productIds);
+    private static CreateOrderCommand GetCreateCommand(IEnumerable<Guid> productIds) => new(productIds);
 
-    public static UpdateOrderCommand GetUpdateCommand(Guid orderId, IEnumerable<Guid> productsIds) =>
+    private static UpdateOrderCommand GetUpdateCommand(Guid orderId, IEnumerable<Guid> productsIds) =>
         new(orderId, productsIds);
-    
-    public static DeleteOrderByGuidCommand GetDeleteCommand(Guid id) => new(id);
-    
-    public static GetOrdersQuery GetGetAllQuery() => new();
-    
-    public static GetOrderQuery GetGetOneQuery(Guid id) => new(id);
+
+    private static DeleteOrderByGuidCommand GetDeleteCommand(Guid id) => new(id);
+
+    private static GetOrdersQuery GetGetAllQuery() => new();
+
+    private static GetOrderQuery GetGetOneQuery(Guid id) => new(id);
     
     public static async Task<Result<CreateOrderDto>> CreateOrderAsync(IMediator mediator, params Guid[] productsIds)
     {

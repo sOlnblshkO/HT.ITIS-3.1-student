@@ -6,7 +6,7 @@ namespace Dotnet.Homeworks.Tests.Shared.CqrsStuff;
 
 public static class TestUser
 {
-    public static CreateUserCommand GetCreateCommand() => new(GenerateRandomName(5), GenerateRandomEmail());
+    private static CreateUserCommand GetCreateCommand() => new(GenerateRandomName(5), GenerateRandomEmail());
     
     public static async Task<Result<CreateUserDto>> CreateUserAsync(IMediator mediator)
     {
@@ -15,7 +15,7 @@ public static class TestUser
     }
 
     private static string GenerateRandomEmail() =>
-        "test." + Guid.NewGuid() + "@test.tst";
+        $"test.{Guid.NewGuid()}@test.tst";
 
     private static string GenerateRandomName(int length)
     {
