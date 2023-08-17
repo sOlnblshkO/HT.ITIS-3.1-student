@@ -22,9 +22,9 @@ public class ProductRepositoryMock : IProductRepository
 
     public Task UpdateProductAsync(Product product)
     {
-        if (_products.ContainsKey(product.Id))  
+        if (_products.ContainsKey(product.Id))
             _products[product.Id] = product;
-        
+
         return Task.CompletedTask;
     }
 

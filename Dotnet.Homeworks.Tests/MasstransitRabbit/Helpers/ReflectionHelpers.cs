@@ -20,7 +20,8 @@ internal static class ReflectionHelpers
     }
 
     internal static async Task<bool> AnyConsumedMessagesWithFilterAsync<T>(object consumer,
-        FilterDelegate<IReceivedMessage<T>>? filter = default, CancellationToken cancellationToken = default) where T : class
+        FilterDelegate<IReceivedMessage<T>>? filter = default, CancellationToken cancellationToken = default)
+        where T : class
     {
         filter ??= _ => true;
         var consumedProperty = GetConsumedPropertyInfo<T>(consumer);
@@ -34,7 +35,8 @@ internal static class ReflectionHelpers
                                  && p[1].ParameterType.FullName == typeof(CancellationToken).FullName;
         });
         if (anyMethod is null)
-            throw new Exception("IReceivedMessageList API has changed. There is now not such a method as Any with provided parameter types");
+            throw new Exception(
+                "IReceivedMessageList API has changed. There is now not such a method as Any with provided parameter types");
         var anyGenericMethod = anyMethod.MakeGenericMethod(typeof(SendEmail));
         var parameters = new object?[] { filter, cancellationToken };
         var consumedPropertyValue = consumedProperty.GetValue(consumer)!;
@@ -61,9 +63,12 @@ internal static class ReflectionHelpers
                                      && p[1].ParameterType.ToString() == countParameterTypes[1].ToString();
             });
         if (countMethod is null)
-            throw new Exception("AsyncElementListExtensions has changed. There is now not such a method as Count with provided parameter types");
+            throw new Exception(
+                "AsyncElementListExtensions has changed. There is now not such a method as Count with provided parameter types");
         var countGenericMethod = countMethod.MakeGenericMethod(typeof(IReceivedMessage));
         var resObj = countGenericMethod.Invoke(null, new[] { consumedPropertyValue, default(CancellationToken) });
-        return resObj is int res ? res : throw new Exception("A signature of Count method has changed. It does not return int now");
+        return resObj is int res
+            ? res
+            : throw new Exception("A signature of Count method has changed. It does not return int now");
     }
 }

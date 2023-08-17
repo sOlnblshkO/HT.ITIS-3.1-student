@@ -9,7 +9,7 @@ namespace Dotnet.Homeworks.Tests.MinioStorage;
 public class ArchitectureTests
 {
     private readonly Assembly _storageAssembly = AssemblyReference.Assembly;
-    
+
     [Homework(RunLogic.Homeworks.MinioStorage)]
     public void ImageStorage_ShouldHave_DependencyOnMinio()
     {
@@ -20,10 +20,10 @@ public class ArchitectureTests
             .Should()
             .HaveDependencyOn("Minio")
             .GetResult();
-        
+
         Assert.True(testResult.IsSuccessful);
     }
-    
+
     [Homework(RunLogic.Homeworks.MinioStorage)]
     public void StorageFactory_ShouldHave_DependencyOnMinio()
     {
@@ -34,10 +34,10 @@ public class ArchitectureTests
             .Should()
             .HaveDependencyOn("Minio")
             .GetResult();
-        
+
         Assert.True(testResult.IsSuccessful);
     }
-    
+
     [Homework(RunLogic.Homeworks.MinioStorage)]
     public void StorageAPI_ShouldNotHave_DependencyOn_MainProject_And_MailingAPI()
     {
@@ -51,7 +51,7 @@ public class ArchitectureTests
             .ShouldNot()
             .HaveDependencyOnAny(projectsNamespaces.ToArray())
             .GetResult();
-        
+
         Assert.True(testResult.IsSuccessful);
     }
 }

@@ -5,7 +5,6 @@ using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Dotnet.Homeworks.Tests.RunLogic.Utils.Cqrs;
-using Moq;
 using NetArchTest.Rules;
 using NSubstitute;
 
@@ -14,6 +13,9 @@ namespace Dotnet.Homeworks.Tests.CqrsValidation;
 [Collection(nameof(AllUsersRequestsFixture))]
 public class DecoratorTests
 {
+    const string Email = "correct@email.ru";
+    const string Name = "name";
+
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public void RequestHandlers_Should_InheritDecorators()
     {
@@ -49,29 +51,29 @@ public class DecoratorTests
 
         // Assert
         Assert.True(result?.IsFailure);
-        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(It.IsAny<CancellationToken>());
+        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public async Task CreateUserOperation_Must_ReturnFailedResult_WhenEmailIsNotUnique()
     {
         // Arrange
-        var email = "copy@email.ru";
-        var name = "Name";
+        string email = "copy@email.ru";
         await using var testEnvBuilder = new CqrsEnvironmentBuilder();
-        await testEnvBuilder.UserRepositoryMock.InsertUserAsync(new User() { Name = name, Email = email });
+
         var env = testEnvBuilder.Build();
+        await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = email });
 
         // Act
         var result =
-            await env.CustomMediatorMock.Send(TestUsers.CreateUserCommand(name: name, email: email));
+            await env.CustomMediatorMock.Send(TestUsers.CreateUserCommand(name: Name, email: email));
 
         // Assert
         Assert.True(result?.IsFailure);
-        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(It.IsAny<CancellationToken>());
+        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
-    [InlineData("correct@email.ru", "name")]
+    [InlineData(Email, Name)]
     [HomeworkTheory(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public async Task CreateUserOperation_Should_ReturnSucceedResult_WhenEmailIsCorrect(string email, string name)
     {
@@ -85,21 +87,20 @@ public class DecoratorTests
 
         // Assert
         Assert.True(result?.IsSuccess);
-        await env.UnitOfWorkMock.Received().SaveChangesAsync(It.IsAny<CancellationToken>());
+        await env.UnitOfWorkMock.Received().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
-    [InlineData("correct@email.ru", "name")]
-    [HomeworkTheory(RunLogic.Homeworks.CqrsValidatorsDecorators)]
-    public async Task GetUserOperation_Must_ReturnFailedResult_WhenUserHasNoPermission(string email, string name)
+    [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
+    public async Task GetUserOperation_Must_ReturnFailedResult_WhenUserHasNoPermission()
     {
         // Assert
         await using var testEnvBuilder = new CqrsEnvironmentBuilder();
-        var guid = await testEnvBuilder.UserRepositoryMock.InsertUserAsync(new User() { Name = name, Email = email })!;
 
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>()
             { new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()) });
 
         var env = testEnvBuilder.Build();
+        var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email });
 
         // Act
         var result =
@@ -109,18 +110,18 @@ public class DecoratorTests
         Assert.True(result?.IsFailure);
     }
 
-    [InlineData("correct@email.ru", "name")]
+    [InlineData(Email, Name)]
     [HomeworkTheory(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public async Task GetUserOperation_Must_ReturnSucceedResult_WhenRequestIsValid(string email, string name)
     {
         // Assert
         await using var testEnvBuilder = new CqrsEnvironmentBuilder();
-        var guid = await testEnvBuilder.UserRepositoryMock.InsertUserAsync(new User() { Name = name, Email = email })!;
-
+        var guid = Guid.NewGuid();
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>()
             { new Claim(ClaimTypes.NameIdentifier, guid.ToString()) });
 
         var env = testEnvBuilder.Build();
+        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = name, Email = email });
 
         // Act
         var result =
@@ -130,19 +131,19 @@ public class DecoratorTests
         Assert.True(result?.IsSuccess);
     }
 
-    [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
-    public async Task DeleteUserOperation_Must_ReturnSucceedResult_WhenRequestIsValid()
+    [InlineData(Email, Name)]
+    [HomeworkTheory(RunLogic.Homeworks.CqrsValidatorsDecorators)]
+    public async Task DeleteUserOperation_Must_ReturnSucceedResult_WhenRequestIsValid(string email, string name)
     {
         // Assert
-        var email = "correct@email.ru";
-        var name = "name";
         await using var testEnvBuilder = new CqrsEnvironmentBuilder();
-        var guid = await testEnvBuilder.UserRepositoryMock.InsertUserAsync(new User() { Name = name, Email = email })!;
+        var guid = Guid.NewGuid();
 
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>()
             { new Claim(ClaimTypes.NameIdentifier, guid.ToString()) });
 
         var env = testEnvBuilder.Build();
+        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = name, Email = email });
 
         // Act
         var result =
@@ -150,22 +151,21 @@ public class DecoratorTests
 
         // Assert
         Assert.True(result?.IsSuccess);
-        await env.UnitOfWorkMock.Received().SaveChangesAsync(It.IsAny<CancellationToken>());
+        await env.UnitOfWorkMock.Received().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public async Task DeleteUserOperation_Must_ReturnFailedResult_WhenUserHasNoPermission()
     {
         // Assert
-        var email = "correct@email.ru";
-        var name = "name";
         await using var testEnvBuilder = new CqrsEnvironmentBuilder();
-        var guid = await testEnvBuilder.UserRepositoryMock.InsertUserAsync(new User() { Name = name, Email = email })!;
+        var guid = Guid.NewGuid();
 
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>()
             { new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()) });
 
         var env = testEnvBuilder.Build();
+        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = Name, Email = Email });
 
         // Act
         var result =
@@ -173,23 +173,23 @@ public class DecoratorTests
 
         // Assert
         Assert.True(result?.IsFailure);
-        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(It.IsAny<CancellationToken>());
+        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
-    [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
-    public async Task UpdateUserOperation_Must_ReturnSucceedResult_WhenRequestIsValid()
+    [InlineData(Email, Name)]
+    [HomeworkTheory(RunLogic.Homeworks.CqrsValidatorsDecorators)]
+    public async Task UpdateUserOperation_Must_ReturnSucceedResult_WhenRequestIsValid(string email, string name)
     {
         // Assert
-        var email = "correct@email.ru";
-        var name = "name";
         await using var testEnvBuilder = new CqrsEnvironmentBuilder();
-        var guid = await testEnvBuilder.UserRepositoryMock.InsertUserAsync(new User() { Name = name, Email = email })!;
+        var guid = Guid.NewGuid();
 
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>()
             { new Claim(ClaimTypes.NameIdentifier, guid.ToString()) });
 
         var env = testEnvBuilder.Build();
-        var user = new User() { Email = email, Id = guid, Name = name };
+        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = name, Email = email });
+        var user = new User() { Email = Email, Id = guid, Name = Name };
 
         // Act
         var result =
@@ -197,23 +197,22 @@ public class DecoratorTests
 
         // Assert
         Assert.True(result?.IsSuccess);
-        await env.UnitOfWorkMock.Received().SaveChangesAsync(It.IsAny<CancellationToken>());
+        await env.UnitOfWorkMock.Received().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public async Task UpdateUserOperation_Must_ReturnFailedResult_WhenUserHasNoPermission()
     {
         // Assert
-        var email = "correct@email.ru";
-        var name = "name";
         await using var testEnvBuilder = new CqrsEnvironmentBuilder();
-        var guid = await testEnvBuilder.UserRepositoryMock.InsertUserAsync(new User() { Name = name, Email = email })!;
+        var guid = Guid.NewGuid();
 
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>()
             { new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()) });
 
         var env = testEnvBuilder.Build();
-        var user = new User() { Email = email, Id = guid, Name = name };
+        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = Name, Email = Email });
+        var user = new User() { Email = Email, Id = guid, Name = Name };
 
         // Act
         var result =
@@ -221,15 +220,13 @@ public class DecoratorTests
 
         // Assert
         Assert.True(result?.IsFailure);
-        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(It.IsAny<CancellationToken>());
+        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public async Task DeleteOperation_Should_ReturnFailedResult_WhenNoSuchUserExists()
     {
         // Assert
-        var email = "correct@email.ru";
-        var name = "name";
         await using var testEnvBuilder = new CqrsEnvironmentBuilder();
 
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>()
@@ -243,22 +240,20 @@ public class DecoratorTests
 
         // Assert
         Assert.True(result?.IsFailure);
-        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(It.IsAny<CancellationToken>());
+        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public async Task UpdateOperation_Should_ReturnFailedResult_WhenNoSuchUserExists()
     {
         // Assert
-        var email = "correct@email.ru";
-        var name = "name";
         await using var testEnvBuilder = new CqrsEnvironmentBuilder();
 
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>()
             { new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()) });
 
         var env = testEnvBuilder.Build();
-        var user = new User() { Email = email, Id = Guid.NewGuid(), Name = name };
+        var user = new User() { Email = Email, Id = Guid.NewGuid(), Name = Name };
 
         // Act
         var result =
@@ -266,6 +261,6 @@ public class DecoratorTests
 
         // Assert
         Assert.True(result?.IsFailure);
-        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(It.IsAny<CancellationToken>());
+        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 }

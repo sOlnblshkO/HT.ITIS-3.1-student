@@ -6,7 +6,7 @@ namespace Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
 public static class Parser
 {
     private const string FilePath = "docker-compose.yml";
-    
+
     private static readonly Lazy<DockerCompose> DockerComposeDeserializedFactory = new(() =>
     {
         var filePath = Path.Combine(TryGetSolutionDirectoryInfo().FullName, FilePath);
@@ -26,11 +26,11 @@ public static class Parser
     {
         var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
 
-        while (directory is not null && !directory.GetFiles("*.sln").Any()) 
+        while (directory is not null && !directory.GetFiles("*.sln").Any())
             directory = directory.Parent;
 
         if (directory is null) throw new DirectoryNotFoundException("Solution directory not found");
-        
+
         return directory;
     }
 

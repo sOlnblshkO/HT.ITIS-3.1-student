@@ -51,7 +51,7 @@ public class MasstransitEnvironmentBuilder : TestEnvironmentBuilder<MasstransitE
             .Callback(async () => await Harness!.Bus.Publish(testingEmailMessage));
         producerMock.Setup(p => p.RegisterAsync(It.IsAny<RegisterUserDto>()))
             .Callback(async () => await communicationServiceMock.Object.SendEmailAsync(testingEmailMessage));
-        
+
         _communicationService = communicationServiceMock.Object;
         _registrationService = producerMock.Object;
     }

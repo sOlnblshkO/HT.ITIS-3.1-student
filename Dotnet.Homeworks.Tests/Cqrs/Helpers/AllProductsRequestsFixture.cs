@@ -7,12 +7,14 @@ namespace Dotnet.Homeworks.Tests.Cqrs.Helpers;
 [CollectionDefinition(nameof(AllProductsRequestsFixture))]
 public class AllProductsRequestsFixture : IDisposable, ICollectionFixture<AllProductsRequestsFixture>
 {
-    private static Assembly AssemblyFeatures = Features.Helpers.AssemblyReference.Assembly;
+    private static readonly Assembly AssemblyFeatures = Features.Helpers.AssemblyReference.Assembly;
 
     public AllProductsRequestsFixture()
     {
         if (!AllRequestsInAssemblyFixture() || !AllHandlersInAssemblyFixture())
-            throw new ProductImplementInterfacesException(AssemblyFeatures.FullName ?? "");
+            throw new ImplementInterfacesException(
+                $"Not all Products feature types implement required interfaces in {AssemblyFeatures.GetName().FullName} assembly"
+            );
     }
 
     public bool AllRequestsInAssemblyFixture()
@@ -25,9 +27,9 @@ public class AllProductsRequestsFixture : IDisposable, ICollectionFixture<AllPro
         };
 
         var types = AssemblyFeatures.GetTypes()
-            .Where(x => x.Namespace.Contains("Products"))
-            .Where(x => x.Name.EndsWith("Command") || x.Name.EndsWith("Query"))
-            .Select(x => interfaces.IntersectBy(x.GetInterfaces().Select(x => x.Name), type => type.Name));
+            .Where(type => type.Namespace != null && type.Namespace.Contains("Products"))
+            .Where(type => type.Name.EndsWith("Command") || type.Name.EndsWith("Query"))
+            .Select(type => interfaces.IntersectBy(type.GetInterfaces().Select(interfaceType => interfaceType.Name), x => x.Name));
 
         return types.All(x => x.Any());
     }
@@ -42,9 +44,9 @@ public class AllProductsRequestsFixture : IDisposable, ICollectionFixture<AllPro
         };
 
         var types = AssemblyFeatures.GetTypes()
-            .Where(x => x.Namespace.Contains("Products"))
-            .Where(x => x.Name.EndsWith("Handler"))
-            .Select(x => interfaces.IntersectBy(x.GetInterfaces().Select(x => x.Name), type => type.Name));
+            .Where(type => type.Namespace != null && type.Namespace.Contains("Products"))
+            .Where(type => type.Name.EndsWith("Handler"))
+            .Select(type => interfaces.IntersectBy(type.GetInterfaces().Select(interfaceType => interfaceType.Name), x => x.Name));
 
         return types.All(x => x.Any());
     }

@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
 using Dotnet.Homeworks.Domain.Entities;
-using Dotnet.Homeworks.Features.Cqrs.UserManagement.Queries.GetAllUsers;
 using Dotnet.Homeworks.Features.Decorators;
-using Dotnet.Homeworks.Infrastructure.Services.PermissionChecker.Enums;
+using Dotnet.Homeworks.Infrastructure.Validation.PermissionChecker.Enums;
 using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
@@ -16,6 +15,9 @@ namespace Dotnet.Homeworks.Tests.CqrsValidation;
 [Collection(nameof(AllUserManagementFixture))]
 public class PipelineBehaviorTests
 {
+    private const string Email = "correct@email.ru";
+    private const string Name = "Name";
+
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public void RequestHandlers_ShouldNot_InheritDecorators()
     {
@@ -72,14 +74,12 @@ public class PipelineBehaviorTests
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public async Task Mediator_Should_InvokeBehaviors_And_ReturnFailedResult_WhenCallDeleteUserWithNoPermission()
     {
-        // Assert
-        var email = "correct@email.ru";
-        var name = "name";
+        // Assert;
         await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithPipelineBehaviors();
-        var guid = await testEnvBuilder.UserRepositoryMock.InsertUserAsync(new User() { Name = name, Email = email })!;
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>());
 
         var env = testEnvBuilder.Build();
+        var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email });
 
         // Act
         var result = await env.CustomMediatorMock.Send(TestUsers.DeleteUserByAdminCommand(guid));
@@ -93,14 +93,12 @@ public class PipelineBehaviorTests
     public async Task Mediator_Should_InvokeBehaviors_And_ReturnSucceedResult_WhenCallDeleteUser()
     {
         // Assert
-        var email = "correct@email.ru";
-        var name = "name";
         await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithPipelineBehaviors();
-        var guid = await testEnvBuilder.UserRepositoryMock.InsertUserAsync(new User() { Name = name, Email = email })!;
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>()
             { new Claim(ClaimTypes.Role, Roles.Admin.ToString()) });
 
         var env = testEnvBuilder.Build();
+        var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email });
 
         // Act
         var result = await env.CustomMediatorMock.Send(TestUsers.DeleteUserByAdminCommand(guid));

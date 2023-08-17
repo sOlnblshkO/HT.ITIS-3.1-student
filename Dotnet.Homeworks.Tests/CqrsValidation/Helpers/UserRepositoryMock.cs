@@ -27,9 +27,9 @@ public class UserRepositoryMock : IUserRepository
 
     public Task UpdateUserAsync(User user)
     {
-        if (_users.ContainsKey(user.Id))  
+        if (_users.ContainsKey(user.Id))
             _users[user.Id] = user;
-        
+
         return Task.CompletedTask;
     }
 

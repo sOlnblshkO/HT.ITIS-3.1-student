@@ -35,17 +35,6 @@ public class MediatorTests
         await env.MediatRMock.Received().Send(Arg.Any<IQuery<GetProductsDto>>(), Arg.Any<CancellationToken>());
     }
 
-    [Homework(RunLogic.Homeworks.Cqrs)]
-    public async Task Controller_Should_CallMediator_WhenCallGetProducts()
-    {
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediator();
-        var env = testEnvBuilder.Build();
-
-        await env.ProductManagementController.GetProducts();
-
-        await env.CustomMediatorMock.Received().Send(Arg.Any<IQuery<GetProductsDto>>(), Arg.Any<CancellationToken>());
-    }
-
     [Homework(RunLogic.Homeworks.Cqrs, true)]
     public async Task Controller_Should_CallMediatR_WhenCallInsertProduct()
     {
@@ -55,18 +44,6 @@ public class MediatorTests
         await env.ProductManagementController.InsertProduct("Name");
 
         await env.MediatRMock.Received().Send(Arg.Any<ICommand<InsertProductDto>>(), Arg.Any<CancellationToken>());
-    }
-
-    [Homework(RunLogic.Homeworks.Cqrs)]
-    public async Task Controller_Should_CallMediator_WhenCallInsertProduct()
-    {
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediator();
-        var env = testEnvBuilder.Build();
-
-        await env.ProductManagementController.InsertProduct("Name");
-
-        await env.CustomMediatorMock.Received()
-            .Send(Arg.Any<ICommand<InsertProductDto>>(), Arg.Any<CancellationToken>());
     }
 
     [Homework(RunLogic.Homeworks.Cqrs, true)]
@@ -80,18 +57,6 @@ public class MediatorTests
         await env.MediatRMock.Received().Send(Arg.Any<DeleteProductByGuidCommand>(), Arg.Any<CancellationToken>());
     }
 
-    [Homework(RunLogic.Homeworks.Cqrs)]
-    public async Task Controller_Should_CallMediator_WhenCallDeleteProduct()
-    {
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediator();
-        var env = testEnvBuilder.Build();
-
-        await env.ProductManagementController.DeleteProduct(Guid.NewGuid());
-
-        await env.CustomMediatorMock.Received()
-            .Send(Arg.Any<DeleteProductByGuidCommand>(), Arg.Any<CancellationToken>());
-    }
-
     [Homework(RunLogic.Homeworks.Cqrs, true)]
     public async Task Controller_Should_CallMediatR_WhenCallUpdateProduct()
     {
@@ -101,16 +66,5 @@ public class MediatorTests
         await env.ProductManagementController.UpdateProduct(Guid.NewGuid(), "Name");
 
         await env.MediatRMock.Received().Send(Arg.Any<UpdateProductCommand>(), Arg.Any<CancellationToken>());
-    }
-
-    [Homework(RunLogic.Homeworks.Cqrs)]
-    public async Task Controller_Should_CallMediator_WhenCallUpdateProduct()
-    {
-        await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediator();
-        var env = testEnvBuilder.Build();
-
-        await env.ProductManagementController.UpdateProduct(Guid.NewGuid(), "Name");
-
-        await env.CustomMediatorMock.Received().Send(Arg.Any<UpdateProductCommand>(), Arg.Any<CancellationToken>());
     }
 }

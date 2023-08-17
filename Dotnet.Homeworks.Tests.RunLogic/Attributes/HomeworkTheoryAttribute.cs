@@ -2,16 +2,16 @@ using Xunit;
 
 namespace Dotnet.Homeworks.Tests.RunLogic.Attributes;
 
-public class HomeworkTheoryAttribute: TheoryAttribute
+public class HomeworkTheoryAttribute : TheoryAttribute
 {
     private readonly Homeworks _number;
-    private readonly bool _skipIfPassed;
+    private readonly bool _skipIfNotCurrentHomework;
 
-    public HomeworkTheoryAttribute(Homeworks number, bool skipIfPassed = default)
+    public HomeworkTheoryAttribute(Homeworks number, bool skipIfNotCurrentHomework = default)
     {
         _number = number;
-        _skipIfPassed = skipIfPassed;
+        _skipIfNotCurrentHomework = skipIfNotCurrentHomework;
     }
 
-    public override string? Skip => HomeworkAttribute.GetSkip(_number, _skipIfPassed);
+    public override string? Skip => HomeworkAttribute.GetSkip(_number, _skipIfNotCurrentHomework);
 }

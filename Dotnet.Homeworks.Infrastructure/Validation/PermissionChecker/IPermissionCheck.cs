@@ -1,10 +1,8 @@
 using Dotnet.Homeworks.Infrastructure.Utils;
 
-namespace Dotnet.Homeworks.Infrastructure.Services.PermissionChecker;
+namespace Dotnet.Homeworks.Infrastructure.Validation.PermissionChecker;
 
 public interface IPermissionCheck
 {
-    IEnumerable<PermissionResult> CheckPermission<TRequest>(TRequest request);
-
     Task<IEnumerable<PermissionResult>> CheckPermissionAsync<TRequest>(TRequest request);
 }

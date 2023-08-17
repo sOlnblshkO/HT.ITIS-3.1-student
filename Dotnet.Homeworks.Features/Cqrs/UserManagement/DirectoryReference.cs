@@ -5,5 +5,5 @@
 /// </summary>
 public static class DirectoryReference 
 {
-    public static readonly string? Namespace = typeof(DirectoryReference).Namespace;
+    public static readonly string Namespace = typeof(DirectoryReference).Namespace!;
 }

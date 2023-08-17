@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dotnet.Homeworks.Infrastructure.Services.PermissionChecker;
+namespace Dotnet.Homeworks.Infrastructure.Validation.PermissionChecker.DependencyInjectionExtensions;
 
-public static class PermissionDependencyInjection
+public static class ServiceCollectionExtensions
 {
     public static void AddPermissionChecks(
         this IServiceCollection serviceCollection,

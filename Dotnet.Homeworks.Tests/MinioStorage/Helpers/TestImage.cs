@@ -9,7 +9,7 @@ public static class TestImage
         var content = new MemoryStream(GetRandomDataArray(10));
         return new Image(content, Guid.NewGuid().ToString());
     }
-    
+
     public static bool ImagesEqual(Image img1, Image img2)
     {
         if (img1.FileName != img2.FileName || img1.ContentType != img2.ContentType ||

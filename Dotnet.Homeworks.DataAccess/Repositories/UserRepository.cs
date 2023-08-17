@@ -1,7 +1,5 @@
-﻿using Dotnet.Homeworks.Data.DatabaseContext;
-using Dotnet.Homeworks.Domain.Abstractions.Repositories;
+﻿using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace Dotnet.Homeworks.DataAccess.Repositories;
 
