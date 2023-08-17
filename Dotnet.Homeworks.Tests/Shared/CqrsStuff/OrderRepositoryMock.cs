@@ -18,17 +18,17 @@ public class OrderRepositoryMock : IOrderRepository
         return await Task.FromResult(_orders.Values.Where(o => o.OrdererId == userId));
     }
 
-    public async Task<Order?> GetOrderByGuidAsync(Guid orderGuid, CancellationToken cancellationToken)
+    public async Task<Order?> GetOrderByGuidAsync(Guid orderId, CancellationToken cancellationToken)
     {
-        if (_orders.TryGetValue(orderGuid, out var order))
+        if (_orders.TryGetValue(orderId, out var order))
             return await Task.FromResult(order);
 
         return null;
     }
 
-    public async Task DeleteOrderByGuidAsync(Guid orderGuid, CancellationToken cancellationToken)
+    public async Task DeleteOrderByGuidAsync(Guid orderId, CancellationToken cancellationToken)
     {
-        _orders.Remove(orderGuid, out _);
+        _orders.Remove(orderId, out _);
         await Task.CompletedTask;
     }
 
