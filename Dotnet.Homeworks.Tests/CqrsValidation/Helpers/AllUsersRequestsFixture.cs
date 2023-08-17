@@ -15,7 +15,7 @@ public class AllUsersRequestsFixture : IDisposable, ICollectionFixture<AllUsersR
             throw new UserImplementInterfacesException(AssemblyFeatures.GetName().FullName);
     }
 
-    public bool AllRequestsInAssemblyFixture()
+    private bool AllRequestsInAssemblyFixture()
     {
         var interfaces = new List<Type>()
         {
