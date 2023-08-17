@@ -14,19 +14,19 @@ public class RequestsAndHandlersImplementedFixture : IDisposable,
     
     public RequestsAndHandlersImplementedFixture()
     {
-        if (!AreCommandsImplemented() || !AreQueriesImplemented() || !AreHandlersImplemented())
+        if (!AreCommandsImplemented || !AreQueriesImplemented || !AreHandlersImplemented)
             throw new Exception($"Either commands, queries or handlers are not implemented in " +
                                 $"{FeaturesAssembly.GetName().FullName} assembly");
     }
 
-    private static bool AreHandlersImplemented() =>
+    private static readonly bool AreHandlersImplemented =
         TypesWithEndingImplementSomeOfInterfaces("handler", typeof(ICommandHandler<>),
             typeof(ICommandHandler<,>), typeof(IQueryHandler<,>));
 
-    private static bool AreQueriesImplemented() =>
+    private static readonly bool AreQueriesImplemented =
         TypesWithEndingImplementSomeOfInterfaces("query", typeof(IQuery<>));
 
-    private static bool AreCommandsImplemented() =>
+    private static readonly bool AreCommandsImplemented =
         TypesWithEndingImplementSomeOfInterfaces("command", typeof(ICommand), typeof(ICommand<>));
 
     private static bool TypesWithEndingImplementSomeOfInterfaces(string typesEnding, params Type[] interfacesTypes)

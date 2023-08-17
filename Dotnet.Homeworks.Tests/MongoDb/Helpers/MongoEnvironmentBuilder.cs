@@ -22,7 +22,6 @@ public class MongoEnvironmentBuilder : TestEnvironmentBuilder<MongoEnvironment>
     
     private IMediator? _mediator;
     private IHttpContextAccessor? _contextAccessor;
-    private Guid? _contextUserId;
 
     private bool _withFakeUser;
 
@@ -57,7 +56,7 @@ public class MongoEnvironmentBuilder : TestEnvironmentBuilder<MongoEnvironment>
         if (ServiceProvider is null) SetupServices();
         _mediator ??= ServiceProvider!.GetRequiredService<IMediator>();
         _contextAccessor ??= ServiceProvider!.GetRequiredService<IHttpContextAccessor>();
-        return new MongoEnvironment(_mediator, _contextAccessor, _contextUserId);
+        return new MongoEnvironment(_mediator, _contextAccessor);
     }
 
     private IHttpContextAccessor InitializeContextAccessor()
@@ -70,8 +69,7 @@ public class MongoEnvironmentBuilder : TestEnvironmentBuilder<MongoEnvironment>
     private void ConfigureContextUser()
     {
         if (!_withFakeUser) return;
-        _contextUserId = Guid.NewGuid();
-        var claims = new List<Claim> { new(ClaimTypes.NameIdentifier, _contextUserId.Value.ToString()) };
+        var claims = new List<Claim> { new(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()) };
         var claimsIdentity = new ClaimsIdentity(claims);
         if (_contextAccessor is null) InitializeContextAccessor();
         _contextAccessor!.HttpContext!.User = new ClaimsPrincipal(claimsIdentity);

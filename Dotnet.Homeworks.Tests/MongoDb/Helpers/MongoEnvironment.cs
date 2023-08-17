@@ -7,22 +7,15 @@ namespace Dotnet.Homeworks.Tests.MongoDb.Helpers;
 
 public class MongoEnvironment
 {
-    public MongoEnvironment(IMediator mediator,
-        IHttpContextAccessor httpContextAccessor, Guid? contextUserId)
+    public MongoEnvironment(IMediator mediator, IHttpContextAccessor httpContextAccessor)
     {
         Mediator = mediator;
         HttpContextAccessor = httpContextAccessor;
-        ContextUserId = contextUserId;
     }
 
     public IMediator Mediator { get; }
 
     private IHttpContextAccessor HttpContextAccessor { get; }
-
-    /// <summary>
-    ///     Null if builder wasn't called WithFakeUserInContext. Then updates after LogInNewUserAsync call.
-    /// </summary>
-    public Guid? ContextUserId { get; private set; }
 
     public void LogOutCurrentUser()
     {
@@ -35,8 +28,7 @@ public class MongoEnvironment
     public async Task LogInNewUserAsync()
     {
         var userRes = await TestUser.CreateUserAsync(Mediator);
-        ContextUserId = userRes.Value!.Guid;
-        var claims = new List<Claim> { new(ClaimTypes.NameIdentifier, ContextUserId.Value.ToString()) };
+        var claims = new List<Claim> { new(ClaimTypes.NameIdentifier, userRes.Value!.Guid.ToString()) };
         var claimsIdentity = new ClaimsIdentity(claims);
         HttpContextAccessor.HttpContext!.User = new ClaimsPrincipal(claimsIdentity);
     }
