@@ -1,6 +1,7 @@
 using System.Reflection;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Queries;
+using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 
 namespace Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 
@@ -12,7 +13,9 @@ public class AllUserManagementFixture : IDisposable, ICollectionFixture<AllUserM
     public AllUserManagementFixture()
     {
         if (!AllRequestsInAssemblyFixture() || !AllHandlersInAssemblyFixture())
-            throw new UserImplementInterfacesException(AssemblyFeatures.GetName().FullName);
+            throw new ImplementInterfacesException(
+                $"Not all Users feature types implement required interfaces in {AssemblyFeatures.GetName().FullName} assembly"
+            );
     }
 
     private bool AllRequestsInAssemblyFixture()

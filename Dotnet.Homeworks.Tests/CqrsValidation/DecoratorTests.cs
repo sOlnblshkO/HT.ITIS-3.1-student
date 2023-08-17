@@ -16,7 +16,7 @@ public class DecoratorTests
 {
     const string Email = "correct@email.ru";
     const string Name = "name";
-    
+
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public void RequestHandlers_Should_InheritDecorators()
     {

@@ -12,7 +12,9 @@ public class AllProductsRequestsFixture : IDisposable, ICollectionFixture<AllPro
     public AllProductsRequestsFixture()
     {
         if (!AllRequestsInAssemblyFixture() || !AllHandlersInAssemblyFixture())
-            throw new ProductImplementInterfacesException(AssemblyFeatures.GetName().FullName);
+            throw new ImplementInterfacesException(
+                $"Not all Products feature types implement required interfaces in {AssemblyFeatures.GetName().FullName} assembly"
+            );
     }
 
     public bool AllRequestsInAssemblyFixture()

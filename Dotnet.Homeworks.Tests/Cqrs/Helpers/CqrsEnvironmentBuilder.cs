@@ -62,9 +62,9 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
             .AddValidatorsFromAssembly(Features.Helpers.AssemblyReference.Assembly)
             .AddPermissionChecks(Features.Helpers.AssemblyReference.Assembly);
 
-        SetupMediator(ref configureServices);
+        configureServices = SetupMediator(configureServices);
 
-        SetupPipelineBehavior(ref configureServices);
+        configureServices = SetupPipelineBehavior(configureServices);
 
         ServiceProvider = GetServiceProvider(configureServices);
     }
@@ -136,7 +136,7 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
         return isCqrsComplete;
     }
 
-    private void SetupMediator(ref Action<IServiceCollection>? configureServices)
+    private Action<IServiceCollection>? SetupMediator(Action<IServiceCollection>? configureServices)
     {
         if (_withMockedMediator)
             configureServices += s =>
@@ -152,9 +152,11 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
                 configureServices += s => s.AddMediatR(cfg =>
                     cfg.RegisterServicesFromAssembly(Features.Helpers.AssemblyReference.Assembly));
         }
+
+        return configureServices;
     }
 
-    private void SetupPipelineBehavior(ref Action<IServiceCollection>? configureServices)
+    private Action<IServiceCollection>? SetupPipelineBehavior(Action<IServiceCollection>? configureServices)
     {
         if (_withPipelineBehaviors) // Порядок pipelineBehaviors может быть нарушен
         {
@@ -165,6 +167,8 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
                     .AddSingleton(typeof(Mediator.IPipelineBehavior<,>), type);
             }
         }
+
+        return configureServices;
     }
 
     private void GetMockedMediatorFromServiceProvider()

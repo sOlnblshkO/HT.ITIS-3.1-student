@@ -7,7 +7,8 @@ namespace Dotnet.Homeworks.Tests.Cqrs.Helpers;
 internal class CqrsEnvironment
 {
     public CqrsEnvironment(ProductManagementController productManagementController, IUnitOfWork unitOfWorkMock,
-        MediatR.IMediator mediatRMock, Mediator.IMediator customMediator, IProductRepository productRepository, IUserRepository userRepository)
+        MediatR.IMediator mediatRMock, Mediator.IMediator customMediator, IProductRepository productRepository,
+        IUserRepository userRepository)
     {
         ProductManagementController = productManagementController;
         CustomMediatorMock = customMediator;
