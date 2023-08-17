@@ -7,7 +7,7 @@ namespace Dotnet.Homeworks.Tests.Cqrs.Helpers;
 [CollectionDefinition(nameof(AllProductsRequestsFixture))]
 public class AllProductsRequestsFixture : IDisposable, ICollectionFixture<AllProductsRequestsFixture>
 {
-    private static Assembly AssemblyFeatures = Features.Helpers.AssemblyReference.Assembly;
+    private static readonly Assembly AssemblyFeatures = Features.Helpers.AssemblyReference.Assembly;
 
     public AllProductsRequestsFixture()
     {
