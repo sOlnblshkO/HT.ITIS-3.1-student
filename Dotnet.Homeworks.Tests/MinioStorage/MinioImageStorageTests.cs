@@ -17,7 +17,7 @@ public class MinioImageStorageTests
         var image = GetTestImage();
 
         var res = await storage.PutItemAsync(image);
-        
+
         Assert.True(res.IsSucceeded);
     }
 
@@ -49,11 +49,11 @@ public class MinioImageStorageTests
 
         var result = await storage.PutItemAsync(image);
         Assert.True(result.IsSucceeded);
-        
+
         result = await storage.PutItemAsync(image);
         Assert.False(result.IsSucceeded);
     }
-    
+
     [Homework(RunLogic.Homeworks.MinioStorage)]
     public async Task GetItemAsync_ShouldReturn_Item_AfterBackgroundServiceWork()
     {
@@ -109,7 +109,7 @@ public class MinioImageStorageTests
         var storage = await env.StorageFactory.CreateImageStorageWithinBucketAsync(Guid.NewGuid().ToString());
 
         var res = await storage.RemoveItemAsync(Guid.NewGuid().ToString());
-        
+
         Assert.True(res.IsSucceeded);
     }
 
@@ -127,7 +127,7 @@ public class MinioImageStorageTests
         await env.WaitForBackgroundServiceAsync();
         var items = await storage.EnumerateItemNamesAsync();
         var itemsList = items.ToList();
-        
+
         Assert.Equal(2, itemsList.Count);
         Assert.Contains(image1.FileName, itemsList);
         Assert.Contains(image2.FileName, itemsList);

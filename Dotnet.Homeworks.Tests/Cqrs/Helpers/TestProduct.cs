@@ -9,10 +9,10 @@ namespace Dotnet.Homeworks.Tests.Cqrs.Helpers;
 public static class TestProduct
 {
     public static InsertProductCommand GetInsertCommand() => new("test");
-    
+
     public static UpdateProductCommand GetUpdateCommand(Product product) => new(product.Id, product.Name);
-    
+
     public static DeleteProductByGuidCommand GetDeleteCommand(Guid id) => new(id);
-    
+
     public static GetProductsQuery GetGetQuery() => new();
 }

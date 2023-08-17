@@ -12,7 +12,7 @@ public class DockerMinioTests
 
         Assert.NotNull(docker.Services?.DotnetMinio);
     }
-    
+
     [Homework(RunLogic.Homeworks.MinioStorage)]
     public void DotnetMinio_ShouldContain_CredentialEnvVars()
     {

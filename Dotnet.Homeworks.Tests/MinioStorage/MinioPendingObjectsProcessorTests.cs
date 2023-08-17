@@ -23,7 +23,7 @@ public class MinioPendingObjectsProcessorTests
 
         Assert.Empty(items);
     }
-    
+
     [Homework(RunLogic.Homeworks.MinioStorage)]
     public async Task ShouldMove_ObjectsToBuckets()
     {
@@ -36,11 +36,11 @@ public class MinioPendingObjectsProcessorTests
         await storage.PutItemAsync(image);
         var itemsInStorageBucket = await storage.EnumerateItemNamesAsync();
         var itemsInPendingBucket = await pendingStorage.EnumerateItemNamesAsync();
-        
+
         Assert.Empty(itemsInStorageBucket);
         Assert.Contains(image.FileName, itemsInPendingBucket);
         await env.WaitForBackgroundServiceAsync();
-        
+
         itemsInStorageBucket = await storage.EnumerateItemNamesAsync();
         itemsInPendingBucket = await pendingStorage.EnumerateItemNamesAsync();
 

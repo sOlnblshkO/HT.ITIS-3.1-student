@@ -7,7 +7,7 @@ public enum Homeworks
     RabbitMasstransit,
     Cqrs,
     CqrsValidatorsDecorators,
-    MinioStorage, 
+    MinioStorage,
     MongoDb,
     AutoMapper,
     Observability

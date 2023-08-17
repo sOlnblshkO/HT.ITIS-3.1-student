@@ -25,7 +25,7 @@ public class MinioStorageFactoryTests
         await using var testEnvBuilder = new MinioEnvironmentBuilder();
         var env = testEnvBuilder.Build();
         var bucketName = Guid.NewGuid().ToString();
-        
+
         var storage = await env.StorageFactory.CreateImageStorageWithinBucketAsync(bucketName);
         try
         {
@@ -35,7 +35,7 @@ public class MinioStorageFactoryTests
         {
             Assert.Fail(e.Message);
         }
-        
+
         Assert.True(true);
     }
 
@@ -44,7 +44,7 @@ public class MinioStorageFactoryTests
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder();
         var env = testEnvBuilder.Build();
-        
+
         var storage = await env.StorageFactory.CreateImageStorageWithinBucketAsync(Buckets.Pending);
         try
         {
@@ -54,7 +54,7 @@ public class MinioStorageFactoryTests
         {
             Assert.Fail(e.Message);
         }
-        
+
         Assert.True(true);
     }
 
@@ -64,10 +64,10 @@ public class MinioStorageFactoryTests
         await using var testEnvBuilder = new MinioEnvironmentBuilder();
         var env = testEnvBuilder.Build();
         var bucketName = Guid.NewGuid().ToString();
-        
+
         var storage = await env.StorageFactory.CreateImageStorageWithinBucketAsync(bucketName);
         var items = await storage.EnumerateItemNamesAsync();
-        
+
         Assert.Empty(items);
     }
 }

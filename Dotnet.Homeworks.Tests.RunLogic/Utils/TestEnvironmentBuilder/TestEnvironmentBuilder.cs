@@ -14,7 +14,7 @@ public abstract class TestEnvironmentBuilder<T> : IAsyncDisposable
     }
 
     public abstract void SetupServices(Action<IServiceCollection>? configureServices = default);
-    
+
     public abstract T Build();
 
     public virtual ValueTask DisposeAsync()
