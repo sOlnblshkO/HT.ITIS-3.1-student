@@ -1,3 +1,5 @@
 namespace Dotnet.Homeworks.Features.Orders.Queries.GetOrders;
 
-public record GetOrdersQuery; // TODO: implement interface
+public class GetOrdersQuery // TODO: implement interface
+{
+}

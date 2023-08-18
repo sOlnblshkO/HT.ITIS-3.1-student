@@ -1,3 +1,11 @@
 namespace Dotnet.Homeworks.Features.Orders.Commands.DeleteOrder;
 
-public record DeleteOrderByGuidCommand(Guid Id); // TODO: implement interface
+public class DeleteOrderByGuidCommand // TODO: implement interface
+{
+    public DeleteOrderByGuidCommand(Guid id)
+    {
+        Id = id;
+    }
+
+    public Guid Id { get; init; }
+}

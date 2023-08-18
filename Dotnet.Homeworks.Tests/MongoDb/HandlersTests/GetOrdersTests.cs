@@ -45,7 +45,8 @@ public class GetOrdersTests
 
         var ordersList = orders.Value?.Orders.Select(o => o.Id).ToList();
         Assert.True(orders.IsSuccess);
-        Assert.Contains(createdOrder1.Value!.Id, ordersList!);
-        Assert.Contains(createdOrder2.Value!.Id, ordersList!);
+        Assert.Equal(2, ordersList!.Count);
+        Assert.Contains(createdOrder1.Value!.Id, ordersList);
+        Assert.Contains(createdOrder2.Value!.Id, ordersList);
     }
 }
