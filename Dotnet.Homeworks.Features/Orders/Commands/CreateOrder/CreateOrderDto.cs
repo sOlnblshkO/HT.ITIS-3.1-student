@@ -1,3 +1,3 @@
 namespace Dotnet.Homeworks.Features.Orders.Commands.CreateOrder;
 
-public record CreateOrderDto(Guid Guid);
+public record CreateOrderDto(Guid Id);

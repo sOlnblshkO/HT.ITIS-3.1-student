@@ -18,19 +18,21 @@ public class OrderManagementController : ControllerBase
     }
 
     [HttpPost("order")]
-    public async Task<IActionResult> CreateOrderAsync([FromBody] IEnumerable<Guid> productsIds)
+    public async Task<IActionResult> CreateOrderAsync([FromBody] IEnumerable<Guid> productsIds,
+        CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
     [HttpPut("order")]
-    public async Task<IActionResult> UpdateOrderAsync([FromBody] Guid orderId)
+    public async Task<IActionResult> UpdateOrderAsync([FromBody] Guid orderId, [FromBody] IEnumerable<Guid> productsIds,
+        CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
     [HttpDelete("order/{id:guid}")]
-    public async Task<IActionResult> DeleteOrderAsync(Guid id)
+    public async Task<IActionResult> DeleteOrderAsync(Guid id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

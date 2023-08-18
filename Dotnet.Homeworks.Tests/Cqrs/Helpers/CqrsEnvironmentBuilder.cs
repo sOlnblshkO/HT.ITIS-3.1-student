@@ -13,6 +13,7 @@ using Dotnet.Homeworks.Mediator.DependencyInjectionExtensions;
 using Dotnet.Homeworks.Tests.RunLogic.Utils.TestEnvironmentBuilder;
 using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
+using Dotnet.Homeworks.Tests.Shared.CqrsStuff;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,9 +29,9 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
     private IHttpContextAccessor HttpContextAccessorMock { get; } = Substitute.For<IHttpContextAccessor>();
 
     private IUnitOfWork UnitOfWork { get; set; } = Substitute.For<IUnitOfWork>();
-    private MediatR.IMediator MediatRMock { get; set; } = Substitute.For<MediatR.IMediator>();
-    private Mediator.IMediator CustomMediatorMock { get; set; } = Substitute.For<Mediator.IMediator>();
-    private ProductManagementController? ProductManagementController { get; set; } = new ();
+    private MediatR.IMediator MediatR { get; set; } = Substitute.For<MediatR.IMediator>();
+    private Mediator.IMediator CustomMediator { get; set; } = Substitute.For<Mediator.IMediator>();
+    private ProductManagementController? ProductManagementController { get; set; }
 
     private bool _withMockedMediator;
     private bool _withPipelineBehaviors;
@@ -74,7 +75,7 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
         GetMockedMediatorFromServiceProvider();
 
         return new CqrsEnvironment(ProductManagementController,
-            UnitOfWork, MediatRMock, CustomMediatorMock, UserRepositoryMock);
+            UnitOfWork, MediatR, CustomMediator, UserRepositoryMock);
     }
 
     public void SetupHttpContextClaims(List<Claim> claims)
@@ -91,7 +92,8 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
         var pipelineBehaviors = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(x => x.GetTypes())
             .Where(type => type.GetInterfaces().Any(interfaceType =>
-                interfaceType.IsGenericType && interfaceType.GetGenericTypeDefinition() == typeof(Mediator.IPipelineBehavior<,>)));
+                interfaceType.IsGenericType &&
+                interfaceType.GetGenericTypeDefinition() == typeof(Mediator.IPipelineBehavior<,>)));
 
         return pipelineBehaviors;
     }
@@ -106,22 +108,22 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
 
     private void SetupMediatRMock()
     {
-        MediatRMock.Send(Arg.Any<ICommand>(), Arg.Any<CancellationToken>())
+        MediatR.Send(Arg.Any<ICommand>(), Arg.Any<CancellationToken>())
             .Returns(new Result(true));
-        MediatRMock.Send(Arg.Any<ICommand<InsertProductDto>>(), Arg.Any<CancellationToken>())
+        MediatR.Send(Arg.Any<ICommand<InsertProductDto>>(), Arg.Any<CancellationToken>())
             .Returns(new Result<InsertProductDto>(new InsertProductDto(Guid.Empty), true));
-        MediatRMock.Send(Arg.Any<IQuery<GetProductsDto>>(), Arg.Any<CancellationToken>())
+        MediatR.Send(Arg.Any<IQuery<GetProductsDto>>(), Arg.Any<CancellationToken>())
             .Returns(new Result<GetProductsDto>(
                 new GetProductsDto(new List<GetProductDto>() { new GetProductDto(Guid.NewGuid(), "name") }), true));
     }
 
     private void SetupCustomMediatorMock()
     {
-        CustomMediatorMock.Send(Arg.Any<ICommand>(), Arg.Any<CancellationToken>())
+        CustomMediator.Send(Arg.Any<ICommand>(), Arg.Any<CancellationToken>())
             .Returns(new Result(true));
-        CustomMediatorMock.Send(Arg.Any<ICommand<InsertProductDto>>(), Arg.Any<CancellationToken>())
+        CustomMediator.Send(Arg.Any<ICommand<InsertProductDto>>(), Arg.Any<CancellationToken>())
             .Returns(new Result<InsertProductDto>(new InsertProductDto(Guid.Empty), true));
-        CustomMediatorMock.Send(Arg.Any<IQuery<GetProductsDto>>(), Arg.Any<CancellationToken>())
+        CustomMediator.Send(Arg.Any<IQuery<GetProductsDto>>(), Arg.Any<CancellationToken>())
             .Returns(new Result<GetProductsDto>(
                 new GetProductsDto(new List<GetProductDto>() { new GetProductDto(Guid.NewGuid(), "name") }), true));
     }
@@ -139,8 +141,8 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
         if (_withMockedMediator)
             configureServices += s =>
             {
-                if (IsCqrsComplete()) s.AddSingleton(CustomMediatorMock);
-                else s.AddSingleton(MediatRMock);
+                if (IsCqrsComplete()) s.AddSingleton(CustomMediator);
+                else s.AddSingleton(MediatR);
             };
         else
         {
@@ -174,9 +176,9 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
         if (!_withMockedMediator)
         {
             if (IsCqrsComplete())
-                CustomMediatorMock = ServiceProvider!.GetRequiredService<Mediator.IMediator>();
+                CustomMediator = ServiceProvider!.GetRequiredService<Mediator.IMediator>();
             else
-                MediatRMock = ServiceProvider!.GetRequiredService<MediatR.IMediator>();
+                MediatR = ServiceProvider!.GetRequiredService<MediatR.IMediator>();
         }
     }
 }

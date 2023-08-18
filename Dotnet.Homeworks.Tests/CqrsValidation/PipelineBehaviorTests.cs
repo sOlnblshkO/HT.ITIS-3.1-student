@@ -6,6 +6,7 @@ using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Dotnet.Homeworks.Tests.RunLogic.Utils.Cqrs;
+using Dotnet.Homeworks.Tests.Shared.CqrsStuff;
 using Moq;
 using NetArchTest.Rules;
 using NSubstitute;
@@ -47,11 +48,10 @@ public class PipelineBehaviorTests
         var env = testEnvBuilder.Build();
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.GetAllUsersQuery());
+        var result = await TestUser.GetAllUsersAsync(env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsSuccess);
+        Assert.True(result.IsSuccess);
     }
 
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
@@ -64,11 +64,10 @@ public class PipelineBehaviorTests
         var env = testEnvBuilder.Build();
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.GetAllUsersQuery());
+        var result = await TestUser.GetAllUsersAsync(env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsFailure);
+        Assert.True(result.IsFailure);
     }
 
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
@@ -82,10 +81,10 @@ public class PipelineBehaviorTests
         var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email });
 
         // Act
-        var result = await env.CustomMediatorMock.Send(TestUsers.DeleteUserByAdminCommand(guid));
+        var result = await TestUser.DeleteUserByAdminAsync(guid, env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsFailure);
+        Assert.True(result.IsFailure);
         await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(It.IsAny<CancellationToken>());
     }
 
@@ -101,10 +100,10 @@ public class PipelineBehaviorTests
         var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email });
 
         // Act
-        var result = await env.CustomMediatorMock.Send(TestUsers.DeleteUserByAdminCommand(guid));
+        var result = await TestUser.DeleteUserByAdminAsync(guid, env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsSuccess);
+        Assert.True(result.IsSuccess);
         await env.UnitOfWorkMock.Received().SaveChangesAsync(It.IsAny<CancellationToken>());
     }
 
@@ -119,11 +118,10 @@ public class PipelineBehaviorTests
         var env = testEnvBuilder.Build();
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.DeleteUserByAdminCommand(Guid.NewGuid()));
+        var result = await TestUser.DeleteUserByAdminAsync(Guid.NewGuid(), env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsFailure);
+        Assert.True(result.IsFailure);
         await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(It.IsAny<CancellationToken>());
     }
 }

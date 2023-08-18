@@ -7,19 +7,19 @@ namespace Dotnet.Homeworks.Tests.Cqrs.Helpers;
 internal class CqrsEnvironment
 {
     public CqrsEnvironment(ProductManagementController productManagementController, IUnitOfWork unitOfWorkMock,
-        MediatR.IMediator mediatRMock, Mediator.IMediator customMediator,
+        MediatR.IMediator mediatR, Mediator.IMediator customMediator,
         IUserRepository userRepository)
     {
         ProductManagementController = productManagementController;
-        CustomMediatorMock = customMediator;
+        CustomMediator = customMediator;
         UserRepository = userRepository;
-        MediatRMock = mediatRMock;
+        MediatR = mediatR;
         UnitOfWorkMock = unitOfWorkMock;
     }
 
     public ProductManagementController ProductManagementController { get; }
     public IUnitOfWork UnitOfWorkMock { get; }
-    public MediatR.IMediator MediatRMock { get; }
-    public Mediator.IMediator CustomMediatorMock { get; }
+    public MediatR.IMediator MediatR { get; }
+    public Mediator.IMediator CustomMediator { get; }
     public IUserRepository UserRepository { get; }
 }

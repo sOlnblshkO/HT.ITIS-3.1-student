@@ -5,6 +5,7 @@ using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Dotnet.Homeworks.Tests.RunLogic.Utils.Cqrs;
+using Dotnet.Homeworks.Tests.Shared.CqrsStuff;
 using NetArchTest.Rules;
 using NSubstitute;
 
@@ -13,8 +14,8 @@ namespace Dotnet.Homeworks.Tests.CqrsValidation;
 [Collection(nameof(AllUsersRequestsFixture))]
 public class DecoratorTests
 {
-    const string Email = "correct@email.ru";
-    const string Name = "name";
+    private const string Email = "correct@email.ru";
+    private const string Name = "name";
 
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
     public void RequestHandlers_Should_InheritDecorators()
@@ -46,11 +47,10 @@ public class DecoratorTests
         var env = testEnvBuilder.Build();
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.CreateUserCommand(name: name, email: email));
+        var result = await TestUser.CreateUserAsync(name, email, env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsFailure);
+        Assert.True(result.IsFailure);
         await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
@@ -65,11 +65,10 @@ public class DecoratorTests
         await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = email });
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.CreateUserCommand(name: Name, email: email));
+        var result = await TestUser.CreateUserAsync(Name, email, env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsFailure);
+        Assert.True(result.IsFailure);
         await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
@@ -82,11 +81,10 @@ public class DecoratorTests
         var env = testEnvBuilder.Build();
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.CreateUserCommand(name: name, email: email));
+        var result = await TestUser.CreateUserAsync(name, email, env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsSuccess);
+        Assert.True(result.IsSuccess);
         await env.UnitOfWorkMock.Received().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
@@ -103,11 +101,10 @@ public class DecoratorTests
         var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email });
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.GetUserQuery(guid));
+        var result = await TestUser.GetUserAsync(guid, env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsFailure);
+        Assert.True(result.IsFailure);
     }
 
     [InlineData(Email, Name)]
@@ -124,11 +121,10 @@ public class DecoratorTests
         await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = name, Email = email });
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.GetUserQuery(guid));
+        var result = await TestUser.GetUserAsync(guid, env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsSuccess);
+        Assert.True(result.IsSuccess);
     }
 
     [InlineData(Email, Name)]
@@ -146,11 +142,10 @@ public class DecoratorTests
         await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = name, Email = email });
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.DeleteUserCommand(guid));
+        var result = await TestUser.DeleteUserAsync(guid, env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsSuccess);
+        Assert.True(result.IsSuccess);
         await env.UnitOfWorkMock.Received().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
@@ -168,11 +163,10 @@ public class DecoratorTests
         await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = Name, Email = Email });
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.DeleteUserCommand(guid));
+        var result = await TestUser.DeleteUserAsync(guid, env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsFailure);
+        Assert.True(result.IsFailure);
         await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
@@ -192,11 +186,10 @@ public class DecoratorTests
         var user = new User() { Email = Email, Id = guid, Name = Name };
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.UpdateUserCommand(user));
+        var result = await TestUser.UpdateUserAsync(user, env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsSuccess);
+        Assert.True(result.IsSuccess);
         await env.UnitOfWorkMock.Received().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
@@ -215,11 +208,10 @@ public class DecoratorTests
         var user = new User() { Email = Email, Id = guid, Name = Name };
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.UpdateUserCommand(user));
+        var result = await TestUser.UpdateUserAsync(user, env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsFailure);
+        Assert.True(result.IsFailure);
         await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
@@ -235,11 +227,10 @@ public class DecoratorTests
         var env = testEnvBuilder.Build();
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.DeleteUserCommand(Guid.NewGuid()));
+        var result = await TestUser.DeleteUserAsync(Guid.NewGuid(), env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsFailure);
+        Assert.True(result.IsFailure);
         await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
@@ -256,11 +247,10 @@ public class DecoratorTests
         var user = new User() { Email = Email, Id = Guid.NewGuid(), Name = Name };
 
         // Act
-        var result =
-            await env.CustomMediatorMock.Send(TestUsers.UpdateUserCommand(user));
+        var result = await TestUser.UpdateUserAsync(user, env.CustomMediator);
 
         // Assert
-        Assert.True(result?.IsFailure);
+        Assert.True(result.IsFailure);
         await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 }

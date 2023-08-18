@@ -2,7 +2,7 @@
 using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Domain.Entities;
 
-namespace Dotnet.Homeworks.Tests.Cqrs.Helpers;
+namespace Dotnet.Homeworks.Tests.Shared.CqrsStuff;
 
 public class ProductRepositoryMock : IProductRepository
 {
