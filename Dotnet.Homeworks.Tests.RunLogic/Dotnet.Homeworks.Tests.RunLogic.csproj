@@ -7,20 +7,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="xunit" Version="2.5.0" />
-      <PackageReference Include="YamlDotNet" Version="13.1.1" />
+        <PackageReference Include="xunit" Version="2.5.0" />
+        <PackageReference Include="YamlDotNet" Version="13.1.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Dotnet.Homeworks.DataAccess\Dotnet.Homeworks.DataAccess.csproj" />
-      <ProjectReference Include="..\Dotnet.Homeworks.Features\Dotnet.Homeworks.Features.csproj" />
-      <ProjectReference Include="..\Dotnet.Homeworks.Mailing.API\Dotnet.Homeworks.Mailing.API.csproj" />
-      <ProjectReference Include="..\Dotnet.Homeworks.Mediator\Dotnet.Homeworks.Mediator.csproj" />
-      <ProjectReference Include="..\Dotnet.Homeworks.Storage.API\Dotnet.Homeworks.Storage.API.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Dotnet.Homeworks.MainProject\Dotnet.Homeworks.MainProject.csproj" />
+        <ProjectReference Include="..\Dotnet.Homeworks.DataAccess\Dotnet.Homeworks.DataAccess.csproj" />
+        <ProjectReference Include="..\Dotnet.Homeworks.Features\Dotnet.Homeworks.Features.csproj" />
+        <ProjectReference Include="..\Dotnet.Homeworks.Mailing.API\Dotnet.Homeworks.Mailing.API.csproj" />
+        <ProjectReference Include="..\Dotnet.Homeworks.MainProject\Dotnet.Homeworks.MainProject.csproj" />
+        <ProjectReference Include="..\Dotnet.Homeworks.Mediator\Dotnet.Homeworks.Mediator.csproj" />
+        <ProjectReference Include="..\Dotnet.Homeworks.Storage.API\Dotnet.Homeworks.Storage.API.csproj" />
     </ItemGroup>
     
 </Project>
