@@ -26,7 +26,7 @@ public static class UsersSpecs
     public static Specification<User> HasPopularEmailVendor => throw new NotImplementedException();
 
     /// <summary>
-    /// Возвращает true, если длина имени пользователя больше 15 символов
+    /// Возвращает true, если длина параметра <code>Name</code> пользователя больше 15 символов
     /// </summary>
     public static Specification<User> HasLongName => throw new NotImplementedException();
 
