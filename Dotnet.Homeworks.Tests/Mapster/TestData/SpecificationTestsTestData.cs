@@ -11,7 +11,8 @@ public partial class SpecificationTests
         // should have implicit conversion to Expression<Func<T, bool>>
         yield return new object?[]
         {
-            typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(DestinationType, typeof(bool))),
+            typeof(Expression<>).MakeGenericType(
+                typeof(Func<,>).MakeGenericType(DestinationType, typeof(bool))),
             "op_Implicit",
             new[] { SpecificationType }
         };
@@ -33,13 +34,13 @@ public partial class SpecificationTests
 
         var users = new User[]
         {
-            new() { Email = googleEmail, Name = shortName }, // 0
-            new() { Email = yandexEmail, Name = shortName }, // 1
-            new() { Email = mailEmail, Name = shortName }, // 2
-            new() { Email = googleEmail, Name = longName }, // 3
-            new() { Email = googleEmail, Name = compositeShortName }, // 4
-            new() { Email = googleEmail, Name = complexLongName }, // 5
-            new() { Email = "test.test@test.tst", Name = shortName } // 6
+            new() { Email = googleEmail, Name = shortName },            // 0
+            new() { Email = yandexEmail, Name = shortName },            // 1
+            new() { Email = mailEmail, Name = shortName },              // 2
+            new() { Email = googleEmail, Name = longName },             // 3
+            new() { Email = googleEmail, Name = compositeShortName },   // 4
+            new() { Email = googleEmail, Name = complexLongName },      // 5
+            new() { Email = "test.test@test.tst", Name = shortName }    // 6
         };
 
         yield return new object[]
