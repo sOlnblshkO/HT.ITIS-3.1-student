@@ -63,8 +63,7 @@ public partial class MapsterTests
     [MemberData(nameof(EnumerateRegisterMappings))]
     public void RegisterMappings_ShouldHave_Instructions_InRegisterMethod(Type registerOrderMapping)
     {
-        const string methodName = nameof(IRegister.Register);
-        var methodInfo = registerOrderMapping.GetMethod(methodName);
+        var methodInfo = registerOrderMapping.GetMethod(nameof(IRegister.Register));
 
         Assert.True(HasInstructions(methodInfo));
     }
