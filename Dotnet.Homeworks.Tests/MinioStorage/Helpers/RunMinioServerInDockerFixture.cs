@@ -12,12 +12,16 @@ public class RunMinioServerInDockerFixture : IDisposable, ICollectionFixture<Run
 
     public RunMinioServerInDockerFixture()
     {
+        if (!IsDockerRunning)
+            throw new Exception("Docker engine is not running on the current machine. Cannot run tests.");
         _minioContainerName = Guid.NewGuid().ToString();
         if (!IsMinioPortAvailable())
             throw new PortAlreadyAllocatedException(MinioInstance.Config.Port);
         RunMinioContainer(_minioContainerName);
         Thread.Sleep(TimeSpan.FromSeconds(1)); // waiting for minio container to fully set up
     }
+
+    private static bool IsDockerRunning => RunProcess("docker", "ps");
 
     private static bool IsMinioPortAvailable()
     {
@@ -48,16 +52,25 @@ public class RunMinioServerInDockerFixture : IDisposable, ICollectionFixture<Run
     private static void DeleteMinioContainer(string containerName) =>
         RunProcess("docker", $"rm {containerName}");
 
-    private static void RunProcess(string command, string arguments)
+    private static bool RunProcess(string command, string arguments)
     {
-        using var process = new Process();
+        try
+        {
+            using var process = new Process();
 
-        process.StartInfo.FileName = command;
-        process.StartInfo.Arguments = arguments;
+            process.StartInfo.FileName = command;
+            process.StartInfo.Arguments = arguments;
 
-        process.Start();
-        process.WaitForExit();
-        process.Close();
+            process.Start();
+            process.WaitForExit();
+            var isSuccessful = process.ExitCode == 0;
+            process.Close();
+            return isSuccessful;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 
     public void Dispose()
