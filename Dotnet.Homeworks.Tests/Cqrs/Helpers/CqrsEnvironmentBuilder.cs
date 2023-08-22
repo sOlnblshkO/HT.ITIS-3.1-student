@@ -6,19 +6,16 @@ using Dotnet.Homeworks.Features.Products.Queries.GetProducts;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Queries;
 using Dotnet.Homeworks.Infrastructure.UnitOfWork;
-using Dotnet.Homeworks.Infrastructure.Utils;
 using Dotnet.Homeworks.Infrastructure.Validation.PermissionChecker.DependencyInjectionExtensions;
 using Dotnet.Homeworks.MainProject.Controllers;
 using Dotnet.Homeworks.Mediator.DependencyInjectionExtensions;
 using Dotnet.Homeworks.Shared.Dto;
-using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Dotnet.Homeworks.Tests.Shared.RepositoriesMocks;
 using Dotnet.Homeworks.Tests.Shared.TestEnvironmentBuilder;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
 using NSubstitute;
 
 namespace Dotnet.Homeworks.Tests.Cqrs.Helpers;
@@ -81,11 +78,10 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
 
     public void SetupHttpContextClaims(List<Claim> claims)
     {
-        var httpContextMock = new Mock<HttpContext>();
-        httpContextMock.SetupGet(x => x.User.Claims)
-            .Returns(claims);
+        var httpContextSubstitute = Substitute.For<HttpContext>();
+        httpContextSubstitute.User.Claims.Returns(claims);
 
-        HttpContextAccessorMock.HttpContext.Returns(httpContextMock.Object);
+        HttpContextAccessorMock.HttpContext.Returns(httpContextSubstitute);
     }
 
     private IEnumerable<Type> LoadPipelineBehavior()

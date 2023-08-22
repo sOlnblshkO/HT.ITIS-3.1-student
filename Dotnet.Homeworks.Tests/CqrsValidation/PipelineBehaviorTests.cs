@@ -7,7 +7,6 @@ using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Dotnet.Homeworks.Tests.Shared.Cqrs;
 using Dotnet.Homeworks.Tests.Shared.TestRequests;
-using Moq;
 using NetArchTest.Rules;
 using NSubstitute;
 
@@ -85,7 +84,7 @@ public class PipelineBehaviorTests
 
         // Assert
         Assert.True(result.IsFailure);
-        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(It.IsAny<CancellationToken>());
+        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
@@ -104,7 +103,7 @@ public class PipelineBehaviorTests
 
         // Assert
         Assert.True(result.IsSuccess);
-        await env.UnitOfWorkMock.Received().SaveChangesAsync(It.IsAny<CancellationToken>());
+        await env.UnitOfWorkMock.Received().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 
     [Homework(RunLogic.Homeworks.CqrsValidatorsDecorators)]
@@ -122,6 +121,6 @@ public class PipelineBehaviorTests
 
         // Assert
         Assert.True(result.IsFailure);
-        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(It.IsAny<CancellationToken>());
+        await env.UnitOfWorkMock.DidNotReceive().SaveChangesAsync(Arg.Any<CancellationToken>());
     }
 }

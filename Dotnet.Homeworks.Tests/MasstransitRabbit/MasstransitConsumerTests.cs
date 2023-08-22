@@ -6,7 +6,7 @@ using Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
+using NSubstitute;
 using static Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers.ReflectionHelpers;
 
 // ReSharper disable AccessToDisposedClosure
@@ -111,8 +111,9 @@ public class MasstransitConsumerTests
             await env.Harness.Start();
             await env.RegistrationService.RegisterAsync(new RegisterUserDto("", ""));
             await Task.Delay(100);
+            
+            await env.MailingServiceMock.Received(1).SendEmailAsync(Arg.Any<EmailMessage>());
 
-            env.MailingServiceMock.Verify(m => m.SendEmailAsync(It.IsAny<EmailMessage>()), Times.Once);
         }
         finally
         {
