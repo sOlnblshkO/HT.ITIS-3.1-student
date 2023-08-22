@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using System.Net.Sockets;
-using Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
+using Dotnet.Homeworks.Tests.Shared.Docker;
 using MinioInstance = Dotnet.Homeworks.Tests.MinioStorage.Helpers.TestEnvironmentMinioInstance;
 
 namespace Dotnet.Homeworks.Tests.MinioStorage.Helpers;

@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dotnet.Homeworks.Tests.RunLogic.Utils.TestEnvironmentBuilder;
+namespace Dotnet.Homeworks.Tests.Shared.TestEnvironmentBuilder;
 
 public abstract class TestEnvironmentBuilder<T> : IAsyncDisposable
 {

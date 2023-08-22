@@ -2,7 +2,7 @@ using System.Reflection;
 using Dotnet.Homeworks.DataAccess.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using NetArchTest.Rules;
-using static Dotnet.Homeworks.Tests.RunLogic.Utils.MongoDb.Constants;
+using static Dotnet.Homeworks.Tests.Shared.MongoDb.Constants;
 
 namespace Dotnet.Homeworks.Tests.MongoDb;
 

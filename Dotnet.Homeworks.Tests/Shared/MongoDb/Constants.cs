@@ -1,6 +1,6 @@
 using Dotnet.Homeworks.DataAccess.Repositories;
 
-namespace Dotnet.Homeworks.Tests.RunLogic.Utils.MongoDb;
+namespace Dotnet.Homeworks.Tests.Shared.MongoDb;
 
 public static class Constants
 {

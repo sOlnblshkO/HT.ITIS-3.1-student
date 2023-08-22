@@ -3,10 +3,10 @@ using Dotnet.Homeworks.Features.Orders.Commands.DeleteOrder;
 using Dotnet.Homeworks.Features.Orders.Commands.UpdateOrder;
 using Dotnet.Homeworks.Features.Orders.Queries.GetOrder;
 using Dotnet.Homeworks.Features.Orders.Queries.GetOrders;
-using Dotnet.Homeworks.Infrastructure.Utils;
 using Dotnet.Homeworks.Mediator;
+using Dotnet.Homeworks.Shared.Dto;
 
-namespace Dotnet.Homeworks.Tests.Shared.CqrsStuff;
+namespace Dotnet.Homeworks.Tests.Shared.TestRequests;
 
 public static class TestOrder
 {

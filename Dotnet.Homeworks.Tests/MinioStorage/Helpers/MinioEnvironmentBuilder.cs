@@ -1,5 +1,5 @@
 using Dotnet.Homeworks.Storage.API.Services;
-using Dotnet.Homeworks.Tests.RunLogic.Utils.TestEnvironmentBuilder;
+using Dotnet.Homeworks.Tests.Shared.TestEnvironmentBuilder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;

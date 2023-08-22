@@ -1,6 +1,6 @@
-﻿using Dotnet.Homeworks.Infrastructure.Utils;
-using Dotnet.Homeworks.Mailing.API.Configuration;
+﻿using Dotnet.Homeworks.Mailing.API.Configuration;
 using Dotnet.Homeworks.Mailing.API.Dto;
+using Dotnet.Homeworks.Shared.Dto;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;

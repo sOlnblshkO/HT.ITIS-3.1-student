@@ -6,7 +6,7 @@ using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
 using Dotnet.Homeworks.Infrastructure.Cqrs.Queries;
 using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
-using Dotnet.Homeworks.Tests.RunLogic.Utils.Cqrs;
+using Dotnet.Homeworks.Tests.Shared.Cqrs;
 using NSubstitute;
 
 namespace Dotnet.Homeworks.Tests.Cqrs;

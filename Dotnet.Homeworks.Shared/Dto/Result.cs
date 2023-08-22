@@ -1,4 +1,4 @@
-namespace Dotnet.Homeworks.Infrastructure.Utils;
+namespace Dotnet.Homeworks.Shared.Dto;
 
 public class Result
 {

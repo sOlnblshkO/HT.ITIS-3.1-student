@@ -1,7 +1,7 @@
 ﻿using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
+namespace Dotnet.Homeworks.Tests.Shared.Docker;
 
 public static class Parser
 {

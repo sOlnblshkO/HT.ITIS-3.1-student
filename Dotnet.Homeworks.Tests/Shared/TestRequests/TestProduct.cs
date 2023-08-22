@@ -1,9 +1,9 @@
 ﻿using Dotnet.Homeworks.Features.Products.Commands.InsertProduct;
 using Dotnet.Homeworks.Features.Products.Queries.GetProducts;
-using Dotnet.Homeworks.Infrastructure.Utils;
 using Dotnet.Homeworks.Mediator;
+using Dotnet.Homeworks.Shared.Dto;
 
-namespace Dotnet.Homeworks.Tests.Shared.CqrsStuff;
+namespace Dotnet.Homeworks.Tests.Shared.TestRequests;
 
 public static class TestProduct
 {

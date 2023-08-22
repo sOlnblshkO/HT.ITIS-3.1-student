@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using Dotnet.Homeworks.Mediator;
-using Dotnet.Homeworks.Tests.Shared.CqrsStuff;
+using Dotnet.Homeworks.Tests.Shared.TestRequests;
 using Microsoft.AspNetCore.Http;
 
 namespace Dotnet.Homeworks.Tests.MongoDb.Helpers;

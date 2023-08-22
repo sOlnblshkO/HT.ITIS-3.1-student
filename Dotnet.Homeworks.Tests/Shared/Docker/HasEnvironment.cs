@@ -1,4 +1,4 @@
-﻿namespace Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
+﻿namespace Dotnet.Homeworks.Tests.Shared.Docker;
 
 public abstract class HasEnvironment
 {

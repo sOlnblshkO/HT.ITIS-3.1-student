@@ -1,6 +1,6 @@
 ﻿using Dotnet.Homeworks.Features.Users;
 
-namespace Dotnet.Homeworks.Tests.RunLogic.Utils.Cqrs;
+namespace Dotnet.Homeworks.Tests.Shared.Cqrs;
 
 public static class Constants
 {

@@ -4,7 +4,7 @@ using Dotnet.Homeworks.Mailing.API.Services;
 using Dotnet.Homeworks.MainProject.Dto;
 using Dotnet.Homeworks.MainProject.Services;
 using Dotnet.Homeworks.Shared.MessagingContracts.Email;
-using Dotnet.Homeworks.Tests.RunLogic.Utils.TestEnvironmentBuilder;
+using Dotnet.Homeworks.Tests.Shared.TestEnvironmentBuilder;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;

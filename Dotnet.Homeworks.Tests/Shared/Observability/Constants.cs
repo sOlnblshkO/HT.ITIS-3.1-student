@@ -1,4 +1,4 @@
-﻿namespace Dotnet.Homeworks.Tests.RunLogic.Utils.Observability;
+﻿namespace Dotnet.Homeworks.Tests.Shared.Observability;
 
 public static class Constants
 {

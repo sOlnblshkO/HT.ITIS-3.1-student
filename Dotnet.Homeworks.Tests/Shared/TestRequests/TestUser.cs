@@ -5,11 +5,11 @@ using Dotnet.Homeworks.Features.Users.Commands.CreateUser;
 using Dotnet.Homeworks.Features.Users.Commands.DeleteUser;
 using Dotnet.Homeworks.Features.Users.Commands.UpdateUser;
 using Dotnet.Homeworks.Features.Users.Queries.GetUser;
-using Dotnet.Homeworks.Infrastructure.Utils;
 using Dotnet.Homeworks.Mediator;
+using Dotnet.Homeworks.Shared.Dto;
 using GetUserDto = Dotnet.Homeworks.Features.Users.Queries.GetUser.GetUserDto;
 
-namespace Dotnet.Homeworks.Tests.Shared.CqrsStuff;
+namespace Dotnet.Homeworks.Tests.Shared.TestRequests;
 
 public static class TestUser
 {

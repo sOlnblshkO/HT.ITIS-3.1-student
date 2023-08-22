@@ -1,7 +1,7 @@
 ﻿using Dotnet.Homeworks.Tests.MongoDb.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
-using static Dotnet.Homeworks.Tests.Shared.CqrsStuff.TestOrder;
-using static Dotnet.Homeworks.Tests.Shared.CqrsStuff.TestProduct;
+using static Dotnet.Homeworks.Tests.Shared.TestRequests.TestOrder;
+using static Dotnet.Homeworks.Tests.Shared.TestRequests.TestProduct;
 
 namespace Dotnet.Homeworks.Tests.MongoDb.HandlersTests;
 

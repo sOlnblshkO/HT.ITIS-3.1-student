@@ -1,7 +1,7 @@
 ﻿using Dotnet.Homeworks.Mailing.API.Configuration;
 using Dotnet.Homeworks.Storage.API.Configuration;
 
-namespace Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
+namespace Dotnet.Homeworks.Tests.Shared.Docker;
 
 public static class Constants
 {

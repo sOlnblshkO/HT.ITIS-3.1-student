@@ -1,7 +1,7 @@
 ﻿using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Domain.Entities;
 
-namespace Dotnet.Homeworks.Tests.Shared.CqrsStuff;
+namespace Dotnet.Homeworks.Tests.Shared.RepositoriesMocks;
 
 public class UserRepositoryMock : IUserRepository
 {

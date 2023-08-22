@@ -1,4 +1,4 @@
-﻿using Dotnet.Homeworks.Infrastructure.Utils;
+﻿using Dotnet.Homeworks.Shared.Dto;
 using Dotnet.Homeworks.Storage.API.Dto.Internal;
 
 namespace Dotnet.Homeworks.Storage.API.Services;

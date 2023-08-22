@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Dotnet.Homeworks.MainProject.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
-using Dotnet.Homeworks.Tests.RunLogic.Utils.Observability;
+using Dotnet.Homeworks.Tests.Shared.Observability;
 using NetArchTest.Rules;
 
 namespace Dotnet.Homeworks.Tests.Observability;

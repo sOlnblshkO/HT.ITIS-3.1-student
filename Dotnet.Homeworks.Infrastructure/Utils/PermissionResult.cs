@@ -1,4 +1,6 @@
-﻿namespace Dotnet.Homeworks.Infrastructure.Utils;
+﻿using Dotnet.Homeworks.Shared.Dto;
+
+namespace Dotnet.Homeworks.Infrastructure.Utils;
 
 public class PermissionResult : Result
 {
