@@ -1,0 +1,35 @@
+name: .NET
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build in Debug mode
+        run: dotnet build --no-restore
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build in Debug mode
+        run: dotnet build
+      - name: Tests
+        run: dotnet test --no-build
+        working-directory: Dotnet.Homeworks.Tests
