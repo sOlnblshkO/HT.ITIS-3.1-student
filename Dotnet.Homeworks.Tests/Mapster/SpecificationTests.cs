@@ -30,10 +30,10 @@ public partial class SpecificationTests
 
     [HomeworkTheory(RunLogic.Homeworks.AutoMapper)]
     [MemberData(nameof(FilterTestData))]
-    public void ShouldFilter_Correctly(IQueryableFilter<User> filter, IEnumerable<User> input,
+    public void ShouldFilter_Correctly(Func<IQueryableFilter<User>> specificationMethod, IEnumerable<User> input,
         IEnumerable<User> expectedOutput)
     {
-        var actualOutput = filter.Apply(input.AsQueryable());
+        var actualOutput = specificationMethod().Apply(input.AsQueryable());
 
         Assert.True(actualOutput.SequenceEqual(expectedOutput));
     }

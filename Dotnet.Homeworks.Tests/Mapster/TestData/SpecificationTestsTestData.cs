@@ -42,14 +42,16 @@ public partial class SpecificationTests
             new() { Email = googleEmail, Name = complexLongName },      // 5
             new() { Email = "test.test@test.tst", Name = shortName }    // 6
         };
+        var specs = new UsersSpecs();
+        var t = specs.HasYandexEmail;
 
         yield return new object[]
-            { UsersSpecs.HasGoogleEmail, users, new[] { users[0], users[3], users[4], users[5] } };
-        yield return new object[] { UsersSpecs.HasYandexEmail, users, new[] { users[1] } };
-        yield return new object[] { UsersSpecs.HasMailEmail, users, new[] { users[2] } };
-        yield return new object[] { UsersSpecs.HasPopularEmailVendor, users, users[..^1] };
-        yield return new object[] { UsersSpecs.HasLongName, users, new[] { users[3], users[5] } };
-        yield return new object[] { UsersSpecs.HasCompositeName, users, new[] { users[4], users[5] } };
-        yield return new object[] { UsersSpecs.HasComplexName, users, new[] { users[5] } };
+            { specs.HasGoogleEmail, users, new[] { users[0], users[3], users[4], users[5] } };
+        yield return new object[] { specs.HasYandexEmail, users, new[] { users[1] } };
+        yield return new object[] { specs.HasMailEmail, users, new[] { users[2] } };
+        yield return new object[] { specs.HasPopularEmailVendor, users, users[..^1] };
+        yield return new object[] { specs.HasLongName, users, new[] { users[3], users[5] } };
+        yield return new object[] { specs.HasCompositeName, users, new[] { users[4], users[5] } };
+        yield return new object[] { specs.HasComplexName, users, new[] { users[5] } };
     }
 }
