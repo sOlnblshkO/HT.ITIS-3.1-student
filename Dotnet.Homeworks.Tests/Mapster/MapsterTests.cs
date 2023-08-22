@@ -60,16 +60,16 @@ public partial class MapsterTests
     {
         var mappers = new[]
             { typeof(IOrderMapper), typeof(IProductMapper), typeof(IUserMapper), typeof(IUserManagementMapper) };
+
         foreach (var mapperInterface in mappers)
         {
-            var methods = mapperInterface.GetMethods();
-
-            var foundIQueryable = methods
+            var foundIQueryable = mapperInterface.GetMethods()
                 .Any(m => m.GetParameters()
                     .Any(p => p.ParameterType.IsGenericType &&
                               p.ParameterType.GetGenericTypeDefinition() == typeof(IQueryable<>)));
             if (foundIQueryable) return; // test is passed
         }
+
         Assert.Fail("No mapper has a method with IQueryable as one of the parameters types");
     }
 
