@@ -6,18 +6,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.Tests", "D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Theory", "Theory", "{34A78ECB-E940-4BDA-AA77-E7552F322718}"
 	ProjectSection(SolutionItems) = preProject
-		Dotnet.Homeworks.Theory\Docker.md = Dotnet.Homeworks.Theory\Docker.md
-		Dotnet.Homeworks.Theory\UML.C4.md = Dotnet.Homeworks.Theory\UML.C4.md
-		Dotnet.Homeworks.Theory\RabbitMQ. Masstransit.md = Dotnet.Homeworks.Theory\RabbitMQ. Masstransit.md
-		Dotnet.Homeworks.Theory\Architecture styles.md = Dotnet.Homeworks.Theory\Architecture styles.md
-		Dotnet.Homeworks.Theory\Patterns.md = Dotnet.Homeworks.Theory\Patterns.md
-		Dotnet.Homeworks.Theory\Minio.S3.md = Dotnet.Homeworks.Theory\Minio.S3.md
-		Dotnet.Homeworks.Theory\CQRS.md = Dotnet.Homeworks.Theory\CQRS.md
-		Dotnet.Homeworks.Theory\CQRSValidatorsDecorators.md = Dotnet.Homeworks.Theory\CQRSValidatorsDecorators.md
-		Dotnet.Homeworks.Theory\DDD.Mapster.md = Dotnet.Homeworks.Theory\DDD.Mapster.md
-		Dotnet.Homeworks.Theory\Observability.md = Dotnet.Homeworks.Theory\Observability.md
-		Dotnet.Homeworks.Theory\MongoDB.md = Dotnet.Homeworks.Theory\MongoDB.md
-		Dotnet.Homeworks.Theory\DDDContinue.md = Dotnet.Homeworks.Theory\DDDContinue.md
+		Dotnet.Homeworks.Theory\1. UML.C4.md = Dotnet.Homeworks.Theory\1. UML.C4.md
+		Dotnet.Homeworks.Theory\2. Docker.md = Dotnet.Homeworks.Theory\2. Docker.md
+		Dotnet.Homeworks.Theory\3. Architecture styles.md = Dotnet.Homeworks.Theory\3. Architecture styles.md
+		Dotnet.Homeworks.Theory\4. Patterns.md = Dotnet.Homeworks.Theory\4. Patterns.md
+		Dotnet.Homeworks.Theory\5. RabbitMQ. Masstransit.md = Dotnet.Homeworks.Theory\5. RabbitMQ. Masstransit.md
+		Dotnet.Homeworks.Theory\6. CQRS.md = Dotnet.Homeworks.Theory\6. CQRS.md
+		Dotnet.Homeworks.Theory\7. CQRSValidatorsDecorators.md = Dotnet.Homeworks.Theory\7. CQRSValidatorsDecorators.md
+		Dotnet.Homeworks.Theory\8. Minio.S3.md = Dotnet.Homeworks.Theory\8. Minio.S3.md
+		Dotnet.Homeworks.Theory\9. MongoDB.md = Dotnet.Homeworks.Theory\9. MongoDB.md
+		Dotnet.Homeworks.Theory\10. DDD.Mapster.md = Dotnet.Homeworks.Theory\10. DDD.Mapster.md
+		Dotnet.Homeworks.Theory\11. DDD.Continue.md = Dotnet.Homeworks.Theory\11. DDD.Continue.md
+		Dotnet.Homeworks.Theory\13. Observability.md = Dotnet.Homeworks.Theory\13. Observability.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{03F24D07-470D-4F82-826B-5E7058A1E689}"
