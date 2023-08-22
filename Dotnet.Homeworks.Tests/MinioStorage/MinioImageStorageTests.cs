@@ -18,7 +18,7 @@ public class MinioImageStorageTests
 
         var res = await storage.PutItemAsync(image);
 
-        Assert.True(res.IsSucceeded);
+        Assert.True(res.IsSuccess);
     }
 
     [Homework(RunLogic.Homeworks.MinioStorage)]
@@ -48,10 +48,10 @@ public class MinioImageStorageTests
         var image = GetTestImage();
 
         var result = await storage.PutItemAsync(image);
-        Assert.True(result.IsSucceeded);
+        Assert.True(result.IsSuccess);
 
         result = await storage.PutItemAsync(image);
-        Assert.False(result.IsSucceeded);
+        Assert.False(result.IsSuccess);
     }
 
     [Homework(RunLogic.Homeworks.MinioStorage)]
@@ -96,7 +96,7 @@ public class MinioImageStorageTests
         Assert.NotNull(gotImage);
 
         var res = await storage.RemoveItemAsync(image.FileName);
-        Assert.True(res.IsSucceeded);
+        Assert.True(res.IsSuccess);
         gotImage = await storage.GetItemAsync(image.FileName);
         Assert.Null(gotImage);
     }
@@ -110,7 +110,7 @@ public class MinioImageStorageTests
 
         var res = await storage.RemoveItemAsync(Guid.NewGuid().ToString());
 
-        Assert.True(res.IsSucceeded);
+        Assert.True(res.IsSuccess);
     }
 
     [Homework(RunLogic.Homeworks.MinioStorage)]

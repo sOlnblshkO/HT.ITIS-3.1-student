@@ -1,10 +1,10 @@
-﻿using Dotnet.Homeworks.Mailing.API.Configuration;
+﻿using Dotnet.Homeworks.Infrastructure.Utils;
+using Dotnet.Homeworks.Mailing.API.Configuration;
 using Dotnet.Homeworks.Mailing.API.Dto;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using Dotnet.Homeworks.Shared.Dto;
 
 namespace Dotnet.Homeworks.Mailing.API.Services;
 
@@ -17,7 +17,7 @@ public class MailingService : IMailingService
         _emailConfig = emailConfig.Value;
     }
 
-    public async Task<BaseResult> SendEmailAsync(EmailMessage emailDto)
+    public async Task<Result> SendEmailAsync(EmailMessage emailDto)
     {
         using var message = new MimeMessage();
         message.From.Add(new MailboxAddress("Testing mailing api", _emailConfig.Email));
@@ -35,11 +35,11 @@ public class MailingService : IMailingService
             await client.AuthenticateAsync(_emailConfig.Email, _emailConfig.Password);
             await client.SendAsync(message);
             await client.DisconnectAsync(true);
-            return new BaseResult(true, "Successful");
+            return new Result(true);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return new BaseResult(false, "Error while sending email");
+            return new Result(false, $"Error while sending email: {ex.Message}");
         }
     }
 }

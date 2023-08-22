@@ -1,11 +1,11 @@
-﻿using Dotnet.Homeworks.Storage.API.Dto.Internal;
-using Dotnet.Homeworks.Shared.Dto;
+﻿using Dotnet.Homeworks.Infrastructure.Utils;
+using Dotnet.Homeworks.Storage.API.Dto.Internal;
 
 namespace Dotnet.Homeworks.Storage.API.Services;
 
 public class ImageStorage : IStorage<Image>
 {
-    public Task<BaseResult> PutItemAsync(Image item, CancellationToken cancellationToken = default)
+    public Task<Result> PutItemAsync(Image item, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
@@ -15,7 +15,7 @@ public class ImageStorage : IStorage<Image>
         throw new NotImplementedException();
     }
 
-    public Task<BaseResult> RemoveItemAsync(string itemName, CancellationToken cancellationToken = default)
+    public Task<Result> RemoveItemAsync(string itemName, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
@@ -25,7 +25,7 @@ public class ImageStorage : IStorage<Image>
         throw new NotImplementedException();
     }
 
-    public Task<BaseResult> CopyItemToBucketAsync(string itemName, string destinationBucketName,
+    public Task<Result> CopyItemToBucketAsync(string itemName, string destinationBucketName,
         CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
