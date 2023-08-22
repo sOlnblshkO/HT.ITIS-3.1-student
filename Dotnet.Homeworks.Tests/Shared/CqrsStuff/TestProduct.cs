@@ -1,5 +1,5 @@
-﻿using Dotnet.Homeworks.Features.Cqrs.Products.Commands.InsertProduct;
-using Dotnet.Homeworks.Features.Cqrs.Products.Queries.GetProducts;
+﻿using Dotnet.Homeworks.Features.Products.Commands.InsertProduct;
+using Dotnet.Homeworks.Features.Products.Queries.GetProducts;
 using Dotnet.Homeworks.Infrastructure.Utils;
 using Dotnet.Homeworks.Mediator;
 

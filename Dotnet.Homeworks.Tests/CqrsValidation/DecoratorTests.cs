@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using Dotnet.Homeworks.Domain.Entities;
-using Dotnet.Homeworks.Features.Decorators;
+using Dotnet.Homeworks.Infrastructure.Validation.Decorators;
 using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;

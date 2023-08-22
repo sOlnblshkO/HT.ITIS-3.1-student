@@ -1,13 +1,13 @@
 ﻿using Dotnet.Homeworks.Domain.Entities;
-using Dotnet.Homeworks.Features.Cqrs.UserManagement.Commands.DeleteUserByAdmin;
-using Dotnet.Homeworks.Features.Cqrs.UserManagement.Queries.GetAllUsers;
-using Dotnet.Homeworks.Features.Cqrs.Users.Commands.CreateUser;
-using Dotnet.Homeworks.Features.Cqrs.Users.Commands.DeleteUser;
-using Dotnet.Homeworks.Features.Cqrs.Users.Commands.UpdateUser;
-using Dotnet.Homeworks.Features.Cqrs.Users.Queries.GetUser;
+using Dotnet.Homeworks.Features.UserManagement.Commands.DeleteUserByAdmin;
+using Dotnet.Homeworks.Features.UserManagement.Queries.GetAllUsers;
+using Dotnet.Homeworks.Features.Users.Commands.CreateUser;
+using Dotnet.Homeworks.Features.Users.Commands.DeleteUser;
+using Dotnet.Homeworks.Features.Users.Commands.UpdateUser;
+using Dotnet.Homeworks.Features.Users.Queries.GetUser;
 using Dotnet.Homeworks.Infrastructure.Utils;
 using Dotnet.Homeworks.Mediator;
-using GetUserDto = Dotnet.Homeworks.Features.Cqrs.Users.Queries.GetUser.GetUserDto;
+using GetUserDto = Dotnet.Homeworks.Features.Users.Queries.GetUser.GetUserDto;
 
 namespace Dotnet.Homeworks.Tests.Shared.CqrsStuff;
 
