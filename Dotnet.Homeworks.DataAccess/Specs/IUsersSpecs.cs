@@ -9,12 +9,12 @@ public interface IUsersSpecs
     /// Возвращает true, если почта пользователя находится на домене gmail.com
     /// </summary>
     public Specification<User> HasGoogleEmail();
-    
+
     /// <summary>
     /// Возвращает true, если почта пользователя находится на домене yandex.ru
     /// </summary>
     public Specification<User> HasYandexEmail();
-    
+
     /// <summary>
     /// Возвращает true, если почта пользователя находится на домене mail.ru
     /// </summary>
@@ -34,7 +34,7 @@ public interface IUsersSpecs
     /// Возвращает true, если параметр <code>Name</code> пользователя содержит пробел
     /// </summary>
     public Specification<User> HasCompositeNameWithWhitespace();
-    
+
     /// <summary>
     /// Возвращает true, если параметр <code>Name</code> пользователя содержит дефис
     /// </summary>

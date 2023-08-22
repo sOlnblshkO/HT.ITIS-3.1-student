@@ -2,5 +2,5 @@
 
 public interface IQueryableFilter<T> where T : class
 {
-    // TODO: declare methods
+    IQueryable<T> Apply(IQueryable<T> query);
 }

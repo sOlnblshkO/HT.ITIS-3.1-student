@@ -11,6 +11,7 @@
 
     <ItemGroup>
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
+        <PackageReference Include="Mapster" Version="7.4.0-pre06" />
         <PackageReference Include="MassTransit.TestFramework" Version="8.0.16" />
         <PackageReference Include="MediatR" Version="12.1.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />

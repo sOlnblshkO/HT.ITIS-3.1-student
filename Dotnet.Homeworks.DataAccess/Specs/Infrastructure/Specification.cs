@@ -1,6 +1,8 @@
 ﻿namespace Dotnet.Homeworks.DataAccess.Specs.Infrastructure;
 
-public class Specification<T> : IQueryableFilter<T> where T : class
+public class Specification<T>
 {
-    // TODO: implement
+    // TODO: implement IQueryableFilter interface
+    // this class also should have implicit conversion to Expression<Func<T, bool>>
+    // and operators ||, && overrides 
 }
