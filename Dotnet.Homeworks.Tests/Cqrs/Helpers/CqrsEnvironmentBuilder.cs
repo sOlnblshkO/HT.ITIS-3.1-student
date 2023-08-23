@@ -55,9 +55,12 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
             .AddSingleton<IProductRepository>(ProductRepositoryMock)
             .AddSingleton<IUserRepository>(UserRepositoryMock)
             .AddSingleton(HttpContextAccessorMock)
-            .AddSingleton(UnitOfWork)
-            .AddValidatorsFromAssembly(Features.Helpers.AssemblyReference.Assembly)
-            .AddPermissionChecks(Features.Helpers.AssemblyReference.Assembly);
+            .AddSingleton(UnitOfWork);
+        
+        if (IsCqrsComplete())
+            configureServices += s => s
+                .AddValidatorsFromAssembly(Features.Helpers.AssemblyReference.Assembly)
+                .AddPermissionChecks(Features.Helpers.AssemblyReference.Assembly);
 
         configureServices = SetupMediator(configureServices);
 
@@ -125,13 +128,8 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
                 new GetProductsDto(new List<GetProductDto>() { new GetProductDto(Guid.NewGuid(), "name") }), true));
     }
 
-    private static bool IsCqrsComplete()
-    {
-        var attrHomeworkProgress =
-            typeof(HomeworkAttribute).Assembly.GetCustomAttributes<HomeworkProgressAttribute>().Single();
-        var isCqrsComplete = attrHomeworkProgress.Number >= (int)RunLogic.Homeworks.CqrsValidatorsDecorators;
-        return isCqrsComplete;
-    }
+    private static bool IsCqrsComplete() => IsHomeworkInProgressOrComplete(RunLogic.Homeworks.CqrsValidatorsDecorators);
+    
 
     private Action<IServiceCollection> SetupMediator(Action<IServiceCollection>? configureServices)
     {
