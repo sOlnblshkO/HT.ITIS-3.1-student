@@ -1,5 +1,6 @@
 using Dotnet.Homeworks.Storage.API.Services;
-using Dotnet.Homeworks.Tests.RunLogic.Utils.TestEnvironmentBuilder;
+using Dotnet.Homeworks.Storage.API.ServicesExtensions;
+using Dotnet.Homeworks.Tests.Shared.TestEnvironmentBuilder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -23,6 +24,7 @@ public class MinioEnvironmentBuilder : TestEnvironmentBuilder<MinioEnvironment>
         var optionsConfig = Options.Create(MinioInstance.Config);
         configureServices += s => s
             .AddSingleton(optionsConfig)
+            .AddMinioClient(optionsConfig)
             .AddSingleton<IStorageFactory, StorageFactory>()
             .AddHostedService<PendingObjectsProcessor>();
         ServiceProvider = GetServiceProvider(configureServices);

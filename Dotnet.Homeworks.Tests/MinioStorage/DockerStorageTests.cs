@@ -1,5 +1,5 @@
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
-using Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
+using Dotnet.Homeworks.Tests.Shared.Docker;
 
 namespace Dotnet.Homeworks.Tests.MinioStorage;
 

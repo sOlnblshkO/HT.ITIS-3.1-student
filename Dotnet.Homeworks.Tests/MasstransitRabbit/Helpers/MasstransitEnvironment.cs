@@ -1,14 +1,13 @@
 ﻿using Dotnet.Homeworks.Mailing.API.Services;
 using Dotnet.Homeworks.MainProject.Services;
 using MassTransit.Testing;
-using Moq;
 
 namespace Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers;
 
 public class MasstransitEnvironment
 {
     public MasstransitEnvironment(ITestHarness harness, IRegistrationService registrationService, object emailConsumer,
-        Mock<IMailingService> mailingMock)
+        IMailingService mailingMock)
     {
         Harness = harness;
         RegistrationService = registrationService;
@@ -16,7 +15,7 @@ public class MasstransitEnvironment
         MailingServiceMock = mailingMock;
     }
 
-    public Mock<IMailingService> MailingServiceMock { get; }
+    public IMailingService MailingServiceMock { get; }
 
     public ITestHarness Harness { get; }
 

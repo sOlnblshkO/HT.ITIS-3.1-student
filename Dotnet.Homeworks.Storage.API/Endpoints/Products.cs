@@ -14,7 +14,7 @@ public static class Products
             var image = new Image(formFile.OpenReadStream(), formFile.FileName,
                 !string.IsNullOrWhiteSpace(formFile.ContentType) ? formFile.ContentType : default);
             var res = await imageStorage.PutItemAsync(image, cancellationToken);
-            return res.IsSucceeded ? Results.Ok() : Results.BadRequest(res.ResultMessage);
+            return res.IsSuccess ? Results.Ok() : Results.BadRequest(res.Error);
         });
 
         app.MapGet("/products/picture",
@@ -32,7 +32,7 @@ public static class Products
             {
                 var imageStorage = await storageFactory.CreateImageStorageWithinBucketAsync(Constants.Buckets.Products);
                 var res = await imageStorage.RemoveItemAsync(fileName, cancellationToken);
-                return res.IsSucceeded ? Results.Ok() : Results.BadRequest(res.ResultMessage);
+                return res.IsSuccess ? Results.Ok() : Results.BadRequest(res.Error);
             });
 
         app.MapGet("/products/pictures", async (IStorageFactory storageFactory, CancellationToken cancellationToken) =>

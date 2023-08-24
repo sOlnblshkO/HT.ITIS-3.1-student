@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
-using Dotnet.Homeworks.Features.Cqrs.Products.Mapping;
-using Dotnet.Homeworks.Features.Cqrs.UserManagement.Mapping;
-using Dotnet.Homeworks.Features.Cqrs.Users.Mapping;
 using Dotnet.Homeworks.Features.Helpers;
 using Dotnet.Homeworks.Features.Orders.Mapping;
+using Dotnet.Homeworks.Features.Products.Mapping;
+using Dotnet.Homeworks.Features.UserManagement.Mapping;
+using Dotnet.Homeworks.Features.Users.Mapping;
 using Dotnet.Homeworks.MainProject.ServicesExtensions.Mapper;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Mapster;

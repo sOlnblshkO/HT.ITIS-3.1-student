@@ -1,11 +1,11 @@
 ﻿using System.Security.Claims;
 using Dotnet.Homeworks.Domain.Entities;
-using Dotnet.Homeworks.Features.Decorators;
+using Dotnet.Homeworks.Infrastructure.Validation.Decorators;
 using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
-using Dotnet.Homeworks.Tests.RunLogic.Utils.Cqrs;
-using Dotnet.Homeworks.Tests.Shared.CqrsStuff;
+using Dotnet.Homeworks.Tests.Shared.Cqrs;
+using Dotnet.Homeworks.Tests.Shared.TestRequests;
 using NetArchTest.Rules;
 using NSubstitute;
 

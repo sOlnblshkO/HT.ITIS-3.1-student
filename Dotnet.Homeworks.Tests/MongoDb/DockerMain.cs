@@ -1,6 +1,6 @@
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
-using Dotnet.Homeworks.Tests.RunLogic.Utils.Docker;
-using static Dotnet.Homeworks.Tests.RunLogic.Utils.Docker.Constants;
+using Dotnet.Homeworks.Tests.Shared.Docker;
+using static Dotnet.Homeworks.Tests.Shared.Docker.Constants;
 
 namespace Dotnet.Homeworks.Tests.MongoDb;
 

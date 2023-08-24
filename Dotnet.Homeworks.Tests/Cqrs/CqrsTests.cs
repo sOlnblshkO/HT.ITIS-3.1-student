@@ -1,6 +1,6 @@
 using Dotnet.Homeworks.Tests.Cqrs.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
-using Dotnet.Homeworks.Tests.Shared.CqrsStuff;
+using Dotnet.Homeworks.Tests.Shared.TestRequests;
 using NSubstitute;
 
 namespace Dotnet.Homeworks.Tests.Cqrs;

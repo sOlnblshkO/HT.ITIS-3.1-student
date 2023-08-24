@@ -1,6 +1,6 @@
 using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.RunLogic.Attributes;
-using Dotnet.Homeworks.Tests.RunLogic.Utils.Cqrs;
+using Dotnet.Homeworks.Tests.Shared.Cqrs;
 
 namespace Dotnet.Homeworks.Tests.CqrsValidation;
 

@@ -5,5 +5,5 @@ namespace Dotnet.Homeworks.Mailing.API.Services;
 
 public interface IMailingService
 {
-    public Task<BaseResult> SendEmailAsync(EmailMessage emailDto);
+    public Task<Result> SendEmailAsync(EmailMessage emailDto);
 }
