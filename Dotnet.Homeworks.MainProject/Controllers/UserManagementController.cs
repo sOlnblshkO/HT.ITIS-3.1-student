@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Dotnet.Homeworks.MainProject.Controllers;
 
+[ApiController]
 public class UserManagementController : ControllerBase
 {
     [HttpPost("user")]

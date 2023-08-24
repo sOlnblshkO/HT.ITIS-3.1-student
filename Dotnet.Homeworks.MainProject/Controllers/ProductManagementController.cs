@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Dotnet.Homeworks.MainProject.Controllers;
 
+[ApiController]
 public class ProductManagementController : ControllerBase
 {
     [HttpGet("products")]
