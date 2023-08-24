@@ -47,6 +47,7 @@ public class PipelineBehaviorTests
         var env = testEnvBuilder.Build();
 
         // Act
+        await TestUser.CreateUserAsync(env.CustomMediator);
         var result = await TestUser.GetAllUsersAsync(env.CustomMediator);
 
         // Assert
