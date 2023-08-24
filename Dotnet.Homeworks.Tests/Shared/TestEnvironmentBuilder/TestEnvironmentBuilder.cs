@@ -1,3 +1,6 @@
+using System.Reflection;
+using Dotnet.Homeworks.MainProject.ServicesExtensions.Mapper;
+using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Dotnet.Homeworks.Tests.Shared.TestEnvironmentBuilder;
@@ -10,6 +13,10 @@ public abstract class TestEnvironmentBuilder<T> : IAsyncDisposable
     {
         var serviceCollection = new ServiceCollection();
         configureServices?.Invoke(serviceCollection);
+
+        if (IsHomeworkInProgressOrComplete(RunLogic.Homeworks.AutoMapper))
+            serviceCollection.AddMappers(Features.Helpers.AssemblyReference.Assembly);
+
         return serviceCollection.BuildServiceProvider();
     }
 
@@ -21,5 +28,13 @@ public abstract class TestEnvironmentBuilder<T> : IAsyncDisposable
     {
         GC.SuppressFinalize(this);
         return ServiceProvider?.DisposeAsync() ?? ValueTask.CompletedTask;
+    }
+    
+    protected static bool IsHomeworkInProgressOrComplete(RunLogic.Homeworks homework)
+    {
+        var attrHomeworkProgress =
+            typeof(HomeworkAttribute).Assembly.GetCustomAttributes<HomeworkProgressAttribute>().Single();
+        var isCqrsComplete = attrHomeworkProgress.Number >= (int) homework;
+        return isCqrsComplete;
     }
 }
