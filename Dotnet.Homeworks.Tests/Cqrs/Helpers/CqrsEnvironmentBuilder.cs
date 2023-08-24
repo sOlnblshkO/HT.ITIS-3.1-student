@@ -54,11 +54,9 @@ internal class CqrsEnvironmentBuilder : TestEnvironmentBuilder<CqrsEnvironment>
             .AddSingleton<IUserRepository>(UserRepositoryMock)
             .AddSingleton(HttpContextAccessorMock)
             .AddSingleton(UnitOfWork);
-        
-        if (IsCqrsComplete())
-            configureServices += s => s
-                .AddValidatorsFromAssembly(Features.Helpers.AssemblyReference.Assembly)
-                .AddPermissionChecks(Features.Helpers.AssemblyReference.Assembly);
+        if (IsCqrsComplete()) configureServices += s => s
+            .AddValidatorsFromAssembly(Features.Helpers.AssemblyReference.Assembly)
+            .AddPermissionChecks(Features.Helpers.AssemblyReference.Assembly);
 
         configureServices = SetupMediator(configureServices);
 
