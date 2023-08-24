@@ -6,7 +6,7 @@ namespace Dotnet.Homeworks.MainProject.ServicesExtensions.MongoDb;
 public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddMongoClient(this IServiceCollection services,
-        IOptions<MongoDbConfig> mongoConfiguration)
+        MongoDbConfig mongoConfiguration)
     {
         throw new NotImplementedException();
     }

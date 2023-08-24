@@ -24,7 +24,7 @@ public class MinioEnvironmentBuilder : TestEnvironmentBuilder<MinioEnvironment>
         var optionsConfig = Options.Create(MinioInstance.Config);
         configureServices += s => s
             .AddSingleton(optionsConfig)
-            .AddMinioClient(optionsConfig)
+            .AddMinioClient(MinioInstance.Config)
             .AddSingleton<IStorageFactory, StorageFactory>()
             .AddHostedService<PendingObjectsProcessor>();
         ServiceProvider = GetServiceProvider(configureServices);
