@@ -63,7 +63,7 @@ public class MinioImageStorageTests
         var image = GetTestImage();
 
         await storage.PutItemAsync(image);
-        await env.WaitForBackgroundServiceAsync();
+        await MinioEnvironment.WaitForBackgroundServiceAsync();
         var gotImage = await storage.GetItemAsync(image.FileName);
 
         Assert.NotNull(gotImage);
@@ -91,7 +91,7 @@ public class MinioImageStorageTests
         var image = GetTestImage();
 
         await storage.PutItemAsync(image);
-        await env.WaitForBackgroundServiceAsync();
+        await MinioEnvironment.WaitForBackgroundServiceAsync();
         var gotImage = await storage.GetItemAsync(image.FileName);
         Assert.NotNull(gotImage);
 
@@ -124,7 +124,7 @@ public class MinioImageStorageTests
 
         await storage.PutItemAsync(image1);
         await storage.PutItemAsync(image2);
-        await env.WaitForBackgroundServiceAsync();
+        await MinioEnvironment.WaitForBackgroundServiceAsync();
         var items = await storage.EnumerateItemNamesAsync();
         var itemsList = items.ToList();
 

@@ -1,17 +1,15 @@
+using Dotnet.Homeworks.Storage.API.Constants;
 using Dotnet.Homeworks.Storage.API.Services;
 
 namespace Dotnet.Homeworks.Tests.MinioStorage.Helpers;
 
 public class MinioEnvironment
 {
-    private readonly TimeSpan _pendingObjectsProcessorPeriod;
-
-    public MinioEnvironment(IStorageFactory storageFactory, TimeSpan pendingObjectsProcessorPeriod)
+    public MinioEnvironment(IStorageFactory storageFactory)
     {
         StorageFactory = storageFactory;
-        _pendingObjectsProcessorPeriod = pendingObjectsProcessorPeriod;
     }
 
     public IStorageFactory StorageFactory { get; }
-    public async Task WaitForBackgroundServiceAsync() => await Task.Delay(_pendingObjectsProcessorPeriod);
+    public static async Task WaitForBackgroundServiceAsync() => await Task.Delay(PendingObjectProcessor.Period * 1.1);
 }

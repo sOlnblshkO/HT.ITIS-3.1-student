@@ -18,7 +18,7 @@ public class MinioPendingObjectsProcessorTests
         var image = GetTestImage();
 
         await storage.PutItemAsync(image);
-        await env.WaitForBackgroundServiceAsync();
+        await MinioEnvironment.WaitForBackgroundServiceAsync();
         var items = await pendingStorage.EnumerateItemNamesAsync();
 
         Assert.Empty(items);
@@ -39,7 +39,7 @@ public class MinioPendingObjectsProcessorTests
 
         Assert.Empty(itemsInStorageBucket);
         Assert.Contains(image.FileName, itemsInPendingBucket);
-        await env.WaitForBackgroundServiceAsync();
+        await MinioEnvironment.WaitForBackgroundServiceAsync();
 
         itemsInStorageBucket = await storage.EnumerateItemNamesAsync();
         itemsInPendingBucket = await pendingStorage.EnumerateItemNamesAsync();

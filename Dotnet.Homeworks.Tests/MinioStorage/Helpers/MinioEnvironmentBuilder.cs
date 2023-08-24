@@ -11,7 +11,6 @@ namespace Dotnet.Homeworks.Tests.MinioStorage.Helpers;
 public class MinioEnvironmentBuilder : TestEnvironmentBuilder<MinioEnvironment>
 {
     private bool _runBackgroundServicesOnBuild;
-    private readonly TimeSpan _pendingObjectsProcessorPeriod = TimeSpan.FromSeconds(3.5);
 
     public MinioEnvironmentBuilder WithBackgroundServicesRunOnBuild(bool runBackgroundServicesOnBuild = true)
     {
@@ -35,12 +34,12 @@ public class MinioEnvironmentBuilder : TestEnvironmentBuilder<MinioEnvironment>
         if (ServiceProvider is null) SetupServices();
         var storageFactory = ServiceProvider!.GetRequiredService<IStorageFactory>();
         if (_runBackgroundServicesOnBuild) RunBackgroundServices();
-        return new MinioEnvironment(storageFactory, _pendingObjectsProcessorPeriod);
+        return new MinioEnvironment(storageFactory);
     }
 
     private void RunBackgroundServices(CancellationToken cancellationToken = default) =>
         Task.WaitAll(ServiceProvider!
             .GetServices<IHostedService>()
             .Select(s => s.StartAsync(cancellationToken))
-            .ToArray());
+            .ToArray(), cancellationToken);
 }
