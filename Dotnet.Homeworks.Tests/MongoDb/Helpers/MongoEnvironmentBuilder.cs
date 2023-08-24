@@ -5,8 +5,6 @@ using Dotnet.Homeworks.Infrastructure.UnitOfWork;
 using Dotnet.Homeworks.Infrastructure.Validation.PermissionChecker.DependencyInjectionExtensions;
 using Dotnet.Homeworks.Mediator;
 using Dotnet.Homeworks.Mediator.DependencyInjectionExtensions;
-using Dotnet.Homeworks.Tests.Cqrs.Helpers;
-using Dotnet.Homeworks.Tests.CqrsValidation.Helpers;
 using Dotnet.Homeworks.Tests.Shared.RepositoriesMocks;
 using Dotnet.Homeworks.Tests.Shared.TestEnvironmentBuilder;
 using FluentValidation;

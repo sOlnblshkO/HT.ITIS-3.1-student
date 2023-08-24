@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Dotnet.Homeworks.Domain.Abstractions.Repositories;
 using Dotnet.Homeworks.Features.Products.Commands.InsertProduct;
 using Dotnet.Homeworks.Features.Products.Queries.GetProducts;
@@ -10,7 +9,6 @@ using Dotnet.Homeworks.Infrastructure.Validation.PermissionChecker.DependencyInj
 using Dotnet.Homeworks.MainProject.Controllers;
 using Dotnet.Homeworks.Mediator.DependencyInjectionExtensions;
 using Dotnet.Homeworks.Shared.Dto;
-using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Dotnet.Homeworks.Tests.Shared.RepositoriesMocks;
 using Dotnet.Homeworks.Tests.Shared.TestEnvironmentBuilder;
 using FluentValidation;

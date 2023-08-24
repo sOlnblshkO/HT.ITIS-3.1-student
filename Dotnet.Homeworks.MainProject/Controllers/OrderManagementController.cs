@@ -6,33 +6,33 @@ namespace Dotnet.Homeworks.MainProject.Controllers;
 public class OrderManagementController : ControllerBase
 {
     [HttpGet("orders")]
-    public async Task<IActionResult> GetUserOrdersAsync(CancellationToken cancellationToken)
+    public Task<IActionResult> GetUserOrdersAsync(CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
     [HttpGet("order/{id:guid}")]
-    public async Task<IActionResult> GetUserOrdersAsync(Guid id, CancellationToken cancellationToken)
+    public Task<IActionResult> GetUserOrdersAsync(Guid id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
     [HttpPost("order")]
-    public async Task<IActionResult> CreateOrderAsync([FromBody] IEnumerable<Guid> productsIds,
+    public Task<IActionResult> CreateOrderAsync([FromBody] IEnumerable<Guid> productsIds,
         CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    [HttpPut("order")]
-    public async Task<IActionResult> UpdateOrderAsync([FromBody] Guid orderId, [FromBody] IEnumerable<Guid> productsIds,
+    [HttpPut("order/{id:guid}")]
+    public Task<IActionResult> UpdateOrderAsync(Guid id, [FromBody] IEnumerable<Guid> productsIds,
         CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
     [HttpDelete("order/{id:guid}")]
-    public async Task<IActionResult> DeleteOrderAsync(Guid id, CancellationToken cancellationToken)
+    public Task<IActionResult> DeleteOrderAsync(Guid id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

@@ -6,6 +6,6 @@ public class CqrsDecorator<TRequest, TResponse> //TODO: Inherit certain interfac
     {
     }
 
-    public virtual async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
+    public virtual Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
         => throw new NotImplementedException();  //TODO: Decorator invoke parent's method: await base.Handle(request, cancellationToken);
 }
