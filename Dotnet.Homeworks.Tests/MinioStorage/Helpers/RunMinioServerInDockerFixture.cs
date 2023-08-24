@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using System.Net.Sockets;
+using System.Reflection;
+using Dotnet.Homeworks.Tests.RunLogic.Attributes;
 using Dotnet.Homeworks.Tests.Shared.Docker;
 using MinioInstance = Dotnet.Homeworks.Tests.MinioStorage.Helpers.TestEnvironmentMinioInstance;
 
@@ -8,10 +10,11 @@ namespace Dotnet.Homeworks.Tests.MinioStorage.Helpers;
 [CollectionDefinition(nameof(RunMinioServerInDockerFixture))]
 public class RunMinioServerInDockerFixture : IDisposable, ICollectionFixture<RunMinioServerInDockerFixture>
 {
-    private readonly string _minioContainerName;
+    private readonly string _minioContainerName = null!;
 
     public RunMinioServerInDockerFixture()
     {
+        if (!IsCurrentHomeworkMinio()) return;
         if (!IsDockerRunning)
             throw new Exception("Docker engine is not running on the current machine. Cannot run tests.");
         _minioContainerName = Guid.NewGuid().ToString();
@@ -22,6 +25,13 @@ public class RunMinioServerInDockerFixture : IDisposable, ICollectionFixture<Run
     }
 
     private static bool IsDockerRunning => RunProcess("docker", "ps");
+
+    private static bool IsCurrentHomeworkMinio()
+    {
+        var attrHomeworkProgress =
+            typeof(HomeworkAttribute).Assembly.GetCustomAttributes<HomeworkProgressAttribute>().Single();
+        return attrHomeworkProgress.Number == (int)RunLogic.Homeworks.MinioStorage;
+    }
 
     private static bool IsMinioPortAvailable()
     {

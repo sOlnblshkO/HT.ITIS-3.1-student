@@ -9,7 +9,7 @@ namespace Dotnet.Homeworks.Tests.MinioStorage;
 [Collection(nameof(RunMinioServerInDockerFixture))]
 public class MinioStorageFactoryTests
 {
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task StorageFactory_ShouldCreate_ImageStorage()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder();
@@ -19,7 +19,7 @@ public class MinioStorageFactoryTests
         Assert.True(storage is ImageStorage);
     }
 
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task StorageFactory_ShouldCreate_BucketForStorage()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder();
@@ -39,7 +39,7 @@ public class MinioStorageFactoryTests
         Assert.True(true);
     }
 
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task StorageFactory_ShouldCreate_BucketForPendingStorage()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder();
@@ -58,7 +58,7 @@ public class MinioStorageFactoryTests
         Assert.True(true);
     }
 
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task StorageFactory_ShouldCreate_StorageWithEmptyUnderlyingBucket()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder();
