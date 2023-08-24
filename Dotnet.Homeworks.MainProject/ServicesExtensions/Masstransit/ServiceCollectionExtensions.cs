@@ -1,5 +1,4 @@
 using Dotnet.Homeworks.MainProject.Configuration;
-using Microsoft.Extensions.Options;
 
 namespace Dotnet.Homeworks.MainProject.ServicesExtensions.Masstransit;
 

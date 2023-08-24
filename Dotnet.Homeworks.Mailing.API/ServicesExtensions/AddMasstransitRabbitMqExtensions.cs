@@ -1,5 +1,4 @@
 using Dotnet.Homeworks.Mailing.API.Configuration;
-using Microsoft.Extensions.Options;
 
 namespace Dotnet.Homeworks.Mailing.API.ServicesExtensions;
 

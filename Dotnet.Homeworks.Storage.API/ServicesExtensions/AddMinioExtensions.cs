@@ -1,5 +1,4 @@
 using Dotnet.Homeworks.Storage.API.Configuration;
-using Microsoft.Extensions.Options;
 
 namespace Dotnet.Homeworks.Storage.API.ServicesExtensions;
 
