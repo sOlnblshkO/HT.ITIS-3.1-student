@@ -77,7 +77,7 @@ public class PipelineBehaviorTests
         testEnvBuilder.SetupHttpContextClaims(new List<Claim>());
 
         var env = testEnvBuilder.Build();
-        var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email });
+        var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email }, CancellationToken.None);
 
         // Act
         var result = await TestUser.DeleteUserByAdminAsync(guid, env.CustomMediator);
@@ -96,7 +96,7 @@ public class PipelineBehaviorTests
             { new Claim(ClaimTypes.Role, Roles.Admin.ToString()) });
 
         var env = testEnvBuilder.Build();
-        var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email });
+        var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email }, CancellationToken.None);
 
         // Act
         var result = await TestUser.DeleteUserByAdminAsync(guid, env.CustomMediator);

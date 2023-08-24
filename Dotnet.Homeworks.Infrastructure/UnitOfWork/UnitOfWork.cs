@@ -2,7 +2,7 @@
 
 public class UnitOfWork : IUnitOfWork
 {
-    public Task SaveChangesAsync(CancellationToken token = default)
+    public Task SaveChangesAsync(CancellationToken token)
     {
         throw new NotImplementedException();
     }
