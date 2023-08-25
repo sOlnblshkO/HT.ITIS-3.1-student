@@ -112,7 +112,7 @@ public class UpdateOrderTests
         var productRes2 = await CreateProductAsync(env.Mediator);
         var createdOrder = await CreateOrderAsync(env.Mediator, productRes1.Value!.Guid);
         var updatedOrder =
-            await UpdateOrderAsync(env.Mediator, productRes1.Value!.Guid, new[] { productRes2.Value!.Guid });
+            await UpdateOrderAsync(env.Mediator, createdOrder.Value!.Id, new[] { productRes2.Value!.Guid });
         var getOrder = await GetOrderAsync(env.Mediator, createdOrder.Value!.Id);
 
         Assert.True(updatedOrder.IsSuccess);
