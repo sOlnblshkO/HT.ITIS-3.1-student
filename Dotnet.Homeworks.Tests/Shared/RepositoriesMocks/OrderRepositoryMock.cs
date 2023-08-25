@@ -34,7 +34,8 @@ public class OrderRepositoryMock : IOrderRepository
 
     public async Task UpdateOrderAsync(Order order, CancellationToken cancellationToken)
     {
-        _orders[order.Id] = order;
+        var old = _orders[order.Id];
+        _orders[order.Id] = new Order() { Id = order.Id, OrdererId = old.OrdererId, ProductsIds = order.ProductsIds };
         await Task.CompletedTask;
     }
 

@@ -39,7 +39,7 @@ public class DeleteOrderTests
     }
 
     [Homework(RunLogic.Homeworks.MongoDb)]
-    public async Task ShouldSucceed_WhenUser_DeletesNotExistingOrder()
+    public async Task ShouldFail_WhenUser_DeletesNotExistingOrder()
     {
         await using var testEnvBuilder = new MongoEnvironmentBuilder();
         var env = testEnvBuilder.Build();
@@ -47,7 +47,7 @@ public class DeleteOrderTests
         await env.LogInNewUserAsync();
         var deletedOrder = await DeleteOrderAsync(env.Mediator, Guid.NewGuid());
 
-        Assert.True(deletedOrder.IsSuccess);
+        Assert.False(deletedOrder.IsSuccess);
     }
 
     [Homework(RunLogic.Homeworks.MongoDb)]
