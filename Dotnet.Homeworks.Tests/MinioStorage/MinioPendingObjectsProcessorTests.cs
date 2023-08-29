@@ -8,7 +8,7 @@ namespace Dotnet.Homeworks.Tests.MinioStorage;
 [Collection(nameof(RunMinioServerInDockerFixture))]
 public class MinioPendingObjectsProcessorTests
 {
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task ShouldClear_PendingBucket()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder().WithBackgroundServicesRunOnBuild();
@@ -18,13 +18,13 @@ public class MinioPendingObjectsProcessorTests
         var image = GetTestImage();
 
         await storage.PutItemAsync(image);
-        await env.WaitForBackgroundServiceAsync();
+        await MinioEnvironment.WaitForBackgroundServiceAsync();
         var items = await pendingStorage.EnumerateItemNamesAsync();
 
         Assert.Empty(items);
     }
 
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task ShouldMove_ObjectsToBuckets()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder().WithBackgroundServicesRunOnBuild();
@@ -39,7 +39,7 @@ public class MinioPendingObjectsProcessorTests
 
         Assert.Empty(itemsInStorageBucket);
         Assert.Contains(image.FileName, itemsInPendingBucket);
-        await env.WaitForBackgroundServiceAsync();
+        await MinioEnvironment.WaitForBackgroundServiceAsync();
 
         itemsInStorageBucket = await storage.EnumerateItemNamesAsync();
         itemsInPendingBucket = await pendingStorage.EnumerateItemNamesAsync();

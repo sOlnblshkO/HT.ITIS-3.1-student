@@ -5,22 +5,22 @@ namespace Dotnet.Homeworks.DataAccess.Repositories;
 
 public class ProductRepository : IProductRepository
 {
-    public async Task<IEnumerable<Product>> GetAllProductsAsync()
+    public Task<IEnumerable<Product>> GetAllProductsAsync(CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task DeleteProductByGuidAsync(Guid id)
+    public Task DeleteProductByGuidAsync(Guid id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task UpdateProductAsync(Product product)
+    public Task UpdateProductAsync(Product product, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Guid> InsertProductAsync(Product product)
+    public Task<Guid> InsertProductAsync(Product product, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

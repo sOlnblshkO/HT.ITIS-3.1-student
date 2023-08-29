@@ -8,7 +8,7 @@ namespace Dotnet.Homeworks.Tests.MinioStorage;
 [Collection(nameof(RunMinioServerInDockerFixture))]
 public class MinioImageStorageTests
 {
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task PutItemAsync_ShouldSave_Item_Successfully()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder().WithBackgroundServicesRunOnBuild();
@@ -21,7 +21,7 @@ public class MinioImageStorageTests
         Assert.True(res.IsSuccess);
     }
 
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task PutItemAsync_ShouldMove_ObjectToPendingBucketFirst()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder();
@@ -39,7 +39,7 @@ public class MinioImageStorageTests
         Assert.Equal(image, fromPending, ImagesEqual);
     }
 
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task PutItemAsync_ShouldNotOverwrite_ExistingItem()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder();
@@ -54,7 +54,7 @@ public class MinioImageStorageTests
         Assert.False(result.IsSuccess);
     }
 
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task GetItemAsync_ShouldReturn_Item_AfterBackgroundServiceWork()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder().WithBackgroundServicesRunOnBuild();
@@ -63,14 +63,14 @@ public class MinioImageStorageTests
         var image = GetTestImage();
 
         await storage.PutItemAsync(image);
-        await env.WaitForBackgroundServiceAsync();
+        await MinioEnvironment.WaitForBackgroundServiceAsync();
         var gotImage = await storage.GetItemAsync(image.FileName);
 
         Assert.NotNull(gotImage);
         Assert.Equal(image, gotImage, ImagesEqual);
     }
 
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task GetItemAsync_ShouldReturn_Null_WhenItemNotExists()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder();
@@ -82,7 +82,7 @@ public class MinioImageStorageTests
         Assert.Null(image);
     }
 
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task RemoveItemAsync_ShouldDelete_ExistingItem_Successfully()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder().WithBackgroundServicesRunOnBuild();
@@ -91,7 +91,7 @@ public class MinioImageStorageTests
         var image = GetTestImage();
 
         await storage.PutItemAsync(image);
-        await env.WaitForBackgroundServiceAsync();
+        await MinioEnvironment.WaitForBackgroundServiceAsync();
         var gotImage = await storage.GetItemAsync(image.FileName);
         Assert.NotNull(gotImage);
 
@@ -101,7 +101,7 @@ public class MinioImageStorageTests
         Assert.Null(gotImage);
     }
 
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task RemoveItemAsync_ShouldDelete_NonExistingItem_Successfully()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder();
@@ -113,7 +113,7 @@ public class MinioImageStorageTests
         Assert.True(res.IsSuccess);
     }
 
-    [Homework(RunLogic.Homeworks.MinioStorage)]
+    [Homework(RunLogic.Homeworks.MinioStorage, true)]
     public async Task EnumerateItemNamesAsync_ShouldEnumerate_AllItemsCorrectly()
     {
         await using var testEnvBuilder = new MinioEnvironmentBuilder().WithBackgroundServicesRunOnBuild();
@@ -124,7 +124,7 @@ public class MinioImageStorageTests
 
         await storage.PutItemAsync(image1);
         await storage.PutItemAsync(image2);
-        await env.WaitForBackgroundServiceAsync();
+        await MinioEnvironment.WaitForBackgroundServiceAsync();
         var items = await storage.EnumerateItemNamesAsync();
         var itemsList = items.ToList();
 

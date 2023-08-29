@@ -62,7 +62,7 @@ public class DecoratorTests
         await using var testEnvBuilder = new CqrsEnvironmentBuilder();
 
         var env = testEnvBuilder.Build();
-        await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = email });
+        await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = email }, CancellationToken.None);
 
         // Act
         var result = await TestUser.CreateUserAsync(Name, email, env.CustomMediator);
@@ -98,7 +98,7 @@ public class DecoratorTests
             { new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()) });
 
         var env = testEnvBuilder.Build();
-        var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email });
+        var guid = await env.UserRepository.InsertUserAsync(new User() { Name = Name, Email = Email }, CancellationToken.None);
 
         // Act
         var result = await TestUser.GetUserAsync(guid, env.CustomMediator);
@@ -118,7 +118,7 @@ public class DecoratorTests
             { new Claim(ClaimTypes.NameIdentifier, guid.ToString()) });
 
         var env = testEnvBuilder.Build();
-        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = name, Email = email });
+        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = name, Email = email }, CancellationToken.None);
 
         // Act
         var result = await TestUser.GetUserAsync(guid, env.CustomMediator);
@@ -139,7 +139,7 @@ public class DecoratorTests
             { new Claim(ClaimTypes.NameIdentifier, guid.ToString()) });
 
         var env = testEnvBuilder.Build();
-        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = name, Email = email });
+        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = name, Email = email }, CancellationToken.None);
 
         // Act
         var result = await TestUser.DeleteUserAsync(guid, env.CustomMediator);
@@ -160,7 +160,7 @@ public class DecoratorTests
             { new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()) });
 
         var env = testEnvBuilder.Build();
-        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = Name, Email = Email });
+        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = Name, Email = Email }, CancellationToken.None);
 
         // Act
         var result = await TestUser.DeleteUserAsync(guid, env.CustomMediator);
@@ -182,7 +182,7 @@ public class DecoratorTests
             { new Claim(ClaimTypes.NameIdentifier, guid.ToString()) });
 
         var env = testEnvBuilder.Build();
-        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = name, Email = email });
+        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = name, Email = email }, CancellationToken.None);
         var user = new User() { Email = Email, Id = guid, Name = Name };
 
         // Act
@@ -204,7 +204,7 @@ public class DecoratorTests
             { new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()) });
 
         var env = testEnvBuilder.Build();
-        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = Name, Email = Email });
+        await env.UserRepository.InsertUserAsync(new User() { Id = guid, Name = Name, Email = Email }, CancellationToken.None);
         var user = new User() { Email = Email, Id = guid, Name = Name };
 
         // Act

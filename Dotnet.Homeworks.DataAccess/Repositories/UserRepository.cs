@@ -5,27 +5,27 @@ namespace Dotnet.Homeworks.DataAccess.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    public async Task<IQueryable<User>> GetUsersAsync()
+    public Task<IQueryable<User>> GetUsersAsync(CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<User?> GetUserByGuidAsync(Guid guid)
+    public Task<User?> GetUserByGuidAsync(Guid guid, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task DeleteUserByGuidAsync(Guid guid)
+    public Task DeleteUserByGuidAsync(Guid guid, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task UpdateUserAsync(User user)
+    public Task UpdateUserAsync(User user, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Guid> InsertUserAsync(User user)
+    public Task<Guid> InsertUserAsync(User user, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

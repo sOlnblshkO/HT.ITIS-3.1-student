@@ -30,7 +30,7 @@ public class MediatorTests
         await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediator();
         var env = testEnvBuilder.Build();
 
-        await env.ProductManagementController.GetProducts();
+        await env.ProductManagementController.GetProducts(CancellationToken.None);
 
         await env.MediatR.Received().Send(Arg.Any<IQuery<GetProductsDto>>(), Arg.Any<CancellationToken>());
     }
@@ -41,7 +41,7 @@ public class MediatorTests
         await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediator();
         var env = testEnvBuilder.Build();
 
-        await env.ProductManagementController.InsertProduct("Name");
+        await env.ProductManagementController.InsertProduct("Name", CancellationToken.None);
 
         await env.MediatR.Received().Send(Arg.Any<ICommand<InsertProductDto>>(), Arg.Any<CancellationToken>());
     }
@@ -52,7 +52,7 @@ public class MediatorTests
         await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediator();
         var env = testEnvBuilder.Build();
 
-        await env.ProductManagementController.DeleteProduct(Guid.NewGuid());
+        await env.ProductManagementController.DeleteProduct(Guid.NewGuid(), CancellationToken.None);
 
         await env.MediatR.Received().Send(Arg.Any<DeleteProductByGuidCommand>(), Arg.Any<CancellationToken>());
     }
@@ -63,7 +63,7 @@ public class MediatorTests
         await using var testEnvBuilder = new CqrsEnvironmentBuilder().WithMockedMediator();
         var env = testEnvBuilder.Build();
 
-        await env.ProductManagementController.UpdateProduct(Guid.NewGuid(), "Name");
+        await env.ProductManagementController.UpdateProduct(Guid.NewGuid(), "Name", CancellationToken.None);
 
         await env.MediatR.Received().Send(Arg.Any<UpdateProductCommand>(), Arg.Any<CancellationToken>());
     }

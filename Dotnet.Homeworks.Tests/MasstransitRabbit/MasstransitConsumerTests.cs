@@ -9,8 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
 using static Dotnet.Homeworks.Tests.MasstransitRabbit.Helpers.ReflectionHelpers;
 
-// ReSharper disable AccessToDisposedClosure
-
 namespace Dotnet.Homeworks.Tests.MasstransitRabbit;
 
 [Collection(nameof(AnyConsumersInAssemblyFixture))]
