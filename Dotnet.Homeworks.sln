@@ -58,6 +58,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Homeworks.DataAccess
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dotnet.Homeworks.Main.API", "Dotnet.Homeworks.Main.API", "{8B63B8C3-C1A5-4CC7-A9A2-61F8CD13E50D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BigTask", "BigTask", "{83378E05-B963-42A1-8D37-5770DFB3781C}"
+    ProjectSection(SolutionItems) = preProject
+		Dotnet.Homeworks.BigTask\3.1 BigTask.md = Dotnet.Homeworks.BigTask\3.1 BigTask.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
