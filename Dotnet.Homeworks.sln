@@ -7,7 +7,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Theory", "Theory", "{34A78ECB-E940-4BDA-AA77-E7552F322718}"
 	ProjectSection(SolutionItems) = preProject
 		Dotnet.Homeworks.Theory\1. UML.C4.md = Dotnet.Homeworks.Theory\1. UML.C4.md
-		Dotnet.Homeworks.Theory\2. Docker.md = Dotnet.Homeworks.Theory\2. Docker.md
+		Dotnet.Homeworks.Theory\2. Docker.CI-CD.Static analyzators.md = Dotnet.Homeworks.Theory\2. Docker.CI-CD.Static analyzators.md
 		Dotnet.Homeworks.Theory\3. Architecture styles.md = Dotnet.Homeworks.Theory\3. Architecture styles.md
 		Dotnet.Homeworks.Theory\4. Patterns.md = Dotnet.Homeworks.Theory\4. Patterns.md
 		Dotnet.Homeworks.Theory\5. RabbitMQ. Masstransit.md = Dotnet.Homeworks.Theory\5. RabbitMQ. Masstransit.md
