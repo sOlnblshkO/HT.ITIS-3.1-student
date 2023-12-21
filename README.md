@@ -1,6 +1,6 @@
 # Домашняя работа для пятого учебного семестра (3 год обучения, 1 семестр)
 
-![.NET](https://github.com/<ваш ник github>/<название вашего репозитория>/actions/workflows/dotnet.yml/badge.svg)
+![.NET](https://github.com/kamilla11/HT.ITIS-3.1-student/actions/workflows/dotnet.yml/badge.svg)
 
 ## Как устроены Actions
 1. ***build***: *Проверка: собирается ли проект.*
