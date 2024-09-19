@@ -17,15 +17,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Dotnet.Homeworks.Data\Dotnet.Homeworks.Data.csproj" />
       <ProjectReference Include="..\Dotnet.Homeworks.Domain\Dotnet.Homeworks.Domain.csproj" />
       <ProjectReference Include="..\Dotnet.Homeworks.Shared\Dotnet.Homeworks.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>
