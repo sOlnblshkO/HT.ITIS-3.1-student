@@ -33,8 +33,11 @@ public class MasstransitEnvironmentBuilder : TestEnvironmentBuilder<MasstransitE
         configureServices ??= _ => { };
         configureServices += s => s
             .AddSingleton(_mailingMock)
-            .AddSingleton<ICommunicationService, CommunicationService>()
-            .AddMassTransitTestHarness(b => b.AddConsumers(assembly));
+            .AddScoped<ICommunicationService, CommunicationService>()
+            .AddMassTransitTestHarness(b =>
+            {
+                b.AddConsumers(assembly);
+            });
         ServiceProvider = GetServiceProvider(configureServices);
     }
 

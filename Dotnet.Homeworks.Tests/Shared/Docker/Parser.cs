@@ -17,7 +17,9 @@ public static class Parser
             .IgnoreUnmatchedProperties()
             .WithNamingConvention(UnderscoredNamingConvention.Instance);
 
-        return b.Build().Deserialize<DockerCompose>(File.ReadAllText(filePath));
+        var yamlContent = File.ReadAllText(filePath);
+        
+        return b.Build().Deserialize<DockerCompose>(yamlContent);
     });
 
     private static readonly DockerCompose DockerComposeDeserialized = DockerComposeDeserializedFactory.Value;

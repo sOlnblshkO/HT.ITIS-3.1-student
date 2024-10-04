@@ -16,8 +16,8 @@ services:
   dotnet_rabbitmq:
     image: rabbitmq:3-management
     environment:
-      - RABBITMQ_DEFAULT_USER=DamirkaSuperGod
-      - RABBITMQ_DEFAULT_PASS=Damirka
+      RABBITMQ_DEFAULT_USER: DamirkaSuperGod
+      RABBITMQ_DEFAULT_PASS: Damirka
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -26,15 +26,15 @@ services:
       - ./rabbitmq:/var/lib/rabbitmq
     networks:
       - dotnet_network
-#    
-#  dotnet_minio:
-#    image: minio/minio:latest
-#    
-#  dotnet_mongodb:
-#    image: mongo:latest
-#    
-#  dotnet_jaeger:
-#    image: jaegertracing/all-in-one:latest
+
+  dotnet_minio:
+    image: minio/minio:latest
+
+  dotnet_mongodb:
+    image: mongo:latest
+
+  dotnet_jaeger:
+    image: jaegertracing/all-in-one:latest
     
   dotnet_main:
     build:
@@ -71,8 +71,8 @@ services:
     networks:
       - dotnet_network
       
-#  dotnet_storage:
-#    image: dotnet-web
+  dotnet_storage:
+    image: dotnet-web
 
 volumes:
   postgres_data:
