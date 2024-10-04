@@ -26,7 +26,7 @@ public class MasstransitConsumerTests
         try
         {
             await env.Harness.Start();
-            await env.RegistrationService.RegisterAsync(new RegisterUserDto("", ""));
+            await env.RegistrationService.RegisterAsync(new RegisterUserDto("", ""), new CancellationToken());
             var anyCorrectMessagesConsumed =
                 await AnyConsumedMessagesWithFilterAsync<SendEmail>(env.EmailConsumer,
                     message => message.Context.Message == testSendEmail);
@@ -53,7 +53,7 @@ public class MasstransitConsumerTests
         try
         {
             await env.Harness.Start();
-            await env.RegistrationService.RegisterAsync(new RegisterUserDto("", ""));
+            await env.RegistrationService.RegisterAsync(new RegisterUserDto("", ""), new CancellationToken());
             var anyConsumed = await AnyConsumedMessagesWithFilterAsync<SendEmail>(env.EmailConsumer);
             var anyConsumedWithErrors =
                 await AnyConsumedMessagesWithFilterAsync<SendEmail>(env.EmailConsumer,
@@ -78,7 +78,7 @@ public class MasstransitConsumerTests
         try
         {
             await env.Harness.Start();
-            await env.RegistrationService.RegisterAsync(new RegisterUserDto("", ""));
+            await env.RegistrationService.RegisterAsync(new RegisterUserDto("", ""), new CancellationToken());
             var anyConsumed = await AnyConsumedMessagesWithFilterAsync<SendEmail>(env.EmailConsumer);
             var anyConsumedWithErrors =
                 await AnyConsumedMessagesWithFilterAsync<SendEmail>(env.EmailConsumer,
@@ -107,7 +107,7 @@ public class MasstransitConsumerTests
         try
         {
             await env.Harness.Start();
-            await env.RegistrationService.RegisterAsync(new RegisterUserDto("", ""));
+            await env.RegistrationService.RegisterAsync(new RegisterUserDto("", ""), new CancellationToken());
             await Task.Delay(100);
             
             await env.MailingServiceMock.Received(1).SendEmailAsync(Arg.Any<EmailMessage>());

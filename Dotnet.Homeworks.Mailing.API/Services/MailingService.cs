@@ -2,7 +2,6 @@
 using Dotnet.Homeworks.Mailing.API.Dto;
 using Dotnet.Homeworks.Shared.Dto;
 using MailKit.Net.Smtp;
-using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
@@ -31,7 +30,7 @@ public class MailingService : IMailingService
         using var client = new SmtpClient();
         try
         {
-            await client.ConnectAsync(_emailConfig.Host, _emailConfig.Port, SecureSocketOptions.StartTls);
+            await client.ConnectAsync(_emailConfig.Host, _emailConfig.Port);
             await client.AuthenticateAsync(_emailConfig.Email, _emailConfig.Password);
             await client.SendAsync(message);
             await client.DisconnectAsync(true);

@@ -45,11 +45,11 @@ public class MasstransitEnvironmentBuilder : TestEnvironmentBuilder<MasstransitE
         var communicationServiceSubstitute = Substitute.For<ICommunicationService>();
         var producerSubstitute = Substitute.For<IRegistrationService>();
 
-        communicationServiceSubstitute.SendEmailAsync(Arg.Is<SendEmail>(data => data == testingEmailMessage))
+        communicationServiceSubstitute.SendEmailAsync(Arg.Is<SendEmail>(data => data == testingEmailMessage), Arg.Any<CancellationToken>())
             .Returns(_ => Harness!.Bus.Publish(testingEmailMessage));
 
-        producerSubstitute.RegisterAsync(Arg.Any<RegisterUserDto>())
-            .Returns(_ => communicationServiceSubstitute.SendEmailAsync(testingEmailMessage));
+        producerSubstitute.RegisterAsync(Arg.Any<RegisterUserDto>(), Arg.Any<CancellationToken>())
+            .Returns(_ => communicationServiceSubstitute.SendEmailAsync(testingEmailMessage, Arg.Any<CancellationToken>()));
 
         _communicationService = communicationServiceSubstitute;
         _registrationService = producerSubstitute;

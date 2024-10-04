@@ -4,14 +4,22 @@
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MailKit" Version="4.1.0" />
+        <PackageReference Include="MailKit" Version="4.8.0" />
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.6-develop.2001" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Dotnet.Homeworks.Shared\Dotnet.Homeworks.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>

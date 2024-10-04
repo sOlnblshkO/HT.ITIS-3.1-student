@@ -13,8 +13,19 @@ services:
     networks:
       - dotnet_network
     
-#  dotnet_rabbitmq:
-#    image: rabbitmq:3-alpine
+  dotnet_rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=DamirkaSuperGod
+      - RABBITMQ_DEFAULT_PASS=Damirka
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    container_name: rabbitmq
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq
+    networks:
+      - dotnet_network
 #    
 #  dotnet_minio:
 #    image: minio/minio:latest
@@ -31,17 +42,35 @@ services:
       dockerfile: Dotnet.Homeworks.MainProject/Dockerfile
     depends_on:
       - dotnet_postgres
+      - dotnet_rabbitmq
     environment:
       ASPNETCORE_URLS: "http://*:80"
+      RabbitMqConfig__Username: "DamirkaSuperGod"
+      RabbitMqConfig__Password: "Damirka"
+      RabbitMqConfig__Hostname: "dotnet_rabbitmq:5672"
       ConnectionStrings__Default: Host=dotnet_postgres;Port=5432;Database=PostgresDb;Username=postgres;Password=root
     ports:
       - "9000:80"
     networks:
       - dotnet_network
     
-#  dotnet_mailing:
-#    image: dotnet-web
-    
+  dotnet_mailing:
+    build:
+      context: .
+      dockerfile: Dotnet.Homeworks.Mailing.API/Dockerfile
+    depends_on:
+      - dotnet_rabbitmq
+    environment:
+      EmailConfig__Email: "cdbacjdorz@yandex.ru"
+      EmailConfig__Host: "smtp.yandex.ru"
+      EmailConfig__Port: "465"
+      EmailConfig__Password: "vhcmwfdtshanwzak"
+      RabbitMqConfig__Username: "DamirkaSuperGod"
+      RabbitMqConfig__Password: "Damirka"
+      RabbitMqConfig__Hostname: "dotnet_rabbitmq:5672"
+    networks:
+      - dotnet_network
+      
 #  dotnet_storage:
 #    image: dotnet-web
 

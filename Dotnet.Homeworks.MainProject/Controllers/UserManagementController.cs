@@ -1,5 +1,6 @@
 ﻿using Dotnet.Homeworks.Domain.Entities;
 using Dotnet.Homeworks.MainProject.Dto;
+using Dotnet.Homeworks.MainProject.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dotnet.Homeworks.MainProject.Controllers;
@@ -7,10 +8,25 @@ namespace Dotnet.Homeworks.MainProject.Controllers;
 [ApiController]
 public class UserManagementController : ControllerBase
 {
-    [HttpPost("user")]
-    public Task<IActionResult> CreateUser(RegisterUserDto userDto, CancellationToken cancellationToken)
+    private readonly IRegistrationService _registrationService;
+
+    public UserManagementController(IRegistrationService registrationService)
     {
-        throw new NotImplementedException();
+        _registrationService = registrationService;
+    }
+    
+    [HttpPost("user")]
+    public async Task<IActionResult> CreateUser(RegisterUserDto userDto, CancellationToken cancellationToken)
+    {
+        var user = new User
+        {
+            Email = userDto.Email,
+            Name = userDto.Name
+        };
+
+        await _registrationService.RegisterAsync(userDto, cancellationToken);
+
+        return Ok(user.Email);
     }
 
     [HttpGet("profile/{guid}")]

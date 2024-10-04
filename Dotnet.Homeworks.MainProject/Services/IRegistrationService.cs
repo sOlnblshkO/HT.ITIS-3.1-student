@@ -4,5 +4,5 @@ namespace Dotnet.Homeworks.MainProject.Services;
 
 public interface IRegistrationService
 {
-    public Task RegisterAsync(RegisterUserDto userDto);
+    public Task RegisterAsync(RegisterUserDto userDto, CancellationToken cancellationToken);
 }

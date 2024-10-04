@@ -12,12 +12,18 @@ public class RegistrationService : IRegistrationService
         _communicationService = communicationService;
     }
 
-    public async Task RegisterAsync(RegisterUserDto userDto)
+    public async Task RegisterAsync(RegisterUserDto userDto, CancellationToken cancellationToken)
     {
         // pretending we have some complex logic here
-        await Task.Delay(100);
+        await Task.Delay(100, cancellationToken);
         
         // publish message to a queue
-        await _communicationService.SendEmailAsync(new SendEmail("", "", "", ""));
+        await _communicationService.SendEmailAsync(
+            new SendEmail(
+                "Register",
+                userDto.Email,
+                "Registration",
+                "You are registration"),
+            cancellationToken);
     }
 }
