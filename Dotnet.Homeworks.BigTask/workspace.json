@@ -1,0 +1,1929 @@
+{
+  "configuration" : { },
+  "description" : "C4-модель проекта: магазин (пользователи, товары, заказы) + чат поддержки, RabbitMQ, CQRS, S3-хранилище, Redis, Kubernetes",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedDate" : "2026-11-07T10:44:12Z",
+  "model" : {
+    "deploymentNodes" : [ {
+      "containerInstances" : [ {
+        "containerId" : "8",
+        "environment" : "Docker Compose",
+        "id" : "82",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "de110a36-9d6d-4142-81c0-ca18595047b7"
+        },
+        "relationships" : [ {
+          "description" : "Вызывает REST API, держит соединение SignalR",
+          "destinationId" : "83",
+          "id" : "85",
+          "linkedRelationshipId" : "41",
+          "sourceId" : "82",
+          "technology" : "HTTPS, WebSocket"
+        }, {
+          "description" : "Загружает файл и метаданные",
+          "destinationId" : "87",
+          "id" : "88",
+          "linkedRelationshipId" : "42",
+          "sourceId" : "82",
+          "technology" : "HTTPS, multipart"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "9",
+        "environment" : "Docker Compose",
+        "id" : "83",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "23b7b363-52bd-476e-b01f-938636cf9e22"
+        },
+        "relationships" : [ {
+          "description" : "Доставляет сообщения в реальном времени",
+          "destinationId" : "82",
+          "id" : "84",
+          "linkedRelationshipId" : "58",
+          "sourceId" : "83",
+          "technology" : "SignalR (WebSocket)"
+        }, {
+          "description" : "Получает ссылки на вложения чата",
+          "destinationId" : "87",
+          "id" : "89",
+          "linkedRelationshipId" : "46",
+          "sourceId" : "83",
+          "technology" : "HTTPS"
+        }, {
+          "description" : "Читает и пишет данные",
+          "destinationId" : "91",
+          "id" : "92",
+          "linkedRelationshipId" : "43",
+          "sourceId" : "83",
+          "technology" : "EF Core / Npgsql"
+        }, {
+          "description" : "Backplane SignalR (несколько реплик)",
+          "destinationId" : "94",
+          "id" : "95",
+          "linkedRelationshipId" : "45",
+          "sourceId" : "83",
+          "technology" : "RESP"
+        }, {
+          "description" : "Публикует события чата и e-mail",
+          "destinationId" : "97",
+          "id" : "98",
+          "linkedRelationshipId" : "44",
+          "sourceId" : "83",
+          "technology" : "AMQP"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "19",
+        "environment" : "Docker Compose",
+        "id" : "86",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "4217f1c6-53da-497c-890a-787533fe1e6f"
+        },
+        "relationships" : [ {
+          "description" : "Сохраняет историю чата",
+          "destinationId" : "91",
+          "id" : "93",
+          "linkedRelationshipId" : "48",
+          "sourceId" : "86",
+          "technology" : "EF Core / Npgsql"
+        }, {
+          "description" : "Подписан на очередь истории чата",
+          "destinationId" : "97",
+          "id" : "99",
+          "linkedRelationshipId" : "47",
+          "sourceId" : "86",
+          "technology" : "AMQP"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "20",
+        "environment" : "Docker Compose",
+        "id" : "87",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "91d728ce-76a3-4961-bea2-5f8c973a0076"
+        },
+        "relationships" : [ {
+          "description" : "Метаданные и счётчик загрузок",
+          "destinationId" : "94",
+          "id" : "96",
+          "linkedRelationshipId" : "52",
+          "sourceId" : "87",
+          "technology" : "RESP"
+        }, {
+          "description" : "Кладёт и переносит объекты",
+          "destinationId" : "101",
+          "id" : "102",
+          "linkedRelationshipId" : "53",
+          "sourceId" : "87",
+          "technology" : "S3 API"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "27",
+        "environment" : "Docker Compose",
+        "id" : "90",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "d8118b4f-7d4c-4460-9fc9-d5d9fc65c761"
+        },
+        "relationships" : [ {
+          "description" : "Подписан на очередь SendEmail",
+          "destinationId" : "97",
+          "id" : "100",
+          "linkedRelationshipId" : "49",
+          "sourceId" : "90",
+          "technology" : "AMQP"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "28",
+        "environment" : "Docker Compose",
+        "id" : "91",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "8484eb0e-2626-4f2e-bb65-4f78e302aeef"
+        },
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "29",
+        "environment" : "Docker Compose",
+        "id" : "94",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "8d3006f6-dcb2-4f7c-8be1-b49a4eb783e0"
+        },
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "30",
+        "environment" : "Docker Compose",
+        "id" : "97",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "041884b6-a9ae-497f-99b1-af81011d2d65"
+        },
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "31",
+        "environment" : "Docker Compose",
+        "id" : "101",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "3f80d393-310e-4981-82b4-3138030bbc7b"
+        },
+        "tags" : "Container Instance"
+      } ],
+      "description" : "docker compose up (миграции накатываются при старте)",
+      "environment" : "Docker Compose",
+      "id" : "81",
+      "instances" : "1",
+      "name" : "Docker Host",
+      "properties" : {
+        "structurizr.dsl.identifier" : "76d609b9-a8d5-4e1e-bd51-69470dbf110a"
+      },
+      "tags" : "Element,Deployment Node",
+      "technology" : "Docker, Docker Compose"
+    }, {
+      "children" : [ {
+        "children" : [ {
+          "containerInstances" : [ {
+            "containerId" : "8",
+            "environment" : "Kubernetes",
+            "id" : "107",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "k8sSpa"
+            },
+            "relationships" : [ {
+              "description" : "Вызывает REST API, держит соединение SignalR",
+              "destinationId" : "109",
+              "id" : "111",
+              "linkedRelationshipId" : "41",
+              "sourceId" : "107",
+              "technology" : "HTTPS, WebSocket"
+            }, {
+              "description" : "Загружает файл и метаданные",
+              "destinationId" : "115",
+              "id" : "116",
+              "linkedRelationshipId" : "42",
+              "sourceId" : "107",
+              "technology" : "HTTPS, multipart"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "description" : "Deployment, 2 реплики, Service ClusterIP",
+          "environment" : "Kubernetes",
+          "id" : "106",
+          "instances" : "1",
+          "name" : "spa",
+          "properties" : {
+            "structurizr.dsl.identifier" : "7f7c98dd-c0f9-4db0-88e7-87f138ca7722"
+          },
+          "tags" : "Element,Deployment Node,2",
+          "technology" : "Deployment"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "9",
+            "environment" : "Kubernetes",
+            "id" : "109",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "k8sMain"
+            },
+            "relationships" : [ {
+              "description" : "Доставляет сообщения в реальном времени",
+              "destinationId" : "107",
+              "id" : "110",
+              "linkedRelationshipId" : "58",
+              "sourceId" : "109",
+              "technology" : "SignalR (WebSocket)"
+            }, {
+              "description" : "Получает ссылки на вложения чата",
+              "destinationId" : "115",
+              "id" : "117",
+              "linkedRelationshipId" : "46",
+              "sourceId" : "109",
+              "technology" : "HTTPS"
+            }, {
+              "description" : "Читает и пишет данные",
+              "destinationId" : "121",
+              "id" : "122",
+              "linkedRelationshipId" : "43",
+              "sourceId" : "109",
+              "technology" : "EF Core / Npgsql"
+            }, {
+              "description" : "Backplane SignalR (несколько реплик)",
+              "destinationId" : "125",
+              "id" : "126",
+              "linkedRelationshipId" : "45",
+              "sourceId" : "109",
+              "technology" : "RESP"
+            }, {
+              "description" : "Публикует события чата и e-mail",
+              "destinationId" : "129",
+              "id" : "130",
+              "linkedRelationshipId" : "44",
+              "sourceId" : "109",
+              "technology" : "AMQP"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "description" : "Deployment, 2+ реплики, HPA; ConfigMap + Secret",
+          "environment" : "Kubernetes",
+          "id" : "108",
+          "instances" : "1",
+          "name" : "main-api",
+          "properties" : {
+            "structurizr.dsl.identifier" : "7c49a8c9-9aa9-409e-9cb3-b39bdbca23f2"
+          },
+          "tags" : "Element,Deployment Node,2",
+          "technology" : "Deployment"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "19",
+            "environment" : "Kubernetes",
+            "id" : "113",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "5b8c73f0-7e88-4b5a-9ebd-f1c2d2f11ec1"
+            },
+            "relationships" : [ {
+              "description" : "Сохраняет историю чата",
+              "destinationId" : "121",
+              "id" : "123",
+              "linkedRelationshipId" : "48",
+              "sourceId" : "113",
+              "technology" : "EF Core / Npgsql"
+            }, {
+              "description" : "Подписан на очередь истории чата",
+              "destinationId" : "129",
+              "id" : "131",
+              "linkedRelationshipId" : "47",
+              "sourceId" : "113",
+              "technology" : "AMQP"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "description" : "Deployment",
+          "environment" : "Kubernetes",
+          "id" : "112",
+          "instances" : "1",
+          "name" : "chat-consumer",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dc825c30-2d6e-410b-9f6b-436140dbaccf"
+          },
+          "tags" : "Element,Deployment Node,2",
+          "technology" : "Deployment"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "20",
+            "environment" : "Kubernetes",
+            "id" : "115",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "k8sStorage"
+            },
+            "relationships" : [ {
+              "description" : "Метаданные и счётчик загрузок",
+              "destinationId" : "125",
+              "id" : "127",
+              "linkedRelationshipId" : "52",
+              "sourceId" : "115",
+              "technology" : "RESP"
+            }, {
+              "description" : "Кладёт и переносит объекты",
+              "destinationId" : "134",
+              "id" : "135",
+              "linkedRelationshipId" : "53",
+              "sourceId" : "115",
+              "technology" : "S3 API"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "description" : "Deployment",
+          "environment" : "Kubernetes",
+          "id" : "114",
+          "instances" : "1",
+          "name" : "storage-api",
+          "properties" : {
+            "structurizr.dsl.identifier" : "90439857-87be-491e-a4e1-67c22d3d7bba"
+          },
+          "tags" : "Element,Deployment Node,2",
+          "technology" : "Deployment"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "27",
+            "environment" : "Kubernetes",
+            "id" : "119",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "fe5bb950-d4d7-4730-8776-a591e53758cf"
+            },
+            "relationships" : [ {
+              "description" : "Подписан на очередь SendEmail",
+              "destinationId" : "129",
+              "id" : "132",
+              "linkedRelationshipId" : "49",
+              "sourceId" : "119",
+              "technology" : "AMQP"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "description" : "Deployment",
+          "environment" : "Kubernetes",
+          "id" : "118",
+          "instances" : "1",
+          "name" : "mailing-api",
+          "properties" : {
+            "structurizr.dsl.identifier" : "3f8193fc-f33b-46a9-926d-f919b45ee266"
+          },
+          "tags" : "Element,Deployment Node,1",
+          "technology" : "Deployment"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "28",
+            "environment" : "Kubernetes",
+            "id" : "121",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "d13fc4e1-a71a-4071-8016-b8b4f7e25497"
+            },
+            "tags" : "Container Instance"
+          } ],
+          "description" : "StatefulSet + PVC",
+          "environment" : "Kubernetes",
+          "id" : "120",
+          "instances" : "1",
+          "name" : "postgres",
+          "properties" : {
+            "structurizr.dsl.identifier" : "2745d601-14c4-4d83-989d-0343401e27fe"
+          },
+          "tags" : "Element,Deployment Node",
+          "technology" : "StatefulSet"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "29",
+            "environment" : "Kubernetes",
+            "id" : "125",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "4f0d17bb-3612-454c-a455-b213d864a91b"
+            },
+            "tags" : "Container Instance"
+          } ],
+          "description" : "StatefulSet",
+          "environment" : "Kubernetes",
+          "id" : "124",
+          "instances" : "1",
+          "name" : "redis",
+          "properties" : {
+            "structurizr.dsl.identifier" : "9656d0ea-241e-4b96-b70f-ef488de9812d"
+          },
+          "tags" : "Element,Deployment Node",
+          "technology" : "StatefulSet"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "30",
+            "environment" : "Kubernetes",
+            "id" : "129",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "1f8555cc-ef14-40f6-8840-0d776bbc7f72"
+            },
+            "tags" : "Container Instance"
+          } ],
+          "description" : "StatefulSet + PVC",
+          "environment" : "Kubernetes",
+          "id" : "128",
+          "instances" : "1",
+          "name" : "rabbitmq",
+          "properties" : {
+            "structurizr.dsl.identifier" : "2ffd8274-c993-4e25-87ea-39e115b55dd3"
+          },
+          "tags" : "Element,Deployment Node",
+          "technology" : "StatefulSet"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "31",
+            "environment" : "Kubernetes",
+            "id" : "134",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "5bd9482e-32d5-40a3-83f7-2af1a0ba4f9b"
+            },
+            "tags" : "Container Instance"
+          } ],
+          "description" : "StatefulSet + PVC",
+          "environment" : "Kubernetes",
+          "id" : "133",
+          "instances" : "1",
+          "name" : "minio",
+          "properties" : {
+            "structurizr.dsl.identifier" : "7ef1f62f-0511-4332-a74b-4312c0804868"
+          },
+          "tags" : "Element,Deployment Node",
+          "technology" : "StatefulSet"
+        } ],
+        "environment" : "Kubernetes",
+        "id" : "105",
+        "instances" : "1",
+        "name" : "Namespace: homeworks",
+        "properties" : {
+          "structurizr.dsl.identifier" : "32dfd84e-2b6e-42b3-bb5b-473ae2dd394c"
+        },
+        "tags" : "Element,Deployment Node",
+        "technology" : "Namespace"
+      } ],
+      "description" : "Этап 7: проект в k8s",
+      "environment" : "Kubernetes",
+      "id" : "103",
+      "infrastructureNodes" : [ {
+        "description" : "Маршрутизация /, /api, /chat-hub, /storage",
+        "environment" : "Kubernetes",
+        "id" : "104",
+        "name" : "Ingress Controller",
+        "properties" : {
+          "structurizr.dsl.identifier" : "ingress"
+        },
+        "relationships" : [ {
+          "description" : "Маршрутизирует /",
+          "destinationId" : "107",
+          "id" : "136",
+          "sourceId" : "104",
+          "tags" : "Relationship",
+          "technology" : "HTTP"
+        }, {
+          "description" : "Маршрутизирует /api и /chat-hub",
+          "destinationId" : "109",
+          "id" : "137",
+          "sourceId" : "104",
+          "tags" : "Relationship",
+          "technology" : "HTTP, WebSocket"
+        }, {
+          "description" : "Маршрутизирует /storage",
+          "destinationId" : "115",
+          "id" : "138",
+          "sourceId" : "104",
+          "tags" : "Relationship",
+          "technology" : "HTTP"
+        } ],
+        "tags" : "Element,Infrastructure Node",
+        "technology" : "nginx-ingress"
+      } ],
+      "instances" : "1",
+      "name" : "Kubernetes cluster",
+      "properties" : {
+        "structurizr.dsl.identifier" : "61d39348-2cb2-40c1-882a-b63b5e84e563"
+      },
+      "tags" : "Element,Deployment Node",
+      "technology" : "Kubernetes"
+    } ],
+    "people" : [ {
+      "description" : "Просматривает каталог, оформляет заказы, пишет в чат поддержки и прикладывает картинки",
+      "id" : "1",
+      "name" : "Клиент",
+      "properties" : {
+        "structurizr.dsl.identifier" : "customer"
+      },
+      "relationships" : [ {
+        "description" : "Смотрит каталог, делает заказы, пишет в чат, загружает картинки",
+        "destinationId" : "8",
+        "id" : "32",
+        "sourceId" : "1",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "Смотрит каталог, делает заказы, пишет в чат, загружает картинки",
+        "destinationId" : "7",
+        "id" : "33",
+        "linkedRelationshipId" : "32",
+        "sourceId" : "1",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Отвечает клиентам в чате от имени поддержки",
+      "id" : "2",
+      "name" : "Оператор поддержки",
+      "properties" : {
+        "structurizr.dsl.identifier" : "supportAgent"
+      },
+      "relationships" : [ {
+        "description" : "Отвечает клиентам в чате",
+        "destinationId" : "8",
+        "id" : "34",
+        "sourceId" : "2",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "Отвечает клиентам в чате",
+        "destinationId" : "7",
+        "id" : "35",
+        "linkedRelationshipId" : "34",
+        "sourceId" : "2",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Управляет пользователями и товарами",
+      "id" : "3",
+      "name" : "Администратор",
+      "properties" : {
+        "structurizr.dsl.identifier" : "admin"
+      },
+      "relationships" : [ {
+        "description" : "Управляет пользователями и товарами",
+        "destinationId" : "8",
+        "id" : "36",
+        "sourceId" : "3",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "Управляет пользователями и товарами",
+        "destinationId" : "7",
+        "id" : "37",
+        "linkedRelationshipId" : "36",
+        "sourceId" : "3",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Пушит код, создаёт pull request",
+      "id" : "4",
+      "name" : "Разработчик",
+      "properties" : {
+        "structurizr.dsl.identifier" : "developer"
+      },
+      "relationships" : [ {
+        "description" : "git push / pull request",
+        "destinationId" : "6",
+        "id" : "38",
+        "sourceId" : "4",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "softwareSystems" : [ {
+      "description" : "Доставляет e-mail пользователям",
+      "documentation" : { },
+      "id" : "5",
+      "name" : "SMTP-провайдер",
+      "properties" : {
+        "structurizr.dsl.identifier" : "smtp"
+      },
+      "relationships" : [ {
+        "description" : "Доставляет письма",
+        "destinationId" : "1",
+        "id" : "40",
+        "sourceId" : "5",
+        "tags" : "Relationship",
+        "technology" : "e-mail"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "CI: build, Roslyn-анализатор (back), ESLint (front), тесты. CD: выкладка проекта",
+      "documentation" : { },
+      "id" : "6",
+      "name" : "GitHub Actions",
+      "properties" : {
+        "structurizr.dsl.identifier" : "github"
+      },
+      "relationships" : [ {
+        "description" : "Build, анализаторы, тесты, деплой (CD)",
+        "destinationId" : "7",
+        "id" : "39",
+        "sourceId" : "6",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "containers" : [ {
+        "description" : "Каталог, заказы, админка. Виджет чата поддержки (всплывающее окно) доступен со всех страниц",
+        "documentation" : { },
+        "id" : "8",
+        "name" : "Web SPA",
+        "properties" : {
+          "structurizr.dsl.identifier" : "spa"
+        },
+        "relationships" : [ {
+          "description" : "Вызывает REST API, держит соединение SignalR",
+          "destinationId" : "9",
+          "id" : "41",
+          "sourceId" : "8",
+          "tags" : "Relationship",
+          "technology" : "HTTPS, WebSocket"
+        }, {
+          "description" : "Загружает файл и метаданные",
+          "destinationId" : "20",
+          "id" : "42",
+          "sourceId" : "8",
+          "tags" : "Relationship",
+          "technology" : "HTTPS, multipart"
+        }, {
+          "description" : "Запросы магазина",
+          "destinationId" : "10",
+          "id" : "54",
+          "sourceId" : "8",
+          "tags" : "Relationship",
+          "technology" : "REST/JSON"
+        }, {
+          "description" : "Отправляет сообщения чата",
+          "destinationId" : "11",
+          "id" : "55",
+          "sourceId" : "8",
+          "tags" : "Relationship",
+          "technology" : "SignalR (WebSocket)"
+        }, {
+          "description" : "Загружает историю чата",
+          "destinationId" : "12",
+          "id" : "56",
+          "sourceId" : "8",
+          "tags" : "Relationship",
+          "technology" : "REST/JSON"
+        }, {
+          "description" : "Загрузка файла и метаданных",
+          "destinationId" : "21",
+          "id" : "72",
+          "sourceId" : "8",
+          "tags" : "Relationship",
+          "technology" : "HTTPS, multipart"
+        } ],
+        "tags" : "Element,Container,WebApp",
+        "technology" : "React, TypeScript, @microsoft/signalr"
+      }, {
+        "components" : [ {
+          "description" : "Users / Products / Orders / UserManagement: принимают HTTP и превращают в команды и запросы",
+          "documentation" : { },
+          "id" : "10",
+          "name" : "Shop Controllers",
+          "properties" : {
+            "structurizr.dsl.identifier" : "shopControllers"
+          },
+          "relationships" : [ {
+            "description" : "Отправляет Command / Query",
+            "destinationId" : "13",
+            "id" : "59",
+            "sourceId" : "10",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Presentation",
+          "technology" : "ASP.NET Core Controllers"
+        }, {
+          "description" : "Приём сообщений клиента и оператора, рассылка в реальном времени",
+          "documentation" : { },
+          "id" : "11",
+          "name" : "ChatHub",
+          "properties" : {
+            "structurizr.dsl.identifier" : "chatHub"
+          },
+          "relationships" : [ {
+            "description" : "Доставляет сообщения в реальном времени",
+            "destinationId" : "8",
+            "id" : "57",
+            "sourceId" : "11",
+            "tags" : "Relationship",
+            "technology" : "SignalR (WebSocket)"
+          }, {
+            "description" : "SendChatMessageCommand",
+            "destinationId" : "13",
+            "id" : "60",
+            "sourceId" : "11",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Backplane",
+            "destinationId" : "29",
+            "id" : "70",
+            "sourceId" : "11",
+            "tags" : "Relationship",
+            "technology" : "RESP"
+          } ],
+          "tags" : "Element,Component,Presentation",
+          "technology" : "SignalR Hub"
+        }, {
+          "description" : "Отдаёт историю чата постранично",
+          "documentation" : { },
+          "id" : "12",
+          "name" : "ChatHistoryController",
+          "properties" : {
+            "structurizr.dsl.identifier" : "chatHistoryApi"
+          },
+          "relationships" : [ {
+            "description" : "GetChatHistoryQuery",
+            "destinationId" : "13",
+            "id" : "61",
+            "sourceId" : "12",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Presentation",
+          "technology" : "ASP.NET Core Controller"
+        }, {
+          "description" : "Единая точка входа для CQRS. Behaviors: валидация, транзакция (UnitOfWork), логирование",
+          "documentation" : { },
+          "id" : "13",
+          "name" : "Mediator + Pipeline Behaviors",
+          "properties" : {
+            "structurizr.dsl.identifier" : "mediator"
+          },
+          "relationships" : [ {
+            "description" : "Через pipeline behaviors",
+            "destinationId" : "14",
+            "id" : "62",
+            "sourceId" : "13",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Через pipeline behaviors",
+            "destinationId" : "15",
+            "id" : "63",
+            "sourceId" : "13",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Application",
+          "technology" : "Dotnet.Homeworks.Mediator"
+        }, {
+          "description" : "Create/Update/Delete User, Product, Order; SendChatMessage",
+          "documentation" : { },
+          "id" : "14",
+          "name" : "Command Handlers",
+          "properties" : {
+            "structurizr.dsl.identifier" : "commandHandlers"
+          },
+          "relationships" : [ {
+            "description" : "Использует сущности и интерфейсы репозиториев",
+            "destinationId" : "16",
+            "id" : "64",
+            "sourceId" : "14",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Публикует ChatMessageSent / SendEmail",
+            "destinationId" : "18",
+            "id" : "67",
+            "sourceId" : "14",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Проверяет вложение / получает URL",
+            "destinationId" : "20",
+            "id" : "71",
+            "sourceId" : "14",
+            "tags" : "Relationship",
+            "technology" : "HTTPS"
+          } ],
+          "tags" : "Element,Component,Application",
+          "technology" : "Dotnet.Homeworks.Features"
+        }, {
+          "description" : "GetUser, GetProducts, GetOrders; GetChatHistory",
+          "documentation" : { },
+          "id" : "15",
+          "name" : "Query Handlers",
+          "properties" : {
+            "structurizr.dsl.identifier" : "queryHandlers"
+          },
+          "relationships" : [ {
+            "description" : "Использует интерфейсы репозиториев",
+            "destinationId" : "16",
+            "id" : "65",
+            "sourceId" : "15",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Application",
+          "technology" : "Dotnet.Homeworks.Features"
+        }, {
+          "description" : "Сущности (User, Product, Order, ChatMessage), интерфейсы репозиториев. Ни от чего не зависит",
+          "documentation" : { },
+          "id" : "16",
+          "name" : "Domain",
+          "properties" : {
+            "structurizr.dsl.identifier" : "domain"
+          },
+          "tags" : "Element,Component,Domain",
+          "technology" : "Dotnet.Homeworks.Domain"
+        }, {
+          "description" : "Реализация интерфейсов репозиториев, спецификации, DbContext",
+          "documentation" : { },
+          "id" : "17",
+          "name" : "Repositories + UnitOfWork",
+          "properties" : {
+            "structurizr.dsl.identifier" : "repositories"
+          },
+          "relationships" : [ {
+            "description" : "Реализует интерфейсы (Dependency Inversion)",
+            "destinationId" : "16",
+            "id" : "66",
+            "sourceId" : "17",
+            "tags" : "Relationship"
+          }, {
+            "description" : "SQL",
+            "destinationId" : "28",
+            "id" : "68",
+            "sourceId" : "17",
+            "tags" : "Relationship",
+            "technology" : "EF Core / Npgsql"
+          } ],
+          "tags" : "Element,Component,Infrastructure",
+          "technology" : "EF Core, Dotnet.Homeworks.DataAccess"
+        }, {
+          "description" : "Публикация событий ChatMessageSent и SendEmail в брокер",
+          "documentation" : { },
+          "id" : "18",
+          "name" : "Message Publisher",
+          "properties" : {
+            "structurizr.dsl.identifier" : "messagePublisher"
+          },
+          "relationships" : [ {
+            "description" : "Publish",
+            "destinationId" : "30",
+            "id" : "69",
+            "sourceId" : "18",
+            "tags" : "Relationship",
+            "technology" : "AMQP"
+          } ],
+          "tags" : "Element,Component,Infrastructure",
+          "technology" : "MassTransit"
+        } ],
+        "description" : "Бизнес-логика магазина (CQRS + Clean Architecture), SignalR-хаб чата, REST истории чата",
+        "documentation" : { },
+        "id" : "9",
+        "name" : "Main API",
+        "properties" : {
+          "structurizr.dsl.identifier" : "mainApi"
+        },
+        "relationships" : [ {
+          "description" : "Читает и пишет данные",
+          "destinationId" : "28",
+          "id" : "43",
+          "sourceId" : "9",
+          "tags" : "Relationship",
+          "technology" : "EF Core / Npgsql"
+        }, {
+          "description" : "Публикует события чата и e-mail",
+          "destinationId" : "30",
+          "id" : "44",
+          "sourceId" : "9",
+          "tags" : "Relationship",
+          "technology" : "AMQP"
+        }, {
+          "description" : "Backplane SignalR (несколько реплик)",
+          "destinationId" : "29",
+          "id" : "45",
+          "sourceId" : "9",
+          "tags" : "Relationship",
+          "technology" : "RESP"
+        }, {
+          "description" : "Получает ссылки на вложения чата",
+          "destinationId" : "20",
+          "id" : "46",
+          "sourceId" : "9",
+          "tags" : "Relationship",
+          "technology" : "HTTPS"
+        }, {
+          "description" : "Доставляет сообщения в реальном времени",
+          "destinationId" : "8",
+          "id" : "58",
+          "linkedRelationshipId" : "57",
+          "sourceId" : "9",
+          "technology" : "SignalR (WebSocket)"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "ASP.NET Core, SignalR, MassTransit, EF Core"
+      }, {
+        "description" : "Отдельный проект: подписан на RabbitMQ, асинхронно пишет историю чата в БД",
+        "documentation" : { },
+        "id" : "19",
+        "name" : "Chat Consumer",
+        "properties" : {
+          "structurizr.dsl.identifier" : "chatConsumer"
+        },
+        "relationships" : [ {
+          "description" : "Подписан на очередь истории чата",
+          "destinationId" : "30",
+          "id" : "47",
+          "sourceId" : "19",
+          "tags" : "Relationship",
+          "technology" : "AMQP"
+        }, {
+          "description" : "Сохраняет историю чата",
+          "destinationId" : "28",
+          "id" : "48",
+          "sourceId" : "19",
+          "tags" : "Relationship",
+          "technology" : "EF Core / Npgsql"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : ".NET Worker Service, MassTransit"
+      }, {
+        "components" : [ {
+          "description" : "Приём файла и метаданных (раздельными запросами), выдача ссылок на файл",
+          "documentation" : { },
+          "id" : "21",
+          "name" : "Upload / Download Endpoints",
+          "properties" : {
+            "structurizr.dsl.identifier" : "storageEndpoints"
+          },
+          "relationships" : [ {
+            "description" : "Валидирует метаданные по типу файла",
+            "destinationId" : "22",
+            "id" : "73",
+            "sourceId" : "21",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Кладёт файл во временный бакет",
+            "destinationId" : "24",
+            "id" : "74",
+            "sourceId" : "21",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Сохраняет метаданные, счётчик +1",
+            "destinationId" : "23",
+            "id" : "75",
+            "sourceId" : "21",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Presentation",
+          "technology" : "Minimal API"
+        }, {
+          "description" : "Схемы метаданных по типу файла: mp3, видео, изображение, PDF-книга, документ",
+          "documentation" : { },
+          "id" : "22",
+          "name" : "Metadata Schemas",
+          "properties" : {
+            "structurizr.dsl.identifier" : "metadataSchemas"
+          },
+          "tags" : "Element,Component,Domain",
+          "technology" : "C# records + validators"
+        }, {
+          "description" : "Хранит временные метаданные и счётчик успешных загрузок (файл + метаданные)",
+          "documentation" : { },
+          "id" : "23",
+          "name" : "Upload Tracker",
+          "properties" : {
+            "structurizr.dsl.identifier" : "uploadTracker"
+          },
+          "relationships" : [ {
+            "description" : "Метаданные и счётчик",
+            "destinationId" : "29",
+            "id" : "76",
+            "sourceId" : "23",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Infrastructure",
+          "technology" : "StackExchange.Redis"
+        }, {
+          "description" : "Выбор бакета (temp / permanent), put/get/move объектов",
+          "documentation" : { },
+          "id" : "24",
+          "name" : "Storage Factory + ImageStorage",
+          "properties" : {
+            "structurizr.dsl.identifier" : "storageFactory"
+          },
+          "relationships" : [ {
+            "description" : "put / get / move",
+            "destinationId" : "31",
+            "id" : "77",
+            "sourceId" : "24",
+            "tags" : "Relationship",
+            "technology" : "S3 API"
+          } ],
+          "tags" : "Element,Component,Infrastructure",
+          "technology" : "Minio SDK"
+        }, {
+          "description" : "Когда счётчик = 2: переносит файл из temp в permanent и чистит ключи в Redis",
+          "documentation" : { },
+          "id" : "25",
+          "name" : "Pending Objects Processor",
+          "properties" : {
+            "structurizr.dsl.identifier" : "pendingProcessor"
+          },
+          "relationships" : [ {
+            "description" : "Проверяет: счётчик = 2?",
+            "destinationId" : "23",
+            "id" : "78",
+            "sourceId" : "25",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Переносит temp -> permanent",
+            "destinationId" : "24",
+            "id" : "79",
+            "sourceId" : "25",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Infrastructure",
+          "technology" : "BackgroundService"
+        }, {
+          "description" : "Раз в сутки очищает Redis от зависших незавершённых загрузок",
+          "documentation" : { },
+          "id" : "26",
+          "name" : "Daily Redis Cleaner",
+          "properties" : {
+            "structurizr.dsl.identifier" : "redisCleaner"
+          },
+          "relationships" : [ {
+            "description" : "Очистка раз в сутки",
+            "destinationId" : "29",
+            "id" : "80",
+            "sourceId" : "26",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component,Infrastructure",
+          "technology" : "BackgroundService"
+        } ],
+        "description" : "Отдельный сервис работы с S3: загрузка файла и метаданных, перенос из временного хранилища в постоянное",
+        "documentation" : { },
+        "id" : "20",
+        "name" : "Storage API",
+        "properties" : {
+          "structurizr.dsl.identifier" : "storageApi"
+        },
+        "relationships" : [ {
+          "description" : "Метаданные и счётчик загрузок",
+          "destinationId" : "29",
+          "id" : "52",
+          "sourceId" : "20",
+          "tags" : "Relationship",
+          "technology" : "RESP"
+        }, {
+          "description" : "Кладёт и переносит объекты",
+          "destinationId" : "31",
+          "id" : "53",
+          "sourceId" : "20",
+          "tags" : "Relationship",
+          "technology" : "S3 API"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "ASP.NET Core Minimal API, Minio SDK"
+      }, {
+        "description" : "Подписан на RabbitMQ, отправляет письма (регистрация и др.)",
+        "documentation" : { },
+        "id" : "27",
+        "name" : "Mailing API",
+        "properties" : {
+          "structurizr.dsl.identifier" : "mailingApi"
+        },
+        "relationships" : [ {
+          "description" : "Подписан на очередь SendEmail",
+          "destinationId" : "30",
+          "id" : "49",
+          "sourceId" : "27",
+          "tags" : "Relationship",
+          "technology" : "AMQP"
+        }, {
+          "description" : "Отправляет письма",
+          "destinationId" : "5",
+          "id" : "50",
+          "sourceId" : "27",
+          "tags" : "Relationship",
+          "technology" : "SMTP"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : ".NET Worker, MassTransit, MailKit"
+      }, {
+        "description" : "Пользователи, товары, заказы, история чата. Миграции накатываются при старте",
+        "documentation" : { },
+        "id" : "28",
+        "name" : "PostgreSQL",
+        "properties" : {
+          "structurizr.dsl.identifier" : "postgres"
+        },
+        "tags" : "Element,Container,Database",
+        "technology" : "PostgreSQL"
+      }, {
+        "description" : "Временные метаданные загрузок, счётчик загрузок, backplane для SignalR",
+        "documentation" : { },
+        "id" : "29",
+        "name" : "Redis",
+        "properties" : {
+          "structurizr.dsl.identifier" : "redis"
+        },
+        "tags" : "Element,Container,Database",
+        "technology" : "Redis"
+      }, {
+        "description" : "Очереди: история чата, отправка e-mail",
+        "documentation" : { },
+        "id" : "30",
+        "name" : "RabbitMQ",
+        "properties" : {
+          "structurizr.dsl.identifier" : "rabbit"
+        },
+        "tags" : "Element,Container,Queue",
+        "technology" : "RabbitMQ"
+      }, {
+        "description" : "Два бакета: temp (временное) и permanent (постоянное хранилище)",
+        "documentation" : { },
+        "id" : "31",
+        "name" : "MinIO (S3)",
+        "properties" : {
+          "structurizr.dsl.identifier" : "minio"
+        },
+        "tags" : "Element,Container,Database",
+        "technology" : "MinIO, S3 API"
+      } ],
+      "description" : "Магазин + всплывающий чат поддержки на всех страницах",
+      "documentation" : { },
+      "id" : "7",
+      "name" : "Интернет-магазин",
+      "properties" : {
+        "structurizr.dsl.identifier" : "shop"
+      },
+      "relationships" : [ {
+        "description" : "Отправляет письма",
+        "destinationId" : "5",
+        "id" : "51",
+        "linkedRelationshipId" : "50",
+        "sourceId" : "7",
+        "technology" : "SMTP"
+      } ],
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "Интернет-магазин с чатом поддержки (BigTask 3.1)",
+  "properties" : {
+    "structurizr.inspection.error" : "23",
+    "structurizr.dsl" : "d29ya3NwYWNlICLQmNC90YLQtdGA0L3QtdGCLdC80LDQs9Cw0LfQuNC9INGBINGH0LDRgtC+0Lwg0L/QvtC00LTQtdGA0LbQutC4IChCaWdUYXNrIDMuMSkiICJDNC3QvNC+0LTQtdC70Ywg0L/RgNC+0LXQutGC0LA6INC80LDQs9Cw0LfQuNC9ICjQv9C+0LvRjNC30L7QstCw0YLQtdC70LgsINGC0L7QstCw0YDRiywg0LfQsNC60LDQt9GLKSArINGH0LDRgiDQv9C+0LTQtNC10YDQttC60LgsIFJhYmJpdE1RLCBDUVJTLCBTMy3RhdGA0LDQvdC40LvQuNGJ0LUsIFJlZGlzLCBLdWJlcm5ldGVzIiB7CgogICAgbW9kZWwgewogICAgICAgICFpbXBsaWVkUmVsYXRpb25zaGlwcyB0cnVlCgogICAgICAgICMgLS0tLS0tLS0tLSDQm9GO0LTQuCAtLS0tLS0tLS0tCiAgICAgICAgY3VzdG9tZXIgPSBwZXJzb24gItCa0LvQuNC10L3RgiIgItCf0YDQvtGB0LzQsNGC0YDQuNCy0LDQtdGCINC60LDRgtCw0LvQvtCzLCDQvtGE0L7RgNC80LvRj9C10YIg0LfQsNC60LDQt9GLLCDQv9C40YjQtdGCINCyINGH0LDRgiDQv9C+0LTQtNC10YDQttC60Lgg0Lgg0L/RgNC40LrQu9Cw0LTRi9Cy0LDQtdGCINC60LDRgNGC0LjQvdC60LgiCiAgICAgICAgc3VwcG9ydEFnZW50ID0gcGVyc29uICLQntC/0LXRgNCw0YLQvtGAINC/0L7QtNC00LXRgNC20LrQuCIgItCe0YLQstC10YfQsNC10YIg0LrQu9C40LXQvdGC0LDQvCDQsiDRh9Cw0YLQtSDQvtGCINC40LzQtdC90Lgg0L/QvtC00LTQtdGA0LbQutC4IgogICAgICAgIGFkbWluID0gcGVyc29uICLQkNC00LzQuNC90LjRgdGC0YDQsNGC0L7RgCIgItCj0L/RgNCw0LLQu9GP0LXRgiDQv9C+0LvRjNC30L7QstCw0YLQtdC70Y/QvNC4INC4INGC0L7QstCw0YDQsNC80LgiCiAgICAgICAgZGV2ZWxvcGVyID0gcGVyc29uICLQoNCw0LfRgNCw0LHQvtGC0YfQuNC6IiAi0J/Rg9GI0LjRgiDQutC+0LQsINGB0L7Qt9C00LDRkdGCIHB1bGwgcmVxdWVzdCIKCiAgICAgICAgIyAtLS0tLS0tLS0tINCS0L3QtdGI0L3QuNC1INGB0LjRgdGC0LXQvNGLIC0tLS0tLS0tLS0KICAgICAgICBzbXRwID0gc29mdHdhcmVTeXN0ZW0gIlNNVFAt0L/RgNC+0LLQsNC50LTQtdGAIiAi0JTQvtGB0YLQsNCy0LvRj9C10YIgZS1tYWlsINC/0L7Qu9GM0LfQvtCy0LDRgtC10LvRj9C8IiAiRXh0ZXJuYWwiCiAgICAgICAgZ2l0aHViID0gc29mdHdhcmVTeXN0ZW0gIkdpdEh1YiBBY3Rpb25zIiAiQ0k6IGJ1aWxkLCBSb3NseW4t0LDQvdCw0LvQuNC30LDRgtC+0YAgKGJhY2spLCBFU0xpbnQgKGZyb250KSwg0YLQtdGB0YLRiy4gQ0Q6INCy0YvQutC70LDQtNC60LAg0L/RgNC+0LXQutGC0LAiICJFeHRlcm5hbCIKCiAgICAgICAgIyAtLS0tLS0tLS0tINCd0LDRiNCwINGB0LjRgdGC0LXQvNCwIC0tLS0tLS0tLS0KICAgICAgICBzaG9wID0gc29mdHdhcmVTeXN0ZW0gItCY0L3RgtC10YDQvdC10YIt0LzQsNCz0LDQt9C40L0iICLQnNCw0LPQsNC30LjQvSArINCy0YHQv9C70YvQstCw0Y7RidC40Lkg0YfQsNGCINC/0L7QtNC00LXRgNC20LrQuCDQvdCwINCy0YHQtdGFINGB0YLRgNCw0L3QuNGG0LDRhSIgewoKICAgICAgICAgICAgc3BhID0gY29udGFpbmVyICJXZWIgU1BBIiAi0JrQsNGC0LDQu9C+0LMsINC30LDQutCw0LfRiywg0LDQtNC80LjQvdC60LAuINCS0LjQtNC20LXRgiDRh9Cw0YLQsCDQv9C+0LTQtNC10YDQttC60LggKNCy0YHQv9C70YvQstCw0Y7RidC10LUg0L7QutC90L4pINC00L7RgdGC0YPQv9C10L0g0YHQviDQstGB0LXRhSDRgdGC0YDQsNC90LjRhiIgIlJlYWN0LCBUeXBlU2NyaXB0LCBAbWljcm9zb2Z0L3NpZ25hbHIiICJXZWJBcHAiCgogICAgICAgICAgICBtYWluQXBpID0gY29udGFpbmVyICJNYWluIEFQSSIgItCR0LjQt9C90LXRgS3Qu9C+0LPQuNC60LAg0LzQsNCz0LDQt9C40L3QsCAoQ1FSUyArIENsZWFuIEFyY2hpdGVjdHVyZSksIFNpZ25hbFIt0YXQsNCxINGH0LDRgtCwLCBSRVNUINC40YHRgtC+0YDQuNC4INGH0LDRgtCwIiAiQVNQLk5FVCBDb3JlLCBTaWduYWxSLCBNYXNzVHJhbnNpdCwgRUYgQ29yZSIgewoKICAgICAgICAgICAgICAgIHNob3BDb250cm9sbGVycyA9IGNvbXBvbmVudCAiU2hvcCBDb250cm9sbGVycyIgIlVzZXJzIC8gUHJvZHVjdHMgLyBPcmRlcnMgLyBVc2VyTWFuYWdlbWVudDog0L/RgNC40L3QuNC80LDRjtGCIEhUVFAg0Lgg0L/RgNC10LLRgNCw0YnQsNGO0YIg0LIg0LrQvtC80LDQvdC00Ysg0Lgg0LfQsNC/0YDQvtGB0YsiICJBU1AuTkVUIENvcmUgQ29udHJvbGxlcnMiICJQcmVzZW50YXRpb24iCiAgICAgICAgICAgICAgICBjaGF0SHViID0gY29tcG9uZW50ICJDaGF0SHViIiAi0J/RgNC40ZHQvCDRgdC+0L7QsdGJ0LXQvdC40Lkg0LrQu9C40LXQvdGC0LAg0Lgg0L7Qv9C10YDQsNGC0L7RgNCwLCDRgNCw0YHRgdGL0LvQutCwINCyINGA0LXQsNC70YzQvdC+0Lwg0LLRgNC10LzQtdC90LgiICJTaWduYWxSIEh1YiIgIlByZXNlbnRhdGlvbiIKICAgICAgICAgICAgICAgIGNoYXRIaXN0b3J5QXBpID0gY29tcG9uZW50ICJDaGF0SGlzdG9yeUNvbnRyb2xsZXIiICLQntGC0LTQsNGR0YIg0LjRgdGC0L7RgNC40Y4g0YfQsNGC0LAg0L/QvtGB0YLRgNCw0L3QuNGH0L3QviIgIkFTUC5ORVQgQ29yZSBDb250cm9sbGVyIiAiUHJlc2VudGF0aW9uIgoKICAgICAgICAgICAgICAgIG1lZGlhdG9yID0gY29tcG9uZW50ICJNZWRpYXRvciArIFBpcGVsaW5lIEJlaGF2aW9ycyIgItCV0LTQuNC90LDRjyDRgtC+0YfQutCwINCy0YXQvtC00LAg0LTQu9GPIENRUlMuIEJlaGF2aW9yczog0LLQsNC70LjQtNCw0YbQuNGPLCDRgtGA0LDQvdC30LDQutGG0LjRjyAoVW5pdE9mV29yayksINC70L7Qs9C40YDQvtCy0LDQvdC40LUiICJEb3RuZXQuSG9tZXdvcmtzLk1lZGlhdG9yIiAiQXBwbGljYXRpb24iCiAgICAgICAgICAgICAgICBjb21tYW5kSGFuZGxlcnMgPSBjb21wb25lbnQgIkNvbW1hbmQgSGFuZGxlcnMiICJDcmVhdGUvVXBkYXRlL0RlbGV0ZSBVc2VyLCBQcm9kdWN0LCBPcmRlcjsgU2VuZENoYXRNZXNzYWdlIiAiRG90bmV0LkhvbWV3b3Jrcy5GZWF0dXJlcyIgIkFwcGxpY2F0aW9uIgogICAgICAgICAgICAgICAgcXVlcnlIYW5kbGVycyA9IGNvbXBvbmVudCAiUXVlcnkgSGFuZGxlcnMiICJHZXRVc2VyLCBHZXRQcm9kdWN0cywgR2V0T3JkZXJzOyBHZXRDaGF0SGlzdG9yeSIgIkRvdG5ldC5Ib21ld29ya3MuRmVhdHVyZXMiICJBcHBsaWNhdGlvbiIKCiAgICAgICAgICAgICAgICBkb21haW4gPSBjb21wb25lbnQgIkRvbWFpbiIgItCh0YPRidC90L7RgdGC0LggKFVzZXIsIFByb2R1Y3QsIE9yZGVyLCBDaGF0TWVzc2FnZSksINC40L3RgtC10YDRhNC10LnRgdGLINGA0LXQv9C+0LfQuNGC0L7RgNC40LXQsi4g0J3QuCDQvtGCINGH0LXQs9C+INC90LUg0LfQsNCy0LjRgdC40YIiICJEb3RuZXQuSG9tZXdvcmtzLkRvbWFpbiIgIkRvbWFpbiIKCiAgICAgICAgICAgICAgICByZXBvc2l0b3JpZXMgPSBjb21wb25lbnQgIlJlcG9zaXRvcmllcyArIFVuaXRPZldvcmsiICLQoNC10LDQu9C40LfQsNGG0LjRjyDQuNC90YLQtdGA0YTQtdC50YHQvtCyINGA0LXQv9C+0LfQuNGC0L7RgNC40LXQsiwg0YHQv9C10YbQuNGE0LjQutCw0YbQuNC4LCBEYkNvbnRleHQiICJFRiBDb3JlLCBEb3RuZXQuSG9tZXdvcmtzLkRhdGFBY2Nlc3MiICJJbmZyYXN0cnVjdHVyZSIKICAgICAgICAgICAgICAgIG1lc3NhZ2VQdWJsaXNoZXIgPSBjb21wb25lbnQgIk1lc3NhZ2UgUHVibGlzaGVyIiAi0J/Rg9Cx0LvQuNC60LDRhtC40Y8g0YHQvtCx0YvRgtC40LkgQ2hhdE1lc3NhZ2VTZW50INC4IFNlbmRFbWFpbCDQsiDQsdGA0L7QutC10YAiICJNYXNzVHJhbnNpdCIgIkluZnJhc3RydWN0dXJlIgogICAgICAgICAgICB9CgogICAgICAgICAgICBjaGF0Q29uc3VtZXIgPSBjb250YWluZXIgIkNoYXQgQ29uc3VtZXIiICLQntGC0LTQtdC70YzQvdGL0Lkg0L/RgNC+0LXQutGCOiDQv9C+0LTQv9C40YHQsNC9INC90LAgUmFiYml0TVEsINCw0YHQuNC90YXRgNC+0L3QvdC+INC/0LjRiNC10YIg0LjRgdGC0L7RgNC40Y4g0YfQsNGC0LAg0LIg0JHQlCIgIi5ORVQgV29ya2VyIFNlcnZpY2UsIE1hc3NUcmFuc2l0IgogICAgICAgICAgICBzdG9yYWdlQXBpID0gY29udGFpbmVyICJTdG9yYWdlIEFQSSIgItCe0YLQtNC10LvRjNC90YvQuSDRgdC10YDQstC40YEg0YDQsNCx0L7RgtGLINGBIFMzOiDQt9Cw0LPRgNGD0LfQutCwINGE0LDQudC70LAg0Lgg0LzQtdGC0LDQtNCw0L3QvdGL0YUsINC/0LXRgNC10L3QvtGBINC40Lcg0LLRgNC10LzQtdC90L3QvtCz0L4g0YXRgNCw0L3QuNC70LjRidCwINCyINC/0L7RgdGC0L7Rj9C90L3QvtC1IiAiQVNQLk5FVCBDb3JlIE1pbmltYWwgQVBJLCBNaW5pbyBTREsiIHsKCiAgICAgICAgICAgICAgICBzdG9yYWdlRW5kcG9pbnRzID0gY29tcG9uZW50ICJVcGxvYWQgLyBEb3dubG9hZCBFbmRwb2ludHMiICLQn9GA0LjRkdC8INGE0LDQudC70LAg0Lgg0LzQtdGC0LDQtNCw0L3QvdGL0YUgKNGA0LDQt9C00LXQu9GM0L3Ri9C80Lgg0LfQsNC/0YDQvtGB0LDQvNC4KSwg0LLRi9C00LDRh9CwINGB0YHRi9C70L7QuiDQvdCwINGE0LDQudC7IiAiTWluaW1hbCBBUEkiICJQcmVzZW50YXRpb24iCiAgICAgICAgICAgICAgICBtZXRhZGF0YVNjaGVtYXMgPSBjb21wb25lbnQgIk1ldGFkYXRhIFNjaGVtYXMiICLQodGF0LXQvNGLINC80LXRgtCw0LTQsNC90L3Ri9GFINC/0L4g0YLQuNC/0YMg0YTQsNC50LvQsDogbXAzLCDQstC40LTQtdC+LCDQuNC30L7QsdGA0LDQttC10L3QuNC1LCBQREYt0LrQvdC40LPQsCwg0LTQvtC60YPQvNC10L3RgiIgIkMjIHJlY29yZHMgKyB2YWxpZGF0b3JzIiAiRG9tYWluIgogICAgICAgICAgICAgICAgdXBsb2FkVHJhY2tlciA9IGNvbXBvbmVudCAiVXBsb2FkIFRyYWNrZXIiICLQpdGA0LDQvdC40YIg0LLRgNC10LzQtdC90L3Ri9C1INC80LXRgtCw0LTQsNC90L3Ri9C1INC4INGB0YfRkdGC0YfQuNC6INGD0YHQv9C10YjQvdGL0YUg0LfQsNCz0YDRg9C30L7QuiAo0YTQsNC50LsgKyDQvNC10YLQsNC00LDQvdC90YvQtSkiICJTdGFja0V4Y2hhbmdlLlJlZGlzIiAiSW5mcmFzdHJ1Y3R1cmUiCiAgICAgICAgICAgICAgICBzdG9yYWdlRmFjdG9yeSA9IGNvbXBvbmVudCAiU3RvcmFnZSBGYWN0b3J5ICsgSW1hZ2VTdG9yYWdlIiAi0JLRi9Cx0L7RgCDQsdCw0LrQtdGC0LAgKHRlbXAgLyBwZXJtYW5lbnQpLCBwdXQvZ2V0L21vdmUg0L7QsdGK0LXQutGC0L7QsiIgIk1pbmlvIFNESyIgIkluZnJhc3RydWN0dXJlIgogICAgICAgICAgICAgICAgcGVuZGluZ1Byb2Nlc3NvciA9IGNvbXBvbmVudCAiUGVuZGluZyBPYmplY3RzIFByb2Nlc3NvciIgItCa0L7Qs9C00LAg0YHRh9GR0YLRh9C40LogPSAyOiDQv9C10YDQtdC90L7RgdC40YIg0YTQsNC50Lsg0LjQtyB0ZW1wINCyIHBlcm1hbmVudCDQuCDRh9C40YHRgtC40YIg0LrQu9GO0YfQuCDQsiBSZWRpcyIgIkJhY2tncm91bmRTZXJ2aWNlIiAiSW5mcmFzdHJ1Y3R1cmUiCiAgICAgICAgICAgICAgICByZWRpc0NsZWFuZXIgPSBjb21wb25lbnQgIkRhaWx5IFJlZGlzIENsZWFuZXIiICLQoNCw0Lcg0LIg0YHRg9GC0LrQuCDQvtGH0LjRidCw0LXRgiBSZWRpcyDQvtGCINC30LDQstC40YHRiNC40YUg0L3QtdC30LDQstC10YDRiNGR0L3QvdGL0YUg0LfQsNCz0YDRg9C30L7QuiIgIkJhY2tncm91bmRTZXJ2aWNlIiAiSW5mcmFzdHJ1Y3R1cmUiCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIG1haWxpbmdBcGkgPSBjb250YWluZXIgIk1haWxpbmcgQVBJIiAi0J/QvtC00L/QuNGB0LDQvSDQvdCwIFJhYmJpdE1RLCDQvtGC0L/RgNCw0LLQu9GP0LXRgiDQv9C40YHRjNC80LAgKNGA0LXQs9C40YHRgtGA0LDRhtC40Y8g0Lgg0LTRgC4pIiAiLk5FVCBXb3JrZXIsIE1hc3NUcmFuc2l0LCBNYWlsS2l0IgoKICAgICAgICAgICAgcG9zdGdyZXMgPSBjb250YWluZXIgIlBvc3RncmVTUUwiICLQn9C+0LvRjNC30L7QstCw0YLQtdC70LgsINGC0L7QstCw0YDRiywg0LfQsNC60LDQt9GLLCDQuNGB0YLQvtGA0LjRjyDRh9Cw0YLQsC4g0JzQuNCz0YDQsNGG0LjQuCDQvdCw0LrQsNGC0YvQstCw0Y7RgtGB0Y8g0L/RgNC4INGB0YLQsNGA0YLQtSIgIlBvc3RncmVTUUwiICJEYXRhYmFzZSIKICAgICAgICAgICAgcmVkaXMgPSBjb250YWluZXIgIlJlZGlzIiAi0JLRgNC10LzQtdC90L3Ri9C1INC80LXRgtCw0LTQsNC90L3Ri9C1INC30LDQs9GA0YPQt9C+0LosINGB0YfRkdGC0YfQuNC6INC30LDQs9GA0YPQt9C+0LosIGJhY2twbGFuZSDQtNC70Y8gU2lnbmFsUiIgIlJlZGlzIiAiRGF0YWJhc2UiCiAgICAgICAgICAgIHJhYmJpdCA9IGNvbnRhaW5lciAiUmFiYml0TVEiICLQntGH0LXRgNC10LTQuDog0LjRgdGC0L7RgNC40Y8g0YfQsNGC0LAsINC+0YLQv9GA0LDQstC60LAgZS1tYWlsIiAiUmFiYml0TVEiICJRdWV1ZSIKICAgICAgICAgICAgbWluaW8gPSBjb250YWluZXIgIk1pbklPIChTMykiICLQlNCy0LAg0LHQsNC60LXRgtCwOiB0ZW1wICjQstGA0LXQvNC10L3QvdC+0LUpINC4IHBlcm1hbmVudCAo0L/QvtGB0YLQvtGP0L3QvdC+0LUg0YXRgNCw0L3QuNC70LjRidC1KSIgIk1pbklPLCBTMyBBUEkiICJEYXRhYmFzZSIKICAgICAgICB9CgogICAgICAgICMgLS0tLS0tLS0tLSDQodCy0Y/Qt9C4OiDQu9GO0LTQuCAtLS0tLS0tLS0tCiAgICAgICAgY3VzdG9tZXIgLT4gc3BhICLQodC80L7RgtGA0LjRgiDQutCw0YLQsNC70L7Qsywg0LTQtdC70LDQtdGCINC30LDQutCw0LfRiywg0L/QuNGI0LXRgiDQsiDRh9Cw0YIsINC30LDQs9GA0YPQttCw0LXRgiDQutCw0YDRgtC40L3QutC4IiAiSFRUUFMiCiAgICAgICAgc3VwcG9ydEFnZW50IC0+IHNwYSAi0J7RgtCy0LXRh9Cw0LXRgiDQutC70LjQtdC90YLQsNC8INCyINGH0LDRgtC1IiAiSFRUUFMiCiAgICAgICAgYWRtaW4gLT4gc3BhICLQo9C/0YDQsNCy0LvRj9C10YIg0L/QvtC70YzQt9C+0LLQsNGC0LXQu9GP0LzQuCDQuCDRgtC+0LLQsNGA0LDQvNC4IiAiSFRUUFMiCiAgICAgICAgZGV2ZWxvcGVyIC0+IGdpdGh1YiAiZ2l0IHB1c2ggLyBwdWxsIHJlcXVlc3QiCiAgICAgICAgZ2l0aHViIC0+IHNob3AgIkJ1aWxkLCDQsNC90LDQu9C40LfQsNGC0L7RgNGLLCDRgtC10YHRgtGLLCDQtNC10L/Qu9C+0LkgKENEKSIKICAgICAgICBzbXRwIC0+IGN1c3RvbWVyICLQlNC+0YHRgtCw0LLQu9GP0LXRgiDQv9C40YHRjNC80LAiICJlLW1haWwiCgogICAgICAgICMgLS0tLS0tLS0tLSDQodCy0Y/Qt9C4OiDRg9GA0L7QstC10L3RjCDQutC+0L3RgtC10LnQvdC10YDQvtCyIC0tLS0tLS0tLS0KICAgICAgICBzcGEgLT4gbWFpbkFwaSAi0JLRi9C30YvQstCw0LXRgiBSRVNUIEFQSSwg0LTQtdGA0LbQuNGCINGB0L7QtdC00LjQvdC10L3QuNC1IFNpZ25hbFIiICJIVFRQUywgV2ViU29ja2V0IgogICAgICAgIHNwYSAtPiBzdG9yYWdlQXBpICLQl9Cw0LPRgNGD0LbQsNC10YIg0YTQsNC50Lsg0Lgg0LzQtdGC0LDQtNCw0L3QvdGL0LUiICJIVFRQUywgbXVsdGlwYXJ0IgogICAgICAgIG1haW5BcGkgLT4gcG9zdGdyZXMgItCn0LjRgtCw0LXRgiDQuCDQv9C40YjQtdGCINC00LDQvdC90YvQtSIgIkVGIENvcmUgLyBOcGdzcWwiCiAgICAgICAgbWFpbkFwaSAtPiByYWJiaXQgItCf0YPQsdC70LjQutGD0LXRgiDRgdC+0LHRi9GC0LjRjyDRh9Cw0YLQsCDQuCBlLW1haWwiICJBTVFQIgogICAgICAgIG1haW5BcGkgLT4gcmVkaXMgIkJhY2twbGFuZSBTaWduYWxSICjQvdC10YHQutC+0LvRjNC60L4g0YDQtdC/0LvQuNC6KSIgIlJFU1AiCiAgICAgICAgbWFpbkFwaSAtPiBzdG9yYWdlQXBpICLQn9C+0LvRg9GH0LDQtdGCINGB0YHRi9C70LrQuCDQvdCwINCy0LvQvtC20LXQvdC40Y8g0YfQsNGC0LAiICJIVFRQUyIKICAgICAgICBjaGF0Q29uc3VtZXIgLT4gcmFiYml0ICLQn9C+0LTQv9C40YHQsNC9INC90LAg0L7Rh9C10YDQtdC00Ywg0LjRgdGC0L7RgNC40Lgg0YfQsNGC0LAiICJBTVFQIgogICAgICAgIGNoYXRDb25zdW1lciAtPiBwb3N0Z3JlcyAi0KHQvtGF0YDQsNC90Y/QtdGCINC40YHRgtC+0YDQuNGOINGH0LDRgtCwIiAiRUYgQ29yZSAvIE5wZ3NxbCIKICAgICAgICBtYWlsaW5nQXBpIC0+IHJhYmJpdCAi0J/QvtC00L/QuNGB0LDQvSDQvdCwINC+0YfQtdGA0LXQtNGMIFNlbmRFbWFpbCIgIkFNUVAiCiAgICAgICAgbWFpbGluZ0FwaSAtPiBzbXRwICLQntGC0L/RgNCw0LLQu9GP0LXRgiDQv9C40YHRjNC80LAiICJTTVRQIgogICAgICAgIHN0b3JhZ2VBcGkgLT4gcmVkaXMgItCc0LXRgtCw0LTQsNC90L3Ri9C1INC4INGB0YfRkdGC0YfQuNC6INC30LDQs9GA0YPQt9C+0LoiICJSRVNQIgogICAgICAgIHN0b3JhZ2VBcGkgLT4gbWluaW8gItCa0LvQsNC00ZHRgiDQuCDQv9C10YDQtdC90L7RgdC40YIg0L7QsdGK0LXQutGC0YsiICJTMyBBUEkiCgogICAgICAgICMgLS0tLS0tLS0tLSDQodCy0Y/Qt9C4OiDQutC+0LzQv9C+0L3QtdC90YLRiyBNYWluIEFQSSAtLS0tLS0tLS0tCiAgICAgICAgc3BhIC0+IHNob3BDb250cm9sbGVycyAi0JfQsNC/0YDQvtGB0Ysg0LzQsNCz0LDQt9C40L3QsCIgIlJFU1QvSlNPTiIKICAgICAgICBzcGEgLT4gY2hhdEh1YiAi0J7RgtC/0YDQsNCy0LvRj9C10YIg0YHQvtC+0LHRidC10L3QuNGPINGH0LDRgtCwIiAiU2lnbmFsUiAoV2ViU29ja2V0KSIKICAgICAgICBzcGEgLT4gY2hhdEhpc3RvcnlBcGkgItCX0LDQs9GA0YPQttCw0LXRgiDQuNGB0YLQvtGA0LjRjiDRh9Cw0YLQsCIgIlJFU1QvSlNPTiIKICAgICAgICBjaGF0SHViIC0+IHNwYSAi0JTQvtGB0YLQsNCy0LvRj9C10YIg0YHQvtC+0LHRidC10L3QuNGPINCyINGA0LXQsNC70YzQvdC+0Lwg0LLRgNC10LzQtdC90LgiICJTaWduYWxSIChXZWJTb2NrZXQpIgogICAgICAgIHNob3BDb250cm9sbGVycyAtPiBtZWRpYXRvciAi0J7RgtC/0YDQsNCy0LvRj9C10YIgQ29tbWFuZCAvIFF1ZXJ5IgogICAgICAgIGNoYXRIdWIgLT4gbWVkaWF0b3IgIlNlbmRDaGF0TWVzc2FnZUNvbW1hbmQiCiAgICAgICAgY2hhdEhpc3RvcnlBcGkgLT4gbWVkaWF0b3IgIkdldENoYXRIaXN0b3J5UXVlcnkiCiAgICAgICAgbWVkaWF0b3IgLT4gY29tbWFuZEhhbmRsZXJzICLQp9C10YDQtdC3IHBpcGVsaW5lIGJlaGF2aW9ycyIKICAgICAgICBtZWRpYXRvciAtPiBxdWVyeUhhbmRsZXJzICLQp9C10YDQtdC3IHBpcGVsaW5lIGJlaGF2aW9ycyIKICAgICAgICBjb21tYW5kSGFuZGxlcnMgLT4gZG9tYWluICLQmNGB0L/QvtC70YzQt9GD0LXRgiDRgdGD0YnQvdC+0YHRgtC4INC4INC40L3RgtC10YDRhNC10LnRgdGLINGA0LXQv9C+0LfQuNGC0L7RgNC40LXQsiIKICAgICAgICBxdWVyeUhhbmRsZXJzIC0+IGRvbWFpbiAi0JjRgdC/0L7Qu9GM0LfRg9C10YIg0LjQvdGC0LXRgNGE0LXQudGB0Ysg0YDQtdC/0L7Qt9C40YLQvtGA0LjQtdCyIgogICAgICAgIHJlcG9zaXRvcmllcyAtPiBkb21haW4gItCg0LXQsNC70LjQt9GD0LXRgiDQuNC90YLQtdGA0YTQtdC50YHRiyAoRGVwZW5kZW5jeSBJbnZlcnNpb24pIgogICAgICAgIGNvbW1hbmRIYW5kbGVycyAtPiBtZXNzYWdlUHVibGlzaGVyICLQn9GD0LHQu9C40LrRg9C10YIgQ2hhdE1lc3NhZ2VTZW50IC8gU2VuZEVtYWlsIgogICAgICAgIHJlcG9zaXRvcmllcyAtPiBwb3N0Z3JlcyAiU1FMIiAiRUYgQ29yZSAvIE5wZ3NxbCIKICAgICAgICBtZXNzYWdlUHVibGlzaGVyIC0+IHJhYmJpdCAiUHVibGlzaCIgIkFNUVAiCiAgICAgICAgY2hhdEh1YiAtPiByZWRpcyAiQmFja3BsYW5lIiAiUkVTUCIKICAgICAgICBjb21tYW5kSGFuZGxlcnMgLT4gc3RvcmFnZUFwaSAi0J/RgNC+0LLQtdGA0Y/QtdGCINCy0LvQvtC20LXQvdC40LUgLyDQv9C+0LvRg9GH0LDQtdGCIFVSTCIgIkhUVFBTIgoKICAgICAgICAjIC0tLS0tLS0tLS0g0KHQstGP0LfQuDog0LrQvtC80L/QvtC90LXQvdGC0YsgU3RvcmFnZSBBUEkgLS0tLS0tLS0tLQogICAgICAgIHNwYSAtPiBzdG9yYWdlRW5kcG9pbnRzICLQl9Cw0LPRgNGD0LfQutCwINGE0LDQudC70LAg0Lgg0LzQtdGC0LDQtNCw0L3QvdGL0YUiICJIVFRQUywgbXVsdGlwYXJ0IgogICAgICAgIHN0b3JhZ2VFbmRwb2ludHMgLT4gbWV0YWRhdGFTY2hlbWFzICLQktCw0LvQuNC00LjRgNGD0LXRgiDQvNC10YLQsNC00LDQvdC90YvQtSDQv9C+INGC0LjQv9GDINGE0LDQudC70LAiCiAgICAgICAgc3RvcmFnZUVuZHBvaW50cyAtPiBzdG9yYWdlRmFjdG9yeSAi0JrQu9Cw0LTRkdGCINGE0LDQudC7INCy0L4g0LLRgNC10LzQtdC90L3Ri9C5INCx0LDQutC10YIiCiAgICAgICAgc3RvcmFnZUVuZHBvaW50cyAtPiB1cGxvYWRUcmFja2VyICLQodC+0YXRgNCw0L3Rj9C10YIg0LzQtdGC0LDQtNCw0L3QvdGL0LUsINGB0YfRkdGC0YfQuNC6ICsxIgogICAgICAgIHVwbG9hZFRyYWNrZXIgLT4gcmVkaXMgItCc0LXRgtCw0LTQsNC90L3Ri9C1INC4INGB0YfRkdGC0YfQuNC6IgogICAgICAgIHN0b3JhZ2VGYWN0b3J5IC0+IG1pbmlvICJwdXQgLyBnZXQgLyBtb3ZlIiAiUzMgQVBJIgogICAgICAgIHBlbmRpbmdQcm9jZXNzb3IgLT4gdXBsb2FkVHJhY2tlciAi0J/RgNC+0LLQtdGA0Y/QtdGCOiDRgdGH0ZHRgtGH0LjQuiA9IDI/IgogICAgICAgIHBlbmRpbmdQcm9jZXNzb3IgLT4gc3RvcmFnZUZhY3RvcnkgItCf0LXRgNC10L3QvtGB0LjRgiB0ZW1wIC0+IHBlcm1hbmVudCIKICAgICAgICByZWRpc0NsZWFuZXIgLT4gcmVkaXMgItCe0YfQuNGB0YLQutCwINGA0LDQtyDQsiDRgdGD0YLQutC4IgoKICAgICAgICAjIC0tLS0tLS0tLS0g0KDQsNC30LLRkdGA0YLRi9Cy0LDQvdC40LU6IGRvY2tlci1jb21wb3NlIC0tLS0tLS0tLS0KICAgICAgICBkZXBsb3ltZW50RW52aXJvbm1lbnQgIkRvY2tlciBDb21wb3NlIiB7CiAgICAgICAgICAgIGRlcGxveW1lbnROb2RlICJEb2NrZXIgSG9zdCIgImRvY2tlciBjb21wb3NlIHVwICjQvNC40LPRgNCw0YbQuNC4INC90LDQutCw0YLRi9Cy0LDRjtGC0YHRjyDQv9GA0Lgg0YHRgtCw0YDRgtC1KSIgIkRvY2tlciwgRG9ja2VyIENvbXBvc2UiIHsKICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIHNwYQogICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgbWFpbkFwaQogICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgY2hhdENvbnN1bWVyCiAgICAgICAgICAgICAgICBjb250YWluZXJJbnN0YW5jZSBzdG9yYWdlQXBpCiAgICAgICAgICAgICAgICBjb250YWluZXJJbnN0YW5jZSBtYWlsaW5nQXBpCiAgICAgICAgICAgICAgICBjb250YWluZXJJbnN0YW5jZSBwb3N0Z3JlcwogICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgcmVkaXMKICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIHJhYmJpdAogICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgbWluaW8KICAgICAgICAgICAgfQogICAgICAgIH0KCiAgICAgICAgIyAtLS0tLS0tLS0tINCg0LDQt9Cy0ZHRgNGC0YvQstCw0L3QuNC1OiBLdWJlcm5ldGVzIC0tLS0tLS0tLS0KICAgICAgICBkZXBsb3ltZW50RW52aXJvbm1lbnQgIkt1YmVybmV0ZXMiIHsKICAgICAgICAgICAgZGVwbG95bWVudE5vZGUgIkt1YmVybmV0ZXMgY2x1c3RlciIgItCt0YLQsNC/IDc6INC/0YDQvtC10LrRgiDQsiBrOHMiICJLdWJlcm5ldGVzIiB7CgogICAgICAgICAgICAgICAgaW5ncmVzcyA9IGluZnJhc3RydWN0dXJlTm9kZSAiSW5ncmVzcyBDb250cm9sbGVyIiAi0JzQsNGA0YjRgNGD0YLQuNC30LDRhtC40Y8gLywgL2FwaSwgL2NoYXQtaHViLCAvc3RvcmFnZSIgIm5naW54LWluZ3Jlc3MiCgogICAgICAgICAgICAgICAgZGVwbG95bWVudE5vZGUgIk5hbWVzcGFjZTogaG9tZXdvcmtzIiAiIiAiTmFtZXNwYWNlIiB7CgogICAgICAgICAgICAgICAgICAgIGRlcGxveW1lbnROb2RlICJzcGEiICJEZXBsb3ltZW50LCAyINGA0LXQv9C70LjQutC4LCBTZXJ2aWNlIENsdXN0ZXJJUCIgIkRlcGxveW1lbnQiIDIgewogICAgICAgICAgICAgICAgICAgICAgICBrOHNTcGEgPSBjb250YWluZXJJbnN0YW5jZSBzcGEKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgZGVwbG95bWVudE5vZGUgIm1haW4tYXBpIiAiRGVwbG95bWVudCwgMisg0YDQtdC/0LvQuNC60LgsIEhQQTsgQ29uZmlnTWFwICsgU2VjcmV0IiAiRGVwbG95bWVudCIgMiB7CiAgICAgICAgICAgICAgICAgICAgICAgIGs4c01haW4gPSBjb250YWluZXJJbnN0YW5jZSBtYWluQXBpCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgIGRlcGxveW1lbnROb2RlICJjaGF0LWNvbnN1bWVyIiAiRGVwbG95bWVudCIgIkRlcGxveW1lbnQiIDIgewogICAgICAgICAgICAgICAgICAgICAgICBjb250YWluZXJJbnN0YW5jZSBjaGF0Q29uc3VtZXIKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgZGVwbG95bWVudE5vZGUgInN0b3JhZ2UtYXBpIiAiRGVwbG95bWVudCIgIkRlcGxveW1lbnQiIDIgewogICAgICAgICAgICAgICAgICAgICAgICBrOHNTdG9yYWdlID0gY29udGFpbmVySW5zdGFuY2Ugc3RvcmFnZUFwaQogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBkZXBsb3ltZW50Tm9kZSAibWFpbGluZy1hcGkiICJEZXBsb3ltZW50IiAiRGVwbG95bWVudCIgMSB7CiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIG1haWxpbmdBcGkKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgZGVwbG95bWVudE5vZGUgInBvc3RncmVzIiAiU3RhdGVmdWxTZXQgKyBQVkMiICJTdGF0ZWZ1bFNldCIgewogICAgICAgICAgICAgICAgICAgICAgICBjb250YWluZXJJbnN0YW5jZSBwb3N0Z3JlcwogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBkZXBsb3ltZW50Tm9kZSAicmVkaXMiICJTdGF0ZWZ1bFNldCIgIlN0YXRlZnVsU2V0IiB7CiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIHJlZGlzCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgIGRlcGxveW1lbnROb2RlICJyYWJiaXRtcSIgIlN0YXRlZnVsU2V0ICsgUFZDIiAiU3RhdGVmdWxTZXQiIHsKICAgICAgICAgICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgcmFiYml0CiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgIGRlcGxveW1lbnROb2RlICJtaW5pbyIgIlN0YXRlZnVsU2V0ICsgUFZDIiAiU3RhdGVmdWxTZXQiIHsKICAgICAgICAgICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgbWluaW8KICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICB9CgogICAgICAgIGluZ3Jlc3MgLT4gazhzU3BhICLQnNCw0YDRiNGA0YPRgtC40LfQuNGA0YPQtdGCIC8iICJIVFRQIgogICAgICAgIGluZ3Jlc3MgLT4gazhzTWFpbiAi0JzQsNGA0YjRgNGD0YLQuNC30LjRgNGD0LXRgiAvYXBpINC4IC9jaGF0LWh1YiIgIkhUVFAsIFdlYlNvY2tldCIKICAgICAgICBpbmdyZXNzIC0+IGs4c1N0b3JhZ2UgItCc0LDRgNGI0YDRg9GC0LjQt9C40YDRg9C10YIgL3N0b3JhZ2UiICJIVFRQIgogICAgfQoKICAgIHZpZXdzIHsKCiAgICAgICAgc3lzdGVtQ29udGV4dCBzaG9wICIxLVN5c3RlbUNvbnRleHQiICJDNCDRg9GA0L7QstC10L3RjCAxOiDRgdC40YHRgtC10LzQsCDQuCDQtdGRINC+0LrRgNGD0LbQtdC90LjQtSIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b0xheW91dCBscgogICAgICAgIH0KCiAgICAgICAgY29udGFpbmVyIHNob3AgIjItQ29udGFpbmVycyIgIkM0INGD0YDQvtCy0LXQvdGMIDI6INC60L7QvdGC0LXQudC90LXRgNGLICjRgdC10YDQstC40YHRiywg0JHQlCwg0LHRgNC+0LrQtdGALCBTMywgUmVkaXMpIiB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICBhdXRvTGF5b3V0IGxyCiAgICAgICAgfQoKICAgICAgICBjb21wb25lbnQgbWFpbkFwaSAiMy1NYWluQXBpLUNvbXBvbmVudHMiICJDNCDRg9GA0L7QstC10L3RjCAzOiBNYWluIEFQSSAoQ1FSUywgQ2xlYW4gQXJjaGl0ZWN0dXJlLCDRh9Cw0YIpIiB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICBhdXRvTGF5b3V0IGxyCiAgICAgICAgfQoKICAgICAgICBjb21wb25lbnQgc3RvcmFnZUFwaSAiNC1TdG9yYWdlQXBpLUNvbXBvbmVudHMiICJDNCDRg9GA0L7QstC10L3RjCAzOiBTdG9yYWdlIEFQSSAodGVtcCAtPiBwZXJtYW5lbnQsIFJlZGlzKSIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b0xheW91dCBscgogICAgICAgIH0KCiAgICAgICAgZHluYW1pYyBzaG9wICI1LUR5bmFtaWMtQ2hhdE1lc3NhZ2UiICLQodC+0L7QsdGJ0LXQvdC40LUg0LIg0YfQsNGC0LU6IHJlYWwtdGltZSDQtNC+0YHRgtCw0LLQutCwICsg0LDRgdC40L3RhdGA0L7QvdC90LDRjyDQt9Cw0L/QuNGB0Ywg0LjRgdGC0L7RgNC40LgiIHsKICAgICAgICAgICAgY3VzdG9tZXIgLT4gc3BhICIxLiDQn9C40YjQtdGCINGB0L7QvtCx0YnQtdC90LjQtSDQsiDQstC40LTQttC10YLQtSDRh9Cw0YLQsCIKICAgICAgICAgICAgc3BhIC0+IG1haW5BcGkgIjIuIFNlbmRNZXNzYWdlINC/0L4gU2lnbmFsUiIKICAgICAgICAgICAgbWFpbkFwaSAtPiBzcGEgIjMuINCg0LDRgdGB0YvQu9Cw0LXRgiDRgdC+0L7QsdGJ0LXQvdC40LUg0L7Qv9C10YDQsNGC0L7RgNGDINCyINGA0LXQsNC70YzQvdC+0Lwg0LLRgNC10LzQtdC90LgiCiAgICAgICAgICAgIG1haW5BcGkgLT4gcmFiYml0ICI0LiDQn9GD0LHQu9C40LrRg9C10YIgQ2hhdE1lc3NhZ2VTZW50IgogICAgICAgICAgICBjaGF0Q29uc3VtZXIgLT4gcmFiYml0ICI1LiDQn9C+0LvRg9GH0LDQtdGCINGB0L7QvtCx0YnQtdC90LjQtSDQuNC3INC+0YfQtdGA0LXQtNC4IgogICAgICAgICAgICBjaGF0Q29uc3VtZXIgLT4gcG9zdGdyZXMgIjYuINCX0LDQv9C40YHRi9Cy0LDQtdGCINCyINC40YHRgtC+0YDQuNGOIgogICAgICAgICAgICBzcGEgLT4gbWFpbkFwaSAiNy4g0J/RgNC4INC+0YLQutGA0YvRgtC40Lgg0YfQsNGC0LA6IEdFVCAvY2hhdC9oaXN0b3J5IChSRVNUKSIKICAgICAgICAgICAgYXV0b0xheW91dCBscgogICAgICAgIH0KCiAgICAgICAgZHluYW1pYyBzaG9wICI2LUR5bmFtaWMtRmlsZVVwbG9hZCIgItCX0LDQs9GA0YPQt9C60LAg0YTQsNC50LvQsCDQuCDQvNC10YLQsNC00LDQvdC90YvRhTogdGVtcCAtPiBwZXJtYW5lbnQg0L/RgNC4INGB0YfRkdGC0YfQuNC60LUgPSAyIiB7CiAgICAgICAgICAgIGN1c3RvbWVyIC0+IHNwYSAiMS4g0JLRi9Cx0LjRgNCw0LXRgiDRhNCw0LnQuyDQuCDQt9Cw0L/QvtC70L3Rj9C10YIg0LzQtdGC0LDQtNCw0L3QvdGL0LUiCiAgICAgICAgICAgIHNwYSAtPiBzdG9yYWdlQXBpICIyLiDQntGC0L/RgNCw0LLQu9GP0LXRgiDRhNCw0LnQuyIKICAgICAgICAgICAgc3RvcmFnZUFwaSAtPiBtaW5pbyAiMy4g0KHQvtGF0YDQsNC90Y/QtdGCINGE0LDQudC7INCy0L4g0LLRgNC10LzQtdC90L3Ri9C5INCx0LDQutC10YIiCiAgICAgICAgICAgIHN0b3JhZ2VBcGkgLT4gcmVkaXMgIjQuINCh0YfRkdGC0YfQuNC6INC30LDQs9GA0YPQt9C+0LogPSAxIgogICAgICAgICAgICBzcGEgLT4gc3RvcmFnZUFwaSAiNS4g0J7RgtC/0YDQsNCy0LvRj9C10YIg0LzQtdGC0LDQtNCw0L3QvdGL0LUiCiAgICAgICAgICAgIHN0b3JhZ2VBcGkgLT4gcmVkaXMgIjYuINCc0LXRgtCw0LTQsNC90L3Ri9C1INCy0L4g0LLRgNC10LzQtdC90L3QvtC1INGF0YDQsNC90LjQu9C40YnQtSwg0YHRh9GR0YLRh9C40LogPSAyIgogICAgICAgICAgICBzdG9yYWdlQXBpIC0+IG1pbmlvICI3LiDQn9C10YDQtdC90L7RgdC40YIg0YTQsNC50LsgdGVtcCAtPiBwZXJtYW5lbnQsINGH0LjRgdGC0LjRgiBSZWRpcyIKICAgICAgICAgICAgYXV0b0xheW91dCBscgogICAgICAgIH0KCiAgICAgICAgZGVwbG95bWVudCBzaG9wICJEb2NrZXIgQ29tcG9zZSIgIjctRGVwbG95bWVudC1Eb2NrZXJDb21wb3NlIiAi0JfQsNC/0YPRgdC6INCyIGRvY2tlci1jb21wb3NlICjRjdGC0LDQvyAxKSIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b0xheW91dCBscgogICAgICAgIH0KCiAgICAgICAgZGVwbG95bWVudCBzaG9wICJLdWJlcm5ldGVzIiAiOC1EZXBsb3ltZW50LUt1YmVybmV0ZXMiICLQl9Cw0L/Rg9GB0Log0LIgS3ViZXJuZXRlcyAo0Y3RgtCw0L8gNykiIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9MYXlvdXQgbHIKICAgICAgICB9CgogICAgICAgIHN0eWxlcyB7CiAgICAgICAgICAgIGVsZW1lbnQgIlBlcnNvbiIgewogICAgICAgICAgICAgICAgc2hhcGUgUGVyc29uCiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMwODQyN2IKICAgICAgICAgICAgICAgIGNvbG9yICNmZmZmZmYKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJTb2Z0d2FyZSBTeXN0ZW0iIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzExNjhiZAogICAgICAgICAgICAgICAgY29sb3IgI2ZmZmZmZgogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIkV4dGVybmFsIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICM5OTk5OTkKICAgICAgICAgICAgICAgIGNvbG9yICNmZmZmZmYKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJDb250YWluZXIiIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzQzOGRkNQogICAgICAgICAgICAgICAgY29sb3IgI2ZmZmZmZgogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIkNvbXBvbmVudCIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjODViYmYwCiAgICAgICAgICAgICAgICBjb2xvciAjMDAwMDAwCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiRG9tYWluIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICNmNWRhODEKICAgICAgICAgICAgICAgIGNvbG9yICMwMDAwMDAKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJXZWJBcHAiIHsKICAgICAgICAgICAgICAgIHNoYXBlIFdlYkJyb3dzZXIKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJEYXRhYmFzZSIgewogICAgICAgICAgICAgICAgc2hhcGUgQ3lsaW5kZXIKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJRdWV1ZSIgewogICAgICAgICAgICAgICAgc2hhcGUgUGlwZQogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIkluZnJhc3RydWN0dXJlIE5vZGUiIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgI2ZmZmZmZgogICAgICAgICAgICAgICAgY29sb3IgIzAwMDAwMAogICAgICAgICAgICB9CiAgICAgICAgfQogICAgfQp9",
+    "structurizr.inspection.info" : "0",
+    "structurizr.inspection.ignore" : "0",
+    "structurizr.inspection.warning" : "0"
+  },
+  "views" : {
+    "componentViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "containerId" : "9",
+      "description" : "C4 уровень 3: Main API (CQRS, Clean Architecture, чат)",
+      "elements" : [ {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "10",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "11",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "12",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "13",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "14",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "15",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "16",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "17",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "18",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "20",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "28",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "29",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "30",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "key" : "3-MainApi-Components",
+      "name" : "Component View: Интернет-магазин - Main API",
+      "order" : 3,
+      "relationships" : [ {
+        "id" : "42"
+      }, {
+        "id" : "52"
+      }, {
+        "id" : "54"
+      }, {
+        "id" : "55"
+      }, {
+        "id" : "56"
+      }, {
+        "id" : "57"
+      }, {
+        "id" : "59"
+      }, {
+        "id" : "60"
+      }, {
+        "id" : "61"
+      }, {
+        "id" : "62"
+      }, {
+        "id" : "63"
+      }, {
+        "id" : "64"
+      }, {
+        "id" : "65"
+      }, {
+        "id" : "66"
+      }, {
+        "id" : "67"
+      }, {
+        "id" : "68"
+      }, {
+        "id" : "69"
+      }, {
+        "id" : "70"
+      }, {
+        "id" : "71"
+      } ]
+    }, {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "containerId" : "20",
+      "description" : "C4 уровень 3: Storage API (temp -> permanent, Redis)",
+      "elements" : [ {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "21",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "22",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "23",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "24",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "25",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "26",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "29",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "31",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "key" : "4-StorageApi-Components",
+      "name" : "Component View: Интернет-магазин - Storage API",
+      "order" : 4,
+      "relationships" : [ {
+        "id" : "72"
+      }, {
+        "id" : "73"
+      }, {
+        "id" : "74"
+      }, {
+        "id" : "75"
+      }, {
+        "id" : "76"
+      }, {
+        "id" : "77"
+      }, {
+        "id" : "78"
+      }, {
+        "id" : "79"
+      }, {
+        "id" : "80"
+      } ]
+    } ],
+    "configuration" : {
+      "styles" : {
+        "elements" : [ {
+          "background" : "#85bbf0",
+          "color" : "#000000",
+          "tag" : "Component"
+        }, {
+          "background" : "#438dd5",
+          "color" : "#ffffff",
+          "tag" : "Container"
+        }, {
+          "shape" : "Cylinder",
+          "tag" : "Database"
+        }, {
+          "background" : "#f5da81",
+          "color" : "#000000",
+          "tag" : "Domain"
+        }, {
+          "background" : "#999999",
+          "color" : "#ffffff",
+          "tag" : "External"
+        }, {
+          "background" : "#ffffff",
+          "color" : "#000000",
+          "tag" : "Infrastructure Node"
+        }, {
+          "background" : "#08427b",
+          "color" : "#ffffff",
+          "shape" : "Person",
+          "tag" : "Person"
+        }, {
+          "shape" : "Pipe",
+          "tag" : "Queue"
+        }, {
+          "background" : "#1168bd",
+          "color" : "#ffffff",
+          "tag" : "Software System"
+        }, {
+          "shape" : "WebBrowser",
+          "tag" : "WebApp"
+        } ]
+      },
+      "terminology" : { }
+    },
+    "containerViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "C4 уровень 2: контейнеры (сервисы, БД, брокер, S3, Redis)",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "5",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "9",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "19",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "20",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "27",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "28",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "29",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "30",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "31",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "2-Containers",
+      "name" : "Container View: Интернет-магазин",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "32"
+      }, {
+        "id" : "34"
+      }, {
+        "id" : "36"
+      }, {
+        "id" : "40"
+      }, {
+        "id" : "41"
+      }, {
+        "id" : "42"
+      }, {
+        "id" : "43"
+      }, {
+        "id" : "44"
+      }, {
+        "id" : "45"
+      }, {
+        "id" : "46"
+      }, {
+        "id" : "47"
+      }, {
+        "id" : "48"
+      }, {
+        "id" : "49"
+      }, {
+        "id" : "50"
+      }, {
+        "id" : "52"
+      }, {
+        "id" : "53"
+      }, {
+        "id" : "58"
+      } ],
+      "softwareSystemId" : "7"
+    } ],
+    "deploymentViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Запуск в docker-compose (этап 1)",
+      "elements" : [ {
+        "id" : "81",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "82",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "83",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "86",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "87",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "90",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "91",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "94",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "97",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "101",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "environment" : "Docker Compose",
+      "key" : "7-Deployment-DockerCompose",
+      "name" : "Deployment View: Интернет-магазин - Docker Compose",
+      "order" : 7,
+      "relationships" : [ {
+        "id" : "100"
+      }, {
+        "id" : "102"
+      }, {
+        "id" : "84"
+      }, {
+        "id" : "85"
+      }, {
+        "id" : "88"
+      }, {
+        "id" : "89"
+      }, {
+        "id" : "92"
+      }, {
+        "id" : "93"
+      }, {
+        "id" : "95"
+      }, {
+        "id" : "96"
+      }, {
+        "id" : "98"
+      }, {
+        "id" : "99"
+      } ],
+      "softwareSystemId" : "7"
+    }, {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Запуск в Kubernetes (этап 7)",
+      "elements" : [ {
+        "id" : "103",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "104",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "105",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "106",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "107",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "108",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "109",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "112",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "113",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "114",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "115",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "118",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "119",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "120",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "121",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "124",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "125",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "128",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "129",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "133",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "134",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "environment" : "Kubernetes",
+      "key" : "8-Deployment-Kubernetes",
+      "name" : "Deployment View: Интернет-магазин - Kubernetes",
+      "order" : 8,
+      "relationships" : [ {
+        "id" : "110"
+      }, {
+        "id" : "111"
+      }, {
+        "id" : "116"
+      }, {
+        "id" : "117"
+      }, {
+        "id" : "122"
+      }, {
+        "id" : "123"
+      }, {
+        "id" : "126"
+      }, {
+        "id" : "127"
+      }, {
+        "id" : "130"
+      }, {
+        "id" : "131"
+      }, {
+        "id" : "132"
+      }, {
+        "id" : "135"
+      }, {
+        "id" : "136"
+      }, {
+        "id" : "137"
+      }, {
+        "id" : "138"
+      } ],
+      "softwareSystemId" : "7"
+    } ],
+    "dynamicViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Сообщение в чате: real-time доставка + асинхронная запись истории",
+      "elementId" : "7",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "9",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "19",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "28",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "30",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalBoundariesVisible" : false,
+      "key" : "5-Dynamic-ChatMessage",
+      "name" : "Dynamic View: Интернет-магазин",
+      "order" : 5,
+      "relationships" : [ {
+        "description" : "1. Пишет сообщение в виджете чата",
+        "id" : "32",
+        "order" : "1",
+        "response" : false
+      }, {
+        "description" : "2. SendMessage по SignalR",
+        "id" : "41",
+        "order" : "2",
+        "response" : false
+      }, {
+        "description" : "3. Рассылает сообщение оператору в реальном времени",
+        "id" : "58",
+        "order" : "3",
+        "response" : false
+      }, {
+        "description" : "4. Публикует ChatMessageSent",
+        "id" : "44",
+        "order" : "4",
+        "response" : false
+      }, {
+        "description" : "5. Получает сообщение из очереди",
+        "id" : "47",
+        "order" : "5",
+        "response" : false
+      }, {
+        "description" : "6. Записывает в историю",
+        "id" : "48",
+        "order" : "6",
+        "response" : false
+      }, {
+        "description" : "7. При открытии чата: GET /chat/history (REST)",
+        "id" : "41",
+        "order" : "7",
+        "response" : false
+      } ]
+    }, {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Загрузка файла и метаданных: temp -> permanent при счётчике = 2",
+      "elementId" : "7",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "20",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "29",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "31",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalBoundariesVisible" : false,
+      "key" : "6-Dynamic-FileUpload",
+      "name" : "Dynamic View: Интернет-магазин",
+      "order" : 6,
+      "relationships" : [ {
+        "description" : "1. Выбирает файл и заполняет метаданные",
+        "id" : "32",
+        "order" : "1",
+        "response" : false
+      }, {
+        "description" : "2. Отправляет файл",
+        "id" : "42",
+        "order" : "2",
+        "response" : false
+      }, {
+        "description" : "3. Сохраняет файл во временный бакет",
+        "id" : "53",
+        "order" : "3",
+        "response" : false
+      }, {
+        "description" : "4. Счётчик загрузок = 1",
+        "id" : "52",
+        "order" : "4",
+        "response" : false
+      }, {
+        "description" : "5. Отправляет метаданные",
+        "id" : "42",
+        "order" : "5",
+        "response" : false
+      }, {
+        "description" : "6. Метаданные во временное хранилище, счётчик = 2",
+        "id" : "52",
+        "order" : "6",
+        "response" : false
+      }, {
+        "description" : "7. Переносит файл temp -> permanent, чистит Redis",
+        "id" : "53",
+        "order" : "7",
+        "response" : false
+      } ]
+    } ],
+    "systemContextViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "C4 уровень 1: система и её окружение",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "5",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "6",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "7",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "1-SystemContext",
+      "name" : "System Context View: Интернет-магазин",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "33"
+      }, {
+        "id" : "35"
+      }, {
+        "id" : "37"
+      }, {
+        "id" : "39"
+      }, {
+        "id" : "40"
+      }, {
+        "id" : "51"
+      } ],
+      "softwareSystemId" : "7"
+    } ]
+  }
+}

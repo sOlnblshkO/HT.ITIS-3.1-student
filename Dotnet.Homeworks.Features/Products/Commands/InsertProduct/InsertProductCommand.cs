@@ -1,6 +1,8 @@
+using Dotnet.Homeworks.Infrastructure.Cqrs.Commands;
+
 namespace Dotnet.Homeworks.Features.Products.Commands.InsertProduct;
 
-public class InsertProductCommand //TODO: Inherit certain interface 
+public class InsertProductCommand : ICommand<InsertProductDto>
 {
     public string Name { get; init; }
 
